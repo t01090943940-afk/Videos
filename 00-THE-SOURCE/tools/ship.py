@@ -28,21 +28,22 @@ def run(args):
 def two_pass(vf, codec, extra, out, fps):
     br = vbit()
     log = str(ROOT / 'build' / f'2pass_{codec}')
-    common = ['-i', MASTER, '-vf', vf, '-r', str(fps), '-pix_fmt', 'yuv420p', '-c:v', codec, '-b:v', f'{br}k',
-              '-maxrate', f'{int(br * 1.8)}k', '-bufsize', f'{br * 3}k', '-color_primaries', 'bt709', '-color_trc', 'bt709',
-              '-colorspace', 'bt709', *extra]
+    enc = ['-vf', vf, '-r', str(fps), '-pix_fmt', 'yuv420p', '-c:v', codec, '-b:v', f'{br}k',
+           '-maxrate', f'{int(br * 1.8)}k', '-bufsize', f'{br * 3}k', '-color_primaries', 'bt709', '-color_trc', 'bt709',
+           '-colorspace', 'bt709', *extra]
+    aud = ['-map', '0:v', '-map', '1:a', '-c:a', 'aac', '-b:a', f'{AUDIO_K}k', '-movflags', '+faststart', '-shortest']
     if codec == 'libx265':
-        p1 = [*FF, *common, '-x265-params', f'pass=1:stats={log}.log:log-level=error', '-an', '-f', 'null', '-']
-        p2 = [*FF, *common, '-x265-params', f'pass=2:stats={log}.log:log-level=error', '-i', WAV, '-map', '0:v', '-map', '1:a',
-              '-c:a', 'aac', '-b:a', f'{AUDIO_K}k', '-movflags', '+faststart', '-tag:v', 'hvc1', '-shortest', out]
+        p1 = [*FF, '-i', MASTER, *enc, '-x265-params', f'pass=1:stats={log}.log:log-level=error', '-an', '-f', 'null', '-']
+        p2 = [*FF, '-i', MASTER, '-i', WAV, *enc, '-x265-params', f'pass=2:stats={log}.log:log-level=error', *aud, '-tag:v', 'hvc1', out]
     else:
-        p1 = [*FF, *common, '-pass', '1', '-passlogfile', log, '-an', '-f', 'null', '-']
-        p2 = [*FF, *common, '-pass', '2', '-passlogfile', log, '-i', WAV, '-map', '0:v', '-map', '1:a',
-              '-c:a', 'aac', '-b:a', f'{AUDIO_K}k', '-movflags', '+faststart', '-shortest', out]
-    run(p1); run(p2)
+        p1 = [*FF, '-i', MASTER, *enc, '-pass', '1', '-passlogfile', log, '-an', '-f', 'null', '-']
+        p2 = [*FF, '-i', MASTER, '-i', WAV, *enc, '-pass', '2', '-passlogfile', log, *aud, out]
+    if not Path(log + ('.log' if codec == 'libx265' else '-0.log')).exists() or '--repass' in sys.argv:
+        run(p1)
+    run(p2)
     print(out.name, f'{out.stat().st_size / 1e6:.1f} MB')
 
-which = sys.argv[1:] or ['60', '120', 'poster']
+which = [a for a in sys.argv[1:] if not a.startswith('--')] or ['60', '120', 'poster']
 if '60' in which:
     two_pass('tmix=frames=2:weights=1 1,select=not(mod(n\\,2)),setpts=N/60/TB', 'libx264',
              ['-preset', 'slow', '-profile:v', 'high', '-level', '4.2', '-tune', 'grain', '-g', '120', '-bf', '3'],

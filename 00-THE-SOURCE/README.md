@@ -1,6 +1,12 @@
 # 00-THE-SOURCE ·《源 · THE SOURCE》AI-Coding SuperVideos 合集总片
 
-**66 秒 · 120 BPM · 1920×1080 · 120fps 母版**（交付：`renders/THE-SOURCE_1080p60.mp4` H.264 / `renders/THE-SOURCE_1080p120.mp4` HEVC）
+**66 秒 · 120 BPM · 1920×1080 · 120fps 母版**
+
+| 交付物 | 规格 |
+|---|---|
+| `renders/THE-SOURCE_1080p60.mp4` | H.264 High · 1080p **60fps**（120 帧两两融合 = 真实运动模糊）· AAC 256k · 97.9 MB · 兼容性优先，发群 / 上传用这个 |
+| `renders/THE-SOURCE_1080p120.mp4` | HEVC（hvc1）· 1080p **120fps** · 7,920 帧 · AAC 256k · 97.9 MB · 高刷屏看这个 |
+| `renders/poster.jpg` | 封面（「通通开源」马赛克） |
 
 > 「一行代码，能走多远？」
 > 这支片子是整个仓库 28 部代码视频的总片，它本身也是一部代码视频：
@@ -54,6 +60,7 @@ python3 tools/ship.py             # → THE-SOURCE_1080p60.mp4 / THE-SOURCE_1080
 
 ## 工程要点（踩过的坑）
 
+- **并行要用独立浏览器**：同一个 Chromium 里开多个页面会共用一个 SwiftShader GPU 进程，3 页并行时每帧回传被拖到 1–5 s；改成每个 worker 一个浏览器后约 1.2 s/帧。本片 7,920 帧最终分 8 段在云端渲完，母版按帧号无缝拼接（逐段 framecrc 计数 = 7,920）。
 - **像素回传**：1080p 一帧 8.3 MB。`fetch` POST 实测 660 ms/帧，WebSocket 二进制 ~90 ms/帧 —— 这是 120fps 能在云端跑完的前提。
 - **确定性**：`renderFrame(i)` 先跑一遍场景只登记需要的源片帧，解码完再正式画；没有 rAF / Date.now / Math.random，同一帧号永远同一画面，可以任意分段并行渲染。
 - **NaN 会被泛光放大**：某个 alpha 算成 NaN 时，泛光降采样链会把它扩散成大块黑色多边形。精灵在 alpha 非正数时直接跳过，最终合成里也把 NaN 置零。

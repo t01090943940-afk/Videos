@@ -50,14 +50,17 @@ wss.on('connection', (ws) => {
   ws.on('message', async (d) => { await sinks[k].onFrame(Buffer.from(d)); ws.send('k'); });
 });
 
-const browser = await chromium.launch({
-  args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist',
-    '--disable-gpu-driver-bug-workarounds', '--js-flags=--max-old-space-size=6144'],
-});
-
+// 每个 worker 独立一个浏览器：同一浏览器里的多个页面共用一个 SwiftShader GPU 进程，
+// 实测 3 页共用时每帧回传被拖到 1–5 s；独立进程约 1.2 s/帧。
+const browsers = [];
 async function openWorker(onFrame) {
   const sink = { ws: null, onFrame };
   sinks.push(sink);
+  const browser = await chromium.launch({
+    args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist',
+      '--disable-gpu-driver-bug-workarounds', '--js-flags=--max-old-space-size=6144'],
+  });
+  browsers.push(browser);
   const page = await browser.newPage({ viewport: { width: Wd, height: Hd } });
   page.on('console', (m) => { if (m.type() === 'error' || m.type() === 'warning') console.log('[page]', m.text()); });
   page.on('pageerror', (e) => console.log('[pageerror]', e.message));
@@ -128,6 +131,6 @@ if (STILLS || BEATS) {
   }
   console.log('done →', OUT);
 }
-await browser.close();
+await Promise.all(browsers.map((b) => b.close()));
 server.close(); wss.close();
 process.exit(0);
