@@ -1,0 +1,20 @@
+# ---- 依赖 ----
+node_modules/
+__pycache__/
+*.pyc
+
+# ---- 00-supercut-trailer 构建产物 ----
+/00-supercut-trailer/build/
+/00-supercut-trailer/renders/
+
+# 超过 GitHub 100MB 限制，无法推送
+/00-supercut-trailer/源码.zip
+
+# ---- 其他子视频项目排除 mp4 大文件（00-supercut-trailer 除外） ----
+*.mp4
+!/00-supercut-trailer/**/*.mp4
+
+# ---- 系统垃圾 ----
+.DS_Store
+Thumbs.db
+desktop.ini

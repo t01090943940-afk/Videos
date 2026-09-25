@@ -1,0 +1,19 @@
+{
+  "name": "supercut-trailer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI-Coding SuperVideos 合集总片 · 62.4s · 150BPM · 音画同源 · 通通开源",
+  "type": "module",
+  "scripts": {
+    "prep": "node tools/prep_media.mjs",
+    "build": "node tools/build.mjs",
+    "score": "python audio/score.py",
+    "check": "hyperframes check",
+    "snapshot": "hyperframes snapshot",
+    "render": "hyperframes render . -q delivery --fps 60 -o renders/supercut-trailer-1080p60.mp4",
+    "ship": "ffmpeg -y -i renders/supercut-trailer-1080p60.mp4 -vf scale=1280:720:flags=lanczos -c:v libx264 -preset slow -crf 17 -pix_fmt yuv420p -c:a aac -b:a 256k -movflags +faststart renders/AI-Coding-SuperVideos-720p60.mp4"
+  },
+  "devDependencies": {
+    "hyperframes": "0.8.77"
+  }
+}
