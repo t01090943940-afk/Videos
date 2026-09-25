@@ -1,0 +1,18 @@
+{
+  "name": "the-source",
+  "version": "1.0.0",
+  "private": true,
+  "description": "《源 · THE SOURCE》AI-Coding SuperVideos 合集总片 · 66s · 120BPM · 1080p120 · 通通开源",
+  "type": "module",
+  "scripts": {
+    "prep": "python3 tools/prep.py",
+    "cues": "node tools/cues.mjs",
+    "score": "python3 audio/score.py",
+    "stills": "node tools/render.mjs --stills",
+    "render": "node tools/render.mjs --fps 120 --out renders/master_1080p120.mkv",
+    "ship": "python3 tools/ship.py"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

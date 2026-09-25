@@ -10,9 +10,15 @@ __pycache__/
 # 超过 GitHub 100MB 限制，无法推送
 /00-supercut-trailer/源码.zip
 
-# ---- 其他子视频项目排除 mp4 大文件（00-supercut-trailer 除外） ----
+# ---- 00-THE-SOURCE 构建产物（全部可由 tools/prep.py + render.mjs 重建）----
+/00-THE-SOURCE/assets/
+/00-THE-SOURCE/build/
+/00-THE-SOURCE/renders/*.mkv
+
+# ---- 其他子视频项目排除 mp4 大文件（00-supercut-trailer / 00-THE-SOURCE 交付物除外） ----
 *.mp4
 !/00-supercut-trailer/**/*.mp4
+!/00-THE-SOURCE/renders/*.mp4
 
 # ---- 系统垃圾 ----
 .DS_Store

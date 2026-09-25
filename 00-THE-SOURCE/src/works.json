@@ -1,0 +1,229 @@
+[
+ {
+  "key": "kimi-beat",
+  "folder": "kimi-ai-beat-sync",
+  "title": "AI 觉醒",
+  "model": "KIMI",
+  "spec": "1080p · 30fps · 51s",
+  "tech": "HyperFrames + GSAP · 全曲节拍分析卡点"
+ },
+ {
+  "key": "ai-rise",
+  "folder": "swe-ai-rise",
+  "title": "AI:RISE",
+  "model": "SWE",
+  "spec": "1080p · 30fps · 40s",
+  "tech": "renderAt(t) 纯函数 · 129.2 BPM 帧级锁拍"
+ },
+ {
+  "key": "kimi-film",
+  "folder": "swe-kimi-source-intro",
+  "title": "月之暗面 · KIMI",
+  "model": "SWE",
+  "spec": "1080p · 30fps · 56s",
+  "tech": "numpy 逐像素渲染 · 六幕六种 BPM"
+ },
+ {
+  "key": "cosmos30",
+  "folder": "gpt-universe-30-change",
+  "title": "COSMOS · 从未知到寂静",
+  "model": "GPT",
+  "spec": "1080p · 30fps · 72s",
+  "tech": "无头 OpenGL · 30 种画风 · 200 BPM"
+ },
+ {
+  "key": "beyond",
+  "folder": "gpt-15-style-ai-beyond-generation",
+  "title": "AI · Beyond Generation",
+  "model": "GPT",
+  "spec": "1080p · 30fps · 120s",
+  "tech": "Python + 原生 GL · 15 个世界"
+ },
+ {
+  "key": "gpt-autumn",
+  "folder": "gpt-mid-autumn-general-video",
+  "title": "把日子，慢慢过圆",
+  "model": "GPT",
+  "spec": "1080p · 60fps · 60s",
+  "tech": "21 镜 · 每个时代换一种材质"
+ },
+ {
+  "key": "moon-letter",
+  "folder": "gpt-mid-autumn-for-my-dg03",
+  "title": "月光信笺",
+  "model": "GPT",
+  "spec": "竖屏 1080×1920 · 29s",
+  "tech": "竖屏 · 可交互 HTML 同源",
+  "vertical": true
+ },
+ {
+  "key": "shatter",
+  "folder": "opus-broken-reround",
+  "title": "碎月重圆",
+  "model": "OPUS",
+  "spec": "1080p · 30fps · 30s",
+  "tech": "自写 3D 合成器 · 23 万粒子 · 抠像拆层"
+ },
+ {
+  "key": "oneink",
+  "folder": "opus-oneink",
+  "title": "一畫",
+  "model": "OPUS",
+  "spec": "1080p · 30fps · 60s",
+  "tech": "水墨书法 · 手卷一镜到底 · 泼墨诗云"
+ },
+ {
+  "key": "dingge",
+  "folder": "opus-factory-safety-videos",
+  "title": "定格",
+  "model": "OPUS",
+  "spec": "1440p · 60fps · 87s",
+  "tech": "Three.js 定格动画 · 瑞士奶酪模型"
+ },
+ {
+  "key": "claude15",
+  "folder": "opus-claude-intro-with-15-way",
+  "title": "Claude 自我介绍 · 15 种画风",
+  "model": "OPUS",
+  "spec": "1080p · 30fps · 114s",
+  "tech": "15 种画风 · 一条叙事线"
+ },
+ {
+  "key": "protocom",
+  "folder": "opus-production-video-protocom-intro",
+  "title": "protocom",
+  "model": "OPUS",
+  "spec": "4K · 60fps · 80s",
+  "tech": "4K 60fps · 用画风变化叙事"
+ },
+ {
+  "key": "codecosmos",
+  "folder": "opus-universe-history-video",
+  "title": "代码宇宙",
+  "model": "OPUS",
+  "spec": "1080p · 24fps · 68s",
+  "tech": "27 种代码风格 · 2D→4D · 一拍二定格"
+ },
+ {
+  "key": "phasegate",
+  "folder": "opus-production-video-ai-phase-skill",
+  "title": "Phase-Gate 升维",
+  "model": "OPUS",
+  "spec": "1080p · 60fps · 30s",
+  "tech": "手绘 → 矢量 → 扁平 → 黏土 → 写实"
+ },
+ {
+  "key": "ageint",
+  "folder": "opus-age-of-intelligence",
+  "title": "智能时代",
+  "model": "OPUS",
+  "spec": "60fps · 92s · 108 镜",
+  "tech": "108 镜 · 4170 行 Python · 双 drop"
+ },
+ {
+  "key": "skillshub",
+  "folder": "opus-production-video-skill-hub",
+  "title": "Skills Hub",
+  "model": "OPUS",
+  "spec": "1080p · 60fps · 57s",
+  "tech": "114 拍 · 顺手从零写一套前端来拍"
+ },
+ {
+  "key": "f12",
+  "folder": "opus-F12-teaching",
+  "title": "DevTools in 60 Seconds",
+  "model": "OPUS",
+  "spec": "1080p · 30fps · 60s",
+  "tech": "128 BPM · 32 小节 · 附可交互仿真浏览器"
+ },
+ {
+  "key": "hust1037",
+  "folder": "opus-1037-hust-story",
+  "title": "1037",
+  "model": "OPUS",
+  "spec": "1080p · 30fps · 110s",
+  "tech": "一个符号讲完一所大学"
+ },
+ {
+  "key": "xuanlan",
+  "folder": "opus-introduction-video-xuanlan",
+  "title": "玄览 PocketWebShell",
+  "model": "OPUS",
+  "spec": "1080p · 60fps · 55s",
+  "tech": "32 分钟写完 · 浏览器三十年进化史"
+ },
+ {
+  "key": "studysolo",
+  "folder": "opus-production-video-studysolo",
+  "title": "StudySolo",
+  "model": "OPUS",
+  "spec": "1080p · 60fps · 60s",
+  "tech": "真实 Agent 页面 · 过去|现在 分屏"
+ },
+ {
+  "key": "yusheng",
+  "folder": "opus-production-video-ys-blog",
+  "title": "羽升集",
+  "model": "OPUS",
+  "spec": "1080p · 60fps · 30s",
+  "tech": "每一拍一个可见动作"
+ },
+ {
+  "key": "shuchenglin",
+  "folder": "opus-shuchenglin-into",
+  "title": "树成林",
+  "model": "OPUS",
+  "spec": "1080p · 30fps · 60s",
+  "tech": "虚拟时间逐帧录屏 · 卡点靠坐标"
+ },
+ {
+  "key": "stopmotion",
+  "folder": "skill-方块系列定格动画",
+  "title": "方块定格 Skill",
+  "model": "SKILL",
+  "spec": "720p · 24fps · 60s",
+  "tech": "搭一次世界，拍任何画风"
+ },
+ {
+  "key": "samemoon",
+  "folder": "opus-mid-autumn-genergal-videos",
+  "title": "同一个月亮",
+  "model": "OPUS",
+  "spec": "1080p · 30fps · 120s",
+  "tech": "单文件 854 行 · Canvas + Web Audio"
+ },
+ {
+  "key": "gongcishi",
+  "folder": "opus-mid-autumn-highschool-videos",
+  "title": "共此时",
+  "model": "OPUS",
+  "spec": "180s · 217 份真实素材",
+  "tech": "三年照片 · 机器看片 + 人工看片"
+ },
+ {
+  "key": "moonlamp",
+  "folder": "opus-mid-autumn-for-my-dg02",
+  "title": "月光替你亮着灯",
+  "model": "OPUS",
+  "spec": "1080p · 24fps · 28s",
+  "tech": "真 3D 一镜到底 · 月夜水彩"
+ },
+ {
+  "key": "readclub",
+  "folder": "opus-hust-read-join-video-v1",
+  "title": "慢下来",
+  "model": "OPUS",
+  "spec": "竖屏 1080×1920 · 37s",
+  "tech": "一个 HTML 同时生成画面和音乐",
+  "vertical": true
+ },
+ {
+  "key": "senpai",
+  "folder": "opus-mid-autumn-for-my-dg01",
+  "title": "中秋 · 给学姐",
+  "model": "OPUS",
+  "spec": "竖屏 1080×1920 · 29s",
+  "tech": "render(t) 纯函数 · 局部重渲",
+  "vertical": true
+ }
+]
