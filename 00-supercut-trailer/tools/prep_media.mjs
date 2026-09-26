@@ -54,6 +54,7 @@ const SIZE = {
   split: [1280, 720],
   phone: [608, 1080],
   phoneR: [608, 1080],
+  pair: [1280, 720],
 };
 
 function run(args, label) {
@@ -118,8 +119,9 @@ for (const w of WORKS) {
 }
 for (const w of WORKS) {
   if (!want(`poster-${w.key}`) && !want('poster')) continue;
-  const wallShown = (WALL.b1 - WALL.b0) * BEAT; // 巨墙上实际播放的时长 3.2s
-  for (const j of [posterJob(w, '', w.wallIn + 1.2), posterJob(w, '-end', w.wallIn + wallShown - 1 / 30)]) if (j) jobs.push(j);
+  // -end 海报必须取定格时刻视频实际播到的那一帧（freezeAt - b0 拍之后），否则换图瞬间会跳
+  const freezeT = ((WALL.freezeAt ?? WALL.b1) - WALL.b0) * BEAT;
+  for (const j of [posterJob(w, '', w.wallIn + 1.2), posterJob(w, '-end', w.wallIn + freezeT - 1 / 30)]) if (j) jobs.push(j);
 }
 
 console.log(`prep_media: ${jobs.length} 个任务，并行 ${JOBS}`);

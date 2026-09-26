@@ -77,6 +77,7 @@
   const SHOTS = D.SHOTS;
   const wins = SHOTS.filter((s) => s.type === 'win');
   const fulls = SHOTS.filter((s) => s.type === 'full');
+  const pairShots = SHOTS.filter((s) => s.type === 'pair');
   const splits = SHOTS.filter((s) => s.type === 'split');
   const phones = SHOTS.filter((s) => s.type === 'phone');
 
@@ -86,8 +87,10 @@
       'full', 'duo', 'duo-left', 'duo-phone', 'duo-label', 'drop-ov', 'split', 'phones', 'tunnel', 'tunnel-cam', 'tunnel-line',
       'wall', 'wall-cam', 'wall-title', 'wall-sub', 'breath', 'flyers', 'reveal', 'rv-row', 'rv-en', 'rv-sweep', 'pillars', 'card', 'share',
       'folder', 'sh-count', 'sh-link-t', 'sh-link-u', 'qrbox', 'qr-scan', 'card-cta', 'card-note', 'outro', 'out-term', 'out-cmd', 'out-cursor',
-      'out-answer', 'mini', 'hud-tl', 'hud-rec', 'hud-time', 'hud-frame', 'hud-era', 'hud-era-k', 'hud-era-v', 'ruler', 'ruler-base', 'playhead',
+      'out-answer', 'out-self', 'mini', 'hud-tl', 'hud-rec', 'hud-time', 'hud-frame', 'hud-era', 'hud-era-k', 'hud-era-v', 'ruler', 'ruler-base', 'playhead',
+      'autopsy', 'at-head', 'at-tail', 'marathon', 'mar-strip', 'mar-count', 'mar-n', 'mar-title',
       'hud-count', 'hud-count-n', 'lbx-top', 'lbx-bot', 'fxback', 'fxfront'].forEach((id) => (el[id] = $(id)));
+    el.boot = TX.cold.boot.map((_, i) => $('bt' + i));
     el.nos = TX.cold.nos.map((_, i) => $('no' + i));
     el.strikes = el.nos.map((n) => n.querySelector('.strike'));
     el.formulaT = el['cold-formula'].querySelector('.t');
@@ -103,7 +106,16 @@
     el.phones = phones.map((s) => { const r = $('ph-' + s.id); return { r, label: r.querySelector('.ph-label') }; });
     el.phonesLayer = $('phones'); // el.phones 是数组，层的 id 单独存
     el.tplanes = D.WORKS.map((w) => $('tp-' + w.key));
-    el.wtiles = D.WORKS.map((w) => { const r = $('wt-' + w.key); return { r, flash: r.querySelector('.flash') }; });
+    el.wtiles = D.WORKS.map((w) => { const r = $('wt-' + w.key); return { r, flash: r.querySelector('.flash'), freeze: r.querySelector('img.freeze'), wl: r.querySelector('.wl') }; });
+    el.pairs = D.PAIRS.map((pr, i) => {
+      const r = $('pair-' + i);
+      return { r, code: r.querySelector('.code-pane'), film: r.querySelector('.film-pane'), media: r.querySelector('.film-media'),
+        beam: r.querySelector('.beam'), lock: r.querySelector('.lock'), label: r.querySelector('.film-label'),
+        lines: pr.lines.map((_, j) => $('cl-' + i + '-' + j)) };
+    });
+    el.stats = TX.autopsy.stats.map((_, i) => ({ r: $('st' + i), n: $('sn' + i) }));
+    el.mtiles = D.WORKS.map((w) => $('mt-' + w.key));
+    el.rslices = TX.reveal.chars.map((_, i) => { const c = $('rc' + i); return { t: c.querySelector('.sl-t'), m: c.querySelector('.sl-m'), b: c.querySelector('.sl-b') }; });
     el.blines = TX.breath.map((_, i) => { const r = $('bl' + i); return { r, big: r.querySelector('.big'), small: r.querySelector('.small') }; });
     el.flyers = D.WORKS.map((w) => $('fl-' + w.key));
     el.flyersLayer = $('flyers'); // el.flyers 是数组，层的 id 单独存
@@ -124,22 +136,24 @@
     const ring = (b, x, y, c, r = 900, d = 1.2, w = 10) => RING.push({ b, x, y, c, r, d, w });
     TX.cold.nos.forEach((n) => sh(n.b, 7, 0.25));
     D.ERAS.forEach((e, i) => { if (i < 3) { fl(e.b0, 0.55, 0.35); sh(e.b0, 12, 0.35); ring(e.b0, CX, CY, D.MODELS[e.model].color, 1100, 1.4, 14); } });
-    fulls.forEach((s) => fl(s.b0, s.b0 === 64 ? 1 : 0.2, s.b0 === 64 ? 0.7 : 0.18));
+    fulls.forEach((s) => fl(s.b0, s.b0 === 88 ? 1 : 0.2, s.b0 === 88 ? 0.7 : 0.18));
     D.GRID.steps.forEach((st) => fl(st.b, 0.22, 0.2));
-    fl(48, 0.4, 0.3, '169,139,255');
-    sh(64, 30, 0.55); ring(64, CX, CY, '#FF7A3D', 1500, 1.6, 22); ring(64.25, CX, CY, '#FFFFFF', 1200, 1.2, 6);
-    for (let b = 66; b < 80; b++) sh(b, 5, 0.18);
-    [80, 82, 84, 86].forEach((b) => { fl(b, 0.3, 0.22); sh(b, 8, 0.25); });
-    fl(96, 0.65, 0.4); sh(96, 16, 0.4); ring(96, CX, CY, '#FFFFFF', 1400, 1.2, 8);
+    fl(62, 0.4, 0.3, '169,139,255');
+    sh(88, 30, 0.55); ring(88, CX, CY, '#FF7A3D', 1500, 1.6, 22); ring(88.25, CX, CY, '#FFFFFF', 1200, 1.2, 6);
+    for (let b = 90; b < 112; b++) sh(b, 5, 0.18);
+    [114, 116, 118, 120].forEach((b) => { fl(b, 0.3, 0.22); sh(b, 8, 0.25); });
+    fl(124, 0.5, 0.35); // 隧道冲入
+    fl(138, 0.65, 0.4); sh(138, 16, 0.4); ring(138, CX, CY, '#FFFFFF', 1400, 1.2, 8); // 巨墙砸定
+    fl(148, 0.55, 0.3); sh(148, 8, 0.3); // 28 格定格卡·齐拍快门
     TX.reveal.b.forEach((b, i) => {
       const x = 160 + i * 400 + 200, y = 500;
       fl(b, 0.5 + i * 0.06, 0.25); sh(b, 18 + i * 5, 0.35);
       ring(b, x, y, '#FF7A3D', 900 + i * 150, 1.3, 16); ring(b + 0.12, x, y, '#FFFFFF', 600, 0.9, 5);
     });
-    fl(120, 0.75, 0.45); sh(120, 24, 0.5); ring(120, CX, 500, '#FFD166', 1800, 1.8, 26);
-    fl(128, 0.35, 0.3); fl(131, 0.25, 0.25, '61,139,255');
-    fl(143, 0.3, 0.5);
-    [[15.55, 0.35], [41.7, 0.3], [63.1, 0.35], [86, 0.4], [103.55, 0.45], [127.6, 0.3]].forEach(([b, len]) => GLITCH.push({ b, len }));
+    fl(210, 0.75, 0.45); sh(210, 24, 0.5); ring(210, CX, 500, '#FFD166', 1800, 1.8, 26); // OPEN SOURCE
+    fl(222, 0.35, 0.3); fl(232, 0.35, 0.3); fl(235, 0.3, 0.3, '61,139,255'); // 三柱 / 闪传卡
+    fl(263, 0.3, 0.5); // 「由你来写」
+    [[15.55, 0.35], [55.7, 0.3], [87.1, 0.35], [120, 0.4], [149.55, 0.45], [205.5, 0.3], [216.6, 0.3]].forEach(([b, len]) => GLITCH.push({ b, len }));
   }
   const sumPulse = (list, b) => {
     let a = 0;
@@ -147,12 +161,16 @@
     return a;
   };
 
-  // ═══ §4 冷开场 b0–16 ══════════════════════════════════════════════════════
+  // ═══ §4 冷开场 b0–20 ══════════════════════════════════════════════════════
   function sceneCold(b, t) {
     const C = TX.cold;
-    const vis = b < 15.9;
+    const vis = b < 19.9;
     op(el.cold, vis ? seg(b, 0, 0.8) : 0);
     if (!vis) return;
+    // boot 日志逐行点亮，打字开始后退场
+    el.boot.forEach((node, i) => {
+      op(node, seg(b, C.bootB0 + i * 0.75, C.bootB0 + i * 0.75 + 0.3) * (1 - seg(b, C.typeB0 - 0.2, C.typeB0 + 0.4)));
+    });
     // 终端打字
     const n = Math.floor(seg(b, C.typeB0, C.typeB1) * C.command.length + 1e-6);
     txt(el['cold-cmd'], C.command.slice(0, n));
@@ -259,7 +277,7 @@
   function sceneEras(b, ctxB) {
     D.ERAS.forEach((e, i) => {
       const E4 = i === 3;
-      const end = E4 ? 63.5 : e.b1;
+      const end = e.b1;
       const R = el.eras[i];
       const vis = inR(b, e.b0, end);
       op(R.root, vis ? 1 : 0);
@@ -295,19 +313,21 @@
     });
   }
 
-  // ─── 窗口堆叠 b19–42 ───────────────────────────────────────────────────────
+  // ─── 窗口堆叠 b23–58（ERA02 的窗口入场做 4 步/拍的像素量化停顿）───────────
   function sceneStack(b) {
-    const vis = (inR(b, 19, 27) || inR(b, 30, D.STACK_END));
+    const vis = (inR(b, 23, 34) || inR(b, 37, D.STACK_END));
     op(el.stack, vis ? 1 : 0);
     if (!vis) return;
     const drift = Math.sin(b * 0.35) * 3;
-    tf(el['stack-cam'], `translateZ(${f3(lerp(0, -260, seg(b, 19, 42)))}px) rotateY(${f3(drift)}deg) rotateX(${f3(Math.cos(b * 0.27) * 1.5)}deg)`);
+    tf(el['stack-cam'], `translateZ(${f3(lerp(0, -260, seg(b, 23, 58)))}px) rotateY(${f3(drift)}deg) rotateX(${f3(Math.cos(b * 0.27) * 1.5)}deg)`);
     wins.forEach((s, i) => {
       const W_ = el.wins[i];
       if (b < s.b0) { op(W_.r, 0); return; }
       let d = 0;
       for (let j = i + 1; j < wins.length; j++) d += Ez.oE(seg(b, wins[j].b0, wins[j].b0 + 0.4));
-      const e = spring(seg(b, s.b0, s.b0 + 0.9) * 1.6, 1.6, 5.2);
+      // ERA02「像素」时代的窗口：入场运动量化成一拍 4 步 —— 抽帧顿挫感
+      const bt = s.b0 >= 37 ? Math.floor(b * 4) / 4 : b;
+      const e = spring(seg(bt, s.b0, s.b0 + 0.9) * 1.6, 1.6, 5.2);
       const pose = { x: -150 * d, y: -64 * d, z: -300 * d, ry: -12 - 3 * d, rx: 4 };
       const from = { x: 950, y: 140, z: 520, ry: -42, rx: 8 };
       const p = (a, bb) => lerp(from[a], pose[a], clamp(e, 0, 1.2)) + (bb || 0);
@@ -379,15 +399,17 @@
     }
   }
 
+  const DUO0 = SHOTS.find((s) => s.type === 'duoL').b0;
+  const DUO1 = SHOTS.find((s) => s.type === 'duoL').b1;
   function sceneDuo(b) {
-    const vis = inR(b, 59, 62);
+    const vis = inR(b, DUO0, DUO1);
     op(el.duo, vis ? 1 : 0);
     if (!vis) return;
-    const l = Ez.oE(seg(b, 59, 59.5));
-    tf(el['duo-left'], `translateX(${f3(lerp(-420, 0, l))}px) scale(${f3(1 + 0.025 * (b - 59))})`);
-    const p = seg(b, 59.25, 60.05);
+    const l = Ez.oE(seg(b, DUO0, DUO0 + 0.5));
+    tf(el['duo-left'], `translateX(${f3(lerp(-420, 0, l))}px) scale(${f3(1 + 0.025 * (b - DUO0))})`);
+    const p = seg(b, DUO0 + 0.25, DUO0 + 1.05);
     tf(el['duo-phone'], `translateY(${f3(lerp(900, 0, Ez.oB(p, 1.3)))}px) rotate(${f3(lerp(14, -3, Ez.oC(p)))}deg)`);
-    op(el['duo-label'], seg(b, 59.7, 60.1));
+    op(el['duo-label'], seg(b, DUO0 + 0.7, DUO0 + 1.1));
   }
 
   // ═══ §7 OPUS ══════════════════════════════════════════════════════════════
@@ -397,8 +419,9 @@
     const x0 = (i * W) / n, x1 = ((i + 1) * W) / n;
     return { x0, x1, cx: (x0 + x1) / 2, L: i === 0 ? -300 : x0, R: i === n - 1 ? W + 300 : x1 };
   }
+  const SP0 = splits[0].b0, SP1 = splits[splits.length - 1].b1;
   function sceneSplit(b, ctxF) {
-    const vis = inR(b, 80, 86);
+    const vis = inR(b, SP0, SP1);
     op(el.split, vis ? 1 : 0);
     if (!vis) return;
     splits.forEach((s, k) => {
@@ -432,16 +455,17 @@
     }
   }
 
+  const PH0 = phones[0].b0, PH1 = phones[0].b1;
   function scenePhones(b) {
-    const vis = inR(b, 86, 88);
+    const vis = inR(b, PH0, PH1);
     op(el.phonesLayer, vis ? 1 : 0);
     if (!vis) return;
     el.phones.forEach((P_, i) => {
       const d = i * 0.16;
-      const p = seg(b, 86 + d, 86.62 + d);
+      const p = seg(b, PH0 + d, PH0 + 0.62 + d);
       const rest = [-6, 0, 6][i];
       tf(P_.r, `translateY(${f3(lerp(1000, i === 1 ? -18 : 0, Ez.oB(p, 1.25)))}px) rotate(${f3(lerp(rest * 3, rest, Ez.oC(p)))}deg)`);
-      op(P_.label, seg(b, 86.5 + d, 86.8 + d));
+      op(P_.label, seg(b, PH0 + 0.5 + d, PH0 + 0.8 + d));
     });
   }
 
@@ -451,7 +475,7 @@
     op(el.tunnel, vis ? 1 : 0);
     if (!vis) return;
     const p = seg(b, T_.b0, T_.b1);
-    const zc = lerp(0, 6200, Math.pow(p, 1.55));
+    const zc = lerp(0, 6200, Math.pow(p, 1.7));
     const roll = Math.sin(b * 0.55) * 5 + p * 24;
     tf(el['tunnel-cam'], `translateZ(${f3(zc)}px) rotateZ(${f3(roll)}deg)`);
     D.WORKS.forEach((w, i) => {
@@ -495,33 +519,112 @@
   }
   function sceneWall(b) {
     const Wl = D.WALL;
-    const vis = inR(b, Wl.b0, 111.6);
-    op(el.wall, vis ? 1 - seg(b, 104.2, 106) * 0.62 - seg(b, 109.5, 111.5) * 0.38 : 0);
+    const FRZ = Wl.freezeAt; // 148：28 格齐拍定格成照片卡
+    const vis = inR(b, Wl.b0, 165.6);
+    op(el.wall, vis ? 1 - seg(b, 150, 151.4) * 0.55 - seg(b, 160, 165.6) * 0.45 : 0);
     if (!vis) return;
     const fc = wallCenter(WALL_FOCUS);
     const p = Ez.ioC(seg(b, Wl.b0, Wl.b0 + 3.6));
-    let s = lerp(3.3, 0.94, p) + 0.06 * seg(b, 99.6, 104);
+    let s = lerp(3.3, 0.94, p) + 0.06 * seg(b, Wl.b0 + 3.6, FRZ);
     let tx = -(fc.x - CX) * s * (1 - p), ty = -(fc.y - CY) * s * (1 - p);
     const rx = lerp(20, 0, p), rz = lerp(-7, 0, p);
     // 骤停后：缓慢后退、去色
-    const br = seg(b, 104, 112);
+    const br = seg(b, 150, 160);
     s *= lerp(1, 0.84, Ez.oC(br));
-    const stop = pulse(b, 104, 0.35);
+    const stop = pulse(b, 150, 0.35);
     ty += stop * 26;
     tf(el['wall-cam'], `perspective(1500px) translate(${f3(tx)}px,${f3(ty)}px) scale(${f3(s)}) rotateX(${f3(rx)}deg) rotateZ(${f3(rz)}deg)`);
-    const gray = seg(b, 104, 105.2);
+    const gray = seg(b, 150, 151.2);
     css(el['wall-cam'], 'filter', gray > 0 ? `grayscale(${f3(gray)}) brightness(${f3(1 - 0.45 * gray - 0.5 * stop)})` : 'none');
+    const frz = seg(b, FRZ, FRZ + 0.15);
+    const fzPulse = pulse(b, FRZ, 0.28);
     el.wtiles.forEach((T_, i) => {
       const c = wallCenter(i);
       const dist = Math.hypot(c.c - fc.c, c.r - fc.r);
       const a = Ez.oB(seg(b, Wl.b0 + dist * 0.07, Wl.b0 + 0.45 + dist * 0.07), 1.5);
-      tf(T_.r, `scale(${f3(lerp(0.5, 1, a))})`);
+      // 定格瞬间：整体轻轻一压 + 白边照片卡
+      tf(T_.r, `scale(${f3(lerp(0.5, 1, a) * (1 - 0.035 * fzPulse))})`);
       op(T_.r, clamp(a * 2));
-      op(T_.flash, 0.85 * pulse(b, 102 + (c.c + c.r) * 0.13, 0.22));
+      op(T_.flash, 0.85 * pulse(b, 144 + (c.c + c.r) * 0.13, 0.22));
+      op(T_.freeze, frz);
+      op(T_.wl, 1 - seg(b, 150, 150.8)); // 骤停后格内标签整体退场（巨墙变成纯照片墙）
+      css(T_.r, 'outline', frz > 0.02 ? `3px solid rgba(255,255,255,${f3(0.9 * frz)})` : '');
     });
-    op(el['wall-title'], env(b, 97.4, 98, 104, 104.4));
-    css(el['wall-title'], 'letterSpacing', `${f3(lerp(0.7, 0.32, Ez.oC(seg(b, 97.4, 98.6))))}em`);
-    op(el['wall-sub'], env(b, 98.6, 99.2, 104, 104.4));
+    op(el['wall-title'], env(b, 140.4, 141, 148, 148.4));
+    css(el['wall-title'], 'letterSpacing', `${f3(lerp(0.7, 0.32, Ez.oC(seg(b, 140.4, 141.6))))}em`);
+    op(el['wall-sub'], env(b, 141.6, 142.2, 148, 148.4));
+  }
+
+  // ═══ §7b 解剖：左真实源码 / 右成片输出 b166–196 ═══════════════════════════
+  function sceneAutopsy(b) {
+    const A = TX.autopsy;
+    // A.b0/b1 是标题窗口；段落本体 = A.b0 → A.statsB1
+    const secEnd = A.statsB1;
+    const vis = inR(b, A.b0, secEnd + 0.6);
+    op(el.autopsy, vis ? env(b, A.b0, A.b0 + 0.4, secEnd, secEnd + 0.5) : 0);
+    if (!vis) return;
+    const hp = Ez.oC(seg(b, A.b0, A.b0 + 0.7)) * (1 - seg(b, secEnd - 0.6, secEnd - 0.1));
+    op(el['at-head'], hp);
+    tf(el['at-head'], `translateY(${f3((1 - hp) * 26)}px)`);
+    el.pairs.forEach((P_, i) => {
+      const sh = pairShots[i];
+      if (!inR(b, sh.b0, sh.b1 + 0.4)) { op(P_.r, 0); return; }
+      const ein = Ez.oE(seg(b, sh.b0, sh.b0 + 0.6));
+      const fadeOut = 1 - seg(b, sh.b1, sh.b1 + 0.35);
+      op(P_.r, clamp(ein * 1.5) * fadeOut);
+      tf(P_.code, `translateX(${f3(lerp(-140, 0, ein))}px)`);
+      tf(P_.film, `translateX(${f3(lerp(140, 0, ein))}px)`);
+      // 真实代码行逐行点亮（≈1.05 拍一行），beam 同步脉冲
+      const lit = Math.floor((b - sh.b0 - 0.7) / 1.05);
+      P_.lines.forEach((ln, j) => ln.classList.toggle('hot', j === lit && lit >= 0 && b < sh.b1));
+      const bp = lit >= 0 ? pulse(b, sh.b0 + 0.7 + lit * 1.05, 0.22) : 0;
+      op(P_.beam, clamp(bp * 1.4));
+      // 追踪括号线收紧
+      const lp = Ez.oE(seg(b, sh.b0 + 0.3, sh.b0 + 1.1));
+      op(P_.lock, seg(b, sh.b0 + 0.3, sh.b0 + 0.5));
+      tf(P_.lock, `scale(${f3(lerp(1.12, 1, lp))})`);
+      css(P_.media, 'transform', `scale(${f3(1 + 0.02 * (b - sh.b0))})`);
+      const lbp = Ez.oC(seg(b, sh.b0 + 0.8, sh.b0 + 1.3));
+      op(P_.label, lbp);
+      tf(P_.label, `translateY(${f3((1 - lbp) * 14)}px)`);
+    });
+    // 统计数字滚动
+    el.stats.forEach((S, i) => {
+      const d = A.statsB0 + i * 1.15;
+      const e2 = Ez.oE(seg(b, d, d + 0.5));
+      op(S.r, e2);
+      tf(S.r, `translateY(${f3((1 - e2) * 40)}px)`);
+      const to = +S.n.dataset.to;
+      txt(S.n, Math.round(to * Ez.oC(seg(b, d + 0.2, d + 2.8))).toLocaleString('en-US'));
+    });
+    op(el['at-tail'], seg(b, A.statsB0 + 3.6, A.statsB0 + 4.4));
+  }
+
+  // ═══ §7c 马拉松：28 部 × 半拍海报带 b196–206 ══════════════════════════════
+  const TILE_W = 660;
+  function sceneMarathon(b) {
+    const M = D.MARATHON;
+    const vis = inR(b, M.b0, M.b1 + 0.5);
+    op(el.marathon, vis ? env(b, M.b0, M.b0 + 0.3, M.b1 - 0.1, M.b1 + 0.4) : 0);
+    if (!vis) return;
+    const cont = clamp((b - M.b0) / M.per, 0, 27.999);
+    const i0 = Math.floor(cont);
+    const fr = cont - i0;
+    const sm = Math.min(27, i0 + Ez.oC(Math.min(1, fr * 1.7)));
+    tf(el['mar-strip'], `translateX(${f3(CX - 320 - sm * TILE_W)}px)`);
+    el.mtiles.forEach((m, i) => {
+      const d = Math.abs(i - sm);
+      op(m, i > cont + 4 ? 0 : clamp(1.7 - d * 0.5));
+      const s = lerp(0.8, 1, clamp(1.6 - d));
+      const brt = lerp(0.3, 1, clamp(1.5 - d));
+      css(m, 'filter', `brightness(${f3(brt)}) saturate(${f3(lerp(0.4, 1.15, clamp(1.5 - d)))})`);
+      tf(m, `translateX(${f3(i * TILE_W)}px) scale(${f3(s)})`);
+    });
+    const pk = Math.pow(1 - fr, 2);
+    txt(el['mar-n'], String(Math.min(28, i0 + 1)).padStart(2, '0'));
+    tf(el['mar-count'], `scale(${f3(1 + 0.15 * pk)})`);
+    op(el['mar-count'], env(b, M.b0, M.b0 + 0.3, M.b1 - 0.4, M.b1));
+    op(el['mar-title'], env(b, M.b0 + 0.5, M.b0 + 1, M.b1 - 0.4, M.b1));
   }
 
   // ═══ §8 凝视 / 通通开源 / 卡片 / 尾声 ═════════════════════════════════════
@@ -544,10 +647,11 @@
     return { ang: r() * Math.PI * 2, spin: (r() - 0.5) * 540, tilt: (r() - 0.5) * 120, R: 900 + r() * 700, delay: r() * 0.35,
       sx: r() < 0.5 ? -200 - r() * 300 : W + 200 + r() * 300, sy: r() * H, cx: CX + (r() - 0.5) * 900, cy: -200 + r() * 400 };
   });
-  const arrivals = D.WORKS.map((_, i) => 128.25 + i * 0.085 + 0.95);
+  const FLY_B0 = TX.card.b0; // 232：飞进闪传文件夹的起点
+  const arrivals = D.WORKS.map((_, i) => FLY_B0 + 0.25 + i * 0.085 + 0.95);
   function sceneFlyers(b) {
     // 爆散阶段在「通通开源」大字之后（下层）；吸入阶段必须压在分享卡片之上
-    css(el.flyersLayer, 'zIndex', b >= 128 ? '5' : '0');
+    css(el.flyersLayer, 'zIndex', b >= FLY_B0 ? '5' : '0');
     el.flyers.forEach((f, i) => {
       const R = flyRnd[i];
       // A · 爆散：跟着「通通开源」四拍，从纵深中心冲向镜头
@@ -562,7 +666,7 @@
         return;
       }
       // B · 吸入：28 部片子飞进 QQ 闪传文件夹
-      const s0 = 128.25 + i * 0.085;
+      const s0 = FLY_B0 + 0.25 + i * 0.085;
       if (inR(b, s0, s0 + 0.95)) {
         const q = Ez.iC(seg(b, s0, s0 + 0.95));
         const u = 1 - q;
@@ -578,8 +682,8 @@
 
   function sceneReveal(b) {
     const Rv = TX.reveal;
-    const vis = inR(b, Rv.b[0], 128.4);
-    op(el.reveal, vis ? 1 - seg(b, 127.8, 128.4) : 0);
+    const vis = inR(b, Rv.b[0], 222.4);
+    op(el.reveal, vis ? 1 - seg(b, 221.8, 222.4) : 0);
     if (!vis) return;
     el.rchars.forEach((c, i) => {
       const bi = Rv.b[i];
@@ -587,16 +691,22 @@
       const k = pulse(b, bi, 0.32);
       op(c, seg(b, bi, bi + 0.04));
       tf(c, `scale(${f3(lerp(2.8, 1, Ez.oE(s)) + 0.05 * Math.sin(clamp((b - bi) / 0.5) * Math.PI) * (1 - clamp(b - bi - 0.5)))})`);
-      css(c, 'textShadow', `${f3(-16 * k)}px 0 rgba(255,40,60,${f3(0.85 * k)}), ${f3(16 * k)}px 0 rgba(40,220,255,${f3(0.85 * k)}), 0 0 ${f3(40 + 80 * k + 40 * pulse(b, 120, 0.6))}px rgba(255,122,61,${f3(0.35 + 0.45 * k + 0.3 * pulse(b, 120, 0.6))})`);
+      css(c, 'textShadow', `${f3(-16 * k)}px 0 rgba(255,40,60,${f3(0.85 * k)}), ${f3(16 * k)}px 0 rgba(40,220,255,${f3(0.85 * k)}), 0 0 ${f3(40 + 80 * k + 40 * pulse(b, Rv.enB, 0.6))}px rgba(255,122,61,${f3(0.35 + 0.45 * k + 0.3 * pulse(b, Rv.enB, 0.6))})`);
       css(c, 'filter', s < 1 ? `blur(${f3((1 - Ez.oE(s)) * 18)}px)` : 'none');
+      // 切片爆发式排版：上/下两片横向错位撕开再合拢
+      const sl = el.rslices[i];
+      const k2 = pulse(b, bi, 0.22);
+      tf(sl.t, `translateX(${f3(-30 * k2)}px)`);
+      tf(sl.m, `translateX(${f3(12 * k2)}px)`);
+      tf(sl.b, `translateX(${f3(30 * k2)}px)`);
     });
     const up = Ez.ioC(seg(b, Rv.out, Rv.out + 0.7));
-    tf(el['rv-row'], `translateY(${f3(lerp(0, -232, up))}px) scale(${f3((1 + 0.09 * pulse(b, 120, 0.35)) * lerp(1, 0.42, up))})`);
+    tf(el['rv-row'], `translateY(${f3(lerp(0, -232, up))}px) scale(${f3((1 + 0.09 * pulse(b, Rv.enB, 0.35)) * lerp(1, 0.42, up))})`);
     const en = seg(b, Rv.enB + 0.2, Rv.enB + 0.8);
     op(el['rv-en'], Ez.oC(en) * (1 - seg(b, Rv.out, Rv.out + 0.3)));
     css(el['rv-en'], 'letterSpacing', `${f3(lerp(1.1, 0.5, Ez.oE(en)))}em`);
-    const sw = seg(b, 121, 123);
-    op(el['rv-sweep'], env(b, 121, 121.2, 122.8, 123));
+    const sw = seg(b, 211, 213);
+    op(el['rv-sweep'], env(b, 211, 211.2, 212.8, 213));
     css(el['rv-sweep'], 'backgroundPosition', `${f3(lerp(100, 0, Ez.ioS(sw)))}% 0`);
   }
 
@@ -605,9 +715,9 @@
     const vis = inR(b, Pl.b0, Pl.b1);
     op(el.pillarsLayer, vis ? 1 : 0);
     if (!vis) return;
-    const out = Ez.iC(seg(b, 128.1, 128.6));
+    const out = Ez.iC(seg(b, Pl.b1 - 0.5, Pl.b1));
     el.pillars.forEach((P_, i) => {
-      const d = 124.3 + i * 0.25;
+      const d = Pl.b0 + 0.3 + i * 0.25;
       const e = Ez.oE(seg(b, d, d + 0.5));
       op(P_.r, e * (1 - out));
       tf(P_.r, `translateY(${f3((1 - e) * 70)}px) scale(${f3(1 - out * 0.25)})`);
@@ -620,12 +730,12 @@
 
   function sceneCard(b) {
     const C = TX.card;
-    const vis = inR(b, C.b0, 141.2);
-    op(el.card, vis ? 1 - seg(b, 140.2, 141.2) : 0);
+    const vis = inR(b, C.b0, 257.2);
+    op(el.card, vis ? 1 - seg(b, 255.2, 256.4) : 0);
     if (!vis) return;
     const e = Ez.oE(seg(b, C.b0, C.b0 + 0.75));
-    const push = seg(b, 132, 140);
-    const toMini = Ez.ioC(seg(b, 140, 141.2));
+    const push = seg(b, 244, 255);
+    const toMini = Ez.ioC(seg(b, 255, 256.4));
     tf(el.card, `translate(${f3(toMini * 520)}px,${f3(toMini * 300)}px) scale(${f3((1 + 0.03 * push) * lerp(1, 0.35, toMini))})`);
     let bounce = 0;
     let arrived = 0;
@@ -635,33 +745,35 @@
     tf(el.folder, `scale(${f3(1 + Math.min(0.35, bounce))})`);
     txt(el['sh-count'], `${arrived} / 28`);
     const url = D.SHARE.url;
-    const n = Math.floor(seg(b, 131, 132.4) * url.length + 1e-6);
+    const n = Math.floor(seg(b, 239, 240.4) * url.length + 1e-6);
     txt(el['sh-link-t'], url.slice(0, n));
-    tf(el['sh-link-u'], `scaleX(${f3(Ez.oC(seg(b, 132.4, 133)))})`);
-    const q = seg(b, 129, 129.7);
+    tf(el['sh-link-u'], `scaleX(${f3(Ez.oC(seg(b, 240.4, 241)))})`);
+    const q = seg(b, 236, 236.7);
     tf(el.qrbox, `scale(${f3(lerp(0.6, 1, Ez.oB(q, 1.5)))})`);
-    op(el.qrbox, seg(b, 129, 129.2));
-    const sc = ((b - 129.5) % 2.5) / 2.5;
+    op(el.qrbox, seg(b, 236, 236.2));
+    const sc = ((b - 236.5) % 2.5) / 2.5;
     tf(el['qr-scan'], `translateY(${f3(lerp(-90, 520, sc))}px)`);
-    op(el['qr-scan'], b > 129.5 ? 1 : 0);
+    op(el['qr-scan'], b > 236.5 ? 1 : 0);
     const bar = pulse(b % 4, 0, 0.5);
     css(el.qrbox, 'boxShadow', `0 40px 120px rgba(0,0,0,.6), 0 0 ${f3(20 + 50 * bar)}px rgba(61,139,255,${f3(0.3 + 0.4 * bar)})`);
-    op(el['card-cta'], seg(b, 131.5, 132));
-    tf(el['card-cta'], `translateY(${f3((1 - Ez.oC(seg(b, 131.5, 132.1))) * 30)}px)`);
-    op(el['card-note'], seg(b, 132.2, 132.8));
+    op(el['card-cta'], seg(b, 239.5, 240));
+    tf(el['card-cta'], `translateY(${f3((1 - Ez.oC(seg(b, 239.5, 240.1))) * 30)}px)`);
+    op(el['card-note'], seg(b, 240.2, 240.8));
   }
 
   function sceneOutro(b, t) {
     const O = TX.outro;
-    const vis = inR(b, O.b0, 157);
-    const fade = 1 - seg(b, O.fadeB0, 155.4);
+    const vis = inR(b, O.b0, 301);
+    const fade = 1 - seg(b, O.fadeB0, 295.2);
     op(el.outro, vis ? seg(b, O.b0 + 0.3, O.b0 + 0.9) * fade : 0);
-    op(el.mini, vis ? seg(b, 140.6, 141.4) * (1 - seg(b, 154.2, 155.6)) : 0);
+    op(el.mini, vis ? seg(b, 255.6, 256.4) * (1 - seg(b, 293, 294.5)) : 0);
     if (!vis) return;
     const cmd = TX.cold.command;
     const n = Math.floor(seg(b, O.typeB0, O.typeB1) * cmd.length + 1e-6);
     txt(el['out-cmd'], cmd.slice(0, n));
     op(el['out-cursor'], b < O.typeB1 + 0.3 ? 1 : Math.floor(t * 2.4) % 2 === 0 ? 1 : 0);
+    // 自指：本片也是 render(t) 的输出
+    op(el['out-self'], env(b, O.selfB, O.selfB + 0.4, O.selfB + 2.2, O.selfB + 2.8));
     const a = Ez.oC(seg(b, O.answerB, O.answerB + 1.1));
     op(el['out-answer'], a);
     css(el['out-answer'], 'clipPath', `inset(-30% ${f3((1 - a) * 100)}% -30% 0)`);
@@ -675,8 +787,8 @@
 
   // ═══ §9 HUD ═══════════════════════════════════════════════════════════════
   function hud(b, t, f) {
-    const breathDim = 1 - 0.8 * env(b, 104, 104.6, 115.6, 116);
-    const endFade = 1 - seg(b, 153, 155.4);
+    const breathDim = 1 - 0.8 * env(b, 150, 150.6, 165.6, 166);
+    const endFade = 1 - seg(b, 293, 295.4);
     const base = seg(b, 5.2, 6) * breathDim * endFade;
     op(el['hud-tl'], base);
     txt(el['hud-time'], `t = ${t.toFixed(3).padStart(6, '0')}s`);
@@ -684,8 +796,8 @@
     op(el['hud-rec'], Math.floor(t * 2) % 2 === 0 ? 1 : 0.35);
     let era = null;
     D.ERAS.forEach((e) => { if (b >= e.b0) era = e; });
-    const allMode = b >= 104;
-    op(el['hud-era'], (b >= 16 ? 1 : 0) * breathDim * endFade);
+    const allMode = b >= 150;
+    op(el['hud-era'], (b >= 20 ? 1 : 0) * breathDim * endFade);
     if (era) {
       txt(el['hud-era-k'], allMode ? 'ALL ERAS' : `ERA ${era.n}`);
       txt(el['hud-era-v'], allMode ? '28 部 · 通通开源' : D.MODELS[era.model].label);
@@ -703,8 +815,8 @@
       tf(el.slots[i].r, `scaleY(${f3(1 + 1.6 * pulse(b, fs, 0.25) * (b >= fs ? 1 : 0))})`);
     });
     txt(el['hud-count-n'], String(seen));
-    op(el['hud-count'], seg(b, 16, 16.5) * breathDim * endFade);
-    const lb = Math.max(env(b, 104, 104.7, 115.8, 116), seg(b, 140, 141));
+    op(el['hud-count'], seg(b, 20, 20.5) * breathDim * endFade);
+    const lb = Math.max(env(b, 150, 150.7, 165.8, 166), seg(b, 256, 257));
     tf(el['lbx-top'], `translateY(${f3(-100 * (1 - Ez.ioC(lb)))}%)`);
     tf(el['lbx-bot'], `translateY(${f3(100 * (1 - Ez.ioC(lb)))}%)`);
   }
@@ -728,12 +840,44 @@
     }
   }
 
+  // 冷开场蓝图自绘：把 frame = render(t) 当工程图画出来
+  function blueprint(ctx, b) {
+    const C = TX.cold;
+    if (!inR(b, C.blueprintB0, C.codeWallB1)) return;
+    const p = Ez.ioC(seg(b, C.blueprintB0, C.blueprintB1));
+    const a = env(b, C.blueprintB0, C.blueprintB0 + 0.5, 19.4, 19.9) * 0.85;
+    ctx.save();
+    ctx.globalAlpha = a;
+    ctx.strokeStyle = 'rgba(96,220,255,0.8)';
+    ctx.fillStyle = 'rgba(96,220,255,0.9)';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([14, 10]);
+    const n = p * 6;
+    if (n > 0) ctx.strokeRect(420, 260, 1080, 560);
+    if (n > 1) { ctx.beginPath(); ctx.moveTo(920, 540); ctx.lineTo(1000, 540); ctx.moveTo(960, 500); ctx.lineTo(960, 580); ctx.stroke(); }
+    if (n > 2) { ctx.beginPath(); ctx.moveTo(420, 260); ctx.lineTo(1500, 820); ctx.stroke(); }
+    if (n > 3) for (let i = 0; i <= 12; i++) { const x = 420 + i * 90; ctx.beginPath(); ctx.moveTo(x, 830); ctx.lineTo(x, 848); ctx.stroke(); }
+    if (n > 4) { ctx.beginPath(); ctx.arc(960, 540, 130, 0, Math.PI * 2); ctx.stroke(); }
+    if (n > 4.6) {
+      ctx.font = '500 22px Plex'; ctx.setLineDash([]);
+      ctx.fillText('FIG.01 · frame = render(t)', 420, 244);
+      ctx.fillText('1920', 938, 862);
+      ctx.fillText('1 beat = 48 frames @120fps', 420, 900);
+    }
+    if (p < 1) {
+      const sx = 420 + 1080 * ((p * 3) % 1);
+      ctx.setLineDash([]);
+      ctx.fillRect(sx, 250, 2, 600);
+    }
+    ctx.restore();
+  }
+
   // 冷开场代码墙：真实源码行，从下往上加速滚动
   function codeWall(ctx, b) {
     const C = TX.cold;
     if (!inR(b, C.codeWallB0, C.codeWallB1)) return;
     const p = seg(b, C.codeWallB0, C.codeWallB1);
-    const a = lerp(0.05, 0.38, Ez.iC(seg(b, C.codeWallB0, C.codeWallB0 + 1.5))) + 0.55 * Ez.iE(seg(b, 15.1, 15.85));
+    const a = lerp(0.05, 0.38, Ez.iC(seg(b, C.codeWallB0, C.codeWallB0 + 1.5))) + 0.55 * Ez.iE(seg(b, C.codeWallB1 - 0.8, C.codeWallB1 - 0.05));
     const off = Math.pow(b - C.codeWallB0, 2.1) * 120;
     const L = D.CODE_LINES;
     ctx.save();
@@ -767,11 +911,12 @@
   // 通通开源背景：缓慢漂移的余烬
   const embers = Array.from({ length: 140 }, (_, i) => { const r = mulberry32(5150 + i); return { x: r() * W, y: r() * H, z: 0.3 + r() * 0.7, s: r() }; });
   function drawEmbers(ctx, b) {
-    if (!inR(b, 116, 141)) return;
-    const a = env(b, 116, 116.5, 140, 141);
+    const B0 = TX.reveal.b[0]; // 206
+    if (!inR(b, B0, 257)) return;
+    const a = env(b, B0, B0 + 0.5, 255.5, 257);
     ctx.save();
     embers.forEach((e, i) => {
-      const y = ((e.y - (b - 116) * 22 * e.z) % H + H) % H;
+      const y = ((e.y - (b - B0) * 22 * e.z) % H + H) % H;
       const x = e.x + Math.sin(b * 0.6 + i) * 14 * e.z;
       const r = 1 + e.z * 2.4;
       ctx.globalAlpha = a * (0.25 + 0.55 * e.s) * (0.6 + 0.4 * Math.sin(b * 2 + i));
@@ -781,10 +926,10 @@
     ctx.restore();
   }
 
-  // DROP 段：每拍一次橙色漏光
+  // DROP → 分屏 段：每拍一次橙色漏光
   function lightLeak(ctx, b) {
-    if (!inR(b, 64, 88)) return;
-    const k = pulse(b - Math.floor(b), 0, 0.28) * (inR(b, 64, 80) ? 1 : 0.5);
+    if (!inR(b, 88, 124)) return;
+    const k = pulse(b - Math.floor(b), 0, 0.28) * (inR(b, 88, 112) ? 1 : 0.5);
     const side = Math.floor(b) % 2 ? 0 : W;
     const g = ctx.createRadialGradient(side, CY, 0, side, CY, 1100);
     g.addColorStop(0, `rgba(255,122,61,${f3(0.32 * k)})`); g.addColorStop(1, 'rgba(255,122,61,0)');
@@ -816,33 +961,61 @@
       ctx.restore();
     });
     // 隧道尽头白化
-    const whiteout = Ez.iC(seg(b, 95.2, 96));
-    const flash = Math.max(sumPulse(FLASH, b), b < 96 ? whiteout : 0);
+    const whiteout = Ez.iC(seg(b, 137.2, 138));
+    const flash = Math.max(sumPulse(FLASH, b), b < 138 ? whiteout : 0);
     if (flash > 0.003) {
       ctx.save(); ctx.globalAlpha = Math.min(1, flash); ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, W, H); ctx.restore();
     }
-    // 真空：DROP 前半拍全黑
-    if (inR(b, 63.5, 64) || inR(b, 15.9, 16) || inR(b, 115.75, 116)) { ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H); }
+    // 真空：DROP 前半拍 / 冷开场进正片 / 骤停 全黑
+    if (inR(b, 87.5, 88) || inR(b, 19.9, 20) || inR(b, 165.75, 166)) { ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H); }
     // 胶片颗粒（按帧号换图块 → 确定性）
     const tile = grainTiles[f % grainTiles.length];
     if (tile) {
       ctx.save();
-      ctx.globalAlpha = 0.055 + 0.04 * env(b, 104, 105, 115, 116);
+      ctx.globalAlpha = 0.055 + 0.04 * env(b, 150, 151, 165, 166);
       ctx.globalCompositeOperation = 'overlay';
       const ox = (hash(f) * 256) | 0, oy = (hash(f + 0.5) * 256) | 0;
       for (let y = -oy; y < H; y += 256) for (let x = -ox; x < W; x += 256) ctx.drawImage(tile, x, y);
       ctx.restore();
     }
-    // 结尾黑场
-    const endBlack = seg(b, 155, 156);
-    if (endBlack > 0) { ctx.save(); ctx.globalAlpha = endBlack; ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H); ctx.restore(); }
+    // CRT 关机收尾：画面垂直塌缩成线 → 线缩成亮点 → 熄灭
+    crtOff(ctx, b);
+  }
+
+  function crtOff(ctx, b) {
+    if (b < TX.outro.crtB0) return;
+    const p1 = Ez.iC(seg(b, TX.outro.crtB0, 297.2)); // 垂直塌缩
+    const p2 = Ez.iC(seg(b, 297.2, 299));            // 水平塌缩
+    const p3 = seg(b, 299.3, 300);                    // 熄灭
+    ctx.fillStyle = '#000';
+    const band = lerp(H, 0, p1);
+    const cutY = (H - band) / 2;
+    ctx.fillRect(0, 0, W, cutY);
+    ctx.fillRect(0, H - cutY, W, cutY);
+    if (p1 >= 1) {
+      const lw = lerp(W, 0, p2);
+      const cutX = (W - lw) / 2;
+      ctx.fillRect(0, 0, cutX, H);
+      ctx.fillRect(W - cutX, 0, cutX, H);
+      if (lw > 0.5 && p2 < 1) {
+        ctx.fillStyle = 'rgba(255,255,255,0.95)';
+        ctx.fillRect(cutX, CY - 2, lw, 4);
+      }
+      if (p2 >= 1 && p3 < 1) {
+        ctx.fillStyle = `rgba(255,255,255,${f3(1 - p3)})`;
+        ctx.beginPath(); ctx.arc(CX, CY, 4, 0, Math.PI * 2); ctx.fill();
+      }
+    } else {
+      ctx.fillStyle = `rgba(255,255,255,${f3(0.12 + 0.8 * p1)})`;
+      ctx.fillRect(0, CY - 1, W, 2);
+    }
   }
 
   // 震屏（按帧号取伪随机 → 确定性）
   function shake(b, f) {
     let amp = 0;
     SHAKE.forEach((s) => { if (b >= s.b && b < s.b + s.d * 6) amp += s.amp * pulse(b, s.b, s.d); });
-    amp += 12 * Ez.iC(seg(b, 62.3, 63.5)) * (b < 63.5 ? 1 : 0);
+    amp += 12 * Ez.iC(seg(b, 86.3, 87.5)) * (b < 87.5 ? 1 : 0);
     if (amp < 0.05) { tf(el.stage, 'none'); return; }
     const x = (hash(f * 1.37) - 0.5) * 2 * amp, y = (hash(f * 2.11 + 3) - 0.5) * 2 * amp, r = (hash(f * 0.73 + 9) - 0.5) * amp * 0.06;
     tf(el.stage, `translate(${f3(x)}px,${f3(y)}px) rotate(${f3(r)}deg)`);
@@ -854,10 +1027,12 @@
     const b = t / BEAT;
     const f = Math.round(t * FPS);
     const cb = el.cb, cf = el.cf;
-    cb.setTransform(1, 0, 0, 1, 0, 0); cb.clearRect(0, 0, W, H);
-    cf.setTransform(1, 0, 0, 1, 0, 0); cf.clearRect(0, 0, W, H);
+    const DPR = el.fxback.width / W; // 4K 后备画布 → 全部 FX 以 1920 坐标绘制、硬件放大
+    cb.setTransform(DPR, 0, 0, DPR, 0, 0); cb.clearRect(0, 0, W, H);
+    cf.setTransform(DPR, 0, 0, DPR, 0, 0); cf.clearRect(0, 0, W, H);
     shake(b, f);
     codeWall(cb, b);
+    blueprint(cb, b);
     drawEmbers(cb, b);
     sceneCold(b, t);
     sceneEras(b, cb);
@@ -870,6 +1045,8 @@
     sceneTunnel(b, cf, cb);
     sceneWall(b);
     sceneBreath(b);
+    sceneAutopsy(b);
+    sceneMarathon(b);
     sceneFlyers(b);
     sceneReveal(b);
     scenePillars(b);

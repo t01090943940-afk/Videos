@@ -6,6 +6,7 @@ __pycache__/
 # ---- 00-supercut-trailer 构建产物 ----
 /00-supercut-trailer/build/
 /00-supercut-trailer/renders/
+/00-supercut-trailer/qa-frames/
 
 # 超过 GitHub 100MB 限制，无法推送
 /00-supercut-trailer/源码.zip

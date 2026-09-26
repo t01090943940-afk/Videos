@@ -291,3 +291,83 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
   background: radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.55) 100%); }
 #scanlines { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; pointer-events: none; opacity: 0.07;
   background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0 1px, transparent 1px 3px); }
+
+/* ═══════════════════════ V2 · 120s / 4K120 ═══════════════════════════════ */
+
+/* ── 冷开场 boot 日志 ─────────────────────────────────────────────────── */
+#cold-boot {
+  position: absolute; left: 120px; top: 110px; font-family: var(--mono); font-size: 26px;
+  color: var(--dim); line-height: 2.1; letter-spacing: 0.04em;
+}
+#cold-boot .ok { color: var(--kimi); }
+#cold-boot .ln { opacity: 0; }
+
+/* ── 解剖场景：左真实源码 / 右成片输出 ────────────────────────────────── */
+#autopsy { }
+#at-head { position: absolute; left: 96px; top: 84px; display: flex; align-items: baseline; gap: 28px; }
+#at-title { font-family: var(--serif); font-weight: 900; font-size: 88px; letter-spacing: 0.04em; }
+#at-sub { font-family: var(--mono); font-size: 24px; color: var(--dim); letter-spacing: 0.1em; }
+.pair { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; opacity: 0; }
+.code-pane {
+  position: absolute; left: 96px; top: 216px; width: 830px; height: 620px; border-radius: 14px;
+  background: #0b0d12; border: 1.5px solid rgba(255,255,255,0.14); overflow: hidden;
+  box-shadow: 0 30px 90px rgba(0,0,0,.65);
+}
+.cp-head { height: 42px; display: flex; align-items: center; gap: 9px; padding: 0 16px;
+  background: linear-gradient(#1b1e26,#13151b); border-bottom: 1px solid rgba(255,255,255,0.08); }
+.cp-head i { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; }
+.cp-head i:nth-child(2) { background: #febc2e; } .cp-head i:nth-child(3) { background: #28c840; }
+.cp-file { margin-left: 12px; font-family: var(--mono); font-size: 17px; color: rgba(255,255,255,0.72); white-space: nowrap; overflow: hidden; }
+.cp-live { margin-left: auto; font-family: var(--num); font-weight: 800; font-size: 15px; color: var(--red); letter-spacing: .12em; }
+.cp-body { padding: 18px 0; }
+.cl { display: flex; font-family: var(--mono); font-size: 20px; line-height: 2.0; color: rgba(243,239,230,.38); white-space: nowrap; }
+.cl .ln { width: 52px; text-align: right; padding-right: 18px; color: rgba(255,255,255,0.2); flex: none; }
+.cl .lc { overflow: hidden; text-overflow: ellipsis; }
+.cl.hot { color: #fff; background: linear-gradient(90deg, rgba(255,122,61,.16), transparent 80%); }
+.cl.hot .lc { text-shadow: 0 0 18px rgba(255,122,61,.5); }
+.cl.hot .ln { color: var(--orange); }
+.cp-foot { position: absolute; left: 0; bottom: 0; width: 100%; padding: 10px 18px; font-family: var(--mono); font-size: 16px; color: var(--kimi); border-top: 1px solid rgba(255,255,255,0.08); background: #0d1017; }
+.beam { position: absolute; left: 926px; top: 526px; width: 120px; height: 2px; }
+.beam i { position: absolute; left: 0; top: 0; height: 2px; width: 100%; background: linear-gradient(90deg, var(--orange), transparent); transform-origin: 0 50%; }
+.film-pane { position: absolute; left: 1046px; top: 216px; width: 780px; height: 440px; }
+.film-media { position: absolute; left: 0; top: 0; width: 780px; height: 440px; overflow: hidden; border-radius: 10px;
+  box-shadow: 0 30px 90px rgba(0,0,0,.65), 0 0 0 1.5px rgba(255,255,255,0.16); }
+.lock { position: absolute; inset: -18px; pointer-events: none; }
+.lock .c { position: absolute; width: 34px; height: 34px; border: 3px solid var(--orange); }
+.lock .tl { left: 0; top: 0; border-right: 0; border-bottom: 0; }
+.lock .tr { right: 0; top: 0; border-left: 0; border-bottom: 0; }
+.lock .bl { left: 0; bottom: 0; border-right: 0; border-top: 0; }
+.lock .br { right: 0; bottom: 0; border-left: 0; border-top: 0; }
+.lk-tag { position: absolute; left: 50%; top: -2px; transform: translateX(-50%); font-family: var(--num); font-weight: 800; font-size: 15px; letter-spacing: .3em; color: var(--orange); }
+.film-label { position: absolute; left: 0; top: 480px; display: flex; align-items: center; gap: 16px; white-space: nowrap; }
+.film-label .chip { padding: 4px 14px; border-radius: 6px; background: var(--c); color: #0a0a0a; font-family: var(--num); font-weight: 800; font-size: 20px; letter-spacing: .14em; }
+.film-label b { font-family: var(--serif); font-weight: 900; font-size: 44px; }
+.film-label .ft { font-family: var(--sans); font-weight: 700; font-size: 22px; color: var(--dim); }
+#stats { position: absolute; left: 0; top: 880px; width: 1920px; display: flex; justify-content: center; gap: 120px; }
+.stat { display: flex; align-items: baseline; gap: 14px; opacity: 0; }
+.stat .sn { font-family: var(--num); font-weight: 900; font-size: 84px; color: var(--ink); }
+.stat .sl2 { font-family: var(--sans); font-weight: 700; font-size: 26px; color: var(--dim); white-space: nowrap; }
+#at-tail { position: absolute; left: 0; top: 990px; width: 1920px; text-align: center; font-family: var(--mono); font-size: 24px; color: var(--kimi); letter-spacing: .14em; opacity: 0; }
+
+/* ── 马拉松：28 部 × 半拍海报带 ────────────────────────────────────────── */
+#mar-strip { position: absolute; left: 0; top: 330px; height: 420px; }
+.mtile { position: absolute; left: 0; top: 0; width: 640px; height: 360px; border-radius: 10px; overflow: hidden;
+  outline: 2px solid var(--c); box-shadow: 0 24px 80px rgba(0,0,0,.6); }
+.mtile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mtile .ml { position: absolute; left: 0; bottom: 0; width: 100%; padding: 40px 18px 12px; background: linear-gradient(transparent, rgba(0,0,0,.85));
+  font-family: var(--serif); font-weight: 900; font-size: 30px; white-space: nowrap; }
+.mtile .ml i { font-style: normal; font-family: var(--num); font-weight: 800; font-size: 20px; color: var(--c); margin-right: 10px; letter-spacing: .1em; }
+#mar-count { position: absolute; left: 0; top: 130px; width: 1920px; text-align: center; font-family: var(--num); font-weight: 900; }
+#mar-count b { font-size: 130px; color: var(--orange); }
+#mar-count span { font-size: 52px; color: var(--dim); }
+#mar-title { position: absolute; left: 0; top: 880px; width: 1920px; text-align: center; font-family: var(--serif); font-weight: 900; font-size: 64px; letter-spacing: .1em; }
+
+/* ── 通通开源 · 切片爆发式排版 ────────────────────────────────────────── */
+.rv-ch { position: relative; }
+.rv-ch .sl { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+.rv-ch .sl-t { clip-path: inset(0 0 62% 0); }
+.rv-ch .sl-m { clip-path: inset(38% 0 30% 0); }
+.rv-ch .sl-b { clip-path: inset(70% 0 0 0); }
+
+/* ── 尾声 · 自指行 ────────────────────────────────────────────────────── */
+#out-self { position: absolute; left: 0; top: 412px; width: 1920px; text-align: center; font-family: var(--mono); font-size: 26px; color: var(--kimi); letter-spacing: .1em; opacity: 0; }
