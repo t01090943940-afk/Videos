@@ -1,0 +1,8 @@
+# Python 3.9+ (the film was made with Python 3.11.15)
+numpy>=1.24        # audio synthesis, QC           (used: 2.4.4)
+scipy>=1.10        # filters, reverb, WAV I/O       (used: 1.17.1)
+Pillow>=9.0        # contact sheets, MP4 checks     (used: 12.2.0)
+
+# optional helpers
+matplotlib>=3.7    # tools/audio_report.py          (used: 3.10.9)
+fonttools>=4.40    # scripts/make_fonts.py          (used: 4.62.1)

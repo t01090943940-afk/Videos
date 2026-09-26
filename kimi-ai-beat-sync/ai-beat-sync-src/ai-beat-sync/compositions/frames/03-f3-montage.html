@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>03-f3-montage</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-400.ttf") format("truetype"); font-weight: 400; font-display: block; }
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-600.ttf") format("truetype"); font-weight: 600; font-display: block; }
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-700.ttf") format("truetype"); font-weight: 700; font-display: block; }
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-800.ttf") format("truetype"); font-weight: 800; font-display: block; }
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-900.ttf") format("truetype"); font-weight: 900; font-display: block; }
+        @font-face { font-family: "IBM Plex Mono"; src: url("assets/fonts/IBMPlexMono-500.ttf") format("truetype"); font-weight: 500; font-display: block; }
+        @font-face { font-family: "Noto Sans SC"; src: url("assets/fonts/NotoSansSC-700.ttf") format("truetype"); font-weight: 700; font-display: block; }
+        @font-face { font-family: "Noto Sans SC"; src: url("assets/fonts/NotoSansSC-900.ttf") format("truetype"); font-weight: 900; font-display: block; }
+        @font-face { font-family: "Microsoft YaHei"; src: local("Microsoft YaHei"); font-weight: 400 900; font-display: block; }
+
+        *,
+        *::before,
+        *::after {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        #stage {
+          position: absolute;
+          inset: 0;
+          width: 1920px;
+          height: 1080px;
+          overflow: hidden;
+          background: #111111;
+          font-family: "Barlow", "Noto Sans SC", sans-serif;
+        }
+        .g {
+          position: absolute;
+          inset: 0;
+        }
+
+        /* ── g1 · poster-tile mosaic (Broadside dark register) ─────────── */
+        #g1 {
+          background: #111111;
+        }
+        #g1_wall {
+          position: absolute;
+          inset: 0;
+        }
+        .g1-tile {
+          position: absolute;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          overflow: hidden;
+          will-change: transform, opacity;
+          backface-visibility: hidden;
+        }
+        .g1-yr {
+          font-family: "IBM Plex Mono", monospace;
+          font-weight: 500;
+          text-transform: uppercase;
+          letter-spacing: 0.14em;
+          line-height: 1.2;
+          padding: 0 0.55em;
+        }
+        .g1-ev {
+          font-family: "Barlow", "Noto Sans SC", sans-serif;
+          font-weight: 900;
+          text-transform: lowercase;
+          letter-spacing: -0.02em;
+          line-height: 0.95;
+          padding: 0.12em 0.55em 0.5em;
+        }
+        .g1-ghost {
+          position: absolute;
+          border: 1px solid #282826;
+        }
+        .g1-chrome {
+          position: absolute;
+          left: 96px;
+          right: 96px;
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          font-family: "IBM Plex Mono", monospace;
+          font-weight: 500;
+          font-size: 16px;
+          text-transform: uppercase;
+          letter-spacing: 0.14em;
+        }
+        #g1_chrome_top {
+          top: 30px;
+          padding-bottom: 12px;
+          border-bottom: 1px solid #282826;
+        }
+        #g1_chrome_bot {
+          bottom: 30px;
+          padding-top: 12px;
+          border-top: 1px solid #282826;
+        }
+        .g1-ck-a {
+          color: #e85d26;
+        }
+        .g1-ck-b {
+          color: #888880;
+        }
+
+        /* ── g2 · card flyby (flat, 0 radius, hairline wires) ──────────── */
+        #g2 {
+          background: #111111;
+        }
+        #g2_stage {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 1920px;
+          height: 1080px;
+          perspective: 2400px;
+          perspective-origin: 50% 55%;
+        }
+        #g2_scene {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 1920px;
+          height: 1080px;
+          transform-style: preserve-3d;
+        }
+        .g2-card {
+          position: absolute;
+          left: calc(50% - 700px);
+          top: calc(50% - 395px);
+          width: 1400px;
+          height: 790px;
+          will-change: transform, opacity;
+          --wipe: 0;
+          transform-origin: 50% 50%;
+        }
+        .g2-wire {
+          position: absolute;
+          inset: 0;
+          border: 1px solid rgba(240, 236, 229, 0.35);
+          background: rgba(240, 236, 229, 0.012);
+          overflow: hidden;
+        }
+        .g2-wire-label {
+          position: absolute;
+          left: 64px;
+          top: 56px;
+          font-family: "IBM Plex Mono", monospace;
+          font-size: 24px;
+          font-weight: 500;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: rgba(240, 236, 229, 0.5);
+        }
+        .g2-wire-corner {
+          position: absolute;
+          right: 64px;
+          top: 56px;
+          width: 34px;
+          height: 34px;
+          border: 1px solid rgba(240, 236, 229, 0.32);
+        }
+        .g2-wire-bar {
+          position: absolute;
+          left: 64px;
+          right: 64px;
+          bottom: 64px;
+          height: 1px;
+          background: rgba(240, 236, 229, 0.22);
+        }
+        .g2-solid {
+          position: absolute;
+          inset: 0;
+          background: var(--color);
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 80px 100px;
+          clip-path: polygon(
+            0% 0%,
+            calc(var(--wipe) * 200% - 30%) 0%,
+            calc(var(--wipe) * 200% - 80%) 100%,
+            0% 100%
+          );
+        }
+        .g2-title {
+          font-family: "Barlow", "Noto Sans SC", sans-serif;
+          font-size: 170px;
+          font-weight: 900;
+          letter-spacing: -0.04em;
+          line-height: 0.92;
+          color: var(--ink);
+          text-align: center;
+          max-width: 100%;
+          overflow-wrap: break-word;
+          text-transform: lowercase;
+        }
+        #g2_edge {
+          position: absolute;
+          left: 28px;
+          top: 28px;
+          right: 28px;
+          bottom: 28px;
+          border: 1px solid #e85d26;
+          opacity: 0;
+          pointer-events: none;
+        }
+      </style>
+
+      <div
+        id="stage"
+        data-composition-id="03-f3-montage"
+        data-width="1920"
+        data-height="1080"
+        data-duration="11.749"
+      >
+        <div id="g1" class="g">
+          <div id="g1_wall"></div>
+          <div id="g1_chrome_top" class="g1-chrome">
+            <span class="g1-ck-a">ai chronology — 2016 / 2025</span>
+            <span class="g1-ck-b">no. 03 · montage</span>
+          </div>
+          <div id="g1_chrome_bot" class="g1-chrome">
+            <span class="g1-ck-b">152 bpm · kick-locked accumulation</span>
+            <span class="g1-ck-b">f3 / f6</span>
+          </div>
+        </div>
+        <div id="g2" class="g">
+          <div id="g2_stage">
+            <div id="g2_scene"></div>
+          </div>
+          <div id="g2_edge"></div>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          window.__timelines = window.__timelines || {};
+          var tl = gsap.timeline({ paused: true });
+
+          var ORANGE = "#E85D26",
+            INK = "#111111",
+            CREAM = "#F0ECE5";
+
+          // ══════════════════════════════════════════════════════════════
+          //  g1 · POSTER-TILE MOSAIC — fork of the template, Broadside tokens.
+          //  program: accumulate on kicks → locked global recolor on the
+          //  12.399–12.910 kick roll → snake-fill to 17.2. All times below are
+          //  frame-local (track − 10.913).
+          // ══════════════════════════════════════════════════════════════
+          var wall = document.getElementById("g1_wall");
+          var MARGIN = 96,
+            GAP = 6,
+            N = 12,
+            BANDS = 3;
+          var innerW = 1920 - MARGIN * 2,
+            innerH = 1080 - MARGIN * 2;
+          var LABELS = [
+            "2012 alexnet",
+            "2016 alphago",
+            "2017 transformer",
+            "2020 gpt-3",
+            "2022 chatgpt",
+            "2025 agents",
+            "2022 midjourney",
+            "2023 gpt-4",
+            "2024 sora",
+            "2024 multimodal",
+            "2025 deepseek-r1",
+            "2025 kimi k2",
+          ];
+          // bands ['#1A1A18','#282826','#E85D26'] — the only fills the wall wears
+          var THEMES = [
+            ["#1A1A18", "#282826", "#1A1A18", "#282826"], // 0 pre-roll dark wall
+            ["#1A1A18", "#E85D26", "#282826", "#1A1A18"], // 1 roll flash A
+            ["#282826", "#1A1A18", "#E85D26", "#282826"], // 2 roll flash B
+            ["#E85D26", "#282826", "#1A1A18", "#E85D26"], // 3 locked post-roll wall
+          ];
+          function themeColor(t, slot) {
+            var pal = THEMES[((t % THEMES.length) + THEMES.length) % THEMES.length];
+            return pal[slot % pal.length];
+          }
+          function inkFor(bg) {
+            return bg === ORANGE ? INK : CREAM;
+          }
+          function yrFor(bg) {
+            return bg === ORANGE ? "#111111" : CREAM;
+          }
+
+          function packMosaic(n, W, H) {
+            var rects = [{ x: 0, y: 0, w: W, h: H }];
+            while (rects.length < n) {
+              var bi = 0;
+              for (var i = 1; i < rects.length; i++) {
+                if (rects[i].w * rects[i].h > rects[bi].w * rects[bi].h) bi = i;
+              }
+              var r = rects.splice(bi, 1)[0];
+              var ratio = 0.4 + ((rects.length * 37) % 21) / 100;
+              if (r.w >= r.h) {
+                var w1 = Math.round(r.w * ratio);
+                rects.push({ x: r.x, y: r.y, w: w1, h: r.h });
+                rects.push({ x: r.x + w1, y: r.y, w: r.w - w1, h: r.h });
+              } else {
+                var h1 = Math.round(r.h * ratio);
+                rects.push({ x: r.x, y: r.y, w: r.w, h: h1 });
+                rects.push({ x: r.x, y: r.y + h1, w: r.w, h: r.h - h1 });
+              }
+            }
+            return rects;
+          }
+          var rects = packMosaic(N, innerW, innerH);
+
+          var tiles = [],
+            ghostEls = [],
+            tileEls = [];
+          for (var idx = 0; idx < N; idx++) {
+            var R = rects[idx];
+            var ghost = document.createElement("div");
+            ghost.className = "g1-ghost";
+            ghost.id = "g1g" + idx;
+            ghost.style.left = MARGIN + R.x + GAP / 2 + "px";
+            ghost.style.top = MARGIN + R.y + GAP / 2 + "px";
+            ghost.style.width = Math.max(1, R.w - GAP) + "px";
+            ghost.style.height = Math.max(1, R.h - GAP) + "px";
+            wall.appendChild(ghost);
+            ghostEls.push(ghost);
+
+            var el = document.createElement("div");
+            el.className = "g1-tile";
+            el.id = "g1t" + idx;
+            el.style.left = MARGIN + R.x + GAP / 2 + "px";
+            el.style.top = MARGIN + R.y + GAP / 2 + "px";
+            el.style.width = Math.max(1, R.w - GAP) + "px";
+            el.style.height = Math.max(1, R.h - GAP) + "px";
+            el.style.backgroundColor = themeColor(0, idx);
+
+            var parts = LABELS[idx % LABELS.length].split(" ");
+            var yr = document.createElement("span");
+            yr.className = "g1-yr";
+            yr.textContent = parts[0];
+            yr.style.color = yrFor(themeColor(0, idx));
+            yr.style.fontSize = Math.round(Math.min(R.w, R.h) * 0.075) + "px";
+            var ev = document.createElement("span");
+            ev.className = "g1-ev";
+            ev.textContent = parts.slice(1).join(" ");
+            ev.style.color = inkFor(themeColor(0, idx));
+            ev.style.fontSize = Math.round(Math.min(R.w, R.h) * 0.15) + "px";
+            el.appendChild(yr);
+            el.appendChild(ev);
+            wall.appendChild(el);
+
+            tiles.push({
+              el: el,
+              yr: yr,
+              ev: ev,
+              idx: idx,
+              cx: R.x + R.w / 2,
+              cy: R.y + R.h / 2,
+            });
+            tileEls.push(el);
+          }
+
+          // waterfall enter order (top-right → bottom-left) + snake band order
+          var enterOrder = tiles
+            .map(function (t) {
+              return t.idx;
+            })
+            .sort(function (a, b) {
+              return tiles[b].cx - tiles[b].cy - (tiles[a].cx - tiles[a].cy);
+            });
+          var bandH = innerH / BANDS;
+          var snakeOrder = tiles
+            .map(function (t) {
+              return t.idx;
+            })
+            .sort(function (a, b) {
+              var ba = Math.min(BANDS - 1, Math.floor(tiles[a].cy / bandH));
+              var bb = Math.min(BANDS - 1, Math.floor(tiles[b].cy / bandH));
+              if (ba !== bb) return ba - bb;
+              return (ba % 2 === 0 ? 1 : -1) * (tiles[a].cx - tiles[b].cx);
+            });
+
+          function jitter(i) {
+            return { x: (((i * 37) % 7) - 3) * 16, y: (((i * 53) % 7) - 3) * 16 };
+          }
+          function setTheme(t, i, themeIdx) {
+            var col = themeColor(themeIdx, i);
+            tl.set(tiles[i].el, { backgroundColor: col }, t);
+            tl.set(tiles[i].ev, { color: inkFor(col) }, t);
+            tl.set(tiles[i].yr, { color: yrFor(col) }, t);
+          }
+
+          // initial state: tiles hidden, ghost grid + chrome carry t=0
+          gsap.set(tileEls, { autoAlpha: 0 });
+          tl.set(tileEls, { autoAlpha: 0 }, 0);
+          gsap.set(ghostEls, { opacity: 0.55 });
+          tl.set(ghostEls, { opacity: 0.55 }, 0);
+          tl.set("#g1", { autoAlpha: 1 }, 0);
+
+          // ── accumulate: 6 kicks, first half of the waterfall, one tile per kick
+          var ACC = [0.717, 0.997, 1.997, 2.297, 2.557, 2.807];
+          var POP = {
+            duration: 0.12,
+            ease: "back.out(1.7)",
+            overwrite: "auto",
+            immediateRender: false,
+          };
+          enterOrder.slice(0, 6).forEach(function (i, k) {
+            var d = jitter(i);
+            tl.fromTo(
+              tiles[i].el,
+              { autoAlpha: 0, scale: 0.78, x: d.x, y: d.y },
+              Object.assign({ autoAlpha: 1, scale: 1, x: 0, y: 0 }, POP),
+              ACC[k],
+            );
+          });
+
+          // ── locked global recolor across the kick roll 12.399–12.910
+          //    (local 1.486 / 1.626 / 1.788 / 1.997 — flicker A/B then lock to fire)
+          var ROLL = [
+            [1.486, 1],
+            [1.626, 2],
+            [1.788, 1],
+            [1.997, 3],
+          ];
+          ROLL.forEach(function (r) {
+            tiles.forEach(function (_, i) {
+              setTheme(r[0], i, r[1]);
+            });
+            tl.fromTo(
+              "#g1_wall",
+              { scale: 1.012 },
+              { scale: 1, duration: 0.12, ease: "power1.out", overwrite: "auto" },
+              r[0],
+            );
+          });
+          tl.set(ghostEls, { borderColor: ORANGE }, 1.486);
+          tl.set(ghostEls, { borderColor: "#282826" }, 1.997);
+
+          // ── snake-fill: remaining 6 tiles across 6 beats, then two accents
+          var SNAKE = [3.157, 3.437, 4.067, 4.277, 4.987, 5.337, 5.507, 6.227];
+          var accSet = {};
+          enterOrder.slice(0, 6).forEach(function (i) {
+            accSet[i] = true;
+          });
+          var snakeRest = snakeOrder.filter(function (i) {
+            return !accSet[i];
+          });
+          snakeRest.forEach(function (i, k) {
+            tl.fromTo(
+              tiles[i].el,
+              { autoAlpha: 0, scale: 0.85, x: 0, y: 0 },
+              {
+                autoAlpha: 1,
+                scale: 1,
+                x: 0,
+                y: 0,
+                duration: 0.1,
+                ease: "back.out(1.6)",
+                overwrite: "auto",
+                immediateRender: false,
+              },
+              SNAKE[k],
+            );
+          });
+          // beat 7 (5.507): "2025 agents" tiles go full fire
+          [5, 11].forEach(function (i) {
+            tl.set(tiles[i].el, { backgroundColor: ORANGE }, SNAKE[6]);
+            tl.set(tiles[i].ev, { color: INK }, SNAKE[6]);
+            tl.set(tiles[i].yr, { color: "#111111" }, SNAKE[6]);
+          });
+          tl.fromTo(
+            ["#g1t5", "#g1t11"],
+            { scale: 1.07 },
+            { scale: 1, duration: 0.18, ease: "back.out(2.2)", overwrite: "auto", immediateRender: false },
+            SNAKE[6],
+          );
+          // beat 8 (6.227): full-wall punch + seam flash, wall complete → hold to cut
+          tl.to("#g1_wall", { scale: 1.02, duration: 0.06, ease: "power2.out", overwrite: "auto" }, SNAKE[7]);
+          tl.to("#g1_wall", { scale: 1, duration: 0.12, ease: "power2.inOut", overwrite: "auto" }, SNAKE[7] + 0.06);
+          tl.set(ghostEls, { borderColor: ORANGE }, SNAKE[7]);
+          tl.set(ghostEls, { borderColor: "#282826" }, SNAKE[7] + 0.12);
+
+          // g1 → g2 cut (0ms)
+          tl.set("#g1", { autoAlpha: 0 }, 6.316);
+
+          // ══════════════════════════════════════════════════════════════
+          //  g2 · CARD FLYBY — fork of the template, flat Broadside deck.
+          //  6 cards land on kicks (local), final "agent 时代" lands at 11.517
+          //  and holds; accel-roll 10.890–11.703 shakes the scene into the cut.
+          // ══════════════════════════════════════════════════════════════
+          gsap.set("#g2", { autoAlpha: 0 });
+          tl.set("#g2", { autoAlpha: 0 }, 0);
+          tl.set("#g2", { autoAlpha: 1 }, 6.316);
+
+          var scene = document.getElementById("g2_scene");
+          var CARDS = [
+            { title: "chatgpt" },
+            { title: "gpt-4" },
+            { title: "claude" },
+            { title: "kimi" },
+            { title: "sora" },
+            { title: "agent 时代" },
+          ];
+          var CN = CARDS.length;
+          var CARD_COLORS = ["#1A1A18", "#282826", "#1A1A18", "#282826", "#1A1A18", ORANGE];
+          for (var ci = 0; ci < CN; ci++) {
+            var card = document.createElement("div");
+            card.className = "g2-card";
+            card.id = "g2c" + ci;
+            card.setAttribute("data-layout-allow-overlap", "");
+            var col = CARD_COLORS[ci % CARD_COLORS.length];
+            card.style.setProperty("--color", col);
+            card.style.setProperty("--ink", col === ORANGE ? INK : CREAM);
+            var wire = document.createElement("div");
+            wire.className = "g2-wire";
+            wire.setAttribute("data-layout-allow-overlap", "");
+            var wlabel = document.createElement("div");
+            wlabel.className = "g2-wire-label";
+            wlabel.setAttribute("data-layout-allow-overlap", "");
+            wlabel.textContent = String(ci + 1).padStart(3, "0") + " / 006";
+            wire.appendChild(wlabel);
+            var wcorner = document.createElement("div");
+            wcorner.className = "g2-wire-corner";
+            wire.appendChild(wcorner);
+            var wbar = document.createElement("div");
+            wbar.className = "g2-wire-bar";
+            wire.appendChild(wbar);
+            card.appendChild(wire);
+            var solid = document.createElement("div");
+            solid.className = "g2-solid";
+            solid.setAttribute("data-layout-allow-overlap", "");
+            var title = document.createElement("div");
+            title.className = "g2-title";
+            title.setAttribute("data-layout-allow-overlap", "");
+            title.textContent = CARDS[ci].title;
+            solid.appendChild(title);
+            card.appendChild(solid);
+            scene.appendChild(card);
+          }
+
+          // scene yaw −18 (gsap owns the transform so roll punches compose)
+          gsap.set("#g2_scene", { rotationY: -18 });
+          tl.set("#g2_scene", { rotationY: -18 }, 0);
+
+          var LANDED = [6.667, 7.687, 8.477, 9.357, 10.027, 11.517];
+          function transDur(i) {
+            var gap = i === 0 ? (CN > 1 ? LANDED[1] - LANDED[0] : 0.4) : LANDED[i] - LANDED[i - 1];
+            return Math.max(0.12, Math.min(0.42, gap * 0.32));
+          }
+
+          var SLOT = {
+            far: { x: 360, y: 380, z: -1080, rotX: 84, scale: 0.74, opacity: 0, zi: 60 },
+            s3: { x: 280, y: 290, z: -820, rotX: 66, scale: 0.8, opacity: 0.32, zi: 70 },
+            s2: { x: 195, y: 200, z: -560, rotX: 46, scale: 0.86, opacity: 0.58, zi: 80 },
+            s1: { x: 105, y: 105, z: -290, rotX: 22, scale: 0.93, opacity: 0.85, zi: 90 },
+            s0: { x: 0, y: 0, z: 0, rotX: 0, scale: 1.0, opacity: 1.0, zi: 100 },
+            exit: { x: -90, y: 620, z: 420, rotX: -88, scale: 1.1, opacity: 0, zi: 110 },
+          };
+          function poseForRel(rel) {
+            if (rel <= -1) return SLOT.exit;
+            if (rel === 0) return SLOT.s0;
+            if (rel === 1) return SLOT.s1;
+            if (rel === 2) return SLOT.s2;
+            if (rel === 3) return SLOT.s3;
+            return SLOT.far;
+          }
+          function poseTween(i, slot, t, dur, ease) {
+            tl.set("#g2c" + i, { zIndex: slot.zi }, t);
+            tl.to(
+              "#g2c" + i,
+              {
+                x: slot.x,
+                y: slot.y,
+                z: slot.z,
+                rotationX: slot.rotX,
+                scale: slot.scale,
+                opacity: slot.opacity,
+                force3D: true,
+                duration: dur,
+                ease: ease || "power2.inOut",
+              },
+              t,
+            );
+          }
+
+          // staged stack at t=0 (visible the instant g2 cuts in)
+          for (var j = 0; j < CN; j++) {
+            var s = poseForRel(j + 1);
+            var props = {
+              x: s.x,
+              y: s.y,
+              z: s.z,
+              rotationX: s.rotX,
+              scale: s.scale,
+              opacity: s.opacity,
+              zIndex: s.zi,
+              force3D: true,
+              "--wipe": 0,
+            };
+            gsap.set("#g2c" + j, props);
+            tl.set("#g2c" + j, props, 0);
+          }
+
+          // one landing per kick: front exits, card rolls into s0 + wipes its face
+          for (var L = 0; L < CN; L++) {
+            var dur = transDur(L);
+            var t = Math.max(0, LANDED[L] - dur);
+            for (var k = L - 1; k <= L + 4; k++) {
+              if (k < 0 || k >= CN) continue;
+              var rel = k - L;
+              var ease = rel === 0 ? "power3.out" : rel < 0 ? "power2.in" : "power2.inOut";
+              poseTween(k, poseForRel(rel), t, dur, ease);
+            }
+            tl.to(
+              "#g2c" + L,
+              { "--wipe": 1, duration: dur * 0.85, ease: "power2.inOut" },
+              t + dur * 0.15,
+            );
+          }
+
+          // accel roll 21.803–22.616 → scene punches + edge strobes, 5 hits…
+          var AHITS = [10.89, 11.053, 11.192, 11.308, 11.517];
+          AHITS.forEach(function (t) {
+            tl.to("#g2_scene", { scale: 1.03, duration: 0.07, ease: "power2.out", overwrite: "auto" }, t);
+            tl.to("#g2_scene", { scale: 1, duration: 0.09, ease: "power2.inOut", overwrite: "auto" }, t + 0.07);
+            tl.fromTo(
+              "#g2_edge",
+              { opacity: 0.75 },
+              { opacity: 0, duration: 0.14, ease: "power1.out", overwrite: "auto" },
+              t,
+            );
+          });
+          // …6th hit (22.616 snare): push into the DROP cut, edge holds hot to 11.749
+          tl.to("#g2_scene", { scale: 1.04, duration: 0.046, ease: "power2.out", overwrite: "auto" }, 11.703);
+          tl.fromTo("#g2_edge", { opacity: 0.9 }, { opacity: 0.25, duration: 0.046, ease: "power1.out" }, 11.703);
+
+          tl.seek(0);
+          window.__timelines["03-f3-montage"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

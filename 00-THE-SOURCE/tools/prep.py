@@ -188,9 +188,9 @@ for w in WORKS:
         lines += clean(coexp_blocks.get(w['folder'], ''))
     assert len(lines) >= 20, (w['key'], len(lines))
     code[w['key']] = lines
-(A / 'data' / 'code.json').write_text(json.dumps(code, ensure_ascii=False))
-(A / 'data' / 'tree.json').write_text(json.dumps(sorted(tree), ensure_ascii=False))
-(A / 'data' / 'heads.json').write_text(json.dumps(coexp_heads, ensure_ascii=False))
+(A / 'data' / 'code.json').write_text(json.dumps(code, ensure_ascii=False), encoding='utf-8')
+(A / 'data' / 'tree.json').write_text(json.dumps(sorted(tree), ensure_ascii=False), encoding='utf-8')
+(A / 'data' / 'heads.json').write_text(json.dumps(coexp_heads, ensure_ascii=False), encoding='utf-8')
 
 stats = {
     'films': len(WORKS),
@@ -202,7 +202,7 @@ stats = {
     'coexpHan': coexp_han,
     'heads': len(coexp_heads),
 }
-(A / 'data' / 'stats.json').write_text(json.dumps(stats, ensure_ascii=False, indent=1))
+(A / 'data' / 'stats.json').write_text(json.dumps(stats, ensure_ascii=False, indent=1), encoding='utf-8')
 print('stats:', stats)
 
 # ── 4. 真实音效（kimi-ai-beat-sync / swe-ai-rise 源码包里带的 SFX）──────────
@@ -235,5 +235,5 @@ for d in sorted((A / 'frames').iterdir()):
     if fr:
         w, h = Image.open(fr[0]).size
         man[d.name] = {'n': len(fr), 'w': w, 'h': h}
-(A / 'data' / 'frames.json').write_text(json.dumps(man))
+(A / 'data' / 'frames.json').write_text(json.dumps(man), encoding='utf-8')
 print('manifest:', len(man))

@@ -1,0 +1,8 @@
+# Python 3.11 (tested). Versions are the ones the film was rendered with.
+numpy==2.4.4
+scipy==1.17.1
+opencv-python-headless==4.13.0.92
+pillow==12.2.0
+# only needed to rebuild fonts/ from npm (scripts/build_fonts.py); prebuilt TTFs are included
+fonttools==4.62.1
+brotli==1.2.0

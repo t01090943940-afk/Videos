@@ -1,0 +1,914 @@
+{
+ "title": "stop-motion-3d · skill intro",
+ "world": "studio",
+ "fps": 24,
+ "width": 1280,
+ "height": 720,
+ "screens": {
+  "1": "block",
+  "2": "clay",
+  "3": "vox",
+  "4": "sketch",
+  "5": "comic",
+  "6": "watercolor"
+ },
+ "shots": [
+  {
+   "id": "S01",
+   "beat": "world",
+   "story_function": "Establish the sandbox: one loft, six developers, six monitors each already showing a different look.",
+   "duration": 5.0,
+   "camera": "CAM_EST",
+   "look": "diorama",
+   "mg": [
+    {
+     "kind": "title",
+     "from": 0.5,
+     "to": 4.7,
+     "text": "stop-motion-3d",
+     "sub": "一个沙盒世界 · 任意画风的 3D 定格动画",
+     "size": 84,
+     "y": 0.44
+    },
+    {
+     "kind": "mark",
+     "from": 0,
+     "to": 5.0
+    }
+   ]
+  },
+  {
+   "id": "S02",
+   "beat": "character",
+   "story_function": "阿凯 works in the block look: the whole world re-renders in this style as we arrive.",
+   "duration": 4.5,
+   "camera": "CAM_KAI_FRONT",
+   "look": "block",
+   "transition": {
+    "type": "wipe",
+    "from": "diorama",
+    "frames": 14
+   },
+   "acting": [
+    {
+     "actor": "kai",
+     "loop": "typing",
+     "from": 0,
+     "to": 2.1,
+     "rate": 3.5
+    },
+    {
+     "actor": "kai",
+     "at": 2.3,
+     "pose": "look_screen",
+     "ease": "inOut"
+    },
+    {
+     "actor": "kai",
+     "at": 3.2,
+     "pose": "anticipate_enter",
+     "ease": "inOut"
+    }
+   ],
+   "events": [],
+   "mg": [
+    {
+     "kind": "chip",
+     "from": 0.3,
+     "to": 4.5,
+     "text": "01 / 06"
+    },
+    {
+     "kind": "lower",
+     "from": 0.55,
+     "to": 4.35,
+     "text": "方块世界",
+     "sub": "Block · pixel textures · on twos",
+     "tags": "几何量化为方块 · 16px 像素贴图"
+    },
+    {
+     "kind": "note",
+     "from": 0.9,
+     "to": 4.3,
+     "text": "阿凯",
+     "sub": "敲代码 → 准备按下回车"
+    },
+    {
+     "kind": "mark",
+     "from": 0,
+     "to": 4.5
+    }
+   ]
+  },
+  {
+   "id": "S03",
+   "beat": "character",
+   "story_function": "Over-the-shoulder: 阿凯's action lands; the monitor shows the block render. Explains one skill principle.",
+   "duration": 3.0,
+   "camera": "CAM_KAI_OTS",
+   "look": "block",
+   "acting": [
+    {
+     "actor": "kai",
+     "at": 0,
+     "pose": "anticipate_enter",
+     "ease": "hold"
+    },
+    {
+     "actor": "kai",
+     "at": 0.33,
+     "pose": "hit_enter",
+     "ease": "in"
+    },
+    {
+     "actor": "kai",
+     "at": 0.83,
+     "pose": "hit_enter",
+     "ease": "hold"
+    },
+    {
+     "actor": "kai",
+     "at": 1.33,
+     "pose": "cheer",
+     "ease": "out"
+    },
+    {
+     "actor": "kai",
+     "at": 1.92,
+     "pose": "cheer_b",
+     "ease": "inOut"
+    },
+    {
+     "actor": "kai",
+     "at": 2.5,
+     "pose": "cheer",
+     "ease": "inOut"
+    }
+   ],
+   "events": [],
+   "mg": [
+    {
+     "kind": "chip",
+     "from": 0,
+     "to": 3.0,
+     "text": "01 / 06",
+     "fade": 0.01
+    },
+    {
+     "kind": "note",
+     "from": 0.25,
+     "to": 2.85,
+     "text": "同一个沙盒 · 同一套命名机位",
+     "sub": "回车 = 用新画风重渲整个世界"
+    },
+    {
+     "kind": "mark",
+     "from": 0,
+     "to": 3.0
+    }
+   ]
+  },
+  {
+   "id": "S04",
+   "beat": "opportunity",
+   "story_function": "米娅 works in the clay look: the whole world re-renders in this style as we arrive.",
+   "duration": 4.5,
+   "camera": "CAM_MIA_FRONT",
+   "look": "clay",
+   "transition": {
+    "type": "wipe",
+    "from": "block",
+    "frames": 14
+   },
+   "acting": [
+    {
+     "actor": "mia",
+     "loop": "typing",
+     "from": 0,
+     "to": 1.2,
+     "rate": 3
+    },
+    {
+     "actor": "mia",
+     "at": 1.92,
+     "pose": "reach_mug",
+     "ease": "inOut"
+    },
+    {
+     "actor": "mia",
+     "at": 2.25,
+     "pose": "reach_mug",
+     "ease": "hold"
+    },
+    {
+     "actor": "mia",
+     "at": 3.0,
+     "pose": "hold_mug",
+     "ease": "inOut"
+    },
+    {
+     "actor": "mia",
+     "at": 3.83,
+     "pose": "sip",
+     "ease": "inOut"
+    }
+   ],
+   "events": [
+    {
+     "t": 2.0,
+     "set": {
+      "hold.mug": "mia.R"
+     }
+    }
+   ],
+   "mg": [
+    {
+     "kind": "chip",
+     "from": 0.3,
+     "to": 4.5,
+     "text": "02 / 06"
+    },
+    {
+     "kind": "lower",
+     "from": 0.55,
+     "to": 4.35,
+     "text": "黏土定格",
+     "sub": "Clay · rounded lumps · on threes",
+     "tags": "圆角泥块 · 指纹凹凸 · 暖光"
+    },
+    {
+     "kind": "note",
+     "from": 0.9,
+     "to": 4.3,
+     "text": "米娅",
+     "sub": "伸手拿起咖啡"
+    },
+    {
+     "kind": "mark",
+     "from": 0,
+     "to": 4.5
+    }
+   ]
+  },
+  {
+   "id": "S05",
+   "beat": "opportunity",
+   "story_function": "Over-the-shoulder: 米娅's action lands; the monitor shows the clay render. Explains one skill principle.",
+   "duration": 3.0,
+   "camera": "CAM_MIA_OTS",
+   "look": "clay",
+   "acting": [
+    {
+     "actor": "mia",
+     "at": 0,
+     "pose": "sip",
+     "ease": "hold"
+    },
+    {
+     "actor": "mia",
+     "at": 0.75,
+     "pose": "content",
+     "ease": "inOut"
+    },
+    {
+     "actor": "mia",
+     "at": 1.5,
+     "pose": "reach_mug",
+     "ease": "inOut"
+    },
+    {
+     "actor": "mia",
+     "at": 2.0,
+     "pose": "reach_mug",
+     "ease": "hold"
+    },
+    {
+     "actor": "mia",
+     "at": 2.5,
+     "pose": "look_screen",
+     "ease": "inOut"
+    }
+   ],
+   "events": [
+    {
+     "t": 2.0,
+     "set": {
+      "hold.mug": "home"
+     }
+    }
+   ],
+   "mg": [
+    {
+     "kind": "chip",
+     "from": 0,
+     "to": 3.0,
+     "text": "02 / 06",
+     "fade": 0.01
+    },
+    {
+     "kind": "note",
+     "from": 0.25,
+     "to": 2.85,
+     "text": "道具有状态",
+     "sub": "杯子拿起 → 啜一口 → 放回杯垫"
+    },
+    {
+     "kind": "mark",
+     "from": 0,
+     "to": 3.0
+    }
+   ]
+  },
+  {
+   "id": "S06",
+   "beat": "decision",
+   "story_function": "李奥 works in the vox look: the whole world re-renders in this style as we arrive.",
+   "duration": 4.5,
+   "camera": "CAM_LEO_FRONT",
+   "look": "vox",
+   "transition": {
+    "type": "wipe",
+    "from": "clay",
+    "frames": 14
+   },
+   "acting": [
+    {
+     "actor": "leo",
+     "loop": "typing",
+     "from": 0,
+     "to": 1.0,
+     "rate": 3
+    },
+    {
+     "actor": "leo",
+     "at": 1.67,
+     "pose": "reach_sheet",
+     "ease": "inOut"
+    },
+    {
+     "actor": "leo",
+     "at": 2.0,
+     "pose": "reach_sheet",
+     "ease": "hold"
+    },
+    {
+     "actor": "leo",
+     "at": 2.83,
+     "pose": "show_sheet",
+     "ease": "inOut"
+    },
+    {
+     "actor": "leo",
+     "at": 3.67,
+     "pose": "study_sheet",
+     "ease": "inOut"
+    }
+   ],
+   "events": [
+    {
+     "t": 2.0,
+     "set": {
+      "hold.sheet": "leo.R"
+     }
+    }
+   ],
+   "mg": [
+    {
+     "kind": "chip",
+     "from": 0.3,
+     "to": 4.5,
+     "text": "03 / 06"
+    },
+    {
+     "kind": "lower",
+     "from": 0.55,
+     "to": 4.35,
+     "text": "Vox 纸片拼贴",
+     "sub": "Paper collage · halftone · cut-out",
+     "tags": "平涂色块 · 网点 · 纸边投影"
+    },
+    {
+     "kind": "note",
+     "from": 0.9,
+     "to": 4.3,
+     "text": "李奥",
+     "sub": "抽出一张拼贴稿"
+    },
+    {
+     "kind": "mark",
+     "from": 0,
+     "to": 4.5
+    }
+   ]
+  },
+  {
+   "id": "S07",
+   "beat": "decision",
+   "story_function": "Over-the-shoulder: 李奥's action lands; the monitor shows the vox render. Explains one skill principle.",
+   "duration": 3.0,
+   "camera": "CAM_LEO_OTS",
+   "look": "vox",
+   "acting": [
+    {
+     "actor": "leo",
+     "at": 0,
+     "pose": "study_sheet",
+     "ease": "hold"
+    },
+    {
+     "actor": "leo",
+     "at": 0.75,
+     "pose": "show_sheet",
+     "ease": "inOut"
+    },
+    {
+     "actor": "leo",
+     "at": 1.58,
+     "pose": "reach_sheet",
+     "ease": "inOut"
+    },
+    {
+     "actor": "leo",
+     "at": 2.0,
+     "pose": "reach_sheet",
+     "ease": "hold"
+    },
+    {
+     "actor": "leo",
+     "at": 2.5,
+     "pose": "look_screen",
+     "ease": "inOut"
+    }
+   ],
+   "events": [
+    {
+     "t": 2.0,
+     "set": {
+      "hold.sheet": "home"
+     }
+    }
+   ],
+   "mg": [
+    {
+     "kind": "chip",
+     "from": 0,
+     "to": 3.0,
+     "text": "03 / 06",
+     "fade": 0.01
+    },
+    {
+     "kind": "note",
+     "from": 0.25,
+     "to": 2.85,
+     "text": "画风 = 渲染管线，不是换皮",
+     "sub": "几何 · 着色 · 后期 · 节奏 一起换"
+    },
+    {
+     "kind": "mark",
+     "from": 0,
+     "to": 3.0
+    }
+   ]
+  },
+  {
+   "id": "S08",
+   "beat": "work",
+   "story_function": "小雨 works in the sketch look: the whole world re-renders in this style as we arrive.",
+   "duration": 4.5,
+   "camera": "CAM_YU_FRONT",
+   "look": "sketch",
+   "transition": {
+    "type": "wipe",
+    "from": "vox",
+    "frames": 14
+   },
+   "acting": [
+    {
+     "actor": "yu",
+     "loop": "draw",
+     "from": 0,
+     "to": 3.0,
+     "rate": 4
+    },
+    {
+     "actor": "yu",
+     "at": 3.5,
+     "pose": "think",
+     "ease": "inOut"
+    }
+   ],
+   "events": [],
+   "mg": [
+    {
+     "kind": "chip",
+     "from": 0.3,
+     "to": 4.5,
+     "text": "04 / 06"
+    },
+    {
+     "kind": "lower",
+     "from": 0.55,
+     "to": 4.35,
+     "text": "手绘线稿",
+     "sub": "Hand-drawn · boiling lines · on twos",
+     "tags": "铅笔线每拍抖动 · 排线阴影"
+    },
+    {
+     "kind": "note",
+     "from": 0.9,
+     "to": 4.3,
+     "text": "小雨",
+     "sub": "在数位板上画分镜"
+    },
+    {
+     "kind": "mark",
+     "from": 0,
+     "to": 4.5
+    }
+   ]
+  },
+  {
+   "id": "S09",
+   "beat": "work",
+   "story_function": "Over-the-shoulder: 小雨's action lands; the monitor shows the sketch render. Explains one skill principle.",
+   "duration": 3.0,
+   "camera": "CAM_YU_OTS",
+   "look": "sketch",
+   "acting": [
+    {
+     "actor": "yu",
+     "loop": "draw",
+     "from": 0,
+     "to": 1.75,
+     "rate": 4
+    },
+    {
+     "actor": "yu",
+     "at": 2.0,
+     "pose": "tap",
+     "ease": "in"
+    },
+    {
+     "actor": "yu",
+     "at": 2.62,
+     "pose": "admire",
+     "ease": "inOut"
+    }
+   ],
+   "events": [],
+   "mg": [
+    {
+     "kind": "chip",
+     "from": 0,
+     "to": 3.0,
+     "text": "04 / 06",
+     "fade": 0.01
+    },
+    {
+     "kind": "note",
+     "from": 0.25,
+     "to": 2.85,
+     "text": "线条每一拍重新抖动",
+     "sub": "手绘的“呼吸感”来自阶梯时钟"
+    },
+    {
+     "kind": "mark",
+     "from": 0,
+     "to": 3.0
+    }
+   ]
+  },
+  {
+   "id": "S10",
+   "beat": "turn",
+   "story_function": "诺娃 works in the comic look: the whole world re-renders in this style as we arrive.",
+   "duration": 4.5,
+   "camera": "CAM_NOVA_FRONT",
+   "look": "comic",
+   "transition": {
+    "type": "wipe",
+    "from": "sketch",
+    "frames": 14
+   },
+   "acting": [
+    {
+     "actor": "nova",
+     "loop": "nod",
+     "from": 0,
+     "to": 2.5,
+     "rate": 2.4
+    },
+    {
+     "actor": "nova",
+     "at": 3.0,
+     "pose": "point_screen",
+     "ease": "inOut"
+    }
+   ],
+   "events": [],
+   "mg": [
+    {
+     "kind": "chip",
+     "from": 0.3,
+     "to": 4.5,
+     "text": "05 / 06"
+    },
+    {
+     "kind": "lower",
+     "from": 0.55,
+     "to": 4.35,
+     "text": "赛博漫画",
+     "sub": "Cyberpunk comic · ink + neon · night variant",
+     "tags": "墨线 · 网点 · 霓虹夜景"
+    },
+    {
+     "kind": "note",
+     "from": 0.9,
+     "to": 4.3,
+     "text": "诺娃",
+     "sub": "戴着耳机跟着节拍"
+    },
+    {
+     "kind": "mark",
+     "from": 0,
+     "to": 4.5
+    }
+   ]
+  },
+  {
+   "id": "S11",
+   "beat": "turn",
+   "story_function": "Over-the-shoulder: 诺娃's action lands; the monitor shows the comic render. Explains one skill principle.",
+   "duration": 3.0,
+   "camera": "CAM_NOVA_OTS",
+   "look": "comic",
+   "acting": [
+    {
+     "actor": "nova",
+     "at": 0,
+     "pose": "point_screen",
+     "ease": "hold"
+    },
+    {
+     "actor": "nova",
+     "at": 0.67,
+     "pose": "lean_back",
+     "ease": "inOut"
+    },
+    {
+     "actor": "nova",
+     "loop": "nod",
+     "from": 1.0,
+     "to": 2.0,
+     "rate": 2.4
+    },
+    {
+     "actor": "nova",
+     "at": 2.17,
+     "pose": "fist_pump",
+     "ease": "out"
+    }
+   ],
+   "events": [],
+   "mg": [
+    {
+     "kind": "chip",
+     "from": 0,
+     "to": 3.0,
+     "text": "05 / 06",
+     "fade": 0.01
+    },
+    {
+     "kind": "note",
+     "from": 0.25,
+     "to": 2.85,
+     "text": "同一场景的夜景变体",
+     "sub": "灯光是状态，不用重新建模"
+    },
+    {
+     "kind": "mark",
+     "from": 0,
+     "to": 3.0
+    }
+   ]
+  },
+  {
+   "id": "S12",
+   "beat": "result",
+   "story_function": "琳 works in the watercolor look: the whole world re-renders in this style as we arrive.",
+   "duration": 4.5,
+   "camera": "CAM_RIN_FRONT",
+   "look": "watercolor",
+   "transition": {
+    "type": "wipe",
+    "from": "comic",
+    "frames": 14
+   },
+   "acting": [
+    {
+     "actor": "rin",
+     "loop": "typing",
+     "from": 0,
+     "to": 0.8,
+     "rate": 3
+    },
+    {
+     "actor": "rin",
+     "at": 1.5,
+     "pose": "reach_can",
+     "ease": "inOut"
+    },
+    {
+     "actor": "rin",
+     "at": 1.83,
+     "pose": "reach_can",
+     "ease": "hold"
+    },
+    {
+     "actor": "rin",
+     "at": 2.67,
+     "pose": "lift_can",
+     "ease": "inOut"
+    },
+    {
+     "actor": "rin",
+     "at": 3.33,
+     "pose": "pour",
+     "ease": "inOut"
+    }
+   ],
+   "events": [
+    {
+     "t": 1.83,
+     "set": {
+      "hold.can": "rin.R"
+     }
+    },
+    {
+     "t": 3.33,
+     "set": {
+      "rin.pour": true
+     }
+    }
+   ],
+   "mg": [
+    {
+     "kind": "chip",
+     "from": 0.3,
+     "to": 4.5,
+     "text": "06 / 06"
+    },
+    {
+     "kind": "lower",
+     "from": 0.55,
+     "to": 4.35,
+     "text": "水彩晕染",
+     "sub": "Watercolor · washes · pigment edges",
+     "tags": "颜料边缘沉积 · 纸纹颗粒"
+    },
+    {
+     "kind": "note",
+     "from": 0.9,
+     "to": 4.3,
+     "text": "琳",
+     "sub": "拿起小水壶"
+    },
+    {
+     "kind": "mark",
+     "from": 0,
+     "to": 4.5
+    }
+   ]
+  },
+  {
+   "id": "S13",
+   "beat": "result",
+   "story_function": "Over-the-shoulder: 琳's action lands; the monitor shows the watercolor render. Explains one skill principle.",
+   "duration": 3.0,
+   "camera": "CAM_RIN_OTS",
+   "look": "watercolor",
+   "acting": [
+    {
+     "actor": "rin",
+     "at": 0,
+     "pose": "pour",
+     "ease": "hold"
+    },
+    {
+     "actor": "rin",
+     "at": 2.08,
+     "pose": "lift_can",
+     "ease": "inOut"
+    },
+    {
+     "actor": "rin",
+     "at": 2.67,
+     "pose": "admire_can",
+     "ease": "inOut"
+    }
+   ],
+   "events": [
+    {
+     "t": 1.17,
+     "set": {
+      "plant.watered": true
+     }
+    },
+    {
+     "t": 1.83,
+     "set": {
+      "rin.pour": false
+     }
+    }
+   ],
+   "mg": [
+    {
+     "kind": "chip",
+     "from": 0,
+     "to": 3.0,
+     "text": "06 / 06",
+     "fade": 0.01
+    },
+    {
+     "kind": "note",
+     "from": 0.25,
+     "to": 2.85,
+     "text": "状态跨镜头延续",
+     "sub": "浇过水的植物，之后一直是抬头的"
+    },
+    {
+     "kind": "mark",
+     "from": 0,
+     "to": 3.0
+    }
+   ]
+  },
+  {
+   "id": "S14",
+   "beat": "echo",
+   "story_function": "Pull back to the whole set: the same world, split into all six looks side by side.",
+   "duration": 10.0,
+   "camera": "CAM_END",
+   "look": "diorama",
+   "state": {
+    "hold.mug": "home",
+    "hold.sheet": "home",
+    "hold.can": "home",
+    "rin.pour": false
+   },
+   "transition": {
+    "type": "wipe",
+    "from": "watercolor",
+    "frames": 14
+   },
+   "bands": {
+    "looks": [
+     "block",
+     "clay",
+     "vox",
+     "sketch",
+     "comic",
+     "watercolor"
+    ],
+    "start": 0.9,
+    "stagger": 0.45
+   },
+   "mg": [
+    {
+     "kind": "bandLabels",
+     "from": 1.0,
+     "to": 6.2,
+     "labels": [
+      "方块",
+      "黏土",
+      "纸片拼贴",
+      "手绘",
+      "赛博漫画",
+      "水彩"
+     ]
+    },
+    {
+     "kind": "title",
+     "from": 6.3,
+     "to": 10.0,
+     "text": "搭一次世界，拍任何画风",
+     "sub": "沙盒优先 · 场景与道具复用 · 画风即渲染管线",
+     "size": 66,
+     "y": 0.44,
+     "fade": 0.5,
+     "panel": true
+    },
+    {
+     "kind": "title",
+     "from": 7.2,
+     "to": 10.0,
+     "text": "stop-motion-3d  ·  a Claude skill",
+     "size": 30,
+     "y": 0.61,
+     "color": "#f2c14e",
+     "fade": 0.5
+    }
+   ]
+  }
+ ]
+}

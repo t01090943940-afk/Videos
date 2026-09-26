@@ -15,7 +15,7 @@ import numpy as np
 from scipy.signal import butter, sosfilt, fftconvolve
 
 ROOT = Path(__file__).resolve().parent.parent
-C = json.loads((ROOT / 'build' / 'cues.json').read_text())
+C = json.loads((ROOT / 'build' / 'cues.json').read_text(encoding='utf-8'))
 SR = 48000
 BEAT = C['BEAT']
 DUR = C['DURATION']

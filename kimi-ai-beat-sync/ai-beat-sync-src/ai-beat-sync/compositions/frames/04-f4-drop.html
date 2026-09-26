@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>04-f4-drop</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-400.ttf") format("truetype"); font-weight: 400; font-display: block; }
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-600.ttf") format("truetype"); font-weight: 600; font-display: block; }
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-700.ttf") format("truetype"); font-weight: 700; font-display: block; }
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-800.ttf") format("truetype"); font-weight: 800; font-display: block; }
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-900.ttf") format("truetype"); font-weight: 900; font-display: block; }
+        @font-face { font-family: "IBM Plex Mono"; src: url("assets/fonts/IBMPlexMono-500.ttf") format("truetype"); font-weight: 500; font-display: block; }
+        @font-face { font-family: "Noto Sans SC"; src: url("assets/fonts/NotoSansSC-700.ttf") format("truetype"); font-weight: 700; font-display: block; }
+        @font-face { font-family: "Noto Sans SC"; src: url("assets/fonts/NotoSansSC-900.ttf") format("truetype"); font-weight: 900; font-display: block; }
+        @font-face { font-family: "Microsoft YaHei"; src: local("Microsoft YaHei"); font-weight: 400 900; font-display: block; }
+
+        *,
+        *::before,
+        *::after {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        #stage {
+          position: relative;
+          width: 1920px;
+          height: 1080px;
+          overflow: hidden;
+          background: #111111;
+          font-family: "Barlow", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+        }
+
+        /* ── shared chrome (mono, uppercase, 0.14em) ── */
+        .fx_kicker,
+        .fx_meta {
+          position: absolute;
+          top: 26px;
+          z-index: 40;
+          font-family: "IBM Plex Mono", "JetBrains Mono", Consolas, monospace;
+          font-size: 20px;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #888880;
+          white-space: nowrap;
+        }
+        .fx_kicker {
+          left: 106px;
+        }
+        .fx_meta {
+          right: 106px;
+          text-align: right;
+        }
+        .fx_bar {
+          position: absolute;
+          left: 106px;
+          right: 106px;
+          height: 1px;
+          background: #282826;
+          z-index: 40;
+        }
+        .fx_bar_t {
+          top: 64px;
+        }
+        .fx_bar_b {
+          bottom: 64px;
+        }
+        .fx_rule {
+          position: absolute;
+          top: 80px;
+          left: 106px;
+          width: 36px;
+          height: 2px;
+          background: #e85d26;
+          z-index: 40;
+        }
+
+        /* ── G1 · held-text-strobe-burst fork (爆发) ── */
+        #g1 {
+          position: absolute;
+          inset: 0;
+        }
+        #g1_inner {
+          position: absolute;
+          inset: 0;
+          will-change: transform;
+        }
+        .g1_plate {
+          position: absolute;
+          inset: 0;
+          background: #111111;
+        }
+        .g1_look {
+          position: absolute;
+          inset: 0;
+          opacity: 0;
+          overflow: hidden;
+        }
+        .g1_scan {
+          position: absolute;
+          inset: 0;
+          background: repeating-linear-gradient(
+            0deg,
+            rgba(240, 236, 229, 0) 0px,
+            rgba(240, 236, 229, 0) 3px,
+            rgba(240, 236, 229, 0.07) 3px,
+            rgba(240, 236, 229, 0.07) 4px
+          );
+        }
+        .g1_wwrap {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          will-change: transform;
+        }
+        .g1_word {
+          font-weight: 900;
+          font-size: 423px;
+          line-height: 1.05;
+          letter-spacing: -0.04em;
+          white-space: nowrap;
+          text-align: center;
+        }
+
+        /* ── G2 · terminal code storm (free design) ── */
+        #g2 {
+          position: absolute;
+          inset: 0;
+          background: #111111;
+        }
+        #g2_inner {
+          position: absolute;
+          inset: 0;
+          will-change: transform;
+        }
+        #g2_rain {
+          position: absolute;
+          inset: 0;
+        }
+        .g2_col {
+          position: absolute;
+          top: 0;
+          height: 1080px;
+          overflow: hidden;
+        }
+        .g2_strip {
+          font-family: "IBM Plex Mono", "JetBrains Mono", Consolas, monospace;
+          font-size: 19px;
+          line-height: 30px;
+          white-space: pre;
+          will-change: transform;
+        }
+        #g2_cards {
+          position: absolute;
+          left: 50%;
+          bottom: 96px;
+          transform: translateX(-50%);
+          display: flex;
+          gap: 56px;
+          z-index: 20;
+        }
+        .g2_card {
+          position: relative;
+          width: 500px;
+          background: #1a1a18;
+          border-top: 1px solid #282826;
+          padding: 24px 28px 26px;
+          will-change: transform, opacity;
+        }
+        .g2_numwrap {
+          position: relative;
+        }
+        .g2_num,
+        .g2_ghost {
+          font-weight: 900;
+          font-size: 110px;
+          line-height: 1;
+          letter-spacing: -0.04em;
+          font-variant-numeric: tabular-nums;
+          white-space: nowrap;
+        }
+        .g2_num {
+          color: #e85d26;
+        }
+        .g2_ghost {
+          position: absolute;
+          inset: 0;
+          opacity: 0;
+          pointer-events: none;
+          will-change: transform, opacity;
+        }
+        .g2_gh_a {
+          color: #f0ece5;
+        }
+        .g2_gh_b {
+          color: #888880;
+        }
+        .g2_label {
+          margin-top: 16px;
+          font-size: 30px;
+          font-weight: 400;
+          color: #f0ece5;
+        }
+        .g2_note {
+          margin-top: 10px;
+          font-family: "IBM Plex Mono", "JetBrains Mono", Consolas, monospace;
+          font-size: 19px;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #888880;
+        }
+
+        /* ── G3 · split-anchor word-slot fork ── */
+        #g3 {
+          position: absolute;
+          inset: 0;
+          background: #111111;
+        }
+        #g3_frame {
+          position: absolute;
+          left: 50%;
+          top: 44%;
+          transform: translate(-50%, -50%);
+        }
+        #g3_lockup {
+          position: relative;
+          display: flex;
+          align-items: flex-start;
+          will-change: transform;
+        }
+        #g3_anchors {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .g3_anchor {
+          font-weight: 900;
+          line-height: 0.98;
+          letter-spacing: -0.045em;
+          white-space: nowrap;
+          color: #f0ece5;
+          will-change: transform, opacity;
+        }
+        .g3_t {
+          display: inline-block;
+        }
+        .g3_anchor .g3_t {
+          transform: scaleX(1.12);
+          transform-origin: left center;
+        }
+        #g3_slotbox {
+          position: relative;
+          margin-left: 0.18em;
+          will-change: transform, opacity;
+          transform-origin: 50% 42%;
+          backface-visibility: hidden;
+        }
+        .g3_card {
+          position: absolute;
+          inset: 0;
+          background: transparent;
+          will-change: transform;
+        }
+        #g3_card1 {
+          z-index: -1;
+        }
+        #g3_card2 {
+          z-index: -2;
+          transform: translate(22px, 17px) rotate(-2.8deg);
+        }
+        #g3_card3 {
+          z-index: -3;
+          transform: translate(-15px, 10px) rotate(2.1deg);
+        }
+        .g3_lines {
+          position: relative;
+          z-index: 1;
+          display: grid;
+        }
+        .g3_sgroup {
+          grid-area: 1 / 1;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 3px;
+        }
+        .g3_sline {
+          font-weight: 900;
+          line-height: 0.98;
+          letter-spacing: -0.045em;
+          white-space: nowrap;
+          text-align: left;
+          background: #e85d26;
+          color: #111111;
+          padding: 0.04em 0.22em 0.1em 0.16em;
+          transform-origin: 0% 50%;
+          will-change: transform, opacity;
+        }
+      </style>
+
+      <div
+        id="stage"
+        data-composition-id="04-f4-drop"
+        data-width="1920"
+        data-height="1080"
+        data-duration="14.304"
+        data-root="true"
+      >
+        <!-- ═══ G1 · held-text-strobe-burst · local 0 – 3.437 ═══ -->
+        <div id="g1">
+          <div id="g1_inner" data-layout-allow-overflow data-layout-allow-overlap data-layout-allow-occlusion>
+            <div class="g1_plate"></div>
+            <div class="g1_wwrap" id="g1_basewrap">
+              <div class="g1_word" id="g1_baseword" data-layout-allow-overlap data-layout-allow-occlusion>爆发</div>
+            </div>
+            <!-- .g1_look layers injected by JS -->
+          </div>
+          <div class="fx_kicker">drop // section 04</div>
+          <div class="fx_meta">drop // 0.94</div>
+          <div class="fx_bar fx_bar_t"></div>
+          <div class="fx_bar fx_bar_b"></div>
+          <div class="fx_rule"></div>
+        </div>
+
+        <!-- ═══ G2 · terminal code storm · local 3.437 – 8.336 ═══ -->
+        <div id="g2">
+          <div id="g2_inner" data-layout-allow-overflow>
+            <div id="g2_rain" data-layout-allow-overflow></div>
+            <div id="g2_cards">
+              <div class="g2_card" id="g2_card1">
+                <div class="g2_numwrap">
+                  <div class="g2_num"><span id="g2_numv1">0</span>b</div>
+                  <div class="g2_ghost g2_gh_a" id="g2_gh1a">175b</div>
+                  <div class="g2_ghost g2_gh_b" id="g2_gh1b">175b</div>
+                </div>
+                <div class="g2_label">parameters</div>
+                <div class="g2_note">gpt-3</div>
+              </div>
+              <div class="g2_card" id="g2_card2">
+                <div class="g2_numwrap">
+                  <div class="g2_num"><span id="g2_numv2">0</span>m</div>
+                  <div class="g2_ghost g2_gh_a" id="g2_gh2a">100m</div>
+                  <div class="g2_ghost g2_gh_b" id="g2_gh2b">100m</div>
+                </div>
+                <div class="g2_label">users · 2 months</div>
+                <div class="g2_note">chatgpt</div>
+              </div>
+              <div class="g2_card" id="g2_card3">
+                <div class="g2_numwrap">
+                  <div class="g2_num"><span id="g2_numv3">0</span></div>
+                  <div class="g2_ghost g2_gh_a" id="g2_gh3a">1</div>
+                  <div class="g2_ghost g2_gh_b" id="g2_gh3b">1</div>
+                </div>
+                <div class="g2_label">prompt → anything</div>
+                <div class="g2_note">agents</div>
+              </div>
+            </div>
+          </div>
+          <div class="fx_kicker">~/ai --datastorm</div>
+          <div class="fx_meta">152 bpm // sec.04</div>
+          <div class="fx_bar fx_bar_t"></div>
+          <div class="fx_bar fx_bar_b"></div>
+          <div class="fx_rule"></div>
+        </div>
+
+        <!-- ═══ G3 · split-anchor word-slot · local 8.336 – 14.304 ═══ -->
+        <div id="g3">
+          <div id="g3_frame">
+            <div id="g3_lockup" data-layout-allow-overflow>
+              <div id="g3_anchors"></div>
+              <div id="g3_slotbox" data-layout-allow-overflow>
+                <div class="g3_card" id="g3_card1"></div>
+                <div class="g3_card" id="g3_card2"></div>
+                <div class="g3_card" id="g3_card3"></div>
+                <div class="g3_lines" id="g3_lines"></div>
+              </div>
+            </div>
+          </div>
+          <div class="fx_kicker">agents // slot</div>
+          <div class="fx_meta">sec.04 // 152 bpm</div>
+          <div class="fx_bar fx_bar_t"></div>
+          <div class="fx_bar fx_bar_b"></div>
+          <div class="fx_rule"></div>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          window.__timelines = window.__timelines || {};
+          if (window.__timelines["04-f4-drop"]) return; // idempotent under template re-mount
+          var tl = gsap.timeline({ paused: true });
+          var DUR = 14.304; // frame span 22.662 – 36.966
+
+          function el(id) {
+            return document.getElementById(id);
+          }
+          function mulberry32(a) {
+            return function () {
+              a |= 0;
+              a = (a + 0x6d2b79f5) | 0;
+              var t = Math.imul(a ^ (a >>> 15), 1 | a);
+              t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+              return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+            };
+          }
+          // deterministic per-hit shake — no Math.random at runtime
+          function shakeFx(target, t, amp, steps) {
+            for (var k = 0; k < steps; k++) {
+              var a = amp * (1 - k / steps);
+              tl.to(
+                target,
+                {
+                  x: (k % 2 ? -a : a) * 0.9,
+                  y: (k % 3 ? a * 0.6 : -a * 0.5),
+                  duration: 0.03,
+                  ease: "steps(1)",
+                  overwrite: "auto",
+                },
+                t + k * 0.03,
+              );
+            }
+            tl.to(
+              target,
+              { x: 0, y: 0, duration: 0.08, ease: "power2.out", overwrite: "auto" },
+              t + steps * 0.03,
+            );
+          }
+
+          /* ════════════════ G1 · held-text-strobe-burst fork ════════════════
+             爆发 held on #111 (idle ink #E85D26); strobe bursts on
+             [0.278, 0.718, 0.998(DROP), 1.368, 1.648, 1.808] + roll ride
+             2.926–3.437. Looks are flat brand inversions (no texture PNGs). */
+          var g1inner = el("g1_inner");
+          var G1_LOOKS = [
+            { bg: "#E85D26", ink: "#111111", x: 0, scan: false, outline: false }, // 0 full invert (DROP)
+            { bg: "#F0ECE5", ink: "#111111", x: -14, scan: false, outline: false }, // 1 cream flash
+            { bg: "#111111", ink: "#F0ECE5", x: 10, scan: false, outline: false }, // 2 cream word
+            { bg: "#111111", ink: "#E85D26", x: -26, scan: true, outline: false }, // 3 glitch scan
+            { bg: "#111111", ink: "transparent", x: 20, scan: false, outline: true }, // 4 hairline ghost
+          ];
+          var lookEls = G1_LOOKS.map(function (L) {
+            var look = document.createElement("div");
+            look.className = "g1_look";
+            look.style.background = L.bg;
+            var wrap = document.createElement("div");
+            wrap.className = "g1_wwrap";
+            wrap.style.transform = "translateX(" + L.x + "px)";
+            var w = document.createElement("div");
+            w.className = "g1_word";
+            w.textContent = "爆发";
+            if (L.outline) {
+              w.style.color = "transparent";
+              w.style.webkitTextStroke = "2px #E85D26";
+            } else {
+              w.style.color = L.ink;
+            }
+            wrap.appendChild(w);
+            look.appendChild(wrap);
+            if (L.scan) {
+              var s = document.createElement("div");
+              s.className = "g1_scan";
+              look.appendChild(s);
+            }
+            g1inner.appendChild(look);
+            return look;
+          });
+          el("g1_baseword").style.color = "#E85D26";
+
+          var curLook = -1;
+          function showLook(idx, t) {
+            if (curLook >= 0) tl.set(lookEls[curLook], { opacity: 0 }, t);
+            if (idx >= 0) tl.set(lookEls[idx], { opacity: 1 }, t);
+            // light looks (0 orange / 1 cream) need dark chrome; dark looks keep muted chrome
+            var chrome = idx === 0 || idx === 1 ? "#111111" : "#888880";
+            tl.set(["#g1 .fx_kicker", "#g1 .fx_meta"], { color: chrome }, t);
+            curLook = idx;
+          }
+
+          // burst 1 — 22.94 kick
+          showLook(3, 0.278);
+          showLook(2, 0.358);
+          showLook(-1, 0.438);
+          shakeFx("#g1_inner", 0.278, 16, 4);
+          // burst 2 — 23.38 kick
+          showLook(1, 0.718);
+          showLook(4, 0.788);
+          showLook(-1, 0.868);
+          shakeFx("#g1_inner", 0.718, 16, 4);
+          // THE DROP — 23.66/23.676, biggest hit: full invert, held
+          showLook(0, 0.998);
+          shakeFx("#g1_inner", 0.998, 30, 10);
+          showLook(1, 1.208);
+          showLook(-1, 1.278);
+          // burst 4 — 24.03 kick
+          showLook(2, 1.368);
+          showLook(3, 1.438);
+          showLook(-1, 1.518);
+          shakeFx("#g1_inner", 1.368, 16, 4);
+          // burst 5 — 24.31 kick
+          showLook(4, 1.648);
+          showLook(1, 1.718);
+          showLook(-1, 1.788);
+          shakeFx("#g1_inner", 1.648, 14, 4);
+          // burst 6 — 24.47 kick
+          showLook(3, 1.808);
+          showLook(2, 1.868);
+          showLook(-1, 1.938);
+          shakeFx("#g1_inner", 1.808, 14, 4);
+          // idle breathe across the quiet bar
+          tl.fromTo(
+            "#g1_basewrap",
+            { scale: 1 },
+            {
+              scale: 1.02,
+              duration: 0.49,
+              ease: "sine.inOut",
+              yoyo: true,
+              repeat: 1,
+              immediateRender: false,
+            },
+            2.02,
+          );
+          // roll ride 25.588–26.099 — flips locked to roll hits, ends inverted into the cut
+          showLook(1, 2.926);
+          showLook(3, 3.042);
+          showLook(2, 3.158);
+          showLook(4, 3.266);
+          showLook(0, 3.351);
+          [2.926, 3.042, 3.158, 3.266, 3.351].forEach(function (t) {
+            shakeFx("#g1_inner", t, 10, 3);
+          });
+
+          /* ════════════════ G2 · terminal code storm ════════════════
+             binary-decrypt rain (accumulate) + three counting-punch stat cards
+             slamming on kicks; chromatic-split ghosts + screen-shake.
+             anchors: 3.438 / 4.178 / 4.998 / 5.368 / 6.898 / 7.288 / 7.568 / 8.078 */
+          var G2_LEN = 8.336 - 3.437;
+          var NCOL = 26,
+            ROWS = 74;
+          var rain = el("g2_rain");
+          var cols = [],
+            strips = [],
+            OP = [];
+
+          function rainString(seed, len) {
+            var r = mulberry32(seed),
+              s = "";
+            for (var i = 0; i < len; i++) {
+              var v = r();
+              if (v < 0.86) s += r() < 0.5 ? "0" : "1";
+              else s += "▓▒░".charAt(Math.floor(r() * 3));
+              if (i < len - 1) s += "\n";
+            }
+            return s;
+          }
+
+          for (var ci = 0; ci < NCOL; ci++) {
+            var accentCol = ci % 6 === 3;
+            var col = document.createElement("div");
+            col.className = "g2_col";
+            col.style.left = ci * 74 - 4 + "px";
+            col.style.width = "74px";
+            var strip = document.createElement("div");
+            strip.className = "g2_strip";
+            strip.style.color = accentCol ? "#E85D26" : "#505048";
+            strip.textContent = rainString(1000 + ci * 77, ROWS);
+            col.appendChild(strip);
+            rain.appendChild(col);
+            cols.push(col);
+            strips.push(strip);
+            OP.push(
+              accentCol ? 0.5 + ((ci * 13) % 20) / 100 : 0.28 + ((ci * 37) % 38) / 100,
+            );
+          }
+          gsap.set(cols, { autoAlpha: 0 });
+          // continuous drift (deterministic per column), running the whole group span
+          strips.forEach(function (strip, i) {
+            var startY = -((i * 137) % 500);
+            var endY = Math.max(-(ROWS * 30 - 1080), startY - (380 + (i % 5) * 95));
+            gsap.set(strip, { y: startY });
+            tl.fromTo(
+              strip,
+              { y: startY },
+              { y: endY, duration: G2_LEN, ease: "none", immediateRender: false },
+              3.437,
+            );
+          });
+
+          // 26.10 — rain ignition + entry shake
+          tl.fromTo(
+            cols,
+            { autoAlpha: 0 },
+            {
+              autoAlpha: function (i) {
+                return OP[i];
+              },
+              duration: 0.32,
+              ease: "expo.out",
+              stagger: 0.018,
+              immediateRender: false,
+            },
+            3.438,
+          );
+          shakeFx("#g2_inner", 3.438, 24, 6);
+
+          // decrypt flicker — a rotating third of the columns reshuffles per hit
+          var FLICK = [4.178, 4.998, 5.368, 7.288, 7.568];
+          FLICK.forEach(function (t, h) {
+            for (var i = 0; i < NCOL; i++) {
+              if ((i + h) % 3 !== 0) continue;
+              tl.set(strips[i], { textContent: rainString(5000 + i * 131 + h * 991, ROWS) }, t);
+              tl.fromTo(
+                cols[i],
+                { opacity: Math.min(1, OP[i] + 0.55) },
+                {
+                  opacity: OP[i],
+                  duration: 0.4,
+                  ease: "power2.out",
+                  overwrite: "auto",
+                  immediateRender: false,
+                },
+                t,
+              );
+            }
+          });
+
+          // counting-punch stat cards
+          gsap.set(["#g2_card1", "#g2_card2", "#g2_card3"], { autoAlpha: 0 });
+          var ghosts = [
+            ["#g2_gh1a", "#g2_gh1b"],
+            ["#g2_gh2a", "#g2_gh2b"],
+            ["#g2_gh3a", "#g2_gh3b"],
+          ];
+          gsap.set(".g2_ghost", { opacity: 0 });
+
+          function ghostFlash(pair, t) {
+            pair.forEach(function (sel, gi) {
+              tl.set(sel, { opacity: 0.8, x: gi % 2 ? 14 : -16, y: gi % 2 ? -3 : 3 }, t);
+              tl.set(sel, { opacity: 0, x: 0, y: 0 }, t + 0.06);
+            });
+          }
+          function slam(cardSel, t, pair) {
+            tl.fromTo(
+              cardSel,
+              { autoAlpha: 0, scale: 1.22, y: 24 },
+              {
+                autoAlpha: 1,
+                scale: 1,
+                y: 0,
+                duration: 0.16,
+                ease: "power4.out",
+                overwrite: "auto",
+                immediateRender: false,
+              },
+              t,
+            );
+            ghostFlash(pair, t);
+            shakeFx("#g2_inner", t, 20, 5);
+          }
+          slam("#g2_card1", 4.178, ghosts[0]);
+          slam("#g2_card2", 4.998, ghosts[1]);
+          slam("#g2_card3", 5.368, ghosts[2]);
+
+          // number counts — keyframed textContent sets (seek-safe; onUpdate
+          // callbacks do NOT fire reliably on paused-timeline seeks)
+          function countPunch(spanId, t, target, dur) {
+            var span = el(spanId);
+            var steps = Math.ceil(dur * 30);
+            for (var k = 1; k <= steps; k++) {
+              var p = k / steps;
+              var e = p >= 1 ? 1 : 1 - Math.pow(2, -10 * p); // expo.out
+              tl.set(span, { textContent: String(Math.floor(target * e)) }, t + p * dur);
+            }
+          }
+          countPunch("g2_numv1", 4.178, 175, 0.6);
+          countPunch("g2_numv2", 4.998, 100, 0.6);
+          countPunch("g2_numv3", 5.368, 1, 0.3);
+
+          // 29.56 — full reshuffle + orange surge
+          for (var fi = 0; fi < NCOL; fi++) {
+            tl.set(strips[fi], { textContent: rainString(9000 + fi * 131, ROWS) }, 6.898);
+          }
+          [3, 9, 15, 21].forEach(function (i) {
+            tl.fromTo(
+              cols[i],
+              { opacity: 1 },
+              { opacity: OP[i], duration: 0.5, ease: "power2.out", overwrite: "auto", immediateRender: false },
+              6.898,
+            );
+          });
+          shakeFx("#g2_inner", 6.898, 18, 5);
+
+          // 29.95 — chromatic-split flash across all cards
+          ghostFlash(ghosts[0].concat(ghosts[1], ghosts[2]), 7.288);
+          shakeFx("#g2_inner", 7.288, 22, 5);
+
+          // 30.23 — cards tick
+          tl.fromTo(
+            ["#g2_card1", "#g2_card2", "#g2_card3"],
+            { scale: 1.05 },
+            { scale: 1, duration: 0.22, ease: "back.out(2)", overwrite: "auto", immediateRender: false },
+            7.568,
+          );
+          shakeFx("#g2_inner", 7.568, 14, 4);
+
+          // 30.74 — pre-cut punch
+          tl.fromTo(
+            ["#g2_card1", "#g2_card2", "#g2_card3"],
+            { scale: 1.07 },
+            { scale: 1, duration: 0.2, ease: "back.out(2.4)", overwrite: "auto", immediateRender: false },
+            8.078,
+          );
+          ghostFlash(ghosts[0].concat(ghosts[1], ghosts[2]), 8.078);
+          shakeFx("#g2_inner", 8.078, 30, 6);
+
+          /* ════════════════ G3 · split-anchor word-slot fork ════════════════
+             held anchors agents / 能做什么 + orange tape slot cycling
+             写代码/做设计/剪视频/做科研/开公司; jitter run 12.218–13.468;
+             box-zoom exit wipe at 14.028. */
+          var BASE_TILT = -3.5,
+            BOX_TILT = 2.6;
+          var ANCHORS = ["agents", "能做什么"];
+          var SLOT_WORDS = ["写代码", "做设计", "剪视频", "做科研", "开公司", "开公司"];
+          var SLOT_T = [8.588, 9.128, 9.588, 10.398, 11.538, 13.258];
+          var JITTER = [12.214, 12.33, 12.702, 13.097, 13.259, 13.352, 13.468];
+          var FONT_PX = 140,
+            ROW_H = 138;
+
+          var lockupEl = el("g3_lockup"),
+            anchorsBox = el("g3_anchors"),
+            slotbox = el("g3_slotbox"),
+            linesBox = el("g3_lines");
+          var g3cards = [el("g3_card1"), el("g3_card2"), el("g3_card3")];
+
+          function mkG3Word(text) {
+            var d = document.createElement("div");
+            d.style.fontSize = FONT_PX + "px";
+            d.style.height = ROW_H + "px";
+            var sp = document.createElement("span");
+            sp.className = "g3_t";
+            sp.textContent = text;
+            d.appendChild(sp);
+            return d;
+          }
+
+          var anchorEls = ANCHORS.map(function (a) {
+            var row = mkG3Word(a);
+            row.className = "g3_anchor";
+            anchorsBox.appendChild(row);
+            row.style.width = Math.ceil(row.firstChild.getBoundingClientRect().width + 2) + "px";
+            return row;
+          });
+
+          function lineRot(i) {
+            return [-2.0, 1.6, -1.0, 2.2, -1.4, 1.2][i % 6];
+          }
+          var slotLines = SLOT_WORDS.map(function (word, si) {
+            var g = document.createElement("div");
+            g.className = "g3_sgroup";
+            var row = mkG3Word(word);
+            row.className = "g3_sline";
+            row.style.marginLeft = [0, 16, 8, 24, 12, 4][si % 6] + "px";
+            g.appendChild(row);
+            linesBox.appendChild(g);
+            return row;
+          });
+
+          gsap.set(lockupEl, { rotation: BASE_TILT });
+          gsap.set(slotbox, { rotation: BOX_TILT, autoAlpha: 0, scale: 0.86 });
+          gsap.set(anchorEls, { autoAlpha: 0, y: 18, scale: 0.9, scaleX: 0.9 });
+          slotLines.forEach(function (row, i) {
+            gsap.set(row, { autoAlpha: 0, rotation: lineRot(i) });
+          });
+
+          // lockup — anchors pop + slot box reveal at group start (8.336)
+          anchorEls.forEach(function (row, i) {
+            tl.fromTo(
+              row,
+              { autoAlpha: 0, y: 26, scale: 0.84, scaleX: 0.7 },
+              {
+                autoAlpha: 1,
+                y: 0,
+                scale: 1,
+                scaleX: 1,
+                duration: 0.2,
+                ease: "expo.out",
+                overwrite: "auto",
+                immediateRender: false,
+              },
+              8.336 + i * 0.116,
+            );
+          });
+          tl.fromTo(
+            slotbox,
+            { autoAlpha: 0, scale: 0.6, rotation: BOX_TILT - 6 },
+            {
+              autoAlpha: 1,
+              scale: 1,
+              rotation: BOX_TILT,
+              duration: 0.22,
+              ease: "back.out(2.2)",
+              overwrite: "auto",
+              immediateRender: false,
+            },
+            8.56,
+          );
+
+          // slot cycles — tape whips in on each onset, previous arcs out
+          slotLines.forEach(function (row, i) {
+            var tIn = SLOT_T[i];
+            tl.fromTo(
+              row,
+              { autoAlpha: 0, x: 150, scaleX: 1.7, rotation: lineRot(i) },
+              {
+                autoAlpha: 1,
+                x: 0,
+                scaleX: 1.12,
+                rotation: lineRot(i),
+                duration: 0.24,
+                ease: "expo.out",
+                overwrite: "auto",
+                immediateRender: false,
+              },
+              tIn,
+            );
+            if (i < slotLines.length - 1) {
+              tl.to(
+                row,
+                {
+                  autoAlpha: 0,
+                  x: -120,
+                  y: 46,
+                  scaleX: 1.4,
+                  duration: 0.16,
+                  ease: "power3.in",
+                  overwrite: "auto",
+                },
+                SLOT_T[i + 1] - 0.07,
+              );
+            }
+          });
+
+          // per-beat jitter — deterministic jolts around the base tilt
+          function jolt(k) {
+            return { x: ((k * 37) % 11) - 5, y: ((k * 53) % 9) - 4, r: ((k * 29) % 7) - 3 };
+          }
+          function joltAt(t, k, amp, rot) {
+            var j = jolt(k);
+            tl.fromTo(
+              lockupEl,
+              { x: (j.x * amp) / 5, y: (j.y * amp) / 4, rotation: BASE_TILT + (j.r * rot) / 3 },
+              {
+                x: 0,
+                y: 0,
+                rotation: BASE_TILT,
+                duration: 0.15,
+                ease: "back.out(3)",
+                overwrite: "auto",
+                immediateRender: false,
+              },
+              t,
+            );
+          }
+          SLOT_T.slice(0, 5).forEach(function (t, k) {
+            joltAt(t, k + 1, 16, 2.2);
+          });
+          JITTER.forEach(function (t, k) {
+            joltAt(t, k + 7, 30, 2.6);
+          });
+
+          // exit wipe — 36.69 kick: fade type, orange box zooms to swallow the frame
+          tl.to(anchorEls, { autoAlpha: 0, duration: 0.16, ease: "power2.in", overwrite: "auto" }, 14.028);
+          tl.to(slotLines, { autoAlpha: 0, duration: 0.14, ease: "power2.in", overwrite: "auto" }, 14.028);
+          tl.to(
+            "#g3 .fx_kicker, #g3 .fx_meta, #g3 .fx_bar, #g3 .fx_rule",
+            { autoAlpha: 0, duration: 0.1, ease: "power2.in", overwrite: "auto" },
+            14.028,
+          );
+          tl.set(lockupEl, { x: 0, y: 0 }, 14.028);
+          tl.set(g3cards, { backgroundColor: "#E85D26" }, 14.028);
+          tl.fromTo(
+            slotbox,
+            { scale: 1, filter: "blur(0px)" },
+            {
+              scale: 2.2,
+              filter: "blur(4px)",
+              duration: 0.132,
+              ease: "power2.out",
+              overwrite: "auto",
+              immediateRender: false,
+            },
+            14.028,
+          );
+          tl.to(
+            slotbox,
+            { scale: 34, filter: "blur(12px)", duration: 0.124, ease: "power2.in", overwrite: "auto" },
+            14.16,
+          );
+
+          /* ════════════════ group cuts (0ms) + registration ════════════════ */
+          gsap.set("#g2", { autoAlpha: 0 });
+          gsap.set("#g3", { autoAlpha: 0 });
+          tl.set("#g1", { autoAlpha: 0 }, 3.437);
+          tl.set("#g2", { autoAlpha: 1 }, 3.437);
+          tl.set("#g2", { autoAlpha: 0 }, 8.336);
+          tl.set("#g3", { autoAlpha: 1 }, 8.336);
+
+          tl.set({}, {}, DUR);
+          tl.seek(0);
+          window.__timelines["04-f4-drop"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

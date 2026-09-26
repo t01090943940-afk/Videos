@@ -1,0 +1,1808 @@
+[
+  {
+    "id": "remotion",
+    "name": "Remotion",
+    "category": "video",
+    "kind": "框架",
+    "summary": "把 React 组件按视频帧求值，适合参数化片头、字幕和数据视频。",
+    "capabilities": [
+      "帧驱动组件",
+      "序列与合成",
+      "音视频编排",
+      "程序化渲染"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/remotion/README.md"
+  },
+  {
+    "id": "hyperframes",
+    "name": "HyperFrames",
+    "category": "video",
+    "kind": "框架",
+    "summary": "HeyGen 的 HTML 代码视频体系，将网页动画放进可定位的合成时间轴。",
+    "capabilities": [
+      "HTML composition",
+      "seekable 时间线",
+      "多动画运行时",
+      "检查与渲染工具"
+    ],
+    "aliases": [
+      "Hyperframers",
+      "Hyper",
+      "HeyGen"
+    ],
+    "level": "documented",
+    "markdownPath": "references/libraries/hyperframes/README.md"
+  },
+  {
+    "id": "motion-canvas",
+    "name": "Motion Canvas",
+    "category": "video",
+    "kind": "框架",
+    "summary": "用 TypeScript 生成器组织说明性矢量动画，并通过编辑器调整时机。",
+    "capabilities": [
+      "生成器编排",
+      "信号与补间",
+      "矢量场景",
+      "旁白时间点"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/motion-canvas/README.md"
+  },
+  {
+    "id": "manim",
+    "name": "Manim Community",
+    "category": "video",
+    "kind": "Python 库",
+    "summary": "围绕数学对象与变换构建动画，避免逐像素手写公式布局。",
+    "capabilities": [
+      "MathTex",
+      "几何对象",
+      "Transform",
+      "坐标与绘图"
+    ],
+    "aliases": [
+      "3Blue1Brown",
+      "数学",
+      "math"
+    ],
+    "level": "documented",
+    "markdownPath": "references/libraries/manim/README.md"
+  },
+  {
+    "id": "manimgl",
+    "name": "ManimGL / 3b1b",
+    "category": "video",
+    "kind": "Python 库",
+    "summary": "3Blue1Brown 使用的 Manim 分支，提供面向数学演示的图形工具。",
+    "capabilities": [
+      "数学场景",
+      "OpenGL 显示",
+      "几何变换",
+      "交互预览"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/manimgl/README.md"
+  },
+  {
+    "id": "moviepy",
+    "name": "MoviePy",
+    "category": "video",
+    "kind": "Python 库",
+    "summary": "在 Python 中组合视频、图片与声音，适合批量生成和后处理。",
+    "capabilities": [
+      "裁剪拼接",
+      "合成图层",
+      "音轨处理",
+      "函数式视频帧"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/moviepy/README.md"
+  },
+  {
+    "id": "matplotlib",
+    "name": "Matplotlib Animation",
+    "category": "video",
+    "kind": "Python 库",
+    "summary": "让科学绘图逐帧变化，并通过动画 writer 输出文件。",
+    "capabilities": [
+      "FuncAnimation",
+      "科学坐标",
+      "多曲线更新",
+      "writer 导出"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/matplotlib/README.md"
+  },
+  {
+    "id": "gsap",
+    "name": "GSAP",
+    "category": "timeline",
+    "kind": "动画库",
+    "summary": "把对象属性、顺序与缓动放进可控制的时间线。",
+    "capabilities": [
+      "嵌套 timeline",
+      "stagger",
+      "seek",
+      "插件生态"
+    ],
+    "aliases": [
+      "GreenSock",
+      "动画时间线"
+    ],
+    "level": "documented",
+    "markdownPath": "references/libraries/gsap/README.md"
+  },
+  {
+    "id": "anime",
+    "name": "Anime.js",
+    "category": "timeline",
+    "kind": "动画库",
+    "summary": "面向 JS 对象、DOM 与 SVG 的动画编排工具。",
+    "capabilities": [
+      "timeline",
+      "SVG 动画",
+      "stagger",
+      "WAAPI 工具"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/anime/README.md"
+  },
+  {
+    "id": "motion",
+    "name": "Motion",
+    "category": "timeline",
+    "kind": "动画库",
+    "summary": "提供 React 与 JavaScript 的动画、布局和手势能力。",
+    "capabilities": [
+      "animate",
+      "layout",
+      "手势与弹簧",
+      "SVG 动画"
+    ],
+    "aliases": [
+      "Framer Motion"
+    ],
+    "level": "documented",
+    "markdownPath": "references/libraries/motion/README.md"
+  },
+  {
+    "id": "react-spring",
+    "name": "React Spring",
+    "category": "timeline",
+    "kind": "动画库",
+    "summary": "用弹簧模型表达 React 组件属性的动态变化。",
+    "capabilities": [
+      "弹簧",
+      "插值",
+      "链式动画",
+      "多目标值"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/react-spring/README.md"
+  },
+  {
+    "id": "tweenjs",
+    "name": "Tween.js",
+    "category": "timeline",
+    "kind": "动画库",
+    "summary": "轻量数值补间工具，可对普通 JS 对象施加时间变化。",
+    "capabilities": [
+      "数值 tween",
+      "easing",
+      "group",
+      "链式播放"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/tweenjs/README.md"
+  },
+  {
+    "id": "theatre",
+    "name": "Theatre.js",
+    "category": "timeline",
+    "kind": "编辑器 / 库",
+    "summary": "用可视化序列编辑器调节代码场景中的属性。",
+    "capabilities": [
+      "sequence",
+      "关键帧编辑",
+      "对象绑定",
+      "项目状态"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/theatre/README.md"
+  },
+  {
+    "id": "waapi",
+    "name": "Web Animations API",
+    "category": "timeline",
+    "kind": "浏览器 API",
+    "summary": "浏览器原生动画控制接口，可控制播放状态与当前时间。",
+    "capabilities": [
+      "Element.animate",
+      "currentTime",
+      "pause",
+      "KeyframeEffect"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/waapi/README.md"
+  },
+  {
+    "id": "css-animation",
+    "name": "CSS Animations",
+    "category": "timeline",
+    "kind": "Web 标准",
+    "summary": "通过关键帧和可动画 CSS 属性描述视觉变化。",
+    "capabilities": [
+      "keyframes",
+      "transform",
+      "opacity",
+      "clip-path"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/css-animation/README.md"
+  },
+  {
+    "id": "mojs",
+    "name": "mo.js",
+    "category": "timeline",
+    "kind": "动画库",
+    "summary": "提供形状、爆发和时间线等偏图形化的运动原语。",
+    "capabilities": [
+      "Shape",
+      "Burst",
+      "stagger",
+      "timeline"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/mojs/README.md"
+  },
+  {
+    "id": "splittext",
+    "name": "GSAP SplitText",
+    "category": "type",
+    "kind": "插件",
+    "summary": "把文字拆成字、词或行，以便分别动画。",
+    "capabilities": [
+      "字符拆分",
+      "词行分组",
+      "响应式重拆",
+      "与 GSAP 配合"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/splittext/README.md"
+  },
+  {
+    "id": "scrambletext",
+    "name": "GSAP ScrambleText",
+    "category": "type",
+    "kind": "插件",
+    "summary": "用字符替换制造文字解码与扰动效果。",
+    "capabilities": [
+      "文本扰动",
+      "字符集控制",
+      "揭示进度"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/scrambletext/README.md"
+  },
+  {
+    "id": "pretext",
+    "name": "Pretext",
+    "category": "type",
+    "kind": "排版库",
+    "summary": "快速测量和布局文本，为自定义排版提供几何信息。",
+    "capabilities": [
+      "文字测量",
+      "换行布局",
+      "预处理缓存",
+      "自定义布局"
+    ],
+    "aliases": [
+      "排版",
+      "文本测量"
+    ],
+    "level": "documented",
+    "markdownPath": "references/libraries/pretext/README.md"
+  },
+  {
+    "id": "opentype",
+    "name": "OpenType.js",
+    "category": "type",
+    "kind": "字体库",
+    "summary": "读取字体轮廓和字形信息，为路径级文字效果提供数据。",
+    "capabilities": [
+      "字体解析",
+      "字形轮廓",
+      "路径绘制",
+      "字体度量"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/opentype/README.md"
+  },
+  {
+    "id": "troika",
+    "name": "Troika 3D Text",
+    "category": "type",
+    "kind": "3D 文本库",
+    "summary": "基于 SDF 的 Three.js 文字渲染，适合三维场景中的清晰标签。",
+    "capabilities": [
+      "SDF 文本",
+      "自动排版",
+      "字体解析",
+      "材质集成"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/troika/README.md"
+  },
+  {
+    "id": "katex",
+    "name": "KaTeX",
+    "category": "type",
+    "kind": "排版库",
+    "summary": "将数学表达式排版为浏览器可呈现的公式。",
+    "capabilities": [
+      "LaTeX 子集",
+      "HTML 输出",
+      "MathML",
+      "服务端渲染"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/katex/README.md"
+  },
+  {
+    "id": "svgjs",
+    "name": "SVG.js",
+    "category": "vector",
+    "kind": "矢量库",
+    "summary": "为 SVG 图形、属性和结构操作提供对象化接口。",
+    "capabilities": [
+      "形状",
+      "路径",
+      "组",
+      "变换"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/svgjs/README.md"
+  },
+  {
+    "id": "flubber",
+    "name": "Flubber",
+    "category": "vector",
+    "kind": "插值库",
+    "summary": "为二维轮廓之间的形变生成中间形状。",
+    "capabilities": [
+      "SVG path 插值",
+      "多边形插值",
+      "分裂合并辅助"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/flubber/README.md"
+  },
+  {
+    "id": "paper",
+    "name": "Paper.js",
+    "category": "vector",
+    "kind": "矢量库",
+    "summary": "提供 Canvas 上的矢量场景与路径几何操作。",
+    "capabilities": [
+      "贝塞尔曲线",
+      "路径运算",
+      "场景层级",
+      "交互工具"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/paper/README.md"
+  },
+  {
+    "id": "two",
+    "name": "Two.js",
+    "category": "vector",
+    "kind": "矢量库",
+    "summary": "面向二维图形的场景 API，可使用多种渲染后端。",
+    "capabilities": [
+      "场景图",
+      "路径",
+      "组",
+      "SVG Canvas WebGL 后端"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/two/README.md"
+  },
+  {
+    "id": "rough",
+    "name": "Rough.js",
+    "category": "vector",
+    "kind": "风格库",
+    "summary": "生成带手绘感的线条、形状和填充。",
+    "capabilities": [
+      "手绘描边",
+      "hachure 填充",
+      "Canvas",
+      "SVG"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/rough/README.md"
+  },
+  {
+    "id": "rough-notation",
+    "name": "Rough Notation",
+    "category": "vector",
+    "kind": "标注库",
+    "summary": "为 DOM 元素加手绘感高亮、下划线和括号。",
+    "capabilities": [
+      "圈注",
+      "下划线",
+      "高亮",
+      "组播放"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/rough-notation/README.md"
+  },
+  {
+    "id": "vivus",
+    "name": "Vivus",
+    "category": "vector",
+    "kind": "SVG 动画库",
+    "summary": "沿 SVG 路径做线稿描绘式动画。",
+    "capabilities": [
+      "描边绘制",
+      "路径顺序",
+      "同步与延迟"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/vivus/README.md"
+  },
+  {
+    "id": "perfect-freehand",
+    "name": "Perfect Freehand",
+    "category": "vector",
+    "kind": "几何库",
+    "summary": "把带压力的输入点转成具有笔锋的轮廓。",
+    "capabilities": [
+      "压力笔迹",
+      "可变线宽",
+      "轮廓多边形"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/perfect-freehand/README.md"
+  },
+  {
+    "id": "pixi",
+    "name": "PixiJS",
+    "category": "canvas",
+    "kind": "2D 引擎",
+    "summary": "以 GPU 加速的场景图管理精灵、容器和二维效果。",
+    "capabilities": [
+      "sprites",
+      "filters",
+      "masks",
+      "纹理与粒子"
+    ],
+    "aliases": [],
+    "level": "index",
+    "markdownPath": "references/libraries/pixi/README.md"
+  },
+  {
+    "id": "konva",
+    "name": "Konva",
+    "category": "canvas",
+    "kind": "2D 场景库",
+    "summary": "用 Stage、Layer 和形状对象组织 Canvas，兼顾编辑交互。",
+    "capabilities": [
+      "图层",
+      "事件",
+      "蒙版",
+      "Tween 控制"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/konva/README.md"
+  },
+  {
+    "id": "fabric",
+    "name": "Fabric.js",
+    "category": "canvas",
+    "kind": "2D 场景库",
+    "summary": "对象化 Canvas，适合图像、矢量和编辑器型应用。",
+    "capabilities": [
+      "对象变换",
+      "clipPath",
+      "滤镜",
+      "序列化"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/fabric/README.md"
+  },
+  {
+    "id": "canvas2d",
+    "name": "Canvas 2D",
+    "category": "canvas",
+    "kind": "浏览器 API",
+    "summary": "浏览器原生即时绘图表面，可直接从时间计算每一帧。",
+    "capabilities": [
+      "路径",
+      "文字",
+      "图像",
+      "像素与合成"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/canvas2d/README.md"
+  },
+  {
+    "id": "skia-canvas",
+    "name": "Skia Canvas",
+    "category": "canvas",
+    "kind": "Node 渲染库",
+    "summary": "在服务端使用类似 Canvas 的接口进行高质量二维绘制。",
+    "capabilities": [
+      "离屏绘图",
+      "Canvas 接口",
+      "图像输出",
+      "路径排版"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/skia-canvas/README.md"
+  },
+  {
+    "id": "d3",
+    "name": "D3.js",
+    "category": "data",
+    "kind": "数据可视化库",
+    "summary": "将数据映射到尺度、形状、布局和 DOM。",
+    "capabilities": [
+      "scales",
+      "shapes",
+      "data join",
+      "布局算法"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/d3/README.md"
+  },
+  {
+    "id": "echarts",
+    "name": "Apache ECharts",
+    "category": "data",
+    "kind": "图表库",
+    "summary": "丰富图表与数据更新动效，含跨类型通用过渡。",
+    "capabilities": [
+      "图表",
+      "数据更新",
+      "universalTransition",
+      "Canvas SVG"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/echarts/README.md"
+  },
+  {
+    "id": "chartjs",
+    "name": "Chart.js",
+    "category": "data",
+    "kind": "图表库",
+    "summary": "以 Canvas 绘制常见统计图表，并支持更新动画。",
+    "capabilities": [
+      "统计图",
+      "插件",
+      "动画",
+      "响应式布局"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/chartjs/README.md"
+  },
+  {
+    "id": "vega",
+    "name": "Vega",
+    "category": "data",
+    "kind": "可视化语法",
+    "summary": "用声明式描述数据、标记、尺度和交互。",
+    "capabilities": [
+      "数据变换",
+      "marks",
+      "signals",
+      "可视化语法"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/vega/README.md"
+  },
+  {
+    "id": "vega-lite",
+    "name": "Vega-Lite",
+    "category": "data",
+    "kind": "声明式语法",
+    "summary": "以精简配置表达统计图和组合视图。",
+    "capabilities": [
+      "encoding",
+      "transform",
+      "复合视图",
+      "参数"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/vega-lite/README.md"
+  },
+  {
+    "id": "observable-plot",
+    "name": "Observable Plot",
+    "category": "data",
+    "kind": "绘图库",
+    "summary": "用 marks 和 transforms 快速构造数据图形。",
+    "capabilities": [
+      "数据标记",
+      "分面",
+      "统计转换",
+      "SVG 图形"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/observable-plot/README.md"
+  },
+  {
+    "id": "visx",
+    "name": "visx",
+    "category": "data",
+    "kind": "React 组件库",
+    "summary": "将数据可视化基础能力与 React 组合。",
+    "capabilities": [
+      "scales",
+      "shapes",
+      "axes",
+      "React 组件"
+    ],
+    "aliases": [],
+    "level": "index",
+    "markdownPath": "references/libraries/visx/README.md"
+  },
+  {
+    "id": "p5",
+    "name": "p5.js",
+    "category": "creative",
+    "kind": "创意编程库",
+    "summary": "提供绘图、噪声、交互和 WebGL 的创意编程入口。",
+    "capabilities": [
+      "2D 绘画",
+      "noise",
+      "WEBGL",
+      "shader"
+    ],
+    "aliases": [
+      "p5.js",
+      "p5js",
+      "创意编码"
+    ],
+    "level": "documented",
+    "markdownPath": "references/libraries/p5/README.md"
+  },
+  {
+    "id": "canvas-sketch",
+    "name": "canvas-sketch",
+    "category": "creative",
+    "kind": "创意工具集",
+    "summary": "为生成艺术草图提供尺寸、动画和导出组织。",
+    "capabilities": [
+      "草图生命周期",
+      "画幅",
+      "生成艺术",
+      "导出"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/canvas-sketch/README.md"
+  },
+  {
+    "id": "regl",
+    "name": "regl",
+    "category": "creative",
+    "kind": "WebGL 库",
+    "summary": "把 WebGL 绘制状态封装成声明式命令。",
+    "capabilities": [
+      "draw command",
+      "uniforms",
+      "buffers",
+      "framebuffer"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/regl/README.md"
+  },
+  {
+    "id": "ogl",
+    "name": "OGL",
+    "category": "creative",
+    "kind": "WebGL 库",
+    "summary": "相对轻量的 WebGL 工具层，提供几何、着色器和场景辅助。",
+    "capabilities": [
+      "Program",
+      "Mesh",
+      "Camera",
+      "RenderTarget"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/ogl/README.md"
+  },
+  {
+    "id": "tsparticles",
+    "name": "tsParticles",
+    "category": "creative",
+    "kind": "粒子库",
+    "summary": "用配置组织粒子发射、交互和预设效果。",
+    "capabilities": [
+      "粒子",
+      "发射器",
+      "交互",
+      "形状预设"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/tsparticles/README.md"
+  },
+  {
+    "id": "three",
+    "name": "Three.js",
+    "category": "three",
+    "kind": "3D 引擎",
+    "summary": "以场景、相机、光照和材质组织 Web 3D。",
+    "capabilities": [
+      "scene graph",
+      "camera",
+      "materials",
+      "animation mixer"
+    ],
+    "aliases": [
+      "Three.js",
+      "3D",
+      "摄影",
+      "虚拟片场"
+    ],
+    "level": "documented",
+    "markdownPath": "references/libraries/three/README.md"
+  },
+  {
+    "id": "r3f",
+    "name": "React Three Fiber",
+    "category": "three",
+    "kind": "React 渲染器",
+    "summary": "用 React 组织 Three.js 场景与生命周期。",
+    "capabilities": [
+      "声明式场景",
+      "组件复用",
+      "hooks",
+      "Three 生态"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/r3f/README.md"
+  },
+  {
+    "id": "drei",
+    "name": "Drei",
+    "category": "three",
+    "kind": "辅助组件库",
+    "summary": "提供 React Three Fiber 常用场景、控制器与视觉辅助。",
+    "capabilities": [
+      "环境光",
+      "相机辅助",
+      "文字",
+      "常用抽象"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/drei/README.md"
+  },
+  {
+    "id": "babylon",
+    "name": "Babylon.js",
+    "category": "three",
+    "kind": "3D 引擎",
+    "summary": "较完整的 Web 3D 引擎与工具生态。",
+    "capabilities": [
+      "PBR",
+      "场景",
+      "动画",
+      "引擎工具"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/babylon/README.md"
+  },
+  {
+    "id": "playcanvas",
+    "name": "PlayCanvas",
+    "category": "three",
+    "kind": "3D 引擎 / 编辑器",
+    "summary": "提供 Web 3D 引擎和编辑器工作方式。",
+    "capabilities": [
+      "场景编辑",
+      "PBR",
+      "相机后期",
+      "Web 运行时"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/playcanvas/README.md"
+  },
+  {
+    "id": "model-viewer",
+    "name": "<model-viewer>",
+    "category": "three",
+    "kind": "Web 组件",
+    "summary": "以较少代码展示 glTF/GLB 模型，适合产品与展示页面。",
+    "capabilities": [
+      "模型展示",
+      "相机控制",
+      "热点",
+      "动画播放"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/model-viewer/README.md"
+  },
+  {
+    "id": "vtk",
+    "name": "vtk.js",
+    "category": "three",
+    "kind": "科学可视化库",
+    "summary": "面向科学与工程数据的 Web 三维可视化。",
+    "capabilities": [
+      "体绘制",
+      "网格",
+      "科学数据",
+      "交互视图"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/vtk/README.md"
+  },
+  {
+    "id": "rapier",
+    "name": "Rapier",
+    "category": "physics",
+    "kind": "物理引擎",
+    "summary": "提供二维与三维刚体、碰撞体和约束模拟。",
+    "capabilities": [
+      "刚体",
+      "碰撞体",
+      "关节",
+      "连续碰撞检测"
+    ],
+    "aliases": [
+      "防穿模",
+      "碰撞",
+      "collision"
+    ],
+    "level": "documented",
+    "markdownPath": "references/libraries/rapier/README.md"
+  },
+  {
+    "id": "matter",
+    "name": "Matter.js",
+    "category": "physics",
+    "kind": "2D 物理引擎",
+    "summary": "为二维刚体、碰撞与约束提供成熟模型。",
+    "capabilities": [
+      "刚体",
+      "碰撞",
+      "约束",
+      "复合体"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/matter/README.md"
+  },
+  {
+    "id": "cannon",
+    "name": "cannon-es",
+    "category": "physics",
+    "kind": "3D 物理库",
+    "summary": "Cannon 的 ES 模块化分支，提供刚体动力学。",
+    "capabilities": [
+      "刚体",
+      "碰撞形状",
+      "约束",
+      "接触材质"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/cannon/README.md"
+  },
+  {
+    "id": "planck",
+    "name": "Planck.js",
+    "category": "physics",
+    "kind": "2D 物理库",
+    "summary": "JavaScript 二维物理引擎，延续 Box2D 的概念模型。",
+    "capabilities": [
+      "碰撞",
+      "关节",
+      "刚体",
+      "测试场景"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/planck/README.md"
+  },
+  {
+    "id": "webgl",
+    "name": "WebGL",
+    "category": "gpu",
+    "kind": "浏览器 API",
+    "summary": "浏览器 GPU 图形接口，可绘制自定义二维或三维效果。",
+    "capabilities": [
+      "shader",
+      "textures",
+      "framebuffer",
+      "GPU 绘制"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/webgl/README.md"
+  },
+  {
+    "id": "webgpu",
+    "name": "WebGPU",
+    "category": "gpu",
+    "kind": "浏览器 API",
+    "summary": "现代 GPU 渲染与计算接口，可支持更广的并行运算。",
+    "capabilities": [
+      "render pipeline",
+      "compute",
+      "buffers",
+      "WGSL"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/webgpu/README.md"
+  },
+  {
+    "id": "typegpu",
+    "name": "TypeGPU",
+    "category": "gpu",
+    "kind": "GPU 工具库",
+    "summary": "在 TypeScript 工作流中组织 WebGPU 数据和着色逻辑。",
+    "capabilities": [
+      "类型化 GPU 数据",
+      "WebGPU 辅助",
+      "着色器组织"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/typegpu/README.md"
+  },
+  {
+    "id": "postprocessing",
+    "name": "postprocessing",
+    "category": "gpu",
+    "kind": "后期库",
+    "summary": "为 Three.js 提供组合后期效果的工具。",
+    "capabilities": [
+      "effect passes",
+      "bloom",
+      "景深",
+      "组合效果"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/postprocessing/README.md"
+  },
+  {
+    "id": "gl-transitions",
+    "name": "GL Transitions",
+    "category": "gpu",
+    "kind": "转场集合",
+    "summary": "以两张纹理和进度参数描述可复用 GLSL 转场。",
+    "capabilities": [
+      "texture transition",
+      "progress",
+      "shader 集合"
+    ],
+    "aliases": [
+      "转场",
+      "transition",
+      "位移"
+    ],
+    "level": "documented",
+    "markdownPath": "references/libraries/gl-transitions/README.md"
+  },
+  {
+    "id": "pixi-filters",
+    "name": "PixiJS Filters",
+    "category": "gpu",
+    "kind": "滤镜集合",
+    "summary": "为 Pixi 场景提供一组 GPU 视觉滤镜。",
+    "capabilities": [
+      "模糊",
+      "位移",
+      "光效",
+      "风格滤镜"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/pixi-filters/README.md"
+  },
+  {
+    "id": "maplibre",
+    "name": "MapLibre GL JS",
+    "category": "geo",
+    "kind": "地图引擎",
+    "summary": "用 WebGL 显示矢量地图并控制相机与图层。",
+    "capabilities": [
+      "地图图层",
+      "相机飞行",
+      "地理数据",
+      "样式"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/maplibre/README.md"
+  },
+  {
+    "id": "mapbox",
+    "name": "Mapbox GL JS",
+    "category": "geo",
+    "kind": "地图 SDK",
+    "summary": "提供地图显示、样式与摄影机动画能力。",
+    "capabilities": [
+      "矢量地图",
+      "相机",
+      "图层",
+      "地形"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/mapbox/README.md"
+  },
+  {
+    "id": "deck",
+    "name": "deck.gl",
+    "category": "geo",
+    "kind": "GPU 可视化库",
+    "summary": "以图层组织大规模数据可视化，常与地图协作。",
+    "capabilities": [
+      "数据图层",
+      "GPU 聚合",
+      "地理轨迹",
+      "3D 标记"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/deck/README.md"
+  },
+  {
+    "id": "cesium",
+    "name": "CesiumJS",
+    "category": "geo",
+    "kind": "三维地理引擎",
+    "summary": "用于地球、地形和时空数据的三维可视化。",
+    "capabilities": [
+      "地球",
+      "3D Tiles",
+      "时间动态数据",
+      "摄影机"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/cesium/README.md"
+  },
+  {
+    "id": "leaflet",
+    "name": "Leaflet",
+    "category": "geo",
+    "kind": "地图库",
+    "summary": "轻量二维交互地图工具，适合注释与路线。",
+    "capabilities": [
+      "瓦片",
+      "标记",
+      "路径",
+      "图层"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/leaflet/README.md"
+  },
+  {
+    "id": "lottie",
+    "name": "Lottie Web",
+    "category": "playback",
+    "kind": "动画运行时",
+    "summary": "播放由支持工具导出的矢量动画数据。",
+    "capabilities": [
+      "动画播放",
+      "帧定位",
+      "SVG Canvas",
+      "AE 生态衔接"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/lottie/README.md"
+  },
+  {
+    "id": "dotlottie",
+    "name": "dotLottie Web",
+    "category": "playback",
+    "kind": "动画运行时",
+    "summary": "面向 dotLottie 动画包的 Web 播放运行时。",
+    "capabilities": [
+      "动画包",
+      "播放控制",
+      "状态功能",
+      "Web 运行时"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/dotlottie/README.md"
+  },
+  {
+    "id": "rive",
+    "name": "Rive",
+    "category": "playback",
+    "kind": "设计 / 运行时",
+    "summary": "以动画和状态机连接设计工具与实时交互。",
+    "capabilities": [
+      "状态机",
+      "输入",
+      "时间线",
+      "矢量运行时"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/rive/README.md"
+  },
+  {
+    "id": "spine",
+    "name": "Spine Runtimes",
+    "category": "playback",
+    "kind": "骨骼运行时",
+    "summary": "播放 Spine 制作的二维骨骼动画。",
+    "capabilities": [
+      "骨骼",
+      "动画混合",
+      "皮肤",
+      "网格变形"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/spine/README.md"
+  },
+  {
+    "id": "tone",
+    "name": "Tone.js",
+    "category": "audio",
+    "kind": "声音库",
+    "summary": "在 Web Audio 之上提供合成器、效果和音乐时间调度。",
+    "capabilities": [
+      "Transport",
+      "合成器",
+      "音序",
+      "效果"
+    ],
+    "aliases": [
+      "音乐",
+      "BGM",
+      "合成"
+    ],
+    "level": "documented",
+    "markdownPath": "references/libraries/tone/README.md"
+  },
+  {
+    "id": "web-audio",
+    "name": "Web Audio API",
+    "category": "audio",
+    "kind": "浏览器 API",
+    "summary": "音频节点图、合成、分析和离线渲染的原生接口。",
+    "capabilities": [
+      "AudioContext",
+      "OfflineAudioContext",
+      "频谱",
+      "节点连接"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/web-audio/README.md"
+  },
+  {
+    "id": "howler",
+    "name": "Howler.js",
+    "category": "audio",
+    "kind": "声音库",
+    "summary": "简化音频播放、音频精灵和跨浏览器使用。",
+    "capabilities": [
+      "音频精灵",
+      "播放控制",
+      "音量",
+      "空间音频"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/howler/README.md"
+  },
+  {
+    "id": "wavesurfer",
+    "name": "WaveSurfer.js",
+    "category": "audio",
+    "kind": "音频界面库",
+    "summary": "展示可交互波形并辅助音频区域与播放操作。",
+    "capabilities": [
+      "波形",
+      "区域",
+      "播放界面",
+      "插件"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/wavesurfer/README.md"
+  },
+  {
+    "id": "meyda",
+    "name": "Meyda",
+    "category": "audio",
+    "kind": "分析库",
+    "summary": "提取音频特征，用于声音分析和可视化映射。",
+    "capabilities": [
+      "频谱特征",
+      "时域特征",
+      "实时分析",
+      "离线特征"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/meyda/README.md"
+  },
+  {
+    "id": "midi",
+    "name": "Tone.js MIDI",
+    "category": "audio",
+    "kind": "数据工具",
+    "summary": "读取和组织 MIDI 音符、轨道和时间信息。",
+    "capabilities": [
+      "MIDI 解析",
+      "音符",
+      "轨道",
+      "时间"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/midi/README.md"
+  },
+  {
+    "id": "ffmpeg",
+    "name": "FFmpeg",
+    "category": "export",
+    "kind": "媒体工具",
+    "summary": "处理编码、转码、滤镜、合成和音视频封装。",
+    "capabilities": [
+      "编码",
+      "滤镜",
+      "音轨",
+      "帧序列"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/ffmpeg/README.md"
+  },
+  {
+    "id": "ffmpegwasm",
+    "name": "ffmpeg.wasm",
+    "category": "export",
+    "kind": "浏览器媒体工具",
+    "summary": "把 FFmpeg 的部分能力带到 WebAssembly 环境。",
+    "capabilities": [
+      "浏览器转码",
+      "媒体处理",
+      "内存文件系统"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/ffmpegwasm/README.md"
+  },
+  {
+    "id": "mediabunny",
+    "name": "Mediabunny",
+    "category": "export",
+    "kind": "媒体库",
+    "summary": "在 JavaScript 中读写和处理媒体文件，面向现代 Web 媒体能力。",
+    "capabilities": [
+      "媒体读写",
+      "编解码衔接",
+      "转换",
+      "多环境 API"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/mediabunny/README.md"
+  },
+  {
+    "id": "webcodecs",
+    "name": "WebCodecs",
+    "category": "export",
+    "kind": "浏览器 API",
+    "summary": "直接操作音视频帧与编解码器的底层 Web 接口。",
+    "capabilities": [
+      "VideoFrame",
+      "VideoEncoder",
+      "AudioData",
+      "时间戳"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/webcodecs/README.md"
+  },
+  {
+    "id": "playwright",
+    "name": "Playwright",
+    "category": "export",
+    "kind": "自动化工具",
+    "summary": "操作浏览器、截图、测试并录制页面视频。",
+    "capabilities": [
+      "页面自动化",
+      "截图",
+      "视频记录",
+      "视觉测试"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/playwright/README.md"
+  },
+  {
+    "id": "puppeteer",
+    "name": "Puppeteer",
+    "category": "export",
+    "kind": "自动化工具",
+    "summary": "通过高层 API 控制浏览器，适合捕获与自动测试。",
+    "capabilities": [
+      "浏览器控制",
+      "截图",
+      "脚本执行",
+      "无头运行"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/puppeteer/README.md"
+  },
+  {
+    "id": "canvas-record",
+    "name": "canvas-record",
+    "category": "export",
+    "kind": "录制库",
+    "summary": "围绕 Canvas 动画输出组织帧捕获与编码。",
+    "capabilities": [
+      "Canvas 捕获",
+      "编码适配",
+      "动画记录"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/canvas-record/README.md"
+  },
+  {
+    "id": "ccapture",
+    "name": "CCapture.js",
+    "category": "export",
+    "kind": "捕获库",
+    "summary": "通过控制时间相关 API 捕获固定帧率的 Canvas 动画。",
+    "capabilities": [
+      "固定帧捕获",
+      "时间劫持",
+      "图像序列"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/ccapture/README.md"
+  },
+  {
+    "id": "blender",
+    "name": "Blender",
+    "category": "studio",
+    "kind": "DCC 软件",
+    "summary": "完整的建模、动画、灯光、摄影、渲染与合成环境。",
+    "capabilities": [
+      "建模",
+      "骨骼",
+      "摄影机",
+      "渲染合成"
+    ],
+    "aliases": [],
+    "level": "index",
+    "markdownPath": "references/libraries/blender/README.md"
+  },
+  {
+    "id": "blender-python",
+    "name": "Blender Python API",
+    "category": "studio",
+    "kind": "脚本接口",
+    "summary": "用 bpy 访问场景数据、属性、操作器和渲染。",
+    "capabilities": [
+      "bpy.data",
+      "关键帧",
+      "渲染调用",
+      "场景管理"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/blender-python/README.md"
+  },
+  {
+    "id": "blender-mcp",
+    "name": "MCP for Blender",
+    "category": "studio",
+    "kind": "社区连接器",
+    "summary": "将 AI 工具调用与 Blender 操作连接起来的第三方项目。",
+    "capabilities": [
+      "对象操作",
+      "场景查询",
+      "代码执行",
+      "资产整合"
+    ],
+    "aliases": [
+      "Blender MCP",
+      "mcp-for-blender"
+    ],
+    "level": "documented",
+    "markdownPath": "references/libraries/blender-mcp/README.md"
+  },
+  {
+    "id": "gltf-transform",
+    "name": "glTF Transform",
+    "category": "studio",
+    "kind": "资产工具",
+    "summary": "读取、优化和修改 glTF / GLB 资产。",
+    "capabilities": [
+      "去重",
+      "量化",
+      "压缩",
+      "节点和网格处理"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/gltf-transform/README.md"
+  },
+  {
+    "id": "otio",
+    "name": "OpenTimelineIO",
+    "category": "studio",
+    "kind": "工程交换",
+    "summary": "描述剪辑的片段、时间、轨道和媒体引用。",
+    "capabilities": [
+      "剪辑结构",
+      "时间",
+      "轨道",
+      "格式适配器"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/otio/README.md"
+  },
+  {
+    "id": "usd",
+    "name": "OpenUSD",
+    "category": "studio",
+    "kind": "场景交换",
+    "summary": "面向大型三维场景组合和跨工具协作的描述体系。",
+    "capabilities": [
+      "场景组合",
+      "资产引用",
+      "变体",
+      "时变属性"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/usd/README.md"
+  },
+  {
+    "id": "polyhaven",
+    "name": "Poly Haven",
+    "category": "studio",
+    "kind": "资产来源",
+    "summary": "提供 HDRI、纹理和模型资源，可改善场景基础质量。",
+    "capabilities": [
+      "HDRI",
+      "PBR 纹理",
+      "模型",
+      "CC0 资产"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/polyhaven/README.md"
+  },
+  {
+    "id": "reactbits",
+    "name": "React Bits",
+    "category": "ui",
+    "kind": "组件集合",
+    "summary": "收集 React 视觉、背景和文字等交互组件。",
+    "capabilities": [
+      "文字效果",
+      "交互背景",
+      "UI 动效",
+      "React 组件"
+    ],
+    "aliases": [],
+    "level": "index",
+    "markdownPath": "references/libraries/reactbits/README.md"
+  },
+  {
+    "id": "magicui",
+    "name": "Magic UI",
+    "category": "ui",
+    "kind": "组件集合",
+    "summary": "React、TypeScript 和动画技术构建的界面组件集合。",
+    "capabilities": [
+      "产品界面",
+      "文字",
+      "交互组件",
+      "视觉示例"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/magicui/README.md"
+  },
+  {
+    "id": "aceternity",
+    "name": "Aceternity UI",
+    "category": "ui",
+    "kind": "组件集合",
+    "summary": "提供视觉表现较强的 React 界面与动画组件。",
+    "capabilities": [
+      "布局",
+      "3D 卡片",
+      "背景",
+      "交互示例"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/aceternity/README.md"
+  },
+  {
+    "id": "animista",
+    "name": "Animista",
+    "category": "ui",
+    "kind": "CSS 效果工具",
+    "summary": "可探索和生成 CSS 动画预设。",
+    "capabilities": [
+      "预设",
+      "参数调整",
+      "CSS 输出"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/animista/README.md"
+  },
+  {
+    "id": "embla",
+    "name": "Embla Carousel",
+    "category": "ui",
+    "kind": "交互库",
+    "summary": "为轮播与滑动布局提供低层能力。",
+    "capabilities": [
+      "轮播",
+      "滑动",
+      "对齐",
+      "插件"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/embla/README.md"
+  },
+  {
+    "id": "morphsvg",
+    "name": "GSAP MorphSVG",
+    "category": "vector",
+    "kind": "插件",
+    "summary": "在 SVG 路径之间建立点对应并插值形状。",
+    "capabilities": [
+      "路径变形",
+      "形状转换",
+      "点映射",
+      "Canvas 回调"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/morphsvg/README.md"
+  },
+  {
+    "id": "drawsvg",
+    "name": "GSAP DrawSVG",
+    "category": "vector",
+    "kind": "插件",
+    "summary": "控制 SVG 描边的可见区间，形成线稿揭示。",
+    "capabilities": [
+      "stroke 揭示",
+      "可见区间",
+      "路径长度",
+      "时间线集成"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/drawsvg/README.md"
+  },
+  {
+    "id": "flip",
+    "name": "GSAP Flip",
+    "category": "timeline",
+    "kind": "插件",
+    "summary": "在两种布局状态之间建立视觉连续的变换。",
+    "capabilities": [
+      "布局变化",
+      "状态捕获",
+      "元素重排",
+      "嵌套处理"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/flip/README.md"
+  },
+  {
+    "id": "motionpath",
+    "name": "GSAP MotionPath",
+    "category": "timeline",
+    "kind": "插件",
+    "summary": "让对象沿路径移动并根据路径方向旋转。",
+    "capabilities": [
+      "路径跟随",
+      "对齐",
+      "自动旋转",
+      "坐标转换"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/motionpath/README.md"
+  },
+  {
+    "id": "scrolltrigger",
+    "name": "GSAP ScrollTrigger",
+    "category": "timeline",
+    "kind": "插件",
+    "summary": "将滚动位置关联到动画进度、固定和触发。",
+    "capabilities": [
+      "scrub",
+      "pin",
+      "触发区间",
+      "滚动时间映射"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/scrolltrigger/README.md"
+  },
+  {
+    "id": "svg",
+    "name": "SVG",
+    "category": "vector",
+    "kind": "Web 标准",
+    "summary": "基于文档结构描述矢量图形、蒙版和滤镜。",
+    "capabilities": [
+      "paths",
+      "mask",
+      "clipPath",
+      "filters"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/svg/README.md"
+  },
+  {
+    "id": "mediarecorder",
+    "name": "MediaRecorder",
+    "category": "export",
+    "kind": "浏览器 API",
+    "summary": "把媒体流记录成浏览器支持的文件块。",
+    "capabilities": [
+      "MediaStream",
+      "分块录制",
+      "音视频流",
+      "实时捕获"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/mediarecorder/README.md"
+  },
+  {
+    "id": "reactflow",
+    "name": "React Flow",
+    "category": "data",
+    "kind": "节点界面库",
+    "summary": "在 React 中组织节点、边和交互画布。",
+    "capabilities": [
+      "节点",
+      "边",
+      "视口",
+      "自定义组件"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/reactflow/README.md"
+  },
+  {
+    "id": "mermaid",
+    "name": "Mermaid",
+    "category": "data",
+    "kind": "图解语法",
+    "summary": "把文本描述转换为流程、序列与其他图解。",
+    "capabilities": [
+      "文本到图",
+      "流程图",
+      "序列图",
+      "图形生成"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/mermaid/README.md"
+  },
+  {
+    "id": "revideo",
+    "name": "Revideo",
+    "category": "video",
+    "kind": "框架",
+    "summary": "基于代码的视频制作工具，延续 Motion Canvas 相关思路。",
+    "capabilities": [
+      "代码场景",
+      "参数化",
+      "媒体",
+      "渲染"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/revideo/README.md"
+  },
+  {
+    "id": "lil-gui",
+    "name": "lil-gui",
+    "category": "ui",
+    "kind": "调参工具",
+    "summary": "为 JavaScript 对象快速建立参数控制面板。",
+    "capabilities": [
+      "数值控制",
+      "颜色",
+      "文件夹",
+      "参数保存"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/lil-gui/README.md"
+  },
+  {
+    "id": "leva",
+    "name": "Leva",
+    "category": "ui",
+    "kind": "React 调参库",
+    "summary": "为 React 应用的参数实验提供控制面板。",
+    "capabilities": [
+      "参数面板",
+      "数值",
+      "颜色",
+      "分组"
+    ],
+    "aliases": [],
+    "level": "documented",
+    "markdownPath": "references/libraries/leva/README.md"
+  }
+]

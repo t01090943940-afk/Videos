@@ -16,7 +16,9 @@ import path from 'node:path';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { WebSocketServer } from 'ws';
-import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
+import { createRequire } from 'node:module';
+const req = createRequire(path.join(process.env.APPDATA || '', 'npm/node_modules/x/'));
+const { chromium } = req('playwright');
 import { DURATION } from '../src/timeline.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -109,7 +111,7 @@ if (STILLS || BEATS) {
   const f0 = Math.round(FROM * FPS), f1 = Math.round(TO * FPS);
   const all = Array.from({ length: f1 - f0 }, (_, k) => f0 + k);
   const chunk = Math.ceil(all.length / WORKERS);
-  const enc = ['-c:v', 'libx264', '-preset', 'veryfast', '-crf', '6', '-pix_fmt', 'yuv444p', '-g', String(FPS)];
+  const enc = ['-c:v', 'hevc_nvenc', '-preset', 'p5', '-rc', 'vbr', '-cq', '14', '-pix_fmt', 'yuv420p', '-g', String(FPS)];
   const parts = [];
   await Promise.all(Array.from({ length: WORKERS }, async (_, w) => {
     const frames = all.slice(w * chunk, (w + 1) * chunk);
@@ -118,6 +120,7 @@ if (STILLS || BEATS) {
     parts[w] = out;
     fs.mkdirSync(path.dirname(path.resolve(ROOT, out)), { recursive: true });
     const ff = ffmpegRaw([...enc, path.resolve(ROOT, out)]);
+    await new Promise((r) => setTimeout(r, w * 12000)); // 错峰启动：6 个浏览器同时 init 会饿死个别 worker
     const page = await openWorker((buf) => ff.write(buf));
     await renderFrames(page, frames, `w${w}`);
     await ff.end();

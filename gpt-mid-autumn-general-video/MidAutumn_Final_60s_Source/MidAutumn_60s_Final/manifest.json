@@ -1,0 +1,14 @@
+{
+  "file": "MidAutumn_Final_60s_1080p60.mp4",
+  "duration_seconds": 60.0,
+  "dimensions": [
+    1920,
+    1080
+  ],
+  "fps": 60,
+  "video_frames": 3600,
+  "audio_sample_rate": 48000,
+  "audio_channels": 2,
+  "shots": 21,
+  "narration": false
+}

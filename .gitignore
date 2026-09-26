@@ -20,6 +20,14 @@ __pycache__/
 *.mp4
 !/00-supercut-trailer/**/*.mp4
 !/00-THE-SOURCE/renders/*.mp4
+# 4K120 母版 355MB，超过 GitHub 100MB 推送限制（须位于上面的 ! 豁免之后）
+/00-THE-SOURCE/renders/THE-SOURCE_4k120.mp4
+
+# ---- QA 截图/质检产物（解压源码包内各项目 qa/ 目录，可再生）----
+qa/
+
+# ---- 本地打包产物（超 GitHub 100MB 限制，且为生成物）----
+/AI-Coding-SuperVideos-pack-*.zip
 
 # ---- 系统垃圾 ----
 .DS_Store

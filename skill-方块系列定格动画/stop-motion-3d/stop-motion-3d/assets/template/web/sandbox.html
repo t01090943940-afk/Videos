@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><link rel="icon" href="data:,"><title>Sandbox · studio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{--bg:#0e1117;--panel:#161b24f0;--line:#2a3242;--ink:#eef2f8;--dim:#8b97ab;--acc:#ffcc33;--cyan:#66d9ff}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:13px/1.4 "Noto Sans CJK SC",system-ui,sans-serif;overflow:hidden}
+  #stage{position:absolute;top:0;left:0;bottom:0;right:318px;display:flex;align-items:center;justify-content:center}
+  #gl{width:min(100vw - 350px,(100vh - 30px)*16/9);height:auto;aspect-ratio:16/9;border-radius:10px;box-shadow:0 10px 40px #0008}
+  .dock{position:fixed;top:14px;right:14px;bottom:14px;width:290px;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:12px}
+  header b{font-size:15px} header span{display:block;color:var(--dim);font-size:12px}
+  section>label{display:block;color:var(--dim);font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+  button{background:#1f2633;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 8px;cursor:pointer;font:inherit}
+  button:hover{border-color:var(--cyan)} button.on{background:var(--acc);color:#111;border-color:var(--acc)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:6px} .row{display:flex;gap:6px} .row button{flex:1}
+  #shots button{display:flex;flex-direction:column;align-items:flex-start;text-align:left} #shots small{opacity:.75;font-size:11px}
+  input[type=range]{width:100%;accent-color:var(--acc)}
+  dl{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;margin:0;font-variant-numeric:tabular-nums} dt{color:var(--dim)} dd{margin:0} dd.on{color:var(--acc);font-weight:600}
+  @media (max-width:760px){#stage{right:0;bottom:44%}.dock{top:auto;left:14px;width:auto;height:42%}#gl{width:100vw}}
+</style></head>
+<body>
+<div id="stage"><canvas id="gl" width="1280" height="720"></canvas></div>
+<aside class="dock">
+  <header><b>Sandbox · Loft studio</b><span>一个世界 · 六位开发者 · 七条画风管线</span></header>
+  <section><label>View</label><div class="row"><button id="orbit">自由环绕</button><button id="shot">镜头机位</button><button id="giz">机位/站位</button></div></section>
+  <section><label>Look pipeline</label><div class="grid" id="looks"></div></section>
+  <section><label>Time</label><div class="row"><button id="play">▶</button></div><input id="scrub" type="range" min="0" value="0"></section>
+  <section><label>Shots</label><div class="grid" id="shots"></div></section>
+  <section><label>World state (continuity)</label><dl id="state"></dl></section>
+</aside>
+<script type="module" src="./dist/sandbox.js"></script>
+</body></html>

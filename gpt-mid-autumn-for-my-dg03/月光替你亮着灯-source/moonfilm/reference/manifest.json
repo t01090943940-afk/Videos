@@ -1,0 +1,16 @@
+{
+  "title": "月光替你亮着灯 · 送学姐的中秋小礼物",
+  "fps": 24,
+  "frames": 672,
+  "duration_s": 28.0,
+  "files": {
+    "out/final_crf20.mp4": {
+      "bytes": 21798041,
+      "sha256": "80e7b4740f4fe082cd460c1915fae9f4ac5825b7eeac44b3fc62d20c94593cc8"
+    },
+    "out/qc/qc-report.json": {
+      "bytes": 1517,
+      "sha256": "55d1d5e92bcd37354c70a81a24792ffbf1d9c9a3a0c5971f41224c084b8ccf63"
+    }
+  }
+}
