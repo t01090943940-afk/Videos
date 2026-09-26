@@ -1,0 +1,2194 @@
+# town-camera-lab · SOURCE bundle（claude.ai 精简版）
+
+> claude.ai 网页端限制一个 Skill 最多 200 个文件，所以这一版把本案例的源码树打成这一个文本文件。
+> 文本文件逐字节收录（>= 4 KB 的内嵌 base64 媒体替换为标记）；二进制未收录，清单见 references/cases/<id>/FILES.md。
+> 读单个文件：`python3 scripts/casebook.py show town-camera-lab <路径>`；还原成真实目录：`python3 scripts/casebook.py copy town-camera-lab <目标>`。
+
+| # | 文件 | 行数 | L |
+|---|---|---:|---:|
+| 1 | `town-camera-lab.html` | 2177 | 13 |
+
+---
+
+### 1/1 · `town-camera-lab.html`
+<!-- casebook-file {"path": "town-camera-lab.html", "lines": 2177, "final_newline": true, "sha256": "45772a5836e0bc0ba7e32622eb6c45274ab391b81b7a2cca7bf615b0cc7a8e25", "original_sha256": "45772a5836e0bc0ba7e32622eb6c45274ab391b81b7a2cca7bf615b0cc7a8e25"} -->
+```html
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>小镇片场：摄影与运镜实验室</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#1b1f24;--panel:rgba(246,247,248,.96);--panel2:#e7eaed;--ink:#15191d;--ink2:#4a535c;--line:#c5cbd1;--frame:#1c1f23;
+  --shot:#d98a3a;--move:#7b84d6;--expo:#e8c53a;--body:#2fa7c2;--rig:#62b35f;--scene:#86a5cf;--set:#d7545a;--film:#c96ba4;--help:#9aa0a6;
+  --rec:#ff3b30;--ok:#3ddc84;--warn:#ffcc00;
+  --sans:"Noto Sans SC","PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,sans-serif;
+  --num:"Barlow Condensed","Arial Narrow","Roboto Condensed",var(--sans);}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--panel:rgba(35,40,46,.96);--panel2:#2e343b;--ink:#f2f4f5;--ink2:#b8c0c7;--line:#46505a;}}
+:root[data-theme="dark"]{--panel:rgba(35,40,46,.96);--panel2:#2e343b;--ink:#f2f4f5;--ink2:#b8c0c7;--line:#46505a;}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;height:100%;overflow:hidden;background:var(--bg);font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased;user-select:none;-webkit-user-select:none}
+#gl{position:fixed;inset:0;width:100%;height:100%;display:block;outline:none;touch-action:none}
+button{font:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.num{font-family:var(--num);font-weight:600;letter-spacing:.01em;font-variant-numeric:tabular-nums}
+
+/* ---------- dock: a colour-checker strip ---------- */
+#dock{position:fixed;right:calc(10px + env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);z-index:30;background:var(--frame);padding:7px;border-radius:12px;display:grid;gap:6px;box-shadow:0 8px 28px rgba(0,0,0,.45)}
+#dock button{width:58px;height:54px;border:0;border-radius:6px;background:var(--c);color:#14171a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:12px;font-weight:700;line-height:1;position:relative;transition:transform .12s}
+#dock button svg{width:20px;height:20px;stroke:#14171a;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#dock button[aria-pressed="true"]{box-shadow:0 0 0 2px var(--frame),0 0 0 4px #fff;transform:translateX(-3px)}
+#dock button .k{position:absolute;right:4px;top:3px;font-family:var(--num);font-size:10px;opacity:.55}
+
+/* ---------- panel ---------- */
+#panel{position:fixed;right:calc(92px + env(safe-area-inset-right,0px));top:calc(12px + env(safe-area-inset-top,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));width:min(410px,calc(100vw - 110px));background:var(--panel);border-radius:14px;box-shadow:0 14px 40px rgba(0,0,0,.4);display:none;flex-direction:column;overflow:hidden;z-index:29;backdrop-filter:blur(10px)}
+#panel.open{display:flex}
+#panel header{padding:0 18px 12px;border-bottom:1px solid var(--line)}
+#panel header .bar{height:6px;margin:0 -18px 12px;background:var(--mod)}
+#panel header h2{margin:0;font-size:21px;font-weight:900;display:flex;align-items:center;justify-content:space-between}
+#panel header h2 button{border:0;background:none;color:var(--ink2);font-size:22px;line-height:1;padding:2px 6px}
+#panel header p{margin:6px 0 0;font-size:14px;line-height:1.55;color:var(--ink2);font-weight:500}
+#pbody{overflow:auto;padding:12px 14px 30px;flex:1;overscroll-behavior:contain;user-select:text;-webkit-user-select:text}
+.card{background:var(--panel2);border-radius:10px;padding:12px 12px 12px 14px;margin-bottom:10px;border-left:4px solid var(--mod);position:relative}
+.card .claim{font-size:15px;font-weight:700;line-height:1.45;margin-bottom:8px}
+.card .note{font-size:13px;line-height:1.6;color:var(--ink2);margin-top:8px}
+.card .viz{border-radius:8px;overflow:hidden;background:#15191d;position:relative}
+.card .viz svg,.card .viz canvas{display:block;width:100%}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.btn{border:0;border-radius:7px;padding:7px 12px;background:var(--mod);color:#14171a;font-weight:700;font-size:13px}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.on{box-shadow:inset 0 0 0 2px #14171a}
+.btn:disabled{opacity:.4;cursor:default}
+.seg{display:inline-flex;background:var(--bg);border-radius:8px;padding:3px;gap:2px;flex-wrap:wrap}
+.seg button{border:0;background:transparent;color:#c9d0d6;border-radius:6px;padding:5px 9px;font-size:12.5px;font-weight:700}
+.seg button[aria-pressed="true"]{background:var(--mod);color:#14171a}
+.lbl{font-size:12.5px;color:var(--ink2);font-weight:700;min-width:64px}
+input[type=range]{accent-color:var(--mod);flex:1;min-width:120px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13px;line-height:1.5}
+.kv b{font-family:var(--num);font-size:15px}
+.mini{font-size:12px;color:var(--ink2)}
+.movecard{display:grid;grid-template-columns:112px 1fr;gap:10px;align-items:start}
+.movecard .viz{height:92px}
+.pill{display:inline-block;background:var(--bg);color:#e8ecef;border-radius:20px;padding:2px 9px;font-size:12px;font-weight:700}
+.tl{display:grid;grid-template-columns:96px 1fr;gap:10px;align-items:center;background:var(--panel2);border-radius:10px;padding:8px;margin-bottom:8px;border-left:4px solid var(--mod)}
+.tl img{width:96px;height:54px;object-fit:cover;border-radius:5px;background:#000;display:block}
+.tl .t1{font-size:13.5px;font-weight:700}
+.tl .t2{font-size:12px;color:var(--ink2);font-family:var(--num);letter-spacing:.02em}
+.tl .tb{display:flex;gap:4px;margin-top:5px}
+.tl .tb button{border:0;background:var(--bg);color:#e8ecef;border-radius:5px;font-size:12px;padding:3px 7px}
+.empty{padding:18px;border:1.5px dashed var(--line);border-radius:10px;color:var(--ink2);font-size:13.5px;line-height:1.6;text-align:center}
+kbd{font-family:var(--num);font-weight:700;background:var(--bg);color:#fff;border-radius:4px;padding:0 5px;font-size:13px}
+
+/* ---------- HUD ---------- */
+#chips{position:fixed;left:calc(12px + env(safe-area-inset-left,0px));top:calc(12px + env(safe-area-inset-top,0px));z-index:20;display:flex;flex-direction:column;gap:6px;pointer-events:none;max-width:46vw}
+#story{color:#fff;font-weight:900;font-size:17px;text-shadow:0 2px 8px rgba(0,0,0,.7)}
+#chipsrow{display:flex;gap:6px;flex-wrap:wrap}
+.chip{background:rgba(20,23,27,.72);color:#eef1f3;border-radius:6px;padding:4px 9px;font-size:12.5px;font-weight:700;backdrop-filter:blur(6px)}
+.chip i{font-style:normal;display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--c,#fff);margin-right:6px;vertical-align:0}
+#lcdbar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:20;background:rgba(14,16,19,.8);color:#fff;border-radius:10px;padding:7px 14px;display:flex;gap:14px;align-items:center;font-family:var(--num);font-size:19px;font-weight:600;pointer-events:none;white-space:nowrap}
+#lcdbar small{font-family:var(--sans);font-size:12px;color:#aeb6bd;font-weight:500}
+#toast{position:fixed;left:50%;top:calc(18px + env(safe-area-inset-top,0px));transform:translateX(-50%);z-index:60;background:#14171a;color:#fff;border-radius:10px;padding:10px 16px;font-size:14px;font-weight:600;max-width:min(560px,80vw);line-height:1.55;box-shadow:0 8px 24px rgba(0,0,0,.45);border-left:4px solid var(--tc,#e8c53a);opacity:0;transition:opacity .2s;pointer-events:none}
+#toast.show{opacity:1}
+
+/* ---------- EVF on-screen display ---------- */
+#osd{position:fixed;z-index:10;pointer-events:none;display:none;color:#fff;font-family:var(--num);font-weight:600;text-shadow:0 1px 2px rgba(0,0,0,.85)}
+#osd.on{display:block}
+#osd .top{position:absolute;left:10px;right:10px;top:8px;display:flex;justify-content:space-between;font-size:17px;gap:10px}
+#osd .top span{margin-right:10px}
+#osd .mode{display:inline-block;background:#fff;color:#000;text-shadow:none;border-radius:3px;padding:0 6px;font-weight:700}
+#osd .bot{position:absolute;left:0;right:0;bottom:0;height:44px;background:linear-gradient(transparent,rgba(0,0,0,.72));display:flex;align-items:flex-end;justify-content:center;gap:22px;padding:0 12px 6px;font-size:24px;white-space:nowrap}
+#osd .bot .sm{font-size:15px;opacity:.85}
+#osd .blink{animation:bl .5s steps(1) infinite}
+@keyframes bl{50%{opacity:.15}}
+#meterScale{display:inline-flex;align-items:flex-end;gap:2px;height:22px;position:relative;padding:0 2px}
+#meterScale i{display:block;width:2px;height:6px;background:#fff}
+#meterScale i.maj{height:11px}
+#meterScale b{position:absolute;bottom:-5px;width:8px;height:5px;background:#fff;transform:translateX(-3px)}
+#fbox{position:absolute;border:2px solid #fff;border-radius:2px;width:40px;height:30px;transform:translate(-50%,-50%)}
+#fbox.ok{border-color:var(--ok)}#fbox.fail{border-color:var(--rec)}#fbox.hunt{border-color:#fff;animation:bl .25s steps(1) infinite}
+#facebox{position:absolute;border:2px solid var(--warn);border-radius:3px;display:none}
+#grid{position:absolute;inset:0}
+#level{position:absolute;left:50%;top:50%;width:180px;height:0;border-top:2px solid rgba(255,255,255,.8);transform:translate(-50%,-50%)}
+#level.flat{border-color:var(--ok)}
+#hist{position:absolute;right:10px;bottom:52px;width:170px;height:64px;background:rgba(0,0,0,.45);border-radius:4px}
+#rec{position:absolute;left:12px;top:36px;font-size:20px;color:var(--rec);display:none}
+#osdmsg{position:absolute;left:50%;top:22%;transform:translateX(-50%);background:rgba(0,0,0,.66);border-radius:6px;padding:6px 12px;font-family:var(--sans);font-size:15px;font-weight:700;display:none;white-space:nowrap}
+#expbar{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:260px;display:none;text-align:center;font-size:20px}
+#expbar div{height:6px;background:rgba(255,255,255,.25);border-radius:3px;margin-top:6px;overflow:hidden}
+#expbar div i{display:block;height:100%;width:0;background:#fff}
+#shotTag{position:absolute;left:12px;bottom:52px;font-family:var(--sans);font-size:13px;font-weight:700;background:rgba(0,0,0,.5);border-radius:5px;padding:3px 8px}
+#timer{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);font-size:84px;display:none}
+#curtain{position:fixed;inset:0;background:#000;opacity:0;pointer-events:none;z-index:9;transition:opacity .12s}
+
+/* ---------- i menu ---------- */
+#imenu{position:fixed;z-index:12;display:none;grid-template-columns:repeat(6,1fr);gap:3px;background:rgba(10,12,14,.92);padding:6px;border-radius:6px;font-family:var(--sans)}
+#imenu.on{display:grid}
+#imenu div{background:#23282e;color:#fff;border-radius:4px;padding:6px 6px 5px;min-width:78px;cursor:pointer}
+#imenu div small{display:block;font-size:11px;color:#9aa4ad;font-weight:500}
+#imenu div b{font-family:var(--num);font-size:17px;font-weight:600}
+#imenu div.sel{background:#f5d23a;color:#111}#imenu div.sel small{color:#333}
+
+/* ---------- monitors (multi-cam) ---------- */
+#monitors{position:fixed;left:calc(12px + env(safe-area-inset-left,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:15;display:flex;gap:8px;flex-wrap:wrap;max-width:60vw;pointer-events:none}
+.mon{width:220px;height:124px;border:2px solid #3a4148;border-radius:6px;position:relative;pointer-events:auto;cursor:pointer;background:transparent}
+.mon.pgm{border-color:var(--rec)}
+.mon span{position:absolute;left:6px;top:4px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;font-weight:700;border-radius:4px;padding:1px 6px}
+.mon.pgm span{background:var(--rec)}
+
+/* ---------- film strip ---------- */
+#strip{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(64px + env(safe-area-inset-bottom,0px));z-index:14;display:flex;gap:4px;pointer-events:none}
+#strip img{width:66px;height:44px;object-fit:cover;border-radius:3px;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.5);animation:pop .35s}
+@keyframes pop{from{transform:translateY(16px) scale(.8);opacity:0}}
+
+/* ---------- overlays ---------- */
+.ovl{position:fixed;inset:0;z-index:50;background:rgba(8,9,11,.94);display:none;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:#fff}
+.ovl.on{display:flex}
+.ovl canvas{max-width:92vw;max-height:74vh;background:#000;border-radius:6px}
+.ovl .bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;font-size:14px}
+.ovl .bar .btn{--mod:#e8c53a}
+.ovl .meta{font-family:var(--num);font-size:18px;color:#cfd6dc;letter-spacing:.03em}
+#intro{background:radial-gradient(ellipse at 50% 40%,rgba(20,24,29,.72),rgba(8,9,11,.96))}
+#intro h1{margin:0;font-size:clamp(28px,5vw,54px);font-weight:900;letter-spacing:.02em;text-align:center;line-height:1.15}
+#intro .lead{max-width:640px;text-align:center;font-size:16px;line-height:1.75;color:#cdd4da;margin:0 20px}
+#intro .chart{display:grid;grid-template-columns:repeat(9,34px);gap:5px;background:#111;padding:6px;border-radius:8px}
+#intro .chart i{height:22px;border-radius:3px;background:var(--c)}
+#intro .keys{display:grid;grid-template-columns:repeat(3,auto);gap:6px 22px;font-size:13.5px;color:#cfd6dc;margin-top:6px}
+#intro .go{background:#e8c53a;color:#14171a;border:0;border-radius:10px;padding:13px 30px;font-size:17px;font-weight:900;margin-top:8px}
+#loading{font-size:13px;color:#8e979f}
+#touch{position:fixed;z-index:25;left:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));display:none;gap:8px}
+#touch.on{display:flex}
+#touch button{width:54px;height:54px;border-radius:50%;border:0;background:rgba(20,23,27,.78);color:#fff;font-size:18px;font-weight:700}
+#touch .shut{background:#fff;color:#000}
+@media (max-width:720px){#panel{right:8px;left:8px;width:auto;top:auto;height:58vh;bottom:calc(74px + env(safe-area-inset-bottom,0px))}
+ #dock{top:auto;bottom:calc(8px + env(safe-area-inset-bottom,0px));right:50%;transform:translateX(50%);grid-auto-flow:column;padding:5px;gap:4px}
+ #dock button{width:38px;height:44px;font-size:10px}#dock button svg{width:16px;height:16px}#dock button .k{display:none}
+ #dock button[aria-pressed="true"]{transform:translateY(-3px)}
+ #lcdbar{bottom:calc(66px + env(safe-area-inset-bottom,0px));font-size:15px;gap:8px}#chips{max-width:90vw}#monitors{display:none}
+ #touch{bottom:calc(120px + env(safe-area-inset-bottom,0px))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="gl" tabindex="0" aria-label="小镇三维场景"></canvas>
+<div id="curtain"></div>
+
+<div id="chips"><div id="story">傍晚七点前，阿禾在钟楼下等一封迟到十年的信</div><div id="chipsrow"></div></div>
+
+<div id="osd">
+  <svg id="grid" preserveAspectRatio="none" viewBox="0 0 300 200"><g stroke="rgba(255,255,255,.45)" stroke-width=".6" vector-effect="non-scaling-stroke"><line x1="100" y1="0" x2="100" y2="200"/><line x1="200" y1="0" x2="200" y2="200"/><line x1="0" y1="66.7" x2="300" y2="66.7"/><line x1="0" y1="133.3" x2="300" y2="133.3"/></g></svg>
+  <div id="level"></div>
+  <div class="top"><div><span class="mode" id="oMode">A</span><span id="oPC">SD</span><span id="oWB">AUTO</span><span id="oMet">矩阵</span><span id="oQ">JPEG</span></div><div><span id="oVR">VR</span><span id="oAF">AF-S</span><span id="oArea">[ ]</span><span id="oBat">▮▮▮</span></div></div>
+  <div id="rec">● REC <span id="recT">00:00</span></div>
+  <div id="fbox"></div><div id="facebox"></div>
+  <div id="osdmsg"></div>
+  <div id="timer"></div>
+  <div id="expbar"><span id="expTxt">曝光中</span><div><i id="expFill"></i></div></div>
+  <canvas id="hist" width="170" height="64"></canvas>
+  <div id="shotTag"></div>
+  <div class="bot"><span id="oTv">1/125</span><span id="oAv">F5.6</span><span id="meterScale"></span><span id="oISO">ISO 100</span><span id="oComp" class="sm"></span><span id="oExtra" class="sm"></span><span id="oCnt" class="sm">[ 999 ]</span></div>
+</div>
+<div id="imenu" role="menu" aria-label="i 菜单"></div>
+
+<div id="lcdbar"></div>
+<div id="monitors"></div>
+<div id="strip"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<nav id="dock" aria-label="主导航"></nav>
+<section id="panel" aria-live="polite"><header><div class="bar"></div><h2><span id="ptitle"></span><button id="pclose" aria-label="关闭面板">×</button></h2><p id="pclaim"></p></header><div id="pbody"></div></section>
+
+<div class="ovl" id="review"><canvas id="revCanvas"></canvas><div class="meta" id="revMeta"></div><div class="bar"><button class="btn ghost" id="revPrev" style="color:#fff">上一张</button><button class="btn ghost" id="revNext" style="color:#fff">下一张</button><button class="btn" id="revSave">导出 JPEG</button><button class="btn ghost" id="revClose" style="color:#fff">关闭 (P)</button></div></div>
+<div class="ovl" id="player"><canvas id="plCanvas" width="1280" height="720"></canvas><div class="meta" id="plMeta"></div><div class="bar"><button class="btn" id="plPlay">暂停</button><button class="btn" id="plExport">导出 WebM 视频</button><button class="btn ghost" id="plClose" style="color:#fff">关闭</button></div></div>
+<div class="ovl on" id="intro">
+  <div class="chart" aria-hidden="true"><i style="--c:var(--shot)"></i><i style="--c:var(--move)"></i><i style="--c:var(--expo)"></i><i style="--c:var(--body)"></i><i style="--c:var(--rig)"></i><i style="--c:var(--scene)"></i><i style="--c:var(--set)"></i><i style="--c:var(--film)"></i><i style="--c:var(--help)"></i></div>
+  <h1>小镇片场</h1>
+  <p class="lead">一座程序生成的小镇，一台按 Z50 规格还原操作逻辑的无反相机。<br>举起它，试遍景别、运镜、光圈、快门与 ISO；拍成定格动画，剪成一部小片。</p>
+  <div class="keys"><span><kbd>WASD</kbd> 走动</span><span><kbd>右键</kbd>/<kbd>V</kbd> 举到眼前</span><span><kbd>左键</kbd>/<kbd>空格</kbd> 快门</span><span><kbd>滚轮</kbd> 主拨盘</span><span><kbd>Shift</kbd>+滚轮 副拨盘</span><span><kbd>Z</kbd><kbd>X</kbd> 变焦环</span><span><kbd>F</kbd> 半按对焦</span><span><kbd>T</kbd> 换器材</span><span><kbd>/</kbd> 全部按键</span></div>
+  <button class="go" id="goBtn" disabled>正在搭建小镇…</button>
+  <div id="loading">首次加载需要几秒</div>
+</div>
+<div id="touch"><button id="tUp">▲</button><button id="tDown">▼</button><button id="tLeft">◀</button><button id="tRight">▶</button><button id="tEvf">EVF</button><button class="shut" id="tShut">●</button></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+'use strict';
+/* =====================================================================
+   小镇片场 — procedural town + physically-motivated camera simulator
+   ===================================================================== */
+const TAU = Math.PI * 2, DEG = Math.PI / 180;
+const clamp = (x, a, b) => x < a ? a : x > b ? b : x;
+const lerp = (a, b, t) => a + (b - a) * t;
+const smooth = t => t * t * (3 - 2 * t);
+const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const $ = s => document.querySelector(s);
+function rngF(seed) { let a = seed >>> 0; return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+let R = rngF(20260923);
+const rr = (a, b) => a + (b - a) * R();
+const pick = a => a[Math.floor(R() * a.length)];
+function h1(n) { const s = Math.sin(n * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); }
+function vn(x) { const i = Math.floor(x), f = x - i, u = f * f * (3 - 2 * f); return lerp(h1(i), h1(i + 1), u) * 2 - 1; }
+function h2(x, z) { const s = Math.sin(x * 127.1 + z * 311.7) * 43758.5453; return s - Math.floor(s); }
+function vn2(x, z) { const ix = Math.floor(x), iz = Math.floor(z), fx = x - ix, fz = z - iz, ux = fx * fx * (3 - 2 * fx), uz = fz * fz * (3 - 2 * fz); return lerp(lerp(h2(ix, iz), h2(ix + 1, iz), ux), lerp(h2(ix, iz + 1), h2(ix + 1, iz + 1), ux), uz); }
+const lin = hex => new THREE.Color(hex).convertSRGBToLinear();
+
+/* ---------------- camera spec tables (Z50 behaviour) ---------------- */
+const TV = [30, 25, 20, 15, 13, 10, 8, 6, 5, 4, 3, 2.5, 2, 1.6, 1.3, 1, 1 / 1.3, 1 / 1.6, 1 / 2, 1 / 2.5, 1 / 3, 1 / 4, 1 / 5, 1 / 6, 1 / 8, 1 / 10, 1 / 13, 1 / 15, 1 / 20, 1 / 25, 1 / 30, 1 / 40, 1 / 50, 1 / 60, 1 / 80, 1 / 100, 1 / 125, 1 / 160, 1 / 200, 1 / 250, 1 / 320, 1 / 400, 1 / 500, 1 / 640, 1 / 800, 1 / 1000, 1 / 1250, 1 / 1600, 1 / 2000, 1 / 2500, 1 / 3200, 1 / 4000];
+function tvLabel(t) { if (t >= 0.99) return (Math.round(t * 10) / 10) + '"'; const r = 1 / t; return '1/' + (Math.abs(r - Math.round(r)) < .06 ? Math.round(r) : r.toFixed(1)); }
+const AV = [1.4, 1.6, 1.8, 2, 2.2, 2.5, 2.8, 3.2, 3.5, 4, 4.5, 5, 5.6, 6.3, 7.1, 8, 9, 10, 11, 13, 14, 16, 18, 20, 22, 25, 29, 32, 36, 40];
+const ISOS = [100, 125, 160, 200, 250, 320, 400, 500, 640, 800, 1000, 1250, 1600, 2000, 2500, 3200, 4000, 5000, 6400, 8000, 10000, 12800, 16000, 20000, 25600, 32000, 40000, 51200, 64000, 80000, 102400, 204800];
+function isoLabel(i) { return i > 51200 ? ({ 64000: 'Hi 0.3', 80000: 'Hi 0.7', 102400: 'Hi 1', 204800: 'Hi 2' })[i] || 'Hi' : String(i); }
+const nearestIdx = (arr, v, logv = true) => { let bi = 0, bd = 1e9; arr.forEach((a, i) => { const d = logv ? Math.abs(Math.log2(a) - Math.log2(v)) : Math.abs(a - v); if (d < bd) { bd = d; bi = i; } }); return bi; };
+const LENSES = [
+  { id: 'kit', name: 'NIKKOR Z DX 16-50mm f/3.5-6.3 VR', short: '16-50mm', fMin: 16, fMax: 50, nW: 3.5, nT: 6.3, minW: 22, minT: 40, mfdW: .2, mfdT: .25, vr: 4.5, blades: 7, retract: true },
+  { id: 'tele', name: 'NIKKOR Z DX 50-250mm f/4.5-6.3 VR', short: '50-250mm', fMin: 50, fMax: 250, nW: 4.5, nT: 6.3, minW: 22, minT: 32, mfdW: .5, mfdT: 1.0, vr: 5, blades: 7 },
+  { id: 'fifty', name: 'NIKKOR Z 50mm f/1.8 S', short: '50mm f/1.8', fMin: 50, fMax: 50, nW: 1.8, nT: 1.8, minW: 16, minT: 16, mfdW: .4, mfdT: .4, vr: 0, blades: 9 },
+];
+const SENSOR_W = 23.5, SENSOR_H = 15.7, CROP = 1.5;
+const MODES = ['AUTO', 'P', 'S', 'A', 'M'];
+const PCS = { AUTO: { n: '自动', sat: 1.08, con: 1.02 }, SD: { n: '标准', sat: 1.05, con: 1.0 }, NL: { n: '自然', sat: .9, con: .88 }, VI: { n: '鲜艳', sat: 1.35, con: 1.14 }, MC: { n: '单色', sat: 0, con: 1.08, mono: 1 }, PT: { n: '人像', sat: .96, con: .94, warm: .02 }, LS: { n: '风景', sat: 1.18, con: 1.06, cool: .02 }, FL: { n: '平面', sat: .78, con: .7 } };
+const WBS = { AUTO: 0, '晴天': 5200, '阴天': 6000, '背阴': 8000, '白炽灯': 3000, '荧光灯': 4000, K: -1 };
+const METERS = { matrix: '矩阵', center: '中央重点', spot: '点', high: '亮部重点' };
+const RELEASES = { S: '单张', CL: '低速连拍', CH: '高速连拍 11张/秒', T2: '自拍 2 秒', T10: '自拍 10 秒' };
+const AFMODES = ['AF-S', 'AF-C', 'MF'];
+const AFAREAS = { single: '单点', wide: '宽区域', auto: '自动区域 (人脸)' };
+
+/* ---------------- renderer ---------------- */
+const canvas = $('#gl');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance', preserveDrawingBuffer: false });
+const DPR = Math.min(window.devicePixelRatio || 1, 1.5);
+renderer.setPixelRatio(DPR);
+renderer.setSize(innerWidth, innerHeight, false);
+renderer.physicallyCorrectLights = true;
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.toneMapping = THREE.NoToneMapping;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.shadowMap.autoUpdate = false;
+renderer.autoClear = true;
+const GL2 = renderer.capabilities.isWebGL2;
+if (GL2) renderer.extensions.get('EXT_color_buffer_float');
+const HDRTYPE = (GL2 && renderer.extensions.has('EXT_color_buffer_float')) ? THREE.HalfFloatType : THREE.UnsignedByteType;
+const ANISO = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+
+/* ---------------- procedural textures ---------------- */
+function mkCanvas(w, h) { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
+function texFrom(c, rx = 1, ry = rx, srgb = true) { const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(rx, ry); if (srgb) t.encoding = THREE.sRGBEncoding; t.anisotropy = ANISO; return t; }
+function speckle(g, w, h, n, cols, a = .12, s = 2) { for (let i = 0; i < n; i++) { g.globalAlpha = a * R(); g.fillStyle = pick(cols); g.fillRect(R() * w, R() * h, s * R() + .5, s * R() + .5); } g.globalAlpha = 1; }
+function rrect(g, x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
+const TEX = {};
+function buildTextures() {
+  let c, g;
+  // cobblestone — 512px = 2 m
+  c = mkCanvas(512, 512); g = c.getContext('2d'); g.fillStyle = '#35312d'; g.fillRect(0, 0, 512, 512);
+  for (let row = 0; row < 16; row++) { let x = (row % 2) * 12 - 20; const y = row * 32; while (x < 530) { const w = rr(26, 40); const v = rr(.75, 1.1); const base = [128 * v, 120 * v, 110 * v].map(Math.round); g.fillStyle = `rgb(${base})`; rrect(g, x + 2, y + 2 + rr(-2, 2), w - 4, 28, 9); g.fill(); g.fillStyle = 'rgba(255,255,255,.07)'; rrect(g, x + 5, y + 4, w - 12, 10, 5); g.fill(); x += w; } }
+  speckle(g, 512, 512, 5000, ['#000', '#fff', '#5a4a3a'], .15, 2);
+  TEX.cobble = texFrom(c, 1 / 2);
+  // plaster (tintable) — 512 = 4m
+  c = mkCanvas(512, 512); g = c.getContext('2d'); g.fillStyle = '#ece8e1'; g.fillRect(0, 0, 512, 512);
+  speckle(g, 512, 512, 9000, ['#bbb3a6', '#fff', '#d8d0c4'], .25, 3);
+  for (let i = 0; i < 14; i++) { const x = R() * 512; const gr = g.createLinearGradient(0, 0, 0, 512); gr.addColorStop(0, 'rgba(90,80,70,0)'); gr.addColorStop(1, 'rgba(90,80,70,.13)'); g.fillStyle = gr; g.fillRect(x, 0, rr(6, 30), 512); }
+  TEX.plaster = texFrom(c, 1 / 4);
+  // brick — 512 = 2m
+  c = mkCanvas(512, 512); g = c.getContext('2d'); g.fillStyle = '#c9c1b5'; g.fillRect(0, 0, 512, 512);
+  for (let row = 0; row < 32; row++) { const y = row * 16; let x = (row % 2) ? -32 : 0; while (x < 512) { const v = rr(.8, 1.12); g.fillStyle = `rgb(${Math.round(176 * v)},${Math.round(92 * v)},${Math.round(70 * v)})`; g.fillRect(x + 1.5, y + 1.5, 61, 13); x += 64; } }
+  speckle(g, 512, 512, 6000, ['#000', '#fff'], .12, 2);
+  TEX.brick = texFrom(c, 1 / 2);
+  // roof tiles (tintable) — 256 = 1m
+  c = mkCanvas(256, 256); g = c.getContext('2d'); g.fillStyle = '#a9a9a9'; g.fillRect(0, 0, 256, 256);
+  for (let row = 0; row < 8; row++) { for (let k = -1; k < 9; k++) { const x = k * 32 + (row % 2) * 16, y = row * 32; const v = rr(.8, 1.1); g.fillStyle = `rgb(${Math.round(190 * v)},${Math.round(190 * v)},${Math.round(190 * v)})`; g.beginPath(); g.moveTo(x, y); g.lineTo(x + 32, y); g.lineTo(x + 32, y + 24); g.quadraticCurveTo(x + 16, y + 34, x, y + 24); g.closePath(); g.fill(); g.strokeStyle = 'rgba(0,0,0,.35)'; g.lineWidth = 2; g.stroke(); } }
+  TEX.roof = texFrom(c, 1);
+  // stone blocks — 512 = 3m
+  c = mkCanvas(512, 512); g = c.getContext('2d'); g.fillStyle = '#8f887c'; g.fillRect(0, 0, 512, 512);
+  for (let row = 0; row < 8; row++) { let x = (row % 2) ? -50 : 0; while (x < 512) { const w = rr(80, 120), v = rr(.85, 1.1); g.fillStyle = `rgb(${Math.round(200 * v)},${Math.round(192 * v)},${Math.round(176 * v)})`; g.fillRect(x + 2, row * 64 + 2, w - 4, 60); x += w; } }
+  speckle(g, 512, 512, 8000, ['#000', '#fff', '#776'], .15, 2);
+  TEX.stone = texFrom(c, 1 / 3);
+  // asphalt with lane marks: u spans road width (7m), v = 8 m
+  c = mkCanvas(256, 512); g = c.getContext('2d'); g.fillStyle = '#3d3f42'; g.fillRect(0, 0, 256, 512);
+  speckle(g, 256, 512, 9000, ['#000', '#777', '#555'], .35, 2);
+  g.fillStyle = '#d9d4c3'; g.fillRect(125, 0, 6, 250); g.fillStyle = '#cfc9b6'; g.fillRect(8, 0, 4, 512); g.fillRect(244, 0, 4, 512);
+  TEX.road = texFrom(c, 1 / 7, 1 / 8);
+  // grass — 512 = 4m
+  c = mkCanvas(512, 512); g = c.getContext('2d'); g.fillStyle = '#56703a'; g.fillRect(0, 0, 512, 512);
+  speckle(g, 512, 512, 22000, ['#3f5a2a', '#6f8a46', '#7d8f4a', '#4a5f30'], .5, 3);
+  TEX.grass = texFrom(c, 1 / 4);
+  // wood planks — 256 = 1m
+  c = mkCanvas(256, 256); g = c.getContext('2d'); for (let i = 0; i < 8; i++) { const v = rr(.8, 1.1); g.fillStyle = `rgb(${Math.round(120 * v)},${Math.round(78 * v)},${Math.round(48 * v)})`; g.fillRect(i * 32, 0, 32, 256); g.fillStyle = 'rgba(0,0,0,.35)'; g.fillRect(i * 32, 0, 2, 256); }
+  speckle(g, 256, 256, 3000, ['#000', '#caa'], .15, 2); TEX.wood = texFrom(c, 1);
+  // window: frame + glass (tintable glass via env reflections) and emissive mask
+  c = mkCanvas(128, 192); g = c.getContext('2d');
+  const gg = g.createLinearGradient(0, 0, 0, 192); gg.addColorStop(0, '#3b4a58'); gg.addColorStop(1, '#1c242c'); g.fillStyle = gg; g.fillRect(0, 0, 128, 192);
+  g.fillStyle = 'rgba(160,190,210,.18)'; g.beginPath(); g.moveTo(20, 10); g.lineTo(70, 10); g.lineTo(30, 120); g.lineTo(10, 120); g.fill();
+  g.fillStyle = '#efe9dd'; g.fillRect(0, 0, 128, 10); g.fillRect(0, 182, 128, 10); g.fillRect(0, 0, 10, 192); g.fillRect(118, 0, 10, 192); g.fillRect(60, 0, 8, 192); g.fillRect(0, 70, 128, 7);
+  TEX.window = texFrom(c, 1); TEX.window.wrapS = TEX.window.wrapT = THREE.ClampToEdgeWrapping; TEX.window.repeat.set(1, 1);
+  c = mkCanvas(128, 192); g = c.getContext('2d'); g.fillStyle = '#000'; g.fillRect(0, 0, 128, 192);
+  const eg = g.createRadialGradient(64, 110, 10, 64, 110, 120); eg.addColorStop(0, '#fff'); eg.addColorStop(1, '#7a6a5a'); g.fillStyle = eg; g.fillRect(10, 10, 108, 172);
+  g.fillStyle = 'rgba(0,0,0,.55)'; g.fillRect(10, 10, 40, 60); g.fillStyle = '#000'; g.fillRect(60, 0, 8, 192); g.fillRect(0, 70, 128, 7);
+  TEX.winMask = texFrom(c, 1, 1, false); TEX.winMask.wrapS = TEX.winMask.wrapT = THREE.ClampToEdgeWrapping; TEX.winMask.repeat.set(1, 1);
+  // clock face
+  c = mkCanvas(256, 256); g = c.getContext('2d'); g.fillStyle = '#f1ead8'; g.beginPath(); g.arc(128, 128, 124, 0, TAU); g.fill();
+  g.strokeStyle = '#2b2622'; g.lineWidth = 8; g.stroke(); g.fillStyle = '#2b2622'; g.font = 'bold 26px Georgia,serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
+  ['XII', 'I', 'II', 'III', 'IIII', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'].forEach((s, i) => { const a = i / 12 * TAU - Math.PI / 2; g.save(); g.translate(128 + Math.cos(a) * 96, 128 + Math.sin(a) * 96); g.rotate(a + Math.PI / 2); g.fillText(s, 0, 0); g.restore(); });
+  for (let i = 0; i < 60; i++) { const a = i / 60 * TAU; g.fillRect(128 + Math.cos(a) * 116 - 1, 128 + Math.sin(a) * 116 - 1, 3, 3); }
+  TEX.clock = texFrom(c, 1); TEX.clock.wrapS = TEX.clock.wrapT = THREE.ClampToEdgeWrapping;
+  // glow sprite
+  c = mkCanvas(128, 128); g = c.getContext('2d'); const rg = g.createRadialGradient(64, 64, 0, 64, 64, 64); rg.addColorStop(0, 'rgba(255,255,255,1)'); rg.addColorStop(.15, 'rgba(255,255,255,.55)'); rg.addColorStop(.5, 'rgba(255,255,255,.08)'); rg.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = rg; g.fillRect(0, 0, 128, 128);
+  TEX.glow = new THREE.CanvasTexture(c);
+}
+function stripeTex(a, b) { const c = mkCanvas(128, 16); const g = c.getContext('2d'); for (let i = 0; i < 8; i++) { g.fillStyle = i % 2 ? b : a; g.fillRect(i * 16, 0, 16, 16); } return texFrom(c, 1 / 2, 1); }
+function signTex(txt, bg, fg, sub) {
+  const c = mkCanvas(512, 128), g = c.getContext('2d'); g.fillStyle = bg; g.fillRect(0, 0, 512, 128); g.strokeStyle = fg; g.lineWidth = 5; g.strokeRect(8, 8, 496, 112);
+  g.fillStyle = fg; g.textAlign = 'center'; g.textBaseline = 'middle'; g.font = '900 60px "Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif'; g.fillText(txt, 256, sub ? 56 : 66);
+  if (sub) { g.font = '600 22px Georgia,serif'; g.fillText(sub, 256, 104); }
+  const t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding; t.anisotropy = ANISO; return t;
+}
+
+/* ---------------- materials ---------------- */
+const U = { uTime: { value: 0 }, uWin: { value: 0 }, uWind: { value: 1 } };
+const MATS = {};
+function mat(key, p) { if (MATS[key]) return MATS[key]; const m = new THREE.MeshStandardMaterial(p); MATS[key] = m; return m; }
+const EMISSIVE = []; // {mat, base} — intensities rescaled per time of day
+function emat(key, col, base, p = {}) { if (MATS[key]) return MATS[key]; const night = p.nightOnly; p = Object.assign({}, p); delete p.nightOnly; const m = new THREE.MeshStandardMaterial(Object.assign({ color: 0x111111, emissive: col, emissiveIntensity: base, roughness: .5 }, p)); MATS[key] = m; EMISSIVE.push({ m, base, night }); return m; }
+
+/* ---------------- geometry helpers ---------------- */
+function boxM(w, h, d) { // box with UVs in metres
+  const g = new THREE.BoxGeometry(w, h, d); const uv = g.attributes.uv; const sz = [[d, h], [d, h], [w, d], [w, d], [w, h], [w, h]];
+  for (let f = 0; f < 6; f++) for (let k = 0; k < 4; k++) { const i = f * 4 + k; uv.setXY(i, uv.getX(i) * sz[f][0], uv.getY(i) * sz[f][1]); }
+  return g;
+}
+function mesh(geo, m, x = 0, y = 0, z = 0, parent, cast = true, recv = true) { const o = new THREE.Mesh(geo, m); o.position.set(x, y, z); o.castShadow = cast; o.receiveShadow = recv; if (parent) parent.add(o); return o; }
+function planeM(w, h) { const g = new THREE.PlaneGeometry(w, h); const uv = g.attributes.uv; for (let i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i) * w, uv.getY(i) * h); return g; }
+
+/* ---------------- world layout ---------------- */
+const scene = new THREE.Scene();
+const STATIC = new THREE.Group(); // baked later
+const DYN = new THREE.Group(); scene.add(DYN);
+const COLL = []; // {minX,maxX,minZ,maxZ} or circle {cx,cz,r}
+const SOLIDS = []; // meshes for AF raycast
+function terrainH(x, z) { const r = Math.hypot(x, z); const k = smooth(clamp((r - 66) / 70, 0, 1)); return k * (vn2(x * .011 + 3, z * .011) * 30 + vn2(x * .045 + 7, z * .045) * 5 - 4); }
+// road loop: rounded rectangle centreline, half-size A, corner radius RC
+const ROAD = { A: 23, RC: 7, W: 7 };
+ROAD.S = 2 * (ROAD.A - ROAD.RC); ROAD.L = 4 * ROAD.S + TAU * ROAD.RC;
+function roadAt(s) { // returns {x,z,tx,tz} (tangent), counter-clockwise when seen from above (x right, z down)
+  const A = ROAD.A, r = ROAD.RC, S = ROAD.S, seg = S + Math.PI * r / 2; s = ((s % ROAD.L) + ROAD.L) % ROAD.L;
+  const k = Math.floor(s / seg), u = s - k * seg; // side k: 0 south(z=+A) moving +x, 1 east moving -z, 2 north moving -x, 3 west moving +z
+  const C = [[1, 0, 0, 1], [0, -1, 1, 0], [-1, 0, 0, -1], [0, 1, -1, 0]][k]; // tangent (tx,tz), outward normal (nx,nz)
+  let x, z, tx = C[0], tz = C[1];
+  const nx = C[2], nz = C[3];
+  if (u < S) { const along = -S / 2 + u; x = nx * A + tx * along; z = nz * A + tz * along; }
+  else { const a = (u - S) / r; const cx = nx * (A - r) + tx * S / 2, cz = nz * (A - r) + tz * S / 2; x = cx + (nx * Math.cos(a) + tx * Math.sin(a)) * r; z = cz + (nz * Math.cos(a) + tz * Math.sin(a)) * r; const t2x = -nx * Math.sin(a) + tx * Math.cos(a), t2z = -nz * Math.sin(a) + tz * Math.cos(a); tx = t2x; tz = t2z; }
+  return { x, z, tx, tz };
+}
+
+const HOUSE_COLS = ['#e8d3a8', '#d98e6a', '#9fb7a0', '#e6c9c1', '#b6c7d6', '#efe2c4', '#c7a27c', '#d7b56d', '#a8b98a', '#e0b39a', '#c9d1c8', '#f0d9b5'];
+const SHUT_COLS = ['#3f6b52', '#40597a', '#7a3b36', '#5d6e3a'];
+const ROOF_COLS = ['#8e4a36', '#6c5a52', '#9a5b3d', '#5b6068', '#7b3f33'];
+const WINDOWS = []; // {mesh} raw window planes, baked with aLit
+function makeHouse(o) {
+  // o: x,z front-centre on ground, rot, w,d,floors,col, roofCol, brick, shop:{sign,sub,awn:[a,b],lit}, door
+  const g = new THREE.Group(); g.position.set(o.x, 0, o.z); g.rotation.y = o.rot; STATIC.add(g);
+  const FH = 3.1, H = o.floors * FH + .4;
+  const wallM = o.brick ? mat('brick', { map: TEX.brick, roughness: .9 }) : mat('pl' + o.col, { map: TEX.plaster, color: lin(o.col), roughness: .92 });
+  const w = mesh(boxM(o.w, H, o.d), wallM, 0, H / 2, -o.d / 2, g); SOLIDS.push(w);
+  // plinth
+  mesh(boxM(o.w + .08, .5, o.d + .08), mat('plinth', { map: TEX.stone, color: lin('#9c948a'), roughness: .95 }), 0, .25, -o.d / 2, g);
+  // roof
+  const rh = o.roofH || rr(2.2, 3.6), ov = .35, half = o.d / 2 + ov, sl = Math.hypot(half, rh), ang = Math.atan2(rh, half);
+  const roofM = mat('rf' + o.roofCol, { map: TEX.roof, color: lin(o.roofCol), roughness: .8 });
+  for (const s of [1, -1]) { const r = mesh(boxM(o.w + ov * 2, .16, sl), roofM, 0, H + rh / 2, -o.d / 2 + s * half / 2, g); r.rotation.x = s * ang; }
+  const tri = new THREE.Shape(); tri.moveTo(-o.d / 2, 0); tri.lineTo(o.d / 2, 0); tri.lineTo(0, rh); tri.closePath();
+  for (const s of [1, -1]) { const gm = mesh(new THREE.ShapeGeometry(tri), wallM, s * o.w / 2, H, -o.d / 2, g); gm.rotation.y = s * Math.PI / 2; }
+  if (R() < .6) mesh(boxM(.6, 1.6, .6), mat('brick', {}), rr(-o.w / 3, o.w / 3), H + rh * .6, -o.d * rr(.3, .7), g);
+  // cornice per floor
+  const trimM = mat('trim', { color: lin('#f3eee4'), roughness: .8 });
+  for (let f = 1; f <= o.floors; f++) mesh(boxM(o.w + .12, .16, .22), trimM, 0, f * FH + (f === o.floors ? .3 : 0), .09, g);
+  // windows
+  const shM = mat('sh' + (o.shut || SHUT_COLS[0]), { color: lin(o.shut || pick(SHUT_COLS)), roughness: .7 });
+  const n = Math.max(1, Math.floor((o.w - .6) / 2.1)), sp = o.w / n;
+  const doorK = o.door != null ? o.door : Math.floor(n / 2);
+  for (const face of [1, -1]) for (let f = 0; f < o.floors; f++) for (let k = 0; k < n; k++) {
+    const x = -o.w / 2 + sp * (k + .5), y = f * FH + (f === 0 ? 1.0 : .9), zf = face > 0 ? .03 : -o.d - .03;
+    if (f === 0 && face > 0 && (k === doorK || o.shop)) continue;
+    addWindow(g, x, y + .8, zf, face, 1.0, 1.55, shM, o.shutters !== false && face > 0);
+  }
+  // door
+  if (!o.shop) { const x = -o.w / 2 + sp * (doorK + .5); mesh(boxM(1.15, 2.3, .12), mat('wood', { map: TEX.wood, color: lin(pick(['#6d4a32', '#3f5f6a', '#6e2f2b', '#44503a'])), roughness: .7 }), x, 1.15, .02, g); mesh(boxM(1.45, .18, .2), trimM, x, 2.4, .06, g); }
+  // shop front
+  if (o.shop) {
+    const s = o.shop, sw = o.w - 1.2;
+    const sh = mesh(planeM(sw, 2.3), MATS.shopGlass || (MATS.shopGlass = new THREE.MeshStandardMaterial({ color: lin('#1d2830'), roughness: .08, metalness: .1, emissive: lin('#ffcf8a'), emissiveMap: TEX.winMask, emissiveIntensity: 0 })), 0, 1.55, .05, g, false);
+    sh.userData.shop = true; if (!EMISSIVE.find(e => e.m === MATS.shopGlass)) EMISSIVE.push({ m: MATS.shopGlass, base: .012, always: true });
+    mesh(boxM(o.w, .9, .1), mat('sb' + s.bg, { color: lin(s.bg), roughness: .6 }), 0, 3.25, .06, g);
+    const signM = new THREE.MeshStandardMaterial({ map: signTex(s.sign, s.bg, s.fg, s.sub), roughness: .6 }); mesh(new THREE.PlaneGeometry(3.6, .9), signM, 0, 3.25, .12, g, false);
+    if (s.awn) { const a = mesh(boxM(o.w - .6, .06, 1.8), new THREE.MeshStandardMaterial({ map: stripeTex(s.awn[0], s.awn[1]), roughness: .85, side: THREE.DoubleSide }), 0, 2.85, .8, g); a.rotation.x = .32; }
+  }
+  // balcony
+  if (o.floors > 2 && R() < .35 && !o.shop) { const bx = -o.w / 2 + sp * (doorK + .5); mesh(boxM(1.8, .12, .8), trimM, bx, FH + .75, .4, g); for (let i = 0; i < 7; i++) mesh(boxM(.03, .8, .03), MATS.iron || (MATS.iron = new THREE.MeshStandardMaterial({ color: lin('#1e2224'), roughness: .4, metalness: .6 })), bx - .85 + i * .283, FH + 1.2, .78, g, false); mesh(boxM(1.8, .05, .05), MATS.iron, bx, FH + 1.6, .78, g, false); }
+  // collision footprint (rot is multiple of 90°)
+  const c = Math.round(Math.cos(o.rot)), s = Math.round(Math.sin(o.rot));
+  const pts = [[-o.w / 2, 0], [o.w / 2, 0], [-o.w / 2, -o.d], [o.w / 2, -o.d]].map(([lx, lz]) => [o.x + lx * c + lz * s, o.z - lx * s + lz * c]);
+  COLL.push({ minX: Math.min(...pts.map(p => p[0])) - .2, maxX: Math.max(...pts.map(p => p[0])) + .2, minZ: Math.min(...pts.map(p => p[1])) - .2, maxZ: Math.max(...pts.map(p => p[1])) + .2 });
+  return g;
+}
+const WINM = () => MATS.win || (MATS.win = new THREE.MeshStandardMaterial({ map: TEX.window, roughness: .12, metalness: .05, emissive: lin('#ffc27a'), emissiveMap: TEX.winMask, emissiveIntensity: 0 }));
+function addWindow(g, x, y, z, face, w, h, shM, shutters) {
+  const m = mesh(new THREE.PlaneGeometry(w, h), WINM(), x, y, z, g, false, true); if (face < 0) m.rotation.y = Math.PI;
+  m.userData.aLit = R(); // threshold: lit when uWin > aLit
+  mesh(boxM(w + .25, .09, .2), MATS.trim || mat('trim', {}), x, y - h / 2 - .04, z + face * .08, g);
+  if (shutters && R() < .75) for (const s of [-1, 1]) mesh(boxM(w * .48, h, .05), shM, x + s * (w * .5 + w * .26), y, z + face * .03, g);
+}
+
+function buildTown() {
+  buildTextures();
+  // ---- ground / terrain
+  const tg = new THREE.PlaneGeometry(1400, 1400, 160, 160); tg.rotateX(-Math.PI / 2);
+  const tp = tg.attributes.position, tuv = tg.attributes.uv;
+  for (let i = 0; i < tp.count; i++) { const x = tp.getX(i), z = tp.getZ(i); tp.setY(i, terrainH(x, z) - .02); tuv.setXY(i, x, -z); }
+  tg.computeVertexNormals();
+  const ground = mesh(tg, mat('grass', { map: TEX.grass, roughness: .96 }), 0, 0, 0, STATIC, false, true); SOLIDS.push(ground);
+  // ---- plaza (inner rounded rect) and outer sidewalk ring
+  const rsh = (A, r) => { const s = new THREE.Shape(); s.moveTo(-A + r, -A); s.lineTo(A - r, -A); s.absarc(A - r, -A + r, r, -Math.PI / 2, 0); s.lineTo(A, A - r); s.absarc(A - r, A - r, r, 0, Math.PI / 2); s.lineTo(-A + r, A); s.absarc(-A + r, A - r, r, Math.PI / 2, Math.PI); s.lineTo(-A, -A + r); s.absarc(-A + r, -A + r, r, Math.PI, Math.PI * 1.5); return s; };
+  const cobM = mat('cobble', { map: TEX.cobble, roughness: .62, color: lin('#d8d2c8') });
+  const inner = ROAD.A - ROAD.W / 2, outer = ROAD.A + ROAD.W / 2;
+  const pz = mesh(new THREE.ShapeGeometry(rsh(inner, ROAD.RC - ROAD.W / 2), 12), cobM, 0, .14, 0, STATIC, false, true); pz.rotation.x = -Math.PI / 2; SOLIDS.push(pz);
+  const ring = rsh(40, 16); ring.holes.push(rsh(outer, ROAD.RC + ROAD.W / 2));
+  const sw = mesh(new THREE.ShapeGeometry(ring, 12), mat('paver', { map: TEX.stone, color: lin('#b8b2a8'), roughness: .85 }), 0, .1, 0, STATIC, false, true); sw.rotation.x = -Math.PI / 2; SOLIDS.push(sw);
+  // curbs
+  const curbM = mat('curb', { color: lin('#a8a39b'), roughness: .8 });
+  // road ribbon
+  { const N = 240, pos = [], nor = [], uv = [], idx = [];
+    for (let i = 0; i <= N; i++) { const s = i / N * ROAD.L, p = roadAt(s); const nx = p.tz, nz = -p.tx; // right-hand normal
+      for (const k of [-1, 1]) { pos.push(p.x + nx * k * ROAD.W / 2, .04, p.z + nz * k * ROAD.W / 2); nor.push(0, 1, 0); uv.push((k + 1) / 2 * 7, s); }
+      if (i < N) { const a = i * 2; idx.push(a, a + 2, a + 1, a + 1, a + 2, a + 3); } }
+    const rg = new THREE.BufferGeometry(); rg.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); rg.setAttribute('normal', new THREE.Float32BufferAttribute(nor, 3)); rg.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2)); rg.setIndex(idx);
+    const road = mesh(rg, mat('road', { map: TEX.road, roughness: .55, color: lin('#9a9a9a') }), 0, 0, 0, STATIC, false, true); SOLIDS.push(road);
+    // curb strips
+    for (const off of [ROAD.W / 2, -ROAD.W / 2]) for (let i = 0; i < 64; i++) { const s0 = i / 64 * ROAD.L, p = roadAt(s0 + ROAD.L / 128); const c = mesh(boxM(.22, .16, ROAD.L / 64 + .05), curbM, p.x + p.tz * off, .08, p.z - p.tx * off, STATIC, false, true); c.rotation.y = Math.atan2(p.tx, p.tz); }
+  }
+  // puddles (after the rain)
+  const pudM = new THREE.MeshStandardMaterial({ color: lin('#15191c'), roughness: .06, metalness: .0, envMapIntensity: .55 }); MATS.puddle = pudM;
+  [[3, 9, 1.6], [-7, -3, 1.1], [9, -8, 1.3], [-10, 11, .9], [22.3, 6, 1.4], [-4, 23.2, 1.2], [14, 14, .8]].forEach(([x, z, r]) => { const p = mesh(new THREE.CircleGeometry(r, 20), pudM, x, (Math.abs(x) > 19 || Math.abs(z) > 19) ? .05 : .155, z, STATIC, false, true); p.rotation.x = -Math.PI / 2; p.scale.set(1, rr(.5, .8), 1); });
+
+  // ---- houses around the square
+  const FRONT = outer + 2.6; // building front line
+  const sides = [ // origin, rotation, tangent sign
+    { rot: 0, px: 0, pz: -FRONT, tx: 1, tz: 0 }, { rot: Math.PI, px: 0, pz: FRONT, tx: -1, tz: 0 },
+    { rot: -Math.PI / 2, px: FRONT, pz: 0, tx: 0, tz: 1 }, { rot: Math.PI / 2, px: -FRONT, pz: 0, tx: 0, tz: -1 }];
+  const fill = (sd, a0, a1) => { let a = a0; while (a1 - a >= 3.5) { let w = rr(5.2, 7.8); if (a1 - a - w < 3.5) w = a1 - a; if (w > 9.5) w = (a1 - a) / 2; const mid = a + w / 2;
+      makeHouse({ x: sd.px + sd.tx * mid, z: sd.pz + sd.tz * mid, rot: sd.rot, w: w - .04, d: rr(8, 11), floors: Math.floor(rr(2, 4.6)), col: pick(HOUSE_COLS), roofCol: pick(ROOF_COLS), brick: R() < .18, shut: pick(SHUT_COLS) }); a += w; } };
+  const SPECIAL = [null,
+    { w: 9, floors: 2, col: '#e6c9c1', shop: { sign: '小镇邮局', sub: 'POST OFFICE', bg: '#2d5e3a', fg: '#f6f1e2' } },
+    { w: 9, floors: 3, col: '#efe2c4', shop: { sign: '禾田面包', sub: 'BAKERY · 1987', bg: '#6b2e22', fg: '#f7e6c4', awn: ['#b8332e', '#f4ead7'] } },
+    { w: 9, floors: 3, col: '#b6c7d6', shop: { sign: '钟楼咖啡', sub: 'CAFÉ', bg: '#23413a', fg: '#e9e1c8', awn: ['#23413a', '#e9e1c8'] } }];
+  sides.forEach((sd, si) => {
+    if (si === 0) { fill(sd, -21, -6); fill(sd, 6, 21); return; }
+    fill(sd, -21, -4.5); fill(sd, 4.5, 10.3); fill(sd, 14.7, 21); // alley gap 10.3..14.7
+    makeHouse(Object.assign({ x: sd.px, z: sd.pz, rot: sd.rot, d: 10, roofCol: pick(ROOF_COLS), brick: false, shut: pick(SHUT_COLS) }, SPECIAL[si]));
+  });
+  // back rows
+  for (let i = 0; i < 46; i++) {
+    const side = i % 4, t = rr(-38, 38), dist = rr(44, 60);
+    const sd = sides[side]; const x = sd.px / FRONT * dist + sd.tx * t, z = sd.pz / FRONT * dist + sd.tz * t;
+    if (COLL.some(c => c.minX !== undefined && x > c.minX - 5 && x < c.maxX + 5 && z > c.minZ - 5 && z < c.maxZ + 5)) continue;
+    makeHouse({ x, z, rot: sd.rot, w: rr(6, 10), d: rr(7, 10), floors: Math.floor(rr(2, 5.5)), col: pick(HOUSE_COLS), roofCol: pick(ROOF_COLS), brick: R() < .25, shut: pick(SHUT_COLS), shutters: R() < .5 });
+  }
+  buildTower(FRONT);
+  buildFountain();
+  buildProps(FRONT);
+  buildLandscape();
+}
+
+const CLOCK = { hands: [] };
+let FLAG;
+function buildTower(FRONT) {
+  const g = new THREE.Group(); g.position.set(0, 0, -FRONT - 4.2); STATIC.add(g);
+  const sm = mat('stone', { map: TEX.stone, color: lin('#d9d0bf'), roughness: .9 });
+  const body = mesh(boxM(8.4, 22, 8.4), sm, 0, 11, 0, g); SOLIDS.push(body);
+  mesh(boxM(9, .6, 9), mat('trim', {}), 0, 14.5, 0, g); mesh(boxM(9, .6, 9), MATS.trim, 0, 22.2, 0, g);
+  mesh(boxM(7.6, 5, 7.6), sm, 0, 25, 0, g); // belfry
+  for (const [x, z, ry] of [[0, 3.82, 0], [0, -3.82, 0], [3.82, 0, Math.PI / 2], [-3.82, 0, Math.PI / 2]]) { const o = mesh(boxM(2.2, 3.2, .1), mat('dark', { color: lin('#15171a'), roughness: 1 }), x, 25.2, z, g, false); o.rotation.y = ry; }
+  const roof = mesh(new THREE.ConeGeometry(6.4, 8, 4), mat('copper', { color: lin('#5f8f7c'), roughness: .5, metalness: .3 }), 0, 31.5, 0, g); roof.rotation.y = Math.PI / 4;
+  mesh(new THREE.CylinderGeometry(.05, .05, 3, 6), MATS.iron || (MATS.iron = new THREE.MeshStandardMaterial({ color: lin('#1e2224'), roughness: .4, metalness: .6 })), 0, 36.8, 0, g);
+  // flag (waves in vertex shader)
+  const fg = new THREE.PlaneGeometry(1.8, 1.1, 16, 8); fg.translate(.9, 0, 0);
+  const fm = new THREE.MeshStandardMaterial({ color: lin('#c9373a'), roughness: .8, side: THREE.DoubleSide });
+  fm.onBeforeCompile = sh => { sh.uniforms.uTime = U.uTime; sh.vertexShader = 'uniform float uTime;\n' + sh.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\n float fx = position.x; transformed.z += sin(fx*3.1 - uTime*6.0)*0.14*fx + sin(fx*5.3-uTime*9.0+position.y*2.)*0.04*fx;'); };
+  fm.customProgramCacheKey = () => 'flag';
+  FLAG = mesh(fg, fm, 0, 37.7, 0, DYN); FLAG.position.set(0, 37.7, -FRONT - 4.2);
+  // clock faces with hands (hands are dynamic)
+  const cm = new THREE.MeshStandardMaterial({ map: TEX.clock, roughness: .6, emissive: lin('#fff1cc'), emissiveMap: TEX.clock, emissiveIntensity: 0 }); EMISSIVE.push({ m: cm, base: .004, night: true });
+  const handM = mat('hand', { color: lin('#141414'), roughness: .5, metalness: .4 });
+  for (const [x, z, ry] of [[0, 4.22, 0], [4.22, 0, Math.PI / 2], [-4.22, 0, -Math.PI / 2]]) {
+    const f = mesh(new THREE.CircleGeometry(1.75, 40), cm, x, 18.2, z, g, false); f.rotation.y = ry;
+    const hg = new THREE.Group(); hg.position.set(x, 18.2, z); hg.rotation.y = ry; g.remove; // container is dynamic
+    const wp = new THREE.Vector3(x, 18.2, z).add(g.position);
+    const hp = new THREE.Group(); hp.position.copy(wp); hp.rotation.y = ry; DYN.add(hp); hp.translateZ(.05);
+    const hh = new THREE.Group(), mh = new THREE.Group(); hp.add(hh); hp.add(mh);
+    mesh(boxM(.14, 1.0, .04), handM, 0, .42, 0, hh, false); mesh(boxM(.09, 1.45, .04), handM, 0, .62, .03, mh, false);
+    CLOCK.hands.push({ hh, mh });
+  }
+  COLL.push({ minX: -4.5, maxX: 4.5, minZ: -FRONT - 8.6, maxZ: -FRONT + .2 });
+  CLOCK.pos = new THREE.Vector3(0, 18.2, -FRONT - 4.2 + 4.22);
+}
+
+let WATER;
+const FOUNTAIN = { r: 4.3 };
+function buildFountain() {
+  const sm = mat('fstone', { map: TEX.stone, color: lin('#e3dccd'), roughness: .8 });
+  const pts = [[3.6, .14], [4.3, .14], [4.4, .55], [4.25, .72], [4.0, .72], [3.9, .5]].map(p => new THREE.Vector2(p[0], p[1]));
+  const basin = mesh(new THREE.LatheGeometry(pts, 48), sm, 0, 0, 0, STATIC); SOLIDS.push(basin);
+  const wm = MATS.water || (MATS.water = new THREE.MeshStandardMaterial({ color: lin('#1b3440'), roughness: .04, metalness: .0 }));
+  const wd = mesh(new THREE.CircleGeometry(3.95, 48), wm, 0, .52, 0, STATIC, false); wd.rotation.x = -Math.PI / 2;
+  mesh(new THREE.CylinderGeometry(.38, .55, 1.7, 20), sm, 0, 1.2, 0, STATIC);
+  const bowl = [[0, 1.8], [1.45, 1.86], [1.52, 2.05], [1.35, 2.1], [0, 2.0]].map(p => new THREE.Vector2(p[0], p[1]));
+  mesh(new THREE.LatheGeometry(bowl, 36), sm, 0, 0, 0, STATIC);
+  mesh(new THREE.CylinderGeometry(.14, .22, .8, 12), sm, 0, 2.45, 0, STATIC);
+  mesh(new THREE.SphereGeometry(.2, 12, 8), sm, 0, 2.9, 0, STATIC);
+  COLL.push({ cx: 0, cz: 0, r: 4.7 });
+  // water particles — position is a pure function of uTime (so shutter sub-frames are exact)
+  const N = 2600, seed = new Float32Array(N * 4);
+  for (let i = 0; i < N; i++) { seed[i * 4] = R(); seed[i * 4 + 1] = R(); seed[i * 4 + 2] = R(); seed[i * 4 + 3] = i < 1500 ? 0 : 1; }
+  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array(N * 3), 3)); g.setAttribute('aSeed', new THREE.BufferAttribute(seed, 4));
+  const m = new THREE.ShaderMaterial({ transparent: true, depthWrite: false, uniforms: { uTime: U.uTime, uPx: { value: 600 }, uCol: { value: new THREE.Vector3(1, 1, 1) } },
+    vertexShader: `attribute vec4 aSeed; uniform float uTime; uniform float uPx; varying float vA;
+      void main(){ float T = aSeed.w < .5 ? 1.05 : .55; float age = fract(uTime/T + aSeed.x); float th = aSeed.y*6.2831853; vec3 p;
+        if(aSeed.w<.5){ vec3 v = vec3(cos(th)*(1.35+aSeed.z*.35), 3.1+aSeed.z*.5, sin(th)*(1.35+aSeed.z*.35)); float t=age*T; p = vec3(0.,2.95,0.) + v*t + vec3(0.,-4.9,0.)*t*t; }
+        else { float t=age*T; vec3 o=vec3(cos(th)*1.5,2.02,sin(th)*1.5); vec3 v=vec3(cos(th)*.55,.2,sin(th)*.55); p = o + v*t + vec3(0.,-4.9,0.)*t*t; }
+        if(p.y<.5){ p.y=-10.; }
+        vA = 1.0 - age*.4;
+        vec4 mv = modelViewMatrix*vec4(p,1.); gl_Position = projectionMatrix*mv; gl_PointSize = clamp(0.035*uPx/max(-mv.z,.1), 1.0, 24.0); }`,
+    fragmentShader: `uniform vec3 uCol; varying float vA; void main(){ vec2 c=gl_PointCoord-.5; float d=dot(c,c); if(d>.25) discard; gl_FragColor=vec4(uCol, vA*(1.-d*3.)*.8); }` });
+  WATER = new THREE.Points(g, m); WATER.frustumCulled = false; DYN.add(WATER);
+}
+
+const LAMPS = []; let BULBS;
+function buildProps(FRONT) {
+  const iron = MATS.iron;
+  const lampM = emat('lamp', lin('#ffd9a0'), .9, { nightOnly: true, color: lin('#fff6e0') });
+  // street lamps around the plaza edge
+  const lampPos = []; for (const s of [-1, 1]) for (const t of [-11, 0, 11]) { lampPos.push([s * 18, t], [t, s * 18]); }
+  lampPos.forEach(([x, z], i) => { mesh(new THREE.CylinderGeometry(.07, .1, 4.2, 8), iron, x, 2.25, z, STATIC); mesh(new THREE.CylinderGeometry(.18, .22, .3, 8), iron, x, .3, z, STATIC); mesh(new THREE.BoxGeometry(.38, .5, .38), lampM, x, 4.55, z, STATIC, false); mesh(new THREE.ConeGeometry(.36, .3, 4), iron, x, 4.95, z, STATIC).rotation.y = Math.PI / 4;
+    COLL.push({ cx: x, cz: z, r: .3 }); LAMPS.push(new THREE.Vector3(x, 4.5, z)); });
+  // point lights on a subset
+  LAMPS.lights = [];
+  [[-18, 0], [18, 0], [0, 18], [-18, -11], [18, 11], [0, -18]].forEach(([x, z]) => { const L = new THREE.PointLight(0xffd29a, 0, 26, 2); L.position.set(x, 4.3, z); scene.add(L); LAMPS.lights.push(L); });
+  // benches
+  const woodM = mat('bench', { map: TEX.wood, color: lin('#b07a4c'), roughness: .8 });
+  for (let i = 0; i < 4; i++) { const a = i / 4 * TAU + Math.PI / 4, x = Math.cos(a) * 9.5, z = Math.sin(a) * 9.5; const b = new THREE.Group(); b.position.set(x, .14, z); b.rotation.y = -a - Math.PI / 2; STATIC.add(b);
+    mesh(boxM(1.8, .06, .45), woodM, 0, .45, 0, b); mesh(boxM(1.8, .4, .05), woodM, 0, .75, -.22, b); for (const s of [-.8, .8]) mesh(boxM(.06, .45, .45), iron, s, .22, 0, b); COLL.push({ cx: x, cz: z, r: .8 }); }
+  // café terrace: tables, chairs, parasols, string lights
+  const cafeX = -14.5;
+  for (const z of [-5, 0, 5]) { const g = new THREE.Group(); g.position.set(cafeX, .14, z); STATIC.add(g);
+    mesh(new THREE.CylinderGeometry(.42, .42, .04, 20), mat('tabletop', { color: lin('#e9e2d2'), roughness: .5 }), 0, .74, 0, g); mesh(new THREE.CylinderGeometry(.04, .04, .72, 8), iron, 0, .37, 0, g);
+    for (const s of [-1, 1]) { const ch = new THREE.Group(); ch.position.set(s * .7, 0, 0); ch.rotation.y = s > 0 ? -Math.PI / 2 : Math.PI / 2; g.add(ch); mesh(boxM(.42, .04, .42), MATS.bench, 0, .45, 0, ch); mesh(boxM(.42, .45, .04), MATS.bench, 0, .7, -.2, ch); for (const q of [[-.18, -.18], [.18, -.18], [-.18, .18], [.18, .18]]) mesh(boxM(.03, .45, .03), iron, q[0], .22, q[1], ch, false); }
+    mesh(new THREE.CylinderGeometry(.025, .025, 2.4, 6), iron, 0, 1.2, 0, g); const um = mesh(new THREE.ConeGeometry(1.4, .5, 8, 1, true), new THREE.MeshStandardMaterial({ map: stripeTex('#23413a', '#e9e1c8'), roughness: .8, side: THREE.DoubleSide }), 0, 2.45, 0, g); um.userData.x = 1;
+    COLL.push({ cx: cafeX, cz: z, r: 1.1 }); }
+  // string lights (instanced glowing bulbs)
+  const posts = [[-17.2, -8], [-17.2, 8], [-12, -8], [-12, 8]];
+  posts.forEach(([x, z]) => mesh(new THREE.CylinderGeometry(.05, .05, 3.6, 6), iron, x, 1.9, z, STATIC));
+  const spans = [[posts[0], posts[1]], [posts[2], posts[3]], [posts[0], posts[2]], [posts[1], posts[3]]];
+  const bulbM = emat('bulb', lin('#ffc774'), 1.6, { nightOnly: true, color: lin('#fff2d8') });
+  const nb = 18; BULBS = new THREE.InstancedMesh(new THREE.SphereGeometry(.06, 8, 6), bulbM, spans.length * nb); let bi = 0; const M4 = new THREE.Matrix4();
+  spans.forEach(([a, b]) => { for (let i = 0; i < nb; i++) { const t = (i + .5) / nb; const x = lerp(a[0], b[0], t), z = lerp(a[1], b[1], t), y = 3.6 - Math.sin(t * Math.PI) * .55; M4.makeTranslation(x, y, z); BULBS.setMatrixAt(bi++, M4); } });
+  STATIC.add(BULBS);
+  // mailbox + planters + trees
+  const red = mat('mailred', { color: lin('#b8232a'), roughness: .45, metalness: .2 });
+  mesh(new THREE.CylinderGeometry(.28, .28, 1.05, 16), red, 4, .62, FRONT - 1.4, STATIC); mesh(new THREE.SphereGeometry(.28, 16, 8, 0, TAU, 0, Math.PI / 2), red, 4, 1.15, FRONT - 1.4, STATIC); COLL.push({ cx: 4, cz: FRONT - 1.4, r: .4 });
+  for (const [x, z] of [[-14, -14], [14, -14], [14, 14], [-14, 14], [-30, -30], [30, -30], [30, 30], [-30, 30], [-33, 12], [33, -16]]) makeTree(x, z, rr(.9, 1.25));
+  for (let i = 0; i < 70; i++) { const a = R() * TAU, d = rr(66, 240), x = Math.cos(a) * d, z = Math.sin(a) * d; makeTree(x, z, rr(.8, 1.6), terrainH(x, z)); }
+  const flowerCols = ['#e0485a', '#f2c230', '#f6f0e8', '#b066c9'];
+  for (const [x, z] of [[-6, 16.5], [6, 16.5], [-6, -16.5], [6, -16.5]]) { mesh(boxM(3, .5, .8), mat('planter', { map: TEX.wood, color: lin('#7a5536'), roughness: .9 }), x, .39, z, STATIC); for (let i = 0; i < 14; i++) mesh(new THREE.IcosahedronGeometry(.12, 0), mat('fl' + i % 4, { color: lin(flowerCols[i % 4]), roughness: .7 }), x + rr(-1.35, 1.35), .72, z + rr(-.3, .3), STATIC, false); COLL.push({ minX: x - 1.6, maxX: x + 1.6, minZ: z - .5, maxZ: z + .5 }); }
+}
+function makeTree(x, z, s = 1, y0 = 0) {
+  const trunk = mat('trunk', { color: lin('#5a4230'), roughness: .95 });
+  mesh(new THREE.CylinderGeometry(.14 * s, .24 * s, 3.2 * s, 7), trunk, x, y0 + 1.6 * s, z, STATIC);
+  const leafM = mat('leaf' + Math.floor(R() * 3), { color: lin(pick(['#4f6b2f', '#5d7a34', '#6b7f35'])), roughness: .85, flatShading: true });
+  for (let i = 0; i < 4; i++) { const ge = new THREE.IcosahedronGeometry(rr(1.1, 1.6) * s, 1); const p = ge.attributes.position; for (let k = 0; k < p.count; k++) { const f = 1 + (h2(p.getX(k) * 3 + x, p.getZ(k) * 3 + z) - .5) * .35; p.setXYZ(k, p.getX(k) * f, p.getY(k) * f * .85, p.getZ(k) * f); } ge.computeVertexNormals(); mesh(ge, leafM, x + rr(-.8, .8) * s, y0 + (3.4 + rr(-.2, 1.4)) * s, z + rr(-.8, .8) * s, STATIC); }
+  if (y0 === 0) COLL.push({ cx: x, cz: z, r: .45 * s });
+}
+let WINDMILL;
+function buildLandscape() {
+  // distant mountains
+  const mm = mat('mtn', { color: lin('#6f7f86'), roughness: 1, flatShading: true });
+  for (let i = 0; i < 16; i++) { const a = i / 16 * TAU + rr(-.1, .1), d = rr(520, 640); const h = rr(60, 150); const c = mesh(new THREE.ConeGeometry(rr(90, 170), h, 7), mm, Math.cos(a) * d, h / 2 - 8, Math.sin(a) * d, STATIC, false, false); c.rotation.y = R() * 3; }
+  // windmill on the eastern hill
+  const x = 92, z = -36, y = terrainH(x, z);
+  const wm = mat('millw', { map: TEX.plaster, color: lin('#efe6d6'), roughness: .9 });
+  mesh(new THREE.CylinderGeometry(2.2, 3.4, 12, 12), wm, x, y + 6, z, STATIC); const cap = mesh(new THREE.ConeGeometry(2.8, 3, 12), mat('rf#6c5a52', {}), x, y + 13.4, z, STATIC);
+  WINDMILL = new THREE.Group(); WINDMILL.position.set(x - 2.6, y + 11.5, z + .6); WINDMILL.rotation.y = -Math.PI / 2 + .35; DYN.add(WINDMILL);
+  const bm = mat('blade', { map: TEX.wood, color: lin('#d8cdb8'), roughness: .8 });
+  mesh(new THREE.CylinderGeometry(.35, .35, .8, 12), MATS.iron, 0, 0, 0, WINDMILL).rotation.x = Math.PI / 2;
+  for (let i = 0; i < 4; i++) { const b = new THREE.Group(); b.rotation.z = i / 4 * TAU; WINDMILL.add(b); mesh(boxM(.25, 9, .18), bm, 0, 4.8, 0, b); mesh(boxM(1.5, 7.6, .06), bm, .85, 5.2, 0, b); }
+  WINDMILL.userData.pos = new THREE.Vector3(x - 2.6, y + 11.5, z + .6);
+}
+
+/* ---------------- characters ---------------- */
+function limb(r1, r2, len, m, parent, x, y, z) { const pv = new THREE.Group(); pv.position.set(x, y, z); parent.add(pv); const o = mesh(new THREE.CylinderGeometry(r1, r2, len, 10), m, 0, -len / 2, 0, pv); return pv; }
+function makePerson(o) {
+  const root = new THREE.Group(); const body = new THREE.Group(); root.add(body);
+  const s = o.h / 1.62; body.scale.setScalar(s);
+  const skin = mat('skin' + o.skin, { color: lin(o.skin), roughness: .6 });
+  const coat = mat('coat' + o.coat, { color: lin(o.coat), roughness: o.shiny ? .35 : .8 });
+  const pants = mat('pants' + o.pants, { color: lin(o.pants), roughness: .85 });
+  const shoe = mat('shoe' + o.shoe, { color: lin(o.shoe), roughness: .6 });
+  const P = { root, body };
+  P.legL = limb(.075, .06, .44, pants, body, -.095, .9, 0); P.legR = limb(.075, .06, .44, pants, body, .095, .9, 0);
+  for (const L of [P.legL, P.legR]) { const knee = limb(.06, .05, .43, pants, L, 0, -.44, 0); mesh(boxM(.11, .08, .24), shoe, 0, -.47, .05, knee); L.knee = knee; }
+  const torso = new THREE.Group(); torso.position.y = .9; body.add(torso); P.torso = torso;
+  mesh(new THREE.CylinderGeometry(.17, .19, .58, 14), coat, 0, .3, 0, torso);
+  if (o.long) mesh(new THREE.CylinderGeometry(.19, .26, .36, 14, 1, true), coat, 0, -.12, 0, torso).material.side = THREE.DoubleSide;
+  mesh(new THREE.SphereGeometry(.17, 14, 8, 0, TAU, 0, Math.PI / 2), coat, 0, .58, 0, torso);
+  mesh(new THREE.CylinderGeometry(.05, .055, .1, 8), skin, 0, .66, 0, torso);
+  const head = new THREE.Group(); head.position.y = .7; torso.add(head); P.head = head;
+  const hd = mesh(new THREE.SphereGeometry(.105, 18, 14), skin, 0, .11, 0, head); hd.scale.set(.95, 1.1, 1);
+  const hair = mat('hair' + o.hair, { color: lin(o.hair), roughness: .7 });
+  mesh(new THREE.SphereGeometry(.113, 18, 12, 0, TAU, 0, Math.PI * .55), hair, 0, .125, -.008, head).scale.set(.98, 1.12, 1.02);
+  if (o.bun) mesh(new THREE.SphereGeometry(.055, 10, 8), hair, 0, .2, -.09, head);
+  if (o.longHair) mesh(new THREE.CylinderGeometry(.1, .085, .24, 12, 1, true), hair, 0, .02, -.03, head).material.side = THREE.DoubleSide;
+  const eyeM = mat('eye', { color: lin('#161413'), roughness: .2 });
+  for (const sx of [-.036, .036]) mesh(new THREE.SphereGeometry(.012, 8, 6), eyeM, sx, .125, .094, head, false);
+  mesh(new THREE.SphereGeometry(.014, 6, 6), skin, 0, .1, .105, head, false);
+  mesh(new THREE.BoxGeometry(.03, .006, .01), mat('lip', { color: lin('#9c4a45'), roughness: .5 }), 0, .065, .099, head, false);
+  if (o.cap) { mesh(new THREE.CylinderGeometry(.11, .115, .07, 16), mat('cap' + o.cap, { color: lin(o.cap), roughness: .6 }), 0, .21, 0, head); mesh(boxM(.16, .015, .09), MATS['cap' + o.cap], 0, .18, .1, head); }
+  if (o.scarf) { const sm = mat('scarf' + o.scarf, { color: lin(o.scarf), roughness: .9 }); mesh(new THREE.TorusGeometry(.085, .04, 8, 16), sm, 0, .62, 0, torso).rotation.x = Math.PI / 2; const tail = new THREE.Group(); tail.position.set(.06, .6, .09); torso.add(tail); mesh(boxM(.07, .3, .025), sm, 0, -.15, 0, tail); P.scarf = tail; }
+  P.armL = limb(.05, .045, .3, coat, torso, -.215, .55, 0); P.armR = limb(.05, .045, .3, coat, torso, .215, .55, 0);
+  for (const A of [P.armL, P.armR]) { const el = limb(.045, .04, .27, coat, A, 0, -.3, 0); mesh(new THREE.SphereGeometry(.045, 8, 6), skin, 0, -.3, 0, el); A.el = el; }
+  if (o.bag) { mesh(boxM(.08, .28, .34), mat('bag', { color: lin('#5b3a22'), roughness: .7 }), -.24, .15, .02, torso); }
+  root.traverse(c => { if (c.isMesh) { c.castShadow = true; c.receiveShadow = true; } });
+  return P;
+}
+const CHAR = {};
+function buildCharacters() {
+  // 阿禾 — protagonist waiting by the fountain
+  const A = makePerson({ h: 1.62, skin: '#e9c4a4', coat: '#e2a93b', pants: '#2d3440', shoe: '#f1efe9', hair: '#2a1d17', scarf: '#b3262c', bun: true, long: true, shiny: true });
+  A.root.position.set(-2.1, .14, 5.7); A.root.rotation.y = .25; DYN.add(A.root); CHAR.ahe = A;
+  const letter = mesh(boxM(.2, .13, .01), mat('paper', { color: lin('#f4efe2'), roughness: .8 }), 0, -.29, .06, A.armR.el, false); letter.rotation.x = -.6;
+  A.armR.rotation.x = -.6; A.armR.el.rotation.x = -.9;
+  // postman on a bicycle
+  const P = makePerson({ h: 1.72, skin: '#d9ad8a', coat: '#2f4e7e', pants: '#26334d', shoe: '#1b1b1b', hair: '#3a2a20', cap: '#2f4e7e', bag: true });
+  const bike = new THREE.Group(); DYN.add(bike); bike.add(P.root); CHAR.post = P; CHAR.bike = bike;
+  const frameM = mat('bikeframe', { color: lin('#2f6f5e'), roughness: .35, metalness: .4 });
+  const wheelM = mat('tyre', { color: lin('#141414'), roughness: .8 });
+  const spokeM = mat('spoke', { color: lin('#b9bdc1'), roughness: .3, metalness: .8 });
+  bike.wheels = [];
+  for (const zz of [-.52, .52]) { const w = new THREE.Group(); w.position.set(0, .34, zz); bike.add(w); const t = mesh(new THREE.TorusGeometry(.33, .025, 8, 28), wheelM, 0, 0, 0, w); t.rotation.y = Math.PI / 2; for (let i = 0; i < 8; i++) { const sp = mesh(new THREE.BoxGeometry(.008, .64, .008), spokeM, 0, 0, 0, w, false); sp.rotation.x = i / 8 * Math.PI; } bike.wheels.push(w); }
+  const bar = (x1, y1, z1, x2, y2, z2) => { const a = new THREE.Vector3(x1, y1, z1), b = new THREE.Vector3(x2, y2, z2); const l = a.distanceTo(b); const m = mesh(new THREE.CylinderGeometry(.018, .018, l, 6), frameM, 0, 0, 0, bike); m.position.copy(a).add(b).multiplyScalar(.5); m.lookAt(b); m.rotateX(Math.PI / 2); };
+  bar(0, .34, -.52, 0, .55, 0); bar(0, .55, 0, 0, .34, .52); bar(0, .55, 0, 0, .95, -.08); bar(0, .95, -.08, 0, .95, .42); bar(0, .95, .42, 0, .34, .52); bar(-.25, 1.05, .45, .25, 1.05, .45);
+  mesh(boxM(.34, .2, .26), mat('basket', { map: TEX.wood, color: lin('#a57a45'), roughness: .9 }), 0, 1.0, .68, bike);
+  for (let i = 0; i < 3; i++) mesh(boxM(.2, .02, .14), MATS.paper, rr(-.05, .05), 1.12 + i * .02, .68, bike, false).rotation.y = rr(-.4, .4);
+  P.root.position.set(0, .1, -.1); P.torso.rotation.x = .38; P.armL.rotation.x = -1.05; P.armR.rotation.x = -1.05; P.armL.rotation.z = -.15; P.armR.rotation.z = .15;
+  P.legL.rotation.x = -1.1; P.legR.rotation.x = -1.1;
+  bike.traverse(c => { if (c.isMesh) c.castShadow = true; });
+  // baker at the bakery door
+  const B = makePerson({ h: 1.7, skin: '#e3b894', coat: '#f2efe8', pants: '#3b3b3b', shoe: '#222', hair: '#6f6a64', cap: '#f5f3ee' });
+  B.root.position.set(28.2, .1, 2.2); B.root.rotation.y = -Math.PI / 2; DYN.add(B.root); CHAR.baker = B;
+  // dog
+  const D = new THREE.Group(); DYN.add(D); CHAR.dog = D;
+  const fur = mat('fur', { color: lin('#c98a4b'), roughness: .9 }), white = mat('furw', { color: lin('#f1e8dc'), roughness: .9 });
+  const db = mesh(new THREE.SphereGeometry(.16, 12, 10), fur, 0, .32, 0, D); db.scale.set(1, .85, 2.0);
+  const dh = new THREE.Group(); dh.position.set(0, .45, .3); D.add(dh); mesh(new THREE.SphereGeometry(.12, 12, 10), fur, 0, 0, 0, dh); mesh(new THREE.SphereGeometry(.06, 8, 8), white, 0, -.03, .1, dh).scale.set(1, .8, 1.3);
+  for (const s of [-1, 1]) mesh(new THREE.ConeGeometry(.045, .12, 6), fur, s * .07, .11, -.01, dh);
+  D.legs = []; for (const [x, z] of [[-.08, .2], [.08, .2], [-.08, -.2], [.08, -.2]]) { const l = limb(.03, .028, .22, white, D, x, .24, z); D.legs.push(l); }
+  D.tail = limb(.02, .012, .2, fur, D, 0, .38, -.3); D.tail.rotation.x = -2.3; D.head = dh;
+  D.traverse(c => { if (c.isMesh) c.castShadow = true; });
+  // pigeons
+  CHAR.birds = [];
+  const bm = mat('pigeon', { color: lin('#7c8088'), roughness: .8 });
+  for (let i = 0; i < 14; i++) { const b = new THREE.Group(); DYN.add(b); mesh(new THREE.SphereGeometry(.09, 8, 6), bm, 0, 0, 0, b).scale.set(.8, .7, 1.6); mesh(new THREE.SphereGeometry(.05, 8, 6), bm, 0, .05, .13, b); const wl = new THREE.Group(), wr = new THREE.Group(); b.add(wl); b.add(wr); mesh(boxM(.26, .01, .12), bm, -.13, 0, 0, wl); mesh(boxM(.26, .01, .12), bm, .13, 0, 0, wr); b.wl = wl; b.wr = wr; b.ph = R() * TAU; b.rad = rr(9, 15); b.hgt = rr(9, 14); b.spd = rr(.35, .5) * (R() < .5 ? 1 : 1); CHAR.birds.push(b); }
+  // cars
+  CHAR.cars = [];
+  const carCols = ['#2d8c8c', '#e8dcc2', '#b8322e', '#35475f'];
+  const lanes = [{ lane: 1.7, dir: 1, v: 8.5, s0: 0 }, { lane: 1.7, dir: 1, v: 8.5, s0: ROAD.L * .5 }, { lane: -1.7, dir: -1, v: 7.2, s0: ROAD.L * .25 }];
+  lanes.forEach((L, i) => { const c = new THREE.Group(); DYN.add(c); const paint = mat('car' + i, { color: lin(carCols[i]), roughness: .28, metalness: .45 });
+    mesh(boxM(1.72, .62, 4.0), paint, 0, .6, 0, c); const cab = mesh(boxM(1.5, .55, 2.1), paint, 0, 1.17, -.2, c);
+    mesh(boxM(1.52, .44, 2.0), mat('glass', { color: lin('#141b22'), roughness: .05, metalness: .2 }), 0, 1.18, -.2, c, false).scale.set(1.01, 1, 1.01);
+    const hl = emat('headl', lin('#fff4dc'), .6, { color: lin('#ffffff') }), tl = emat('taill', lin('#ff2a18'), .25, { color: lin('#550000') });
+    for (const s of [-1, 1]) { mesh(boxM(.34, .14, .05), hl, s * .62, .7, 2.01, c, false); mesh(boxM(.34, .12, .05), tl, s * .62, .72, -2.01, c, false); }
+    c.wheels = []; for (const [x, z] of [[-.84, 1.3], [.84, 1.3], [-.84, -1.3], [.84, -1.3]]) { const w = mesh(new THREE.CylinderGeometry(.32, .32, .22, 16), MATS.tyre, x, .32, z, c); w.rotation.z = Math.PI / 2; c.wheels.push(w); }
+    c.glows = []; for (const [x, z, col, sc] of [[-.62, 2.2, 0xfff1d8, 1.4], [.62, 2.2, 0xfff1d8, 1.4], [-.62, -2.15, 0xff3a22, .7], [.62, -2.15, 0xff3a22, .7]]) { const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: TEX.glow, color: col, blending: THREE.AdditiveBlending, depthWrite: false, transparent: true })); sp.position.set(x, .72, z); sp.scale.setScalar(sc); sp.userData.base = new THREE.Color(col).convertSRGBToLinear(); sp.userData.k = col === 0xff3a22 ? .12 : .35; c.add(sp); c.glows.push(sp); }
+    c.traverse(o => { if (o.isMesh) o.castShadow = true; });
+    Object.assign(c.userData, L); CHAR.cars.push(c); });
+}
+
+/* ---------------- world animation: a pure function of time ---------------- */
+const _v = new THREE.Vector3();
+let worldT = -1, worldTod = -1;
+function setWorldTime(t, tod) {
+  if (t === worldT && tod === worldTod) return; worldT = t; worldTod = tod;
+  U.uTime.value = t;
+  // clock hands follow time of day
+  const hrs = tod % 12, mins = (tod % 1) * 60;
+  for (const h of CLOCK.hands) { h.hh.rotation.z = -hrs / 12 * TAU; h.mh.rotation.z = -mins / 60 * TAU; }
+  if (WINDMILL) WINDMILL.children.forEach((b, i) => { if (i > 0) b.rotation.z = (i - 1) / 4 * TAU - t * 2.6; });
+  // 阿禾: waits, glances at the letter, turns to look at the clock tower
+  const A = CHAR.ahe; if (A) { const c = t % 16; const look = smooth(clamp((c - 9) / 1.2, 0, 1)) * (1 - smooth(clamp((c - 13) / 1.2, 0, 1)));
+    const down = smooth(clamp((c - 3) / .8, 0, 1)) * (1 - smooth(clamp((c - 5.5) / .8, 0, 1)));
+    A.head.rotation.y = look * 1.15 + Math.sin(t * .4) * .08; A.torso.rotation.y = look * .45; A.head.rotation.x = down * .45 - look * .1;
+    A.torso.scale.y = 1 + Math.sin(t * 1.6) * .008; A.body.position.x = Math.sin(t * .23) * .015;
+    if (A.scarf) A.scarf.rotation.x = Math.sin(t * 2.3) * .12 + Math.sin(t * 5.1) * .04; A.scarf && (A.scarf.rotation.z = Math.sin(t * 1.7) * .1);
+    const wave = CHAR.waveAmt || 0; A.armL.rotation.z = -wave * 2.5; A.armL.el.rotation.x = -wave * .6; }
+  // postman: circles the square, waves to 阿禾 when passing
+  const bk = CHAR.bike; if (bk) { const r = 12.5, w = 3.6 / r, a = -t * w + 1.2; const x = Math.cos(a) * r, z = Math.sin(a) * r; bk.position.set(x, .14, z); bk.rotation.y = Math.atan2(Math.sin(a), -Math.cos(a)); bk.rotation.z = .08;
+    bk.wheels.forEach(wh => wh.rotation.x = -t * 3.6 / .34); const P = CHAR.post, cr = t * 3.6 / .34 * .5;
+    P.legL.rotation.x = -1.2 + Math.sin(cr) * .45; P.legR.rotation.x = -1.2 - Math.sin(cr) * .45; P.legL.knee.rotation.x = 1.1 - Math.cos(cr) * .5; P.legR.knee.rotation.x = 1.1 + Math.cos(cr) * .5;
+    const d = Math.hypot(x - A.root.position.x, z - A.root.position.z); const wave = smooth(clamp((11 - d) / 3, 0, 1)); CHAR.waveAmt = wave;
+    P.armR.rotation.x = -1.05 - wave * 1.6; P.armR.rotation.z = .15 + wave * .6; P.head.rotation.y = wave * .9; }
+  // dog: figure-eight around the fountain
+  const D = CHAR.dog; if (D) { const k = t * .42; const x = Math.sin(k) * 8.5, z = Math.sin(k * 2) * 4.2 + 1; const dx = Math.cos(k) * 8.5, dz = Math.cos(k * 2) * 8.4; D.position.set(x, .14, z); D.rotation.y = Math.atan2(dx, dz);
+    D.legs.forEach((l, i) => l.rotation.x = Math.sin(t * 13 + (i % 2 ? 0 : Math.PI) + (i > 1 ? Math.PI / 2 : 0)) * .7); D.tail.rotation.z = Math.sin(t * 16) * .6; D.head.rotation.x = Math.sin(t * 6.5) * .08; D.position.y = .14 + Math.abs(Math.sin(t * 13)) * .03; }
+  // baker idles and wipes his hands
+  const B = CHAR.baker; if (B) { B.armR.rotation.x = -.9 + Math.sin(t * 3.1) * .25; B.armL.rotation.x = -.9 - Math.sin(t * 3.1) * .25; B.armR.el.rotation.x = -.8; B.armL.el.rotation.x = -.8; B.head.rotation.y = Math.sin(t * .31) * .5; }
+  // pigeons
+  CHAR.birds && CHAR.birds.forEach((b, i) => { const a = b.ph + t * b.spd; b.position.set(4 + Math.cos(a) * b.rad, b.hgt + Math.sin(t * .7 + i) * .8, -6 + Math.sin(a) * b.rad); b.rotation.y = -a; b.rotation.z = -.35; const f = Math.sin(t * 15 + i) * .8; b.wl.rotation.z = f; b.wr.rotation.z = -f; });
+  // cars
+  CHAR.cars && CHAR.cars.forEach(c => { const L = c.userData; const s = L.s0 + L.dir * L.v * t; const p = roadAt(s); const nx = p.tz, nz = -p.tx; c.position.set(p.x + nx * L.lane, .04, p.z + nz * L.lane); c.rotation.y = Math.atan2(p.tx * L.dir, p.tz * L.dir); c.wheels.forEach(w => w.rotation.x = s / .32); });
+}
+function aheHead(out) { CHAR.ahe.head.updateWorldMatrix(true, false); return out.set(0, .12, .02).applyMatrix4(CHAR.ahe.head.matrixWorld); }
+
+/* =====================================================================
+   PART 3 — light, sky, baking, render pipeline, camera simulation
+   ===================================================================== */
+const EV0 = 13.9;             // calibration: render value → scene luminance
+const WORLD = { t: 30, tod: 18.6, speed: 1, frozen: false, sceneScale: 1, logAmb: 0, sunEl: 0, night: 0, lamps: 0, fog: 1, dirty: true };
+let envRT = null;
+
+/* ---------------- sky ---------------- */
+const SKY_U = { uSun: { value: new THREE.Vector3(0, 1, 0) }, uZen: { value: new THREE.Color() }, uHor: { value: new THREE.Color() }, uSunCol: { value: new THREE.Color() }, uScale: { value: 1 }, uNight: { value: 0 }, uGround: { value: new THREE.Color() } };
+const skyMat = new THREE.ShaderMaterial({ side: THREE.BackSide, depthWrite: false, fog: false, uniforms: SKY_U,
+  vertexShader: `varying vec3 vDir; void main(){ vDir = normalize(position); vec4 p = projectionMatrix*modelViewMatrix*vec4(position,1.); gl_Position = p.xyww; }`,
+  fragmentShader: `uniform vec3 uSun, uZen, uHor, uSunCol, uGround; uniform float uScale, uNight; varying vec3 vDir;
+    float h(vec3 p){ return fract(sin(dot(p, vec3(12.9898,78.233,37.719)))*43758.5453); }
+    void main(){ vec3 d = normalize(vDir); float y = d.y;
+      float t = pow(clamp(1.-max(y,0.),0.,1.), 3.);
+      vec3 c = mix(uZen, uHor, t);
+      float sd = max(dot(d, uSun), 0.);
+      c += uSunCol * (pow(sd, 6.)*.35 + pow(sd, 64.)*1.2) * smoothstep(-.1, .05, uSun.y+.05);
+      c += uSunCol * smoothstep(.99955, .9997, sd) * 60.;           // sun disc
+      if (y < 0.) c = mix(uHor, uGround, smoothstep(0., .08, -y));
+      // stars
+      vec3 q = floor(d*420.); float s = step(.9975, h(q)) * uNight * smoothstep(.05,.3,y);
+      c += vec3(s)*.9*(.6+.4*sin(h(q+3.)*40.));
+      gl_FragColor = vec4(c*uScale, 1.);
+      #include <tonemapping_fragment>
+      #include <encodings_fragment>
+    }` });
+const SKY = new THREE.Mesh(new THREE.SphereGeometry(900, 32, 16), skyMat); SKY.frustumCulled = false; SKY.renderOrder = -10; scene.add(SKY);
+const envScene = new THREE.Scene(); const SKY2 = new THREE.Mesh(new THREE.SphereGeometry(100, 32, 16), skyMat); envScene.add(SKY2);
+const envGround = new THREE.Mesh(new THREE.CircleGeometry(90, 24), new THREE.MeshBasicMaterial({ color: 0x404040 })); envGround.rotation.x = -Math.PI / 2; envGround.position.y = -2; envScene.add(envGround);
+const pmrem = new THREE.PMREMGenerator(renderer);
+
+/* ---------------- sun & lights ---------------- */
+const SUN = new THREE.DirectionalLight(0xffffff, 1); SUN.castShadow = true;
+SUN.shadow.mapSize.set(2048, 2048); const sc = SUN.shadow.camera; sc.left = -46; sc.right = 46; sc.top = 46; sc.bottom = -46; sc.near = 1; sc.far = 260;
+SUN.shadow.bias = -.0004; SUN.shadow.normalBias = .03; scene.add(SUN); scene.add(SUN.target);
+const FILL = new THREE.HemisphereLight(0xbcd0ff, 0x6b5a48, .2); scene.add(FILL);
+scene.fog = new THREE.FogExp2(0x9fb4c8, .0016);
+
+function kelvinRGB(K) { // Tanner Helland approximation, returns linear-ish rgb normalised to max 1
+  const t = K / 100; let r, g, b;
+  r = t <= 66 ? 255 : 329.7 * Math.pow(t - 60, -.1332);
+  g = t <= 66 ? 99.47 * Math.log(t) - 161.12 : 288.12 * Math.pow(t - 60, -.0755);
+  b = t >= 66 ? 255 : t <= 19 ? 0 : 138.52 * Math.log(t - 10) - 305.04;
+  const c = [r, g, b].map(v => Math.pow(clamp(v, 0, 255) / 255, 2.2)); const m = Math.max(...c); return c.map(v => v / m);
+}
+function sunInfo(tod) { const a = Math.PI * (tod - 6.05) / 12.7; const el = Math.asin(clamp(Math.sin(a) * Math.sin(58 * DEG), -1, 1)); const az = a;
+  const ce = Math.cos(el); return { el, dir: new THREE.Vector3(Math.cos(az) * ce, Math.sin(el), (Math.sin(az) * .75 + .25) * ce).normalize() }; }
+function ambientLog(elDeg) { // log2 of ambient luminance relative to noon
+  if (elDeg > 12) return -smooth(clamp((45 - elDeg) / 33, 0, 1)) * 1.1;
+  if (elDeg > 0) return lerp(-3.2, -1.1, elDeg / 12);
+  if (elDeg > -6) return lerp(-8.2, -3.2, (elDeg + 6) / 6);
+  return lerp(-12.3, -8.2, clamp((elDeg + 14) / 8, 0, 1));
+}
+const _c1 = new THREE.Color(), _c2 = new THREE.Color();
+function lerpCol(out, stops, x) { // stops: [[x, hex],...]
+  if (x <= stops[0][0]) return out.set(stops[0][1]).convertSRGBToLinear();
+  for (let i = 1; i < stops.length; i++) if (x <= stops[i][0]) { const k = (x - stops[i - 1][0]) / (stops[i][0] - stops[i - 1][0]); _c1.set(stops[i - 1][1]).convertSRGBToLinear(); _c2.set(stops[i][1]).convertSRGBToLinear(); return out.copy(_c1).lerp(_c2, k); }
+  return out.set(stops[stops.length - 1][1]).convertSRGBToLinear();
+}
+let lastEnvTod = -99;
+function applyTimeOfDay(tod, force) {
+  const s = sunInfo(tod), elD = s.el / DEG; WORLD.sunEl = elD;
+  const la = ambientLog(elD); WORLD.logAmb = la; const scale = Math.pow(2, -clamp(la, -13, 0)); WORLD.sceneScale = scale;
+  WORLD.night = smooth(clamp((-elD - 1) / 8, 0, 1)); WORLD.lamps = smooth(clamp((3 - elD) / 5, 0, 1));
+  const sunVis = smooth(clamp((elD + 1.5) / 4, 0, 1));
+  // sun: intensity relative to noon, warm near horizon
+  const air = clamp(Math.sin(Math.max(s.el, .01)), .01, 1);
+  const sunK = lerp(2200, 5600, smooth(clamp(elD / 30, 0, 1)));
+  const kc = kelvinRGB(sunK); SUN.color.setRGB(kc[0], kc[1], kc[2]);
+  SUN.intensity = 4.7 * Math.pow(air, .45) * sunVis * scale * (1 - .35 * smooth(clamp((6 - elD) / 6, 0, 1)));
+  SUN.position.copy(s.dir).multiplyScalar(120); SUN.target.position.set(0, 0, 0); SUN.visible = sunVis > .001;
+  // sky colours (at relative luminance, then scaled)
+  const x = elD;
+  lerpCol(SKY_U.uZen.value, [[-14, '#02040a'], [-6, '#0b1734'], [-2, '#23386b'], [3, '#3f5f9a'], [12, '#4f7cc4'], [40, '#3f78d6']], x);
+  lerpCol(SKY_U.uHor.value, [[-14, '#05070d'], [-6, '#1c2748'], [-2, '#8a6173'], [1, '#f08a4a'], [6, '#f2b889'], [18, '#c9dcf0'], [40, '#b9d2ee']], x);
+  lerpCol(SKY_U.uGround.value, [[-10, '#040506'], [0, '#3a3530'], [20, '#6d665d']], x);
+  SKY_U.uSunCol.value.setRGB(kc[0], kc[1] * .9, kc[2] * .8).multiplyScalar(sunVis);
+  const skyLog = la + (elD > 0 ? .4 : 0) - WORLD.night * 2.2;
+  SKY_U.uScale.value = Math.pow(2, skyLog) * scale * .9; SKY_U.uNight.value = WORLD.night; SKY_U.uSun.value.copy(s.dir);
+  FILL.intensity = .25 * Math.pow(2, la) * scale; FILL.color.copy(SKY_U.uZen.value).lerp(new THREE.Color(1, 1, 1), .4);
+  FILL.groundColor.setRGB(.35, .3, .25);
+  // fog tint follows horizon
+  scene.fog.color.copy(SKY_U.uHor.value).multiplyScalar(SKY_U.uScale.value * .85); scene.fog.density = .0016 * WORLD.fog;
+  // artificial lights (physical luminance relative to noon, rescaled)
+  const lamp = WORLD.lamps;
+  LAMPS.lights.forEach(L => { L.intensity = 320 * Math.pow(2, -11) * scale * lamp; });
+  EMISSIVE.forEach(e => { const on = e.night ? lamp : 1; e.m.emissiveIntensity = e.base / 32 * scale * on; });
+  U.uWin.value = lamp * .62;
+  if (MATS.win) MATS.win.emissiveIntensity = Math.pow(2, -8.6) * scale * lamp;
+  if (WATER) WATER.material.uniforms.uCol.value.set(.55, .62, .68).multiplyScalar(Math.pow(2, la) * scale * 1.1 + lamp * Math.pow(2, -10) * scale * 1.2);
+  CHAR.cars && CHAR.cars.forEach(c => c.glows.forEach(g => { g.material.color.copy(g.userData.base).multiplyScalar(g.userData.k * Math.pow(2, -4) * scale * (.15 + .85 * lamp)); }));
+  // env map: regenerate when the light meaningfully changes
+  if (force || Math.abs(tod - lastEnvTod) > .04) { lastEnvTod = tod;
+    envGround.material.color.copy(SKY_U.uGround.value).multiplyScalar(SKY_U.uScale.value * .6 + lamp * Math.pow(2, -11) * scale * 2);
+    const rt = pmrem.fromScene(envScene, 0, .1, 200); if (envRT) envRT.dispose(); envRT = rt; scene.environment = rt.texture; }
+  renderer.shadowMap.needsUpdate = true;
+}
+
+/* ---------------- static batching ---------------- */
+function bakeStatic() {
+  STATIC.updateMatrixWorld(true);
+  const groups = new Map(); const keep = [];
+  STATIC.traverse(o => {
+    if (!o.isMesh) return;
+    if (o.isInstancedMesh) { keep.push(o); return; }
+    const key = o.material.uuid + (o.castShadow ? 'c' : 'n');
+    if (!groups.has(key)) groups.set(key, { mat: o.material, cast: o.castShadow, list: [] });
+    groups.get(key).list.push(o);
+  });
+  const nm = new THREE.Matrix3();
+  for (const g of groups.values()) {
+    let nv = 0, ni = 0; const parts = [];
+    for (const o of g.list) { const geo = o.geometry; const cnt = geo.attributes.position.count; const idx = geo.index ? geo.index.array : null; parts.push({ o, geo, cnt, idx }); nv += cnt; ni += idx ? idx.length : cnt; }
+    const P = new Float32Array(nv * 3), N = new Float32Array(nv * 3), UV = new Float32Array(nv * 2), L = new Float32Array(nv); const I = new Uint32Array(ni);
+    let vo = 0, io = 0; const v = new THREE.Vector3();
+    for (const p of parts) {
+      const pa = p.geo.attributes.position, na = p.geo.attributes.normal, ua = p.geo.attributes.uv; nm.getNormalMatrix(p.o.matrixWorld);
+      const lit = p.o.userData.aLit != null ? p.o.userData.aLit : 1;
+      for (let i = 0; i < p.cnt; i++) {
+        v.fromBufferAttribute(pa, i).applyMatrix4(p.o.matrixWorld); P.set([v.x, v.y, v.z], (vo + i) * 3);
+        if (na) { v.fromBufferAttribute(na, i).applyMatrix3(nm).normalize(); N.set([v.x, v.y, v.z], (vo + i) * 3); }
+        if (ua) { UV[(vo + i) * 2] = ua.getX(i); UV[(vo + i) * 2 + 1] = ua.getY(i); }
+        L[vo + i] = lit;
+      }
+      if (p.idx) for (let k = 0; k < p.idx.length; k++) I[io + k] = p.idx[k] + vo; else for (let k = 0; k < p.cnt; k++) I[io + k] = k + vo;
+      io += p.idx ? p.idx.length : p.cnt; vo += p.cnt;
+    }
+    const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(P, 3)); geo.setAttribute('normal', new THREE.BufferAttribute(N, 3)); geo.setAttribute('uv', new THREE.BufferAttribute(UV, 2));
+    if (g.mat === MATS.win) geo.setAttribute('aLit', new THREE.BufferAttribute(L, 1));
+    geo.setIndex(new THREE.BufferAttribute(I, 1)); geo.computeBoundingSphere(); geo.computeBoundingBox();
+    const m = new THREE.Mesh(geo, g.mat); m.castShadow = g.cast; m.receiveShadow = true; m.matrixAutoUpdate = false; scene.add(m);
+  }
+  keep.forEach(o => { o.updateMatrixWorld(true); scene.add(o); });
+  // window material: lit by per-window threshold
+  if (MATS.win) { MATS.win.onBeforeCompile = sh => { sh.uniforms.uWin = U.uWin;
+      sh.vertexShader = 'attribute float aLit;\nvarying float vLit;\n' + sh.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvLit = aLit;');
+      sh.fragmentShader = 'uniform float uWin;\nvarying float vLit;\n' + sh.fragmentShader.replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\ntotalEmissiveRadiance *= step(vLit, uWin);'); };
+    MATS.win.customProgramCacheKey = () => 'winLit'; MATS.win.needsUpdate = true; }
+  // raycast helpers keep original (detached) meshes; world matrices are already valid
+  SOLIDS.splice(0, 1); // drop terrain from AF raycasts (analytic ground used instead)
+}
+
+/* ---------------- post-processing pipeline ---------------- */
+const FSQ = { cam: new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1), scene: new THREE.Scene() };
+FSQ.mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), null); FSQ.mesh.frustumCulled = false; FSQ.scene.add(FSQ.mesh);
+function fsq(mat, target) { FSQ.mesh.material = mat; renderer.setRenderTarget(target || null); renderer.render(FSQ.scene, FSQ.cam); }
+const VS_FS = `varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0., 1.); }`;
+function sMat(frag, uniforms, extra = {}) { return new THREE.ShaderMaterial(Object.assign({ uniforms, vertexShader: VS_FS, fragmentShader: frag, depthTest: false, depthWrite: false }, extra)); }
+
+const accMat = sMat(`uniform sampler2D tSrc; uniform float uW; varying vec2 vUv; void main(){ gl_FragColor = vec4(texture2D(tSrc, vUv).rgb*uW, 1.); }`,
+  { tSrc: { value: null }, uW: { value: 1 } }, { blending: THREE.CustomBlending, blendSrc: THREE.OneFactor, blendDst: THREE.OneFactor, blendEquation: THREE.AddEquation, transparent: true });
+const brightMat = sMat(`uniform sampler2D tSrc; uniform float uExpo; uniform vec2 uTexel; varying vec2 vUv;
+  void main(){ vec3 c = vec3(0.); for(int i=-1;i<=1;i++) for(int j=-1;j<=1;j++) c += texture2D(tSrc, vUv + vec2(float(i),float(j))*uTexel).rgb; c *= uExpo/9.;
+    float l = max(max(c.r,c.g),c.b); float k = smoothstep(.9, 3.5, l); gl_FragColor = vec4(min(c*k, vec3(60.)), 1.); }`, { tSrc: { value: null }, uExpo: { value: 1 }, uTexel: { value: new THREE.Vector2() } });
+const blurMat = sMat(`uniform sampler2D tSrc; uniform vec2 uDir; varying vec2 vUv;
+  void main(){ vec3 c = texture2D(tSrc, vUv).rgb*.2270; c += (texture2D(tSrc, vUv+uDir*1.3846).rgb+texture2D(tSrc, vUv-uDir*1.3846).rgb)*.3162; c += (texture2D(tSrc, vUv+uDir*3.2308).rgb+texture2D(tSrc, vUv-uDir*3.2308).rgb)*.0703; gl_FragColor = vec4(c,1.); }`,
+  { tSrc: { value: null }, uDir: { value: new THREE.Vector2() } });
+const meterMat = sMat(`uniform sampler2D tSrc; uniform vec2 uCell; varying vec2 vUv;
+  void main(){ vec3 c = vec3(0.); for(int i=0;i<4;i++) for(int j=0;j<4;j++){ c += texture2D(tSrc, vUv + (vec2(float(i),float(j))-1.5)*uCell*.25).rgb; } c /= 16.;
+    gl_FragColor = vec4(clamp((log2(max(c, vec3(1e-7)))+24.)/32., 0., 1.), 1.); }`, { tSrc: { value: null }, uCell: { value: new THREE.Vector2() } });
+const blitMat = sMat(`uniform sampler2D tSrc; uniform sampler2D tOnion; uniform float uOnion; varying vec2 vUv;
+  void main(){ vec4 c = texture2D(tSrc, vUv); if (uOnion > 0.) { vec3 o = texture2D(tOnion, vUv).rgb; c.rgb = mix(c.rgb, o, uOnion); } gl_FragColor = vec4(c.rgb, 1.); }`,
+  { tSrc: { value: null }, tOnion: { value: null }, uOnion: { value: 0 } });
+
+function developFrag(NT) { return `
+#define NT ${NT}
+uniform sampler2D tColor, tDepth, tBloom; uniform vec2 uRes; uniform float uNear, uFar, uExpo, uFocusD, uFocal, uN, uSensorW, uBlades, uPoly, uMaxR, uDof;
+uniform vec3 uWB; uniform float uSat, uCon, uMono, uWarm, uSeed, uISOG, uNR, uHot, uHotOn, uADL, uVig, uPeak, uZebra, uBloom, uHuman, uDiff;
+varying vec2 vUv;
+float hash(vec2 p){ p = fract(p*vec2(123.34, 456.21)); p += dot(p, p+45.32); return fract(p.x*p.y); }
+float lz(vec2 uv){ float d = texture2D(tDepth, uv).x*2.-1.; return 2.*uNear*uFar/(uFar+uNear-d*(uFar-uNear)); }
+float coc(float D){ float f = uFocal*.001, S = uFocusD, A = f/uN; float c = A*f*abs(S-D)/(max(D,.05)*max(S-f,.001)); return c/(uSensorW*.001)*uRes.x*.5; }
+vec3 aces(vec3 x){ return clamp((x*(2.51*x+.03))/(x*(2.43*x+.59)+.14), 0., 1.); }
+float luma(vec3 c){ return dot(c, vec3(.2126,.7152,.0722)); }
+vec3 srgb(vec3 c){ return mix(c*12.92, 1.055*pow(c, vec3(1./2.4))-.055, step(.0031308, c)); }
+void main(){
+  vec2 px = 1./uRes; float Dc = lz(vUv); vec3 col;
+  float diff = uDiff;
+  if (uDof > .5 && uMaxR > .6) {
+    float cc = min(sqrt(pow(coc(Dc),2.)+diff*diff), uMaxR);
+    vec3 acc = texture2D(tColor, vUv).rgb; float ws = 1.;
+    float rot = hash(gl_FragCoord.xy + uSeed)*6.2831853;
+    float seg = 6.2831853/max(uBlades, 3.);
+    for (int i = 0; i < NT; i++) {
+      float fi = float(i)+.5; float r = sqrt(fi/float(NT)); float th = fi*2.3999632;
+      float a = mod(th + .3, seg) - seg*.5; float pr = cos(seg*.5)/cos(a); r *= mix(1., pr, uPoly);
+      float thr = th + rot*(1.-uPoly);
+      vec2 o = vec2(cos(thr), sin(thr))*r*uMaxR; float dist = length(o);
+      vec2 uv = vUv + o*px; float Ds = lz(uv); float cs = min(sqrt(pow(coc(Ds),2.)+diff*diff), uMaxR);
+      float reach = (Ds < Dc) ? cs : min(cs, cc);
+      float w = smoothstep(dist - 1., dist + .5, reach);
+      acc += texture2D(tColor, uv).rgb*w; ws += w;
+    }
+    col = acc/ws;
+  } else col = texture2D(tColor, vUv).rgb;
+  col *= uExpo;
+  col += texture2D(tBloom, vUv).rgb*uBloom;
+  col *= uWB;
+  // sensor noise (photon shot + read), before the tone curve
+  if (uISOG > 0.) {
+    vec2 q = gl_FragCoord.xy + uSeed*37.;
+    float l = max(luma(col), 0.);
+    float s = sqrt(l*uISOG/20000.) + 3.*uISOG/20000.;
+    s *= (1. - .5*uNR);
+    float n = (hash(q)+hash(q+17.)+hash(q+31.)-1.5)*1.15;
+    vec3 ch = vec3(hash(q+3.), hash(q+5.), hash(q+9.)) - .5;
+    col += s*(vec3(n) + ch*(1.5 - uNR));
+    if (uHotOn > 0. && hash(floor(gl_FragCoord.xy)) > 1. - uHot) col += vec3(hash(gl_FragCoord.xy+1.), hash(gl_FragCoord.xy+2.), hash(gl_FragCoord.xy+3.))*1.6;
+    col = max(col, 0.);
+  }
+  // Active D-Lighting: lift shadows, protect highlights
+  float L0 = luma(col);
+  col *= mix(1., (1. + 1.2*(1.-smoothstep(0.,.35,L0))) / (1. + .25*smoothstep(.6,3.,L0)), uADL);
+  // picture control: contrast around middle grey, saturation, tint
+  col = .18*pow(max(col, 0.)/.18, vec3(uCon));
+  col = mix(vec3(luma(col)), col, uSat);
+  col *= vec3(1.+uWarm, 1., 1.-uWarm);
+  if (uMono > .5) col = vec3(luma(col))*vec3(1.02,1.,.97);
+  vec3 tm = aces(col*.6);
+  // vignette
+  vec2 cv = vUv-.5; tm *= 1. - uVig*dot(cv,cv)*1.6;
+  vec3 outc = srgb(tm);
+  if (uZebra > 0. && max(max(tm.r,tm.g),tm.b) > .985) { if (mod(gl_FragCoord.x+gl_FragCoord.y, 10.) < 5.) outc = vec3(0.); }
+  if (uPeak > 0.) { float e = abs(luma(texture2D(tColor, vUv+vec2(px.x,0.)).rgb) - luma(texture2D(tColor, vUv-vec2(px.x,0.)).rgb)) + abs(luma(texture2D(tColor, vUv+vec2(0.,px.y)).rgb) - luma(texture2D(tColor, vUv-vec2(0.,px.y)).rgb));
+    float cc2 = coc(Dc); if (e*uExpo > .06 && cc2 < 1.2) outc = mix(outc, vec3(1., .15, .1), .85); }
+  gl_FragColor = vec4(outc, 1.);
+}`; }
+const DEV_U = () => ({ tColor: { value: null }, tDepth: { value: null }, tBloom: { value: null }, uRes: { value: new THREE.Vector2() }, uNear: { value: .1 }, uFar: { value: 2000 }, uExpo: { value: 1 }, uFocusD: { value: 5 }, uFocal: { value: 24 }, uN: { value: 4 }, uSensorW: { value: SENSOR_W }, uBlades: { value: 7 }, uPoly: { value: 0 }, uMaxR: { value: 0 }, uDof: { value: 1 },
+  uWB: { value: new THREE.Vector3(1, 1, 1) }, uSat: { value: 1 }, uCon: { value: 1 }, uMono: { value: 0 }, uWarm: { value: 0 }, uSeed: { value: 0 }, uISOG: { value: 1 }, uNR: { value: 1 }, uHot: { value: 0 }, uHotOn: { value: 0 }, uADL: { value: 0 }, uVig: { value: .3 }, uPeak: { value: 0 }, uZebra: { value: 0 }, uBloom: { value: .05 }, uHuman: { value: 0 }, uDiff: { value: 0 } });
+const devLive = sMat(developFrag(28), DEV_U()), devHQ = sMat(developFrag(72), DEV_U());
+
+class Pipe {
+  constructor(w, h, opt = {}) { this.opt = opt; this.setSize(w, h); }
+  setSize(w, h) {
+    w = Math.max(2, Math.round(w)); h = Math.max(2, Math.round(h)); if (this.w === w && this.h === h) return; this.w = w; this.h = h;
+    ['hdr', 'acc', 'b1', 'b2', 'ldr'].forEach(k => this[k] && this[k].dispose());
+    const hp = { type: HDRTYPE, format: THREE.RGBAFormat, minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, depthBuffer: true };
+    this.hdr = new THREE.WebGLRenderTarget(w, h, hp); this.hdr.depthTexture = new THREE.DepthTexture(w, h, THREE.UnsignedIntType);
+    this.acc = new THREE.WebGLRenderTarget(w, h, Object.assign({}, hp, { depthBuffer: false }));
+    const bw = Math.max(2, w >> 2), bh = Math.max(2, h >> 2);
+    this.b1 = new THREE.WebGLRenderTarget(bw, bh, Object.assign({}, hp, { depthBuffer: false })); this.b2 = this.b1.clone();
+    this.ldr = new THREE.WebGLRenderTarget(w, h, { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, depthBuffer: false });
+    this.ldr.texture.encoding = THREE.sRGBEncoding;
+  }
+  // render K sub-frames spread across the shutter interval (world + camera shake are functions of time)
+  expose(camera, times, poseAt) {
+    const K = times.length; renderer.autoClear = true;
+    if (K === 1) { poseAt(times[0]); renderer.setRenderTarget(this.hdr); renderer.render(scene, camera); return this.hdr; }
+    renderer.setRenderTarget(this.acc); renderer.setClearColor(0x000000, 1); renderer.clear(true, false, false);
+    for (let i = 0; i < K; i++) {
+      poseAt(times[i]); renderer.autoClear = true; renderer.setRenderTarget(this.hdr); renderer.render(scene, camera);
+      accMat.uniforms.tSrc.value = this.hdr.texture; accMat.uniforms.uW.value = 1 / K; renderer.autoClear = false; fsq(accMat, this.acc);
+    }
+    renderer.autoClear = true; return this.acc;
+  }
+  // accumulate one more batch into an existing sum (long exposures, progressive)
+  beginSum() { renderer.setRenderTarget(this.acc); renderer.setClearColor(0x000000, 1); renderer.clear(true, false, false); this.sumN = 0; }
+  addSum(camera, t, poseAt, w) { poseAt(t); renderer.autoClear = true; renderer.setRenderTarget(this.hdr); renderer.render(scene, camera);
+    accMat.uniforms.tSrc.value = this.hdr.texture; accMat.uniforms.uW.value = w; renderer.autoClear = false; fsq(accMat, this.acc); renderer.autoClear = true; this.sumN++; }
+  develop(src, camera, P, target, hq) {
+    // bloom
+    brightMat.uniforms.tSrc.value = src.texture; brightMat.uniforms.uExpo.value = P.expo; brightMat.uniforms.uTexel.value.set(1 / this.w, 1 / this.h); fsq(brightMat, this.b1);
+    for (let i = 0; i < 2; i++) { blurMat.uniforms.tSrc.value = this.b1.texture; blurMat.uniforms.uDir.value.set((i + 1) / this.b1.width, 0); fsq(blurMat, this.b2);
+      blurMat.uniforms.tSrc.value = this.b2.texture; blurMat.uniforms.uDir.value.set(0, (i + 1) / this.b1.height); fsq(blurMat, this.b1); }
+    const m = hq ? devHQ : devLive, u = m.uniforms;
+    u.tColor.value = src.texture; u.tDepth.value = this.hdr.depthTexture; u.tBloom.value = this.b1.texture; u.uRes.value.set(this.w, this.h);
+    u.uNear.value = camera.near; u.uFar.value = camera.far;
+    for (const k in P) if (u['u' + k[0].toUpperCase() + k.slice(1)]) { const uu = u['u' + k[0].toUpperCase() + k.slice(1)]; if (uu.value && uu.value.isVector3) uu.value.copy(P[k]); else uu.value = P[k]; }
+    fsq(m, target === undefined ? this.ldr : target);
+  }
+}
+// meter: render a small HDR view of the scene, reduce to 32×24 log-encoded cells, read back
+const METER = { rt: new THREE.WebGLRenderTarget(32, 24, { minFilter: THREE.NearestFilter, magFilter: THREE.NearestFilter, depthBuffer: false }), buf: new Uint8Array(32 * 24 * 4), pipe: new Pipe(160, 106) };
+function meterScene(camera) {
+  renderer.setRenderTarget(METER.pipe.hdr); renderer.render(scene, camera);
+  meterMat.uniforms.tSrc.value = METER.pipe.hdr.texture; meterMat.uniforms.uCell.value.set(1 / 32, 1 / 24); fsq(meterMat, METER.rt);
+  renderer.readRenderTargetPixels(METER.rt, 0, 0, 32, 24, METER.buf);
+  const cells = new Float32Array(32 * 24 * 4);
+  for (let i = 0; i < 32 * 24; i++) for (let c = 0; c < 3; c++) cells[i * 4 + c] = METER.buf[i * 4 + c] / 255 * 32 - 24; // log2 value per channel
+  for (let i = 0; i < 32 * 24; i++) cells[i * 4 + 3] = Math.log2(.2126 * 2 ** cells[i * 4] + .7152 * 2 ** cells[i * 4 + 1] + .0722 * 2 ** cells[i * 4 + 2] + 1e-9);
+  return cells;
+}
+// metering patterns → log2 of the "average" render value the camera aims to make middle grey
+function meterRead(cells, pattern, fx = 0, fy = 0) {
+  let sw = 0, s = 0; const lum = []; let maxL = -99;
+  for (let y = 0; y < 24; y++) for (let x = 0; x < 32; x++) {
+    const L = cells[(y * 32 + x) * 4 + 3]; lum.push(L); const u = (x + .5) / 32 * 2 - 1, v = (y + .5) / 24 * 2 - 1; let w = 1;
+    if (pattern === 'matrix') { const r = Math.hypot(u * 1.3, v); w = 1 + 1.4 * Math.exp(-r * r * 2.2); if (L > 1.5) w *= .6; if (v > .45) w *= .75; }
+    else if (pattern === 'center') { w = Math.hypot(u * 1.5, v) < .42 ? 3 : .33; }
+    else if (pattern === 'spot') { w = Math.hypot((u - fx) * 32 / 24, v + fy) < .09 ? 1 : 0; }
+    s += L * w; sw += w; maxL = Math.max(maxL, L);
+  }
+  if (pattern === 'high') { lum.sort((a, b) => b - a); return lum[Math.floor(lum.length * .01)] - 2.6; }
+  if (sw === 0) return s; return s / sw;
+}
+function meterAWB(cells) { let r = 0, g = 0, b = 0, n = 0; for (let i = 0; i < 32 * 24; i++) { const L = cells[i * 4 + 3]; if (L > 1.2) continue; r += 2 ** cells[i * 4]; g += 2 ** cells[i * 4 + 1]; b += 2 ** cells[i * 4 + 2]; n++; } return n ? [r / n, g / n, b / n] : [1, 1, 1]; }
+
+/* ---------------- the camera body (Z50-style behaviour) ---------------- */
+const cam = { mode: 'A', movie: false, lensI: 0, focal: 16, extended: false, N: 5.6, t: 1 / 125, iso: 100, autoIso: false, isoMax: 6400, comp: 0, shift: 0,
+  meter: 'matrix', wb: 'AUTO', wbK: 5200, pc: 'SD', adl: 0, nr: 1, lenr: true, release: 'S', af: 'AF-S', area: 'single', fx: 0, fy: 0,
+  focusD: 6, focusGoal: 6, afState: '', vr: true, peaking: false, grid: true, level: false, zebra: false, fps: 24, angle: 180, count: 0,
+  rig: 'hand', tripodPos: null, dispMode: 0, nd: 0 };
+const lens = () => LENSES[cam.lensI];
+const eqF = () => cam.focal * CROP;
+function lensAt(f) { const L = lens(); const k = L.fMax === L.fMin ? 0 : Math.log(f / L.fMin) / Math.log(L.fMax / L.fMin); return { nMin: +(lerp(L.nW, L.nT, k)).toFixed(1), nMax: Math.round(lerp(L.minW, L.minT, k)), mfd: lerp(L.mfdW, L.mfdT, k) }; }
+const avIdxRange = () => { const r = lensAt(cam.focal); let lo = AV.findIndex(a => a >= r.nMin - .05); let hi = AV.length - 1; while (AV[hi] > r.nMax + .1) hi--; return [Math.max(0, lo), hi]; };
+const log2 = Math.log2;
+const EXPO = { EVm: 12, N: 5.6, t: 1 / 125, iso: 100, EVcam: 12, dev: 0, blinkT: false, blinkN: false, blinkI: false, wbMul: new THREE.Vector3(1, 1, 1), awb: [1, 1, 1], meterCells: null, lowLight: false };
+// choose aperture/shutter/ISO from the metered scene EV (ISO 100 reference)
+function resolveExposure() {
+  const EVm = EXPO.EVm; const [ai0, ai1] = avIdxRange(); const Nmin = AV[ai0], Nmax = Math.min(AV[ai1], 22);
+  const tvMin = cam.movie ? log2(cam.fps) : -log2(30), tvMax = log2(4000);
+  let N = cam.N, t = cam.t, iso = cam.iso; const comp = cam.comp; const handT = 1 / Math.max(eqF(), 15);
+  const target = EVm - comp; // EVcam we aim for; Av+Tv = target + log2(iso/100)
+  let blinkT = false, blinkN = false;
+  const mode = cam.mode;
+  const autoIso = mode === 'AUTO' || cam.autoIso;
+  const solveIso = (N_, t_) => clamp(Math.pow(2, log2(N_ * N_ / t_) - target) * 100, 100, mode === 'AUTO' ? 25600 : cam.isoMax);
+  if (mode === 'AUTO' || mode === 'P') {
+    let isoU = autoIso ? 100 : iso; let tot = target + log2(isoU / 100);
+    const program = tot2 => { const avMin = log2(Nmin * Nmin), tvHH = log2(1 / handT); let av = avMin, tv = tot2 - av;
+      if (tv > tvHH) { const extra = tv - tvHH; av = avMin + extra * .5; tv = tot2 - av; }
+      av = clamp(av + (mode === 'P' ? cam.shift : 0), avMin, log2(Nmax * Nmax)); tv = tot2 - av; return [av, tv]; };
+    let [av, tv] = program(tot);
+    if (autoIso && tv < log2(1 / handT)) { const need = log2(1 / handT) - tv; isoU = clamp(100 * Math.pow(2, need), 100, mode === 'AUTO' ? 25600 : cam.isoMax); tot = target + log2(isoU / 100); [av, tv] = program(tot); }
+    N = Math.sqrt(Math.pow(2, av)); t = Math.pow(2, -tv); iso = isoU;
+  } else if (mode === 'S') {
+    if (autoIso) iso = solveIso(clamp(5.6, Nmin, Nmax), t);
+    const av = target + log2(iso / 100) - log2(1 / t); N = Math.sqrt(Math.pow(2, av));
+    if (N < Nmin - .01 || N > Nmax + .01) blinkN = true; N = clamp(N, Nmin, Nmax);
+    if (autoIso) { iso = solveIso(N, t); }
+  } else if (mode === 'A') {
+    N = clamp(cam.N, Nmin, lensAt(cam.focal).nMax);
+    if (autoIso) { iso = 100; let tv = target - log2(N * N); if (tv < log2(1 / handT)) { iso = clamp(100 * Math.pow(2, log2(1 / handT) - tv), 100, cam.isoMax); } }
+    const tv = target + log2(iso / 100) - log2(N * N); t = Math.pow(2, -tv);
+    if (tv < tvMin - .01 || tv > tvMax + .01) blinkT = true; t = clamp(t, 1 / 4000, cam.movie ? 1 / cam.fps : 30);
+  } else { // M
+    N = clamp(cam.N, Nmin, lensAt(cam.focal).nMax); t = cam.t;
+    if (autoIso) iso = solveIso(N, t);
+  }
+  // snap to the camera's 1/3-stop scales
+  if (mode !== 'M' && mode !== 'S') t = TV[nearestIdx(TV, t)];
+  if (mode !== 'M' && mode !== 'A') N = AV[nearestIdx(AV, N)];
+  iso = ISOS[nearestIdx(ISOS, iso)];
+  if (cam.movie) t = Math.min(t, 1 / cam.fps);
+  const EVcam = log2(N * N / t) - log2(iso / 100);
+  Object.assign(EXPO, { N, t, iso, EVcam, dev: target - EVcam, blinkT, blinkN }); // dev > 0: brighter than the meter wants
+  // white balance multipliers (camera setting vs a 5200 K reference)
+  let wb;
+  if (cam.wb === 'AUTO') { const a = EXPO.awb; const g = a[1]; wb = [lerp(1, g / a[0], .65), 1, lerp(1, g / a[2], .65)]; }
+  else { const K = cam.wb === 'K' ? cam.wbK : WBS[cam.wb]; const ref = kelvinRGB(5200), c = kelvinRGB(K); wb = [ref[0] / c[0], ref[1] / c[1], ref[2] / c[2]].map((v, i, arr) => v / arr[1]); }
+  EXPO.wbMul.set(wb[0], wb[1], wb[2]);
+  return EXPO;
+}
+const expoMul = (EVcam) => Math.pow(2, EV0 - EVcam) / WORLD.sceneScale;
+
+/* ---------------- operator: position, look, rigs, shake ---------------- */
+const player = { x: 5.5, z: 15.5, yaw: .18, pitch: .02, roll: 0, h: 1.58, hOff: 0, vx: 0, vz: 0, walk: 0, moving: 0, breath: 0, run: false };
+const keys = new Set();
+function collide(x, z, r = .32) {
+  for (const c of COLL) {
+    if (c.minX !== undefined) { const cx = clamp(x, c.minX, c.maxX), cz = clamp(z, c.minZ, c.maxZ); const dx = x - cx, dz = z - cz, d = Math.hypot(dx, dz);
+      if (d < r) { if (d < 1e-4) { const px = Math.min(x - c.minX, c.maxX - x), pz = Math.min(z - c.minZ, c.maxZ - z); if (px < pz) x = (x - c.minX < c.maxX - x) ? c.minX - r : c.maxX + r; else z = (z - c.minZ < c.maxZ - z) ? c.minZ - r : c.maxZ + r; }
+        else { x = cx + dx / d * r; z = cz + dz / d * r; } } }
+    else { const dx = x - c.cx, dz = z - c.cz, d = Math.hypot(dx, dz), rr2 = c.r + r; if (d < rr2 && d > 1e-4) { x = c.cx + dx / d * rr2; z = c.cz + dz / d * rr2; } }
+  }
+  const d = Math.hypot(x, z); if (d > 62) { x *= 62 / d; z *= 62 / d; }
+  return [x, z];
+}
+function groundAt(x, z) { const a = Math.max(Math.abs(x), Math.abs(z)); const inner = ROAD.A - ROAD.W / 2, outer = ROAD.A + ROAD.W / 2; if (a < inner - .1) return .14; if (a < outer) return .04; if (a < 40) return .1; return Math.max(0, terrainH(x, z)); }
+// hand-held micro-motion is a deterministic function of time, so exposures can integrate it
+const SHAKE = { amp: 1, sway: 1, impulseT: -99, impulseA: 0 };
+function shakeAt(t, out) {
+  const rig = cam.rig; const vrOn = cam.vr && lens().vr > 0 && rig !== 'tripod';
+  let tremor = rig === 'hand' ? .00075 : rig === 'gimbal' ? .00008 : 0;
+  let sway = rig === 'hand' ? .0035 : rig === 'gimbal' ? .0012 : 0;
+  if (player.breath > .5 && rig === 'hand') { tremor *= .55; sway *= .35; }
+  if (vrOn) tremor *= Math.pow(2, -lens().vr * .75);
+  const walk = player.moving * (rig === 'hand' ? 1 : rig === 'gimbal' ? .12 : 0);
+  let yaw = tremor * (vn(t * 9.1) + .6 * vn(t * 13.7 + 5) + .3 * vn(t * 23 + 9)) + sway * (vn(t * .31 + 2) + .5 * vn(t * .83 + 7));
+  let pitch = tremor * (vn(t * 8.3 + 3) + .6 * vn(t * 12.1 + 1) + .3 * vn(t * 19 + 4)) + sway * (vn(t * .27 + 11) + .5 * vn(t * .71 + 3)) + walk * Math.sin(player.walk * 2) * .012;
+  let roll = tremor * .6 * vn(t * 7.7 + 8) + sway * .4 * vn(t * .2 + 13) + walk * Math.sin(player.walk) * .006;
+  // tripod: a hard shutter press rings the head for a moment
+  const dt = t - SHAKE.impulseT; if (dt >= 0 && dt < 1.2) { const a = SHAKE.impulseA * Math.exp(-dt / .18) * Math.sin(dt * 2 * Math.PI * 11); pitch += a; yaw += a * .4; }
+  out.yaw = yaw; out.pitch = pitch; out.roll = roll; out.bob = walk * Math.abs(Math.sin(player.walk)) * .045;
+  return out;
+}
+const SENS = new THREE.PerspectiveCamera(40, 1.5, .1, 2000); // the sensor's point of view
+const EYE = new THREE.PerspectiveCamera(62, innerWidth / innerHeight, .08, 2000);
+const _sh = {};
+const DIRECTOR = { active: null }; // scripted camera moves override pose
+const CAMS = []; // placed multi-cam tripods {pos,yaw,pitch,focal,cam:PerspectiveCamera}
+let PGM = 0;
+function basePose(out) { // where the operator's camera is (without micro shake)
+  if (DIRECTOR.active) return DIRECTOR.active.pose(out);
+  if (PGM > 0 && CAMS[PGM - 1]) { const c = CAMS[PGM - 1]; out.x = c.x; out.y = c.y; out.z = c.z; out.yaw = c.yaw; out.pitch = c.pitch; out.roll = 0; out.focal = c.focal; return out; }
+  const tp = cam.rig === 'tripod' && cam.tripodPos;
+  out.x = tp ? tp.x : player.x; out.z = tp ? tp.z : player.z; out.y = (tp ? tp.y : groundAt(player.x, player.z) + player.h + player.hOff);
+  out.yaw = player.yaw; out.pitch = player.pitch; out.roll = player.roll; out.focal = cam.focal; return out;
+}
+const POSE = {};
+function poseSensor(t, camera = SENS) {
+  basePose(POSE); shakeAt(t, _sh);
+  camera.position.set(POSE.x, POSE.y - _sh.bob, POSE.z);
+  camera.rotation.set(0, 0, 0, 'YXZ'); camera.rotation.order = 'YXZ';
+  camera.rotation.y = POSE.yaw + _sh.yaw; camera.rotation.x = POSE.pitch + _sh.pitch; camera.rotation.z = POSE.roll + _sh.roll;
+  const f = POSE.focal || cam.focal; camera.fov = 2 * Math.atan(SENSOR_H / (2 * f)) / DEG; camera.updateProjectionMatrix(); camera.updateMatrixWorld();
+  return camera;
+}
+let camUp = false; // camera raised to the eye (EVF)
+
+/* ---------------- autofocus ---------------- */
+const RC = new THREE.Raycaster(); const _v2 = new THREE.Vector2(); const _v3 = new THREE.Vector3();
+const AF_TARGETS = []; // dynamic meshes AF can see
+function focusProbe(camera, u, v) {
+  RC.setFromCamera(_v2.set(u, v), camera); RC.far = 400;
+  let best = 1e9; const hits = RC.intersectObjects(SOLIDS.concat(AF_TARGETS), true); if (hits.length) best = hits[0].distance;
+  // analytic ground
+  const o = RC.ray.origin, d = RC.ray.direction; if (d.y < -1e-3) { let tt = (groundAt(o.x, o.z) - o.y) / d.y; for (let i = 0; i < 3; i++) { const p = o.clone().addScaledVector(d, tt); tt = (groundAt(p.x, p.z) - o.y) / d.y; } if (tt > 0 && tt < best) best = tt; }
+  if (best > 1e8) best = 1e4;
+  // distance along the optical axis (thin-lens model uses planar focus)
+  const axis = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion); return best * Math.max(.2, d.dot(axis));
+}
+function faceInFrame(camera) {
+  if (!CHAR.ahe) return null; const hp = aheHead(new THREE.Vector3()); const d = hp.distanceTo(camera.position); if (d > 28) return null;
+  const p = hp.clone().project(camera); if (p.z > 1 || Math.abs(p.x) > .95 || Math.abs(p.y) > .95) return null;
+  // is her face visible (not looking completely away)?
+  const fwd = new THREE.Vector3(0, 0, 1).applyQuaternion(CHAR.ahe.head.getWorldQuaternion(new THREE.Quaternion()));
+  const toCam = camera.position.clone().sub(hp).normalize(); if (fwd.dot(toCam) < -.2) return null;
+  const size = .26 / (d * Math.tan(camera.fov * DEG / 2)); // face height as fraction of half-frame
+  const axis = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion);
+  return { u: p.x, v: p.y, size, dist: hp.clone().sub(camera.position).dot(axis) };
+}
+function autofocus(camera, instant) {
+  if (cam.af === 'MF') return;
+  if (lens().retract && !cam.extended) return;
+  let u = cam.fx, v = cam.fy, face = null;
+  if (cam.area === 'auto') { face = faceInFrame(camera); if (face) { u = face.u; v = face.v; } else { u = 0; v = 0; } }
+  let d;
+  if (cam.area === 'wide') { const ds = []; for (const [a, b] of [[0, 0], [-.12, 0], [.12, 0], [0, -.1], [0, .1]]) ds.push(focusProbe(camera, u + a, v + b)); d = Math.min(...ds); }
+  else d = face ? face.dist : focusProbe(camera, u, v);
+  const lowLight = EXPO.EVm < -3.5;
+  if (lowLight && !face) { cam.afState = 'fail'; return false; }
+  d = Math.max(d, lensAt(cam.focal).mfd); cam.focusGoal = d; if (instant) cam.focusD = d; cam.afState = 'ok'; return true;
+}
+
+/* ---------------- the camera in your hands (first-person overlay) ---------------- */
+const HUD = { scene: new THREE.Scene(), cam: new THREE.PerspectiveCamera(38, innerWidth / innerHeight, .01, 10) };
+const lcdPipe = new Pipe(360, 240);
+function buildHandCamera() {
+  const H = HUD.scene; const g = new THREE.Group(); H.add(g); HUD.body = g;
+  H.add(new THREE.AmbientLight(0xffffff, .55)); const dl = new THREE.DirectionalLight(0xffffff, 1.6); dl.position.set(-.5, 1, .6); H.add(dl); HUD.lights = [dl];
+  const body = new THREE.MeshStandardMaterial({ color: lin('#1b1c1e'), roughness: .62, metalness: .15 });
+  const rubber = new THREE.MeshStandardMaterial({ color: lin('#121213'), roughness: .95 });
+  const metal = new THREE.MeshStandardMaterial({ color: lin('#8d9196'), roughness: .35, metalness: .9 });
+  const accent = new THREE.MeshStandardMaterial({ color: lin('#c7cbd0'), roughness: .4, metalness: .6 });
+  const W = .127, Hh = .094 * .72, D = .038;
+  mesh(new THREE.BoxGeometry(W, Hh, D), body, 0, 0, 0, g, false, false);
+  mesh(new THREE.BoxGeometry(.034, Hh + .004, .052), rubber, W / 2 - .02, -.001, .012, g, false, false); // grip
+  mesh(new THREE.BoxGeometry(.05, .026, .05), body, -.012, Hh / 2 + .013, -.004, g, false, false); // EVF hump
+  mesh(new THREE.BoxGeometry(.03, .018, .012), rubber, -.012, Hh / 2 + .013, -.03, g, false, false); // eyecup
+  const dial = (x, r, h, m) => { const d = mesh(new THREE.CylinderGeometry(r, r, h, 24), m, x, Hh / 2 + h / 2, .006, g, false, false); return d; };
+  HUD.modeDial = dial(.038, .011, .008, body); dial(.052, .005, .006, accent); dial(-.046, .008, .005, body);
+  mesh(new THREE.BoxGeometry(.009, .004, .009), accent, .058, Hh / 2 + .002, -.01, g, false, false); // shutter
+  // rear screen shows what the sensor sees
+  HUD.lcdMat = new THREE.MeshBasicMaterial({ map: lcdPipe.ldr.texture, toneMapped: false });
+  const lcd = mesh(new THREE.PlaneGeometry(.074, .049), HUD.lcdMat, -.012, -.004, -D / 2 - .0026, g, false, false); lcd.rotation.y = Math.PI;
+  mesh(new THREE.BoxGeometry(.08, .054, .002), rubber, -.012, -.004, -D / 2 - .0005, g, false, false);
+  for (let i = 0; i < 4; i++) mesh(new THREE.BoxGeometry(.008, .006, .003), accent, .041 + (i % 2) * .012, .012 - Math.floor(i / 2) * .012, -D / 2 - .0015, g, false, false);
+  mesh(new THREE.CylinderGeometry(.009, .009, .003, 20), accent, .047, -.017, -D / 2 - .002, g, false, false).rotation.x = Math.PI / 2;
+  // lens
+  const L = new THREE.Group(); L.position.set(-.004, -.004, D / 2); g.add(L); HUD.lens = L;
+  mesh(new THREE.CylinderGeometry(.03, .03, .006, 36), metal, 0, 0, .003, L, false, false).rotation.x = Math.PI / 2;
+  HUD.barrel = mesh(new THREE.CylinderGeometry(.031, .031, 1, 36), rubber, 0, 0, .5, L, false, false); HUD.barrel.rotation.x = Math.PI / 2;
+  HUD.ring = mesh(new THREE.CylinderGeometry(.032, .032, .012, 36), body, 0, 0, .02, L, false, false); HUD.ring.rotation.x = Math.PI / 2;
+  HUD.front = mesh(new THREE.CylinderGeometry(.028, .028, .004, 36), new THREE.MeshStandardMaterial({ color: lin('#15242e'), roughness: .05, metalness: .6 }), 0, 0, .04, L, false, false); HUD.front.rotation.x = Math.PI / 2;
+  // hands
+  const skin = new THREE.MeshStandardMaterial({ color: lin('#d7a988'), roughness: .7 }); const sleeve = new THREE.MeshStandardMaterial({ color: lin('#3d4a5a'), roughness: .9 });
+  const rh = new THREE.Group(); rh.position.set(W / 2 + .004, -.012, .01); g.add(rh);
+  mesh(new THREE.BoxGeometry(.03, .075, .06), skin, .012, -.012, 0, rh, false, false);
+  for (let i = 0; i < 3; i++) mesh(new THREE.CylinderGeometry(.008, .0075, .05, 8), skin, -.01, .01 - i * .018, .03, rh, false, false).rotation.z = Math.PI / 2;
+  mesh(new THREE.CylinderGeometry(.009, .008, .04, 8), skin, -.01, .028, -.022, rh, false, false).rotation.z = Math.PI / 2.3;
+  mesh(new THREE.CylinderGeometry(.03, .036, .26, 10), sleeve, .03, -.16, -.02, rh, false, false).rotation.x = .5;
+  const lh = new THREE.Group(); lh.position.set(-.004, -.04, .045); g.add(lh); HUD.lh = lh;
+  mesh(new THREE.BoxGeometry(.075, .018, .06), skin, 0, 0, 0, lh, false, false);
+  mesh(new THREE.CylinderGeometry(.03, .036, .26, 10), sleeve, -.03, -.12, -.05, lh, false, false).rotation.set(.9, 0, .5);
+}
+function updateHandCamera(dt) {
+  const g = HUD.body; if (!g) return; const L = lens();
+  const ext = L.retract ? (cam.extended ? 1 : 0) : 1; const zoomK = L.fMax === L.fMin ? .3 : Math.log(cam.focal / L.fMin) / Math.log(L.fMax / L.fMin);
+  const len = L.id === 'tele' ? .09 + zoomK * .04 : L.id === 'fifty' ? .065 : (ext ? .042 + zoomK * .012 : .03);
+  HUD.barrel.scale.y = len; HUD.barrel.position.z = len / 2; HUD.front.position.z = len + .002; HUD.ring.position.z = len * .55; HUD.lh.position.z = .012 + len * .6;
+  const bob = player.moving * Math.sin(player.walk) * .006, bob2 = player.moving * Math.abs(Math.cos(player.walk)) * .005;
+  g.position.set(.13 + bob, -.12 + bob2 + (cam.rig === 'gimbal' ? .01 : 0), -.52); g.rotation.set(.38, Math.PI + .12, 0);
+  const b = clamp(Math.pow(2, WORLD.logAmb) * 1.4 + WORLD.lamps * .25, .3, 1.2); HUD.lights[0].intensity = 1.6 * b; HUD.scene.children[1].intensity = .5 * b + .05;
+  HUD.modeDial.rotation.y = MODES.indexOf(cam.mode) * .6;
+}
+
+/* ---------------- frame rendering ---------------- */
+const QUAL = { cap: 1800, live: 1500, seq: 1280 };
+const livePipe = new Pipe(960, 640), eyePipe = new Pipe(960, 540), capPipe = new Pipe(1800, 1200), recPipe = new Pipe(960, 540);
+const histRT = new THREE.WebGLRenderTarget(64, 42, { depthBuffer: false }); const histBuf = new Uint8Array(64 * 42 * 4);
+let eyeLog = -2; // eye adaptation state (log2 of adapted render value)
+const poseAtFactory = (camera, frozenT) => t => { setWorldTime(frozenT != null ? frozenT : t, WORLD.tod); renderer.shadowMap.needsUpdate = true; poseSensor(t, camera); };
+function sensorAspect() { return cam.movie ? 16 / 9 : 1.5; }
+function devParamsFor(camera, pipe, E, opt = {}) {
+  const L = lens(), f = POSE.focal || cam.focal, r = lensAt(f); const N = E.N;
+  const cocR = D => { const ff = f * .001, S = Math.max(cam.focusD, ff * 1.1), A = ff / N; return A * ff * Math.abs(S - D) / (D * (S - ff)) / (SENSOR_W * .001) * pipe.w * .5; };
+  const diff = 1.22 * .00055 * N / (SENSOR_W / pipe.w) * .5;
+  const maxR = Math.min(Math.max(cocR(1e5), cocR(.35), diff) , 26 * pipe.w / 1000);
+  const pc = PCS[cam.pc]; const hot = E.t > 1 ? clamp(E.t * 1.2e-5, 0, 6e-4) : 0;
+  return { expo: expoMul(E.EVcam) * Math.pow(2, -(cam.nd || 0)), focusD: cam.focusD, focal: f, N, blades: L.blades, poly: clamp((Math.log2(N / r.nMin) - .6) / 1.2, 0, 1), maxR, dof: 1,
+    WB: E.wbMul, sat: pc.sat, con: pc.con, mono: pc.mono ? 1 : 0, warm: (pc.warm || 0) - (pc.cool || 0), seed: (Math.random() * 1000) | 0, ISOG: E.iso / 100, NR: cam.nr, hot, hotOn: (hot > 0 && !cam.lenr) ? 1 : 0,
+    ADL: cam.adl, vig: .12 + .4 * clamp(1 - Math.log2(N / r.nMin) / 1.6, 0, 1), peak: opt.peak ? 1 : 0, zebra: opt.zebra ? 1 : 0, bloom: .045, diff };
+}
+function renderLive(dt) {
+  const W = renderer.domElement.width, Hh = renderer.domElement.height;
+  const E = EXPO;
+  if (camUp || PGM > 0 || DIRECTOR.active) {
+    const asp = sensorAspect(); let vw = W, vh = Math.round(W / asp); if (vh > Hh) { vh = Hh; vw = Math.round(Hh * asp); }
+    const scale = Math.min(1, QUAL.live / vw); livePipe.setSize(vw * scale, vh * scale);
+    SENS.aspect = asp; const pa = poseAtFactory(SENS, WORLD.frozen ? WORLD.t : null); pa(WORLD.t);
+    const src = livePipe.expose(SENS, [WORLD.t], () => {});
+    devLive.uniforms.uDof.value = 1;
+    livePipe.develop(src, SENS, devParamsFor(SENS, livePipe, E, { peak: cam.peaking || cam.af === 'MF' && cam.peakAuto !== false, zebra: cam.zebra }), livePipe.ldr, false);
+    renderer.setRenderTarget(null); renderer.setClearColor(0x000000, 1); renderer.clear();
+    blitMat.uniforms.tSrc.value = livePipe.ldr.texture; blitMat.uniforms.tOnion.value = STOP.onionTex; blitMat.uniforms.uOnion.value = STOP.active && STOP.onion && STOP.onionTex ? .32 : 0;
+    const x = (W - vw) / 2, y = (Hh - vh) / 2; renderer.setViewport(x / DPR, y / DPR, vw / DPR, vh / DPR); fsq(blitMat, null); renderer.setViewport(0, 0, W / DPR, Hh / DPR);
+    VIEW.rect = { x: x / DPR, y: y / DPR, w: vw / DPR, h: vh / DPR };
+  } else {
+    // the operator's own eyes: auto-adapting, deep focus, no sensor noise
+    EYE.aspect = W / Hh; const bp = basePose({}); EYE.position.set(bp.x, bp.y + .06 - player.moving * Math.abs(Math.sin(player.walk)) * .035, bp.z);
+    EYE.rotation.set(player.pitch, player.yaw, 0, 'YXZ'); EYE.updateProjectionMatrix(); EYE.updateMatrixWorld();
+    setWorldTime(WORLD.t, WORLD.tod);
+    const scale = Math.min(1, 1600 / W); eyePipe.setSize(W * scale, Hh * scale);
+    renderer.setRenderTarget(eyePipe.hdr); renderer.render(scene, EYE);
+    const m = .18 / Math.pow(2, eyeLog);
+    eyePipe.develop(eyePipe.hdr, EYE, { expo: m, dof: 0, maxR: 0, WB: new THREE.Vector3(1, 1, 1).lerp(EXPO.wbMul, .5), sat: 1.02, con: 1, mono: 0, warm: 0, seed: 0, ISOG: 0, NR: 1, hot: 0, hotOn: 0, ADL: .3, vig: .18, peak: 0, zebra: 0, bloom: .035, diff: 0, focusD: 5, focal: 20, N: 8, blades: 7, poly: 0 }, null, false);
+    VIEW.rect = null;
+    // live view on the rear screen (updated at a lower rate)
+    if ((FRAME % 3) === 0 && HUD.body) { SENS.aspect = sensorAspect(); lcdPipe.setSize(360, cam.movie ? 202 : 240); poseSensor(WORLD.t, SENS);
+      renderer.setRenderTarget(lcdPipe.hdr); renderer.render(scene, SENS); lcdPipe.develop(lcdPipe.hdr, SENS, devParamsFor(SENS, lcdPipe, E), lcdPipe.ldr, false); }
+    renderer.setRenderTarget(null); renderer.autoClear = false; renderer.clearDepth(); HUD.cam.aspect = W / Hh; HUD.cam.updateProjectionMatrix();
+    if (!(cam.lcdOff)) renderer.render(HUD.scene, HUD.cam); renderer.autoClear = true;
+  }
+  renderMonitors();
+}
+const VIEW = { rect: null };
+// multi-camera monitors (small tripod views composited into the page)
+const MON = [];
+function renderMonitors() {
+  if (!CAMS.length) return; const W = renderer.domElement.width / DPR, Hh = renderer.domElement.height / DPR;
+  renderer.autoClear = false; renderer.setScissorTest(true);
+  const saveTM = renderer.toneMapping; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = expoMul(EXPO.EVcam) * .55;
+  CAMS.forEach((c, i) => { const el = MON[i]; if (!el) return; const r = el.getBoundingClientRect(); if (r.width < 4) return;
+    c.cam.position.set(c.x, c.y, c.z); c.cam.rotation.set(c.pitch, c.yaw, 0, 'YXZ'); c.cam.fov = 2 * Math.atan(SENSOR_W * 9 / 16 / (2 * c.focal)) / DEG; c.cam.aspect = r.width / r.height; c.cam.updateProjectionMatrix();
+    const y = Hh - r.bottom; renderer.setViewport(r.left, y, r.width, r.height); renderer.setScissor(r.left, y, r.width, r.height); renderer.clear(); renderer.render(scene, c.cam); });
+  renderer.setScissorTest(false); renderer.toneMapping = saveTM; renderer.autoClear = true; renderer.setViewport(0, 0, W, Hh);
+}
+function histogramFrom(ldrRT) {
+  blitMat.uniforms.tSrc.value = ldrRT.texture; blitMat.uniforms.uOnion.value = 0; fsq(blitMat, histRT); renderer.readRenderTargetPixels(histRT, 0, 0, 64, 42, histBuf);
+  const bins = [new Float32Array(64), new Float32Array(64), new Float32Array(64)]; for (let i = 0; i < 64 * 42; i++) for (let c = 0; c < 3; c++) bins[c][histBuf[i * 4 + c] >> 2]++; return bins;
+}
+
+/* ---------------- shutter release & exposures ---------------- */
+const SHOTS = []; let shotSeq = 0; let JOB = null; const JOBQ = [];
+const AUDIO = { ctx: null };
+function click(kind = 'shutter', dur = 0) {
+  try { if (!AUDIO.ctx) AUDIO.ctx = new (window.AudioContext || window.webkitAudioContext)(); const a = AUDIO.ctx; const now = a.currentTime;
+    const burst = (at, len, f, g0) => { const b = a.createBuffer(1, Math.floor(a.sampleRate * len), a.sampleRate); const d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.exp(-i / d.length * 5);
+      const s = a.createBufferSource(); s.buffer = b; const bp = a.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = f; bp.Q.value = 1.2; const g = a.createGain(); g.gain.value = g0; s.connect(bp); bp.connect(g); g.connect(a.destination); s.start(at); };
+    if (kind === 'shutter') { burst(now, .035, 2600, .5); burst(now + Math.max(.03, Math.min(dur, 30)), .045, 1800, .45); }
+    else if (kind === 'beep') { const o = a.createOscillator(); const g = a.createGain(); o.frequency.value = 2900; g.gain.value = .05; o.connect(g); g.connect(a.destination); o.start(now); o.stop(now + .06); }
+    else if (kind === 'tick') burst(now, .012, 4000, .15);
+  } catch (e) { }
+}
+function canShoot() {
+  if (lens().retract && !cam.extended) { osdMsg('镜头已收起：转动变焦环(Z)展开镜头'); return false; }
+  return true;
+}
+function frameTimes(t0, t, K) { const a = []; for (let i = 0; i < K; i++) a.push(t0 + (i + .5) / K * t); return a; }
+function shotLabel(meta) { return `${meta.mode} ${tvLabel(meta.t)} F${meta.N} ISO ${isoLabel(meta.iso)} ${Math.round(meta.focal)}mm`; }
+// queue a still exposure; long exposures are progressive and cost real time (compressed beyond 4 s)
+function startExposure(opt = {}) {
+  if (!canShoot()) return; const E = Object.assign({}, EXPO); const t = opt.bulbT || E.t;
+  const long = t > .6; const K = long ? clamp(Math.ceil(t * 30), 40, 480) : clamp(Math.ceil(t * 420), 1, 48);
+  const asp = sensorAspect(); capPipe.setSize(QUAL.cap, Math.round(QUAL.cap / asp));
+  const t0 = WORLD.t; const wall = t <= 4 ? t : 4 + Math.log2(t / 4) * 1.6;
+  if (cam.rig === 'tripod' && cam.release === 'S') { SHAKE.impulseT = t0 + .005; SHAKE.impulseA = .0011; } else if (cam.rig === 'hand') { SHAKE.impulseT = t0; SHAKE.impulseA = .00035; } else SHAKE.impulseA = 0;
+  const job = { kind: 'still', E, t, K, i: 0, t0, frozen: WORLD.frozen ? WORLD.t : null, wall, started: performance.now(), meta: metaNow(E, t), onDone: opt.onDone, burst: opt.burst, noDisplay: opt.noDisplay };
+  JOBQ.push(job); click('shutter', t);
+  if (!opt.silentCurtain) blink(Math.min(t, .25));
+}
+function metaNow(E, t) { return { mode: cam.mode, t: t || E.t, N: E.N, iso: E.iso, focal: POSE.focal || cam.focal, lens: lens().short, ev: +E.EVcam.toFixed(1), comp: cam.comp, wb: cam.wb === 'K' ? cam.wbK + 'K' : cam.wb, pc: PCS[cam.pc].n, meter: METERS[cam.meter], rig: RIGS[cam.rig], focus: +cam.focusD.toFixed(2), tod: todLabel(WORLD.tod), shotSize: SHOTSIZE.label || '' }; }
+const RIGS = { hand: '手持', gimbal: '稳定器', tripod: '三脚架' };
+function runJobs(budgetMs) {
+  const tStart = performance.now();
+  while ((JOB || JOBQ.length) && performance.now() - tStart < budgetMs) {
+    if (!JOB) { JOB = JOBQ.shift(); SENS.aspect = sensorAspect(); capPipe.beginSum(); }
+    const j = JOB; const pa = poseAtFactory(SENS, j.frozen);
+    // how many sub-frames may be integrated by now (long exposures pace themselves in real time)
+    const elapsed = (performance.now() - j.started) / 1000; const allowed = j.t > .6 ? Math.min(j.K, Math.ceil(j.K * clamp(elapsed / j.wall, 0, 1))) : j.K;
+    while (j.i < allowed && performance.now() - tStart < budgetMs) { capPipe.addSum(SENS, j.t0 + (j.i + .5) / j.K * j.t, pa, 1 / j.K); j.i++; }
+    if (j.t > .6) { EXPBAR.show = true; EXPBAR.p = j.i / j.K; EXPBAR.label = j.t >= 1 ? `曝光中 ${Math.min(j.t, elapsed * j.t / j.wall).toFixed(1)}s / ${j.t}s` : '曝光中'; }
+    if (j.i >= j.K) { finishStill(j); JOB = null; EXPBAR.show = false; }
+    else break;
+  }
+}
+function finishStill(j) {
+  const P = devParamsFor(SENS, capPipe, j.E); P.hotOn = (j.t > 1 && !cam.lenr) ? 1 : 0;
+  capPipe.develop(capPipe.acc, SENS, P, capPipe.ldr, true);
+  const w = capPipe.w, h = capPipe.h; const buf = new Uint8Array(w * h * 4); renderer.readRenderTargetPixels(capPipe.ldr, 0, 0, w, h, buf);
+  const c = mkCanvas(w, h), g = c.getContext('2d'); const img = g.createImageData(w, h);
+  for (let y = 0; y < h; y++) img.data.set(buf.subarray((h - 1 - y) * w * 4, (h - y) * w * 4), y * w * 4);
+  g.putImageData(img, 0, 0);
+  const th = mkCanvas(192, Math.round(192 * h / w)); th.getContext('2d').drawImage(c, 0, 0, th.width, th.height); const thumb = th.toDataURL('image/jpeg', .8);
+  c.toBlob(blob => { const fr = { blob, w, h, thumb, meta: j.meta }; if (j.onDone) j.onDone(fr); else addPhoto(fr); }, 'image/jpeg', .92);
+  if (j.t > 1 && cam.lenr) osdMsg('长时间曝光降噪：拍一张同样时长的暗帧来扣除热噪点', 2200);
+}
+function addPhoto(fr) {
+  if (STOP.active) { STOP.push(fr); return; }
+  const s = { id: ++shotSeq, kind: 'photo', frames: [fr], w: fr.w, h: fr.h, fps: 12, hold: 12, meta: fr.meta, thumb: fr.thumb, label: fr.meta.shotSize || '照片' };
+  SHOTS.push(s); cam.count++; stripAdd(fr.thumb); onRollChange();
+}
+const EXPBAR = { show: false, p: 0, label: '' };
+function blink(t) { const c = $('#curtain'); if (!camUp) return; c.style.opacity = '1'; setTimeout(() => c.style.opacity = '0', Math.max(60, t * 1000)); }
+
+/* ---------------- stop motion ---------------- */
+const STOP = { active: false, shot: null, onion: true, onionTex: null, step: 1 / 12,
+  begin() { this.active = true; WORLD.frozen = true; this.shot = { id: ++shotSeq, kind: 'stop', frames: [], w: 0, h: 0, fps: 12, hold: 1, label: '定格动画', thumb: '' }; SHOTS.push(this.shot); onRollChange(); },
+  push(fr) { const s = this.shot; s.frames.push(fr); s.w = fr.w; s.h = fr.h; s.thumb = s.thumb || fr.thumb; s.meta = s.meta || fr.meta; stripAdd(fr.thumb);
+    // onion skin: previous frame as a texture
+    createImageBitmap(fr.blob).then(bm => { if (this.onionTex) this.onionTex.dispose(); const t = new THREE.Texture(bm); t.flipY = true; t.needsUpdate = true; this.onionTex = t; });
+    WORLD.t += this.step * WORLD.speed; onRollChange(); },
+  end() { this.active = false; WORLD.frozen = false; if (this.shot && !this.shot.frames.length) SHOTS.splice(SHOTS.indexOf(this.shot), 1); this.shot = null; if (this.onionTex) { this.onionTex.dispose(); this.onionTex = null; } onRollChange(); } };
+
+/* ---------------- offline sequence rendering (moves, time-lapse, clips) ---------------- */
+async function renderSequence({ n, fps, label, kind, setup, w = QUAL.seq, shutterFrac = .5, onProgress }) {
+  const asp = cam.movie || kind !== 'stopseq' ? 16 / 9 : 1.5; const hh = Math.round(w / asp); const pipe = recPipe; pipe.setSize(w, hh); SENS.aspect = asp;
+  const shot = { id: ++shotSeq, kind, frames: [], w, h: hh, fps, hold: 1, label, thumb: '' };
+  const c = mkCanvas(w, hh), g = c.getContext('2d'); const buf = new Uint8Array(w * hh * 4); const img = g.createImageData(w, hh);
+  const saveMovie = cam.movie; cam.movie = true;
+  for (let i = 0; i < n; i++) {
+    const st = setup(i, n); // returns {t, dur, frozen?}
+    const pa = t => { setWorldTime(st.frozen != null ? st.frozen : t, WORLD.tod); renderer.shadowMap.needsUpdate = true; DIRECTOR.tNow = t; poseSensor(t, SENS); };
+    pa(st.t); EXPO.EVm = meterFrom(SENS); if (DIRECTOR.active && DIRECTOR.active.af) autofocus(SENS, true); resolveExposure(); const E = Object.assign({}, EXPO); const shutter = Math.min(E.t, st.dur * shutterFrac);
+    const K = clamp(Math.ceil(shutter * 360), 1, 10);
+    const src = pipe.expose(SENS, frameTimes(st.t, shutter, K), pa);
+    pipe.develop(src, SENS, devParamsFor(SENS, pipe, E), pipe.ldr, true);
+    renderer.readRenderTargetPixels(pipe.ldr, 0, 0, w, hh, buf);
+    for (let y = 0; y < hh; y++) img.data.set(buf.subarray((hh - 1 - y) * w * 4, (hh - y) * w * 4), y * w * 4);
+    g.putImageData(img, 0, 0);
+    const blob = await new Promise(r => c.toBlob(r, 'image/jpeg', .88));
+    if (i === 0 || i === Math.floor(n / 2)) { const th = mkCanvas(192, Math.round(192 * hh / w)); th.getContext('2d').drawImage(c, 0, 0, th.width, th.height); if (!shot.thumb || i > 0) shot.thumb = th.toDataURL('image/jpeg', .8); }
+    shot.frames.push({ blob, w, h: hh, meta: metaNow(E, shutter) }); if (i === 0) shot.meta = shot.frames[0].meta;
+    onProgress && onProgress((i + 1) / n);
+    if (i % 2 === 1) await new Promise(r => requestAnimationFrame(r));
+  }
+  cam.movie = saveMovie; SHOTS.push(shot); onRollChange(); return shot;
+}
+// metering on demand (used before each offline frame)
+function meterFrom(camera) { const cells = meterScene(camera); EXPO.meterCells = cells;
+  const lg = meterRead(cells, cam.meter, cam.fx, cam.fy); EXPO.awb = meterAWB(cells); return EV0 - log2(.18 * WORLD.sceneScale / Math.pow(2, lg)) - (cam.nd || 0); }
+
+/* ---------------- live video recording ---------------- */
+const REC = { on: false, shot: null, t0: 0, next: 0, frames: 0, canvas: null, busy: 0 };
+function recStart() { if (!canShoot()) return; if (!cam.movie) { cam.movie = true; onModeChange(); }
+  REC.on = true; REC.t0 = WORLD.t; REC.next = WORLD.t; REC.shot = { id: ++shotSeq, kind: 'clip', frames: [], w: 960, h: 540, fps: cam.fps, hold: 1, label: '视频', thumb: '' }; click('beep'); }
+function recStop() { if (!REC.on) return; REC.on = false; click('beep'); const s = REC.shot; REC.shot = null;
+  const fin = () => { if (REC.busy > 0) return setTimeout(fin, 60); if (s.frames.length) { s.frames.sort((a, b) => a.i - b.i); SHOTS.push(s); onRollChange(); stripAdd(s.thumb); toast(`视频已存入片夹：${s.frames.length} 帧 · ${(s.frames.length / s.fps).toFixed(1)} 秒 · ${s.fps}p`, '--film'); } }; fin(); }
+function recTick() {
+  if (!REC.on) return; const s = REC.shot; const dtF = 1 / s.fps; let guard = 0;
+  while (REC.next <= WORLD.t && guard++ < 3) {
+    const tf = REC.next; REC.next += dtF; const idx = s.frames.length + REC.busy;
+    const E = Object.assign({}, EXPO); const shutter = Math.min(E.t, dtF); const K = clamp(Math.ceil(shutter * 300), 1, 5);
+    recPipe.setSize(960, 540); SENS.aspect = 16 / 9;
+    const src = recPipe.expose(SENS, frameTimes(tf, shutter, K), poseAtFactory(SENS, WORLD.frozen ? WORLD.t : null));
+    recPipe.develop(src, SENS, devParamsFor(SENS, recPipe, E), recPipe.ldr, false);
+    const buf = new Uint8Array(960 * 540 * 4); renderer.readRenderTargetPixels(recPipe.ldr, 0, 0, 960, 540, buf);
+    const c = mkCanvas(960, 540), g = c.getContext('2d'); const img = g.createImageData(960, 540);
+    for (let y = 0; y < 540; y++) img.data.set(buf.subarray((539 - y) * 960 * 4, (540 - y) * 960 * 4), y * 960 * 4); g.putImageData(img, 0, 0);
+    if (!s.thumb) { const th = mkCanvas(192, 108); th.getContext('2d').drawImage(c, 0, 0, 192, 108); s.thumb = th.toDataURL('image/jpeg', .8); s.meta = metaNow(E, shutter); }
+    REC.busy++; c.toBlob(b => { s.frames.push({ blob: b, w: 960, h: 540, i: idx }); REC.busy--; }, 'image/jpeg', .85);
+  }
+  setWorldTime(WORLD.t, WORLD.tod);
+}
+
+/* ---------------- director: scripted camera moves ---------------- */
+const FRONT_D = ROAD.A + ROAD.W / 2 + 2.6;
+const TARGETS = {
+  ahe: { n: '阿禾', p: () => aheHead(new THREE.Vector3()) },
+  tower: { n: '钟楼', p: () => CLOCK.pos.clone() },
+  fountain: { n: '喷泉', p: () => new THREE.Vector3(0, 2.2, 0) },
+  post: { n: '邮差', p: () => CHAR.bike.position.clone().add(new THREE.Vector3(0, 1.4, 0)) },
+  bakery: { n: '面包店', p: () => new THREE.Vector3(FRONT_D - .2, 3.0, 0) },
+};
+function aim(from, to) { const d = to.clone().sub(from); return { yaw: Math.atan2(-d.x, -d.z), pitch: Math.atan2(d.y, Math.hypot(d.x, d.z)), dist: d.length() }; }
+function safeXZ(p) { const [x, z] = collide(p.x, p.z, .25); p.x = x; p.z = z; return p; }
+const MOVES = [
+  { id: 'push', n: '推', en: 'Dolly in', claim: '机位向主体靠近：透视关系在变，背景相对“后退”，观众被带进去。', dur: 4 },
+  { id: 'pull', n: '拉', en: 'Dolly out', claim: '机位后退：主体越来越小、环境逐渐揭示，常用于收尾或揭示信息。', dur: 4 },
+  { id: 'zoom', n: '变焦推', en: 'Zoom in', claim: '机位不动只改焦距：画面整体被“放大”，前后景的比例不变——和推镜头的本质区别。', dur: 4 },
+  { id: 'pan', n: '摇', en: 'Pan', claim: '三脚架不动，镜头水平转动：模拟人转头看过去。', dur: 4 },
+  { id: 'tilt', n: '俯仰', en: 'Tilt', claim: '机位不动，镜头上下转：从脚下仰到钟面，强调高度与仰望感。', dur: 4 },
+  { id: 'truck', n: '移', en: 'Truck', claim: '机位横向平移、镜头朝向不变：前景比背景掠过得更快，这就是视差。', dur: 4 },
+  { id: 'follow', n: '跟', en: 'Follow', claim: '机位随运动主体一起走：主体在画面里相对稳定，世界从身边流过。', dur: 5 },
+  { id: 'crane', n: '升降', en: 'Crane', claim: '机位垂直升起：视角从平视变俯视，画面从人物交代到环境。', dur: 4.5 },
+  { id: 'arc', n: '环绕', en: 'Arc', claim: '围着主体转：背景在主体身后旋转，制造“这一刻很重要”的仪式感。', dur: 5 },
+  { id: 'vertigo', n: '希区柯克变焦', en: 'Dolly zoom', claim: '一边后退一边变焦，主体大小不变而背景剧烈变形——眩晕、顿悟的经典语言。', dur: 4.5 },
+  { id: 'whip', n: '甩', en: 'Whip pan', claim: '极快地摇到另一个主体：快门期间的运动把画面拉成拖影，是转场的剪辑点。', dur: 2.6 },
+  { id: 'dutch', n: '荷兰角', en: 'Dutch angle', claim: '让地平线倾斜：画面失衡，传达不安与异样。', dur: 3.5 },
+  { id: 'rack', n: '移焦', en: 'Rack focus', claim: '机位和构图都不动，只把焦点从前景移到主体：把观众的注意力“递”过去。', dur: 4 },
+];
+function buildMove(id, tgtKey) {
+  const T0 = TARGETS[tgtKey].p(); const L = lens(); const bp = basePose({}); const P0 = new THREE.Vector3(bp.x, bp.y, bp.z);
+  const tgt = () => (tgtKey === 'post' ? TARGETS.post.p() : T0);
+  const f0 = cam.focal; const a0 = aim(P0, T0); const flat = new THREE.Vector3(T0.x - P0.x, 0, T0.z - P0.z).normalize(); const side = new THREE.Vector3(-flat.z, 0, flat.x);
+  const lookFrom = (p, t, extra = {}) => Object.assign({ x: p.x, y: p.y, z: p.z, yaw: aim(p, t).yaw, pitch: aim(p, t).pitch, roll: 0, focal: f0, focus: aim(p, t).dist * Math.cos(0) }, extra);
+  let fn, restore = null, af = true;
+  switch (id) {
+    case 'push': fn = u => lookFrom(safeXZ(P0.clone().lerp(T0.clone().setY(P0.y), ease(u) * Math.min(.62, 1 - 2.2 / Math.max(a0.dist, 2.5)))), tgt()); break;
+    case 'pull': fn = u => lookFrom(safeXZ(P0.clone().lerp(T0.clone().setY(P0.y), (1 - ease(u)) * Math.min(.62, 1 - 2.2 / Math.max(a0.dist, 2.5)))), tgt()); break;
+    case 'zoom': fn = u => lookFrom(P0, tgt(), { focal: L.fMin * Math.pow(Math.min(L.fMax / L.fMin, 3.2), ease(u)) }); break;
+    case 'pan': fn = u => { const o = lookFrom(P0, tgt()); o.yaw = a0.yaw + (1 - ease(u)) * .95; return o; }; break;
+    case 'tilt': fn = u => { const top = T0.clone(); top.y += .6; const bot = T0.clone(); bot.y = .2; const o = lookFrom(P0, bot.lerp(top, ease(u))); return o; }; break;
+    case 'truck': fn = u => { const p = safeXZ(P0.clone().addScaledVector(side, -3 + 6 * ease(u))); return { x: p.x, y: p.y, z: p.z, yaw: a0.yaw, pitch: a0.pitch, roll: 0, focal: f0, focus: a0.dist }; }; break;
+    case 'follow': fn = u => { const b = CHAR.bike; const fw = new THREE.Vector3(Math.sin(b.rotation.y), 0, Math.cos(b.rotation.y)); const sd = new THREE.Vector3(fw.z, 0, -fw.x);
+      const p = b.position.clone().addScaledVector(fw, -3.6).addScaledVector(sd, 1.3); p.y = 1.55; return lookFrom(p, b.position.clone().addScaledVector(fw, 1.5).setY(1.2)); }; break;
+    case 'crane': fn = u => { const p = P0.clone(); p.y = lerp(.45, 7.5, ease(u)); return lookFrom(p, tgt()); }; break;
+    case 'arc': { const r = clamp(a0.dist, 3, 9), ang0 = Math.atan2(P0.x - T0.x, P0.z - T0.z);
+      fn = u => { const a = ang0 + ease(u) * 2.1; const p = safeXZ(new THREE.Vector3(T0.x + Math.sin(a) * r, P0.y, T0.z + Math.cos(a) * r)); return lookFrom(p, tgt()); }; break; }
+    case 'vertigo': { const d0 = clamp(a0.dist, 2.5, 6), k = 2.6, fS = Math.min(L.fMax / k, 30); const back = flat.clone().negate();
+      fn = u => { const d = d0 * lerp(1, k, ease(u)); const p = safeXZ(T0.clone().setY(P0.y).addScaledVector(back, d)); return lookFrom(p, tgt(), { focal: fS * d / d0 }); }; break; }
+    case 'whip': { const other = tgtKey === 'tower' ? TARGETS.bakery.p() : TARGETS.tower.p(); const b1 = aim(P0, other); let dy = b1.yaw - a0.yaw; while (dy > Math.PI) dy -= TAU; while (dy < -Math.PI) dy += TAU;
+      fn = u => { const s = u * 2.6; const k = smooth(clamp((s - 1.05) / .3, 0, 1)); return { x: P0.x, y: P0.y, z: P0.z, yaw: a0.yaw + dy * k, pitch: lerp(a0.pitch, b1.pitch, k), roll: 0, focal: f0, focus: lerp(a0.dist, b1.dist, k) }; }; break; }
+    case 'dutch': fn = u => lookFrom(P0, tgt(), { roll: ease(u) * .34 }); break;
+    case 'rack': { const near = Math.max(lensAt(cam.focal).mfd + .3, 1.2); const saved = { mode: cam.mode, N: cam.N, af: cam.af }; cam.mode = 'A'; cam.N = lensAt(cam.focal).nMin; cam.af = 'MF'; af = false;
+      restore = () => { Object.assign(cam, saved); };
+      fn = u => lookFrom(P0, tgt(), { focus: lerp(near, a0.dist, smooth(clamp((u - .25) / .5, 0, 1))) }); break; }
+  }
+  const mv = MOVES.find(m => m.id === id);
+  return { id, dur: mv.dur, start: WORLD.t, restore, af: false, pose(out) { const u = clamp(((DIRECTOR.tNow != null ? DIRECTOR.tNow : WORLD.t) - this.start) / this.dur, 0, 1); const o = fn(u); Object.assign(out, o); if (o.focus && cam.af !== 'MF' || id === 'rack') cam.focusD = cam.focusGoal = Math.max(.3, o.focus); return out; } };
+}
+function previewMove(id, tgt) { endMove(); const m = buildMove(id, tgt); m.start = WORLD.t; DIRECTOR.active = m; DIRECTOR.name = MOVES.find(x => x.id === id).n; if (!cam.extended && lens().retract) cam.extended = true; if (!camUp) setCamUp(true); }
+function endMove() { const a = DIRECTOR.active; if (!a) return; DIRECTOR.active = null; DIRECTOR.tNow = null; if (a.restore) a.restore(); }
+async function recordMove(id, tgt, stopmo) {
+  if (lens().retract && !cam.extended) cam.extended = true;
+  endMove(); const m = buildMove(id, tgt); const t0 = WORLD.t; m.start = t0; DIRECTOR.active = m; const saveFrozen = WORLD.frozen;
+  const fps = stopmo ? 12 : 24; const n = Math.round(m.dur * fps);
+  toast(`正在渲染「${MOVES.find(x => x.id === id).n}」${stopmo ? '定格版' : ''}：${n} 帧…`, '--move');
+  try {
+    await renderSequence({ n, fps, kind: stopmo ? 'stop' : 'clip', label: MOVES.find(x => x.id === id).n + (stopmo ? '·定格' : '') + '·' + TARGETS[tgt].n,
+      setup: i => { const t = t0 + i / fps; DIRECTOR.tNow = t; return stopmo ? { t, dur: 1 / fps, frozen: t } : { t, dur: 1 / fps }; }, shutterFrac: stopmo ? .02 : .5,
+      onProgress: p => { EXPBAR.show = true; EXPBAR.p = p; EXPBAR.label = '渲染镜头'; } });
+  } finally { EXPBAR.show = false; endMove(); WORLD.frozen = saveFrozen; WORLD.t = t0 + m.dur; }
+  toast('镜头已存入片夹，按 P 或打开「放映」面板查看', '--film');
+}
+
+/* ---------------- shot sizes (景别) & angles ---------------- */
+const SIZES = [
+  { id: 'els', n: '大远景', en: 'ELS', vis: 30, cy: 1.2, f: 16, claim: '人很小，环境是主角：交代时间、地点和孤独感。' },
+  { id: 'ls', n: '远景', en: 'LS', vis: 6.5, cy: 1.0, f: 16, claim: '看得清人在做什么，但环境仍占大部分。' },
+  { id: 'fs', n: '全景', en: 'FS', vis: 2.05, cy: .95, f: 24, claim: '头到脚完整入画：动作、姿态、服装一览无余。' },
+  { id: 'ms', n: '中景', en: 'MS', vis: 1.05, cy: 1.35, f: 35, claim: '膝盖或腰以上：对话和肢体语言最常用的景别。' },
+  { id: 'mcu', n: '近景', en: 'MCU', vis: .62, cy: 1.52, f: 50, claim: '胸口以上：表情开始成为信息的中心。' },
+  { id: 'cu', n: '特写', en: 'CU', vis: .34, cy: 1.63, f: 50, claim: '只有脸：情绪被放大，观众与角色的距离消失。' },
+  { id: 'ecu', n: '大特写', en: 'ECU', vis: .13, cy: 1.66, f: 50, claim: '一双眼睛或一个细节：强烈、紧张、不可回避。' },
+];
+const SHOTSIZE = { label: '', mode: 'move' };
+function aheFront() { const r = CHAR.ahe.root.rotation.y; return new THREE.Vector3(Math.sin(r), 0, Math.cos(r)); }
+function goShotSize(id) {
+  const S = SIZES.find(s => s.id === id); const R0 = CHAR.ahe.root.position; const L = lens(); endMove(); PGM = 0;
+  if (cam.rig === 'tripod') { cam.rig = 'hand'; cam.tripodPos = null; }
+  if (L.retract) cam.extended = true;
+  const Hs = cam.movie ? SENSOR_W * 9 / 16 : SENSOR_H; let f, d;
+  if (SHOTSIZE.mode === 'move') { f = clamp(S.f, L.fMin, L.fMax); d = S.vis * f / Hs; }
+  else { d = 6; f = d * Hs / S.vis; if (f < L.fMin || f > L.fMax) { toast(`这个景别在 6 米外需要 ${Math.round(f)}mm（等效 ${Math.round(f * CROP)}mm），${L.short} 做不到——这就是为什么要换镜头或者挪机位`, '--shot'); f = clamp(f, L.fMin, L.fMax); } }
+  let dir = aheFront(); if (d > 11) dir = new THREE.Vector3(.62, 0, .78).normalize();
+  const p = R0.clone().addScaledVector(dir, d); const Hy = aheHead(new THREE.Vector3()).y, top = Hy + .17;
+  const cyW = S.id === 'ecu' ? Hy + .03 : S.vis > 1.9 ? R0.y + (top - R0.y) * .5 : top - S.vis * .5; const target = new THREE.Vector3(R0.x, cyW, R0.z);
+  const [x, z] = collide(p.x, p.z, .3); player.x = x; player.z = z; const gy = groundAt(x, z);
+  player.hOff = clamp(target.y - gy - player.h, -1.2, 1.5);
+  const a = aim(new THREE.Vector3(x, gy + player.h + player.hOff, z), target); player.yaw = a.yaw; player.pitch = a.pitch; player.roll = 0;
+  cam.focal = f; cam.focusD = cam.focusGoal = Math.max(a.dist, lensAt(f).mfd); if (!camUp) setCamUp(true);
+  toast(`${S.n}：${SHOTSIZE.mode === 'move' ? '走到' : '站在'} ${d.toFixed(1)} 米外，${Math.round(f)}mm（等效 ${Math.round(f * CROP)}mm）`, '--shot');
+}
+function goAngle(id) {
+  const R0 = CHAR.ahe.root.position; endMove(); PGM = 0; if (lens().retract) cam.extended = true; if (cam.rig === 'tripod') { cam.rig = 'hand'; cam.tripodPos = null; }
+  const dir = aheFront(); let d = 3.2, h = 1.5, roll = 0, tgtY = 1.25; cam.focal = clamp(24, lens().fMin, lens().fMax);
+  if (id === 'eye') { h = 1.58; tgtY = 1.5; } if (id === 'low') { h = .35; tgtY = 1.45; d = 2.6; } if (id === 'high') { h = 4.2; d = 3; tgtY = 1.0; }
+  if (id === 'bird') { h = 17; d = .6; tgtY = 0; cam.focal = lens().fMin; } if (id === 'dutch') { h = 1.5; roll = .3; tgtY = 1.35; }
+  const p = R0.clone().addScaledVector(dir, d); const [x, z] = collide(p.x, p.z, .3); player.x = x; player.z = z; const gy = groundAt(x, z); player.hOff = h - player.h + (gy > .1 ? 0 : 0);
+  const eyeP = new THREE.Vector3(x, gy + player.h + player.hOff, z); const a = aim(eyeP, new THREE.Vector3(R0.x, R0.y + tgtY, R0.z)); player.yaw = a.yaw; player.pitch = a.pitch; player.roll = roll;
+  cam.focusD = cam.focusGoal = a.dist; if (!camUp) setCamUp(true);
+}
+function detectShotSize(camera) {
+  if (!CHAR.ahe) return ''; const R0 = CHAR.ahe.root.position; const top = aheHead(new THREE.Vector3()).add(new THREE.Vector3(0, .12, 0)); const feet = new THREE.Vector3(R0.x, R0.y, R0.z);
+  const a = top.clone().project(camera), b = feet.clone().project(camera); if (a.z > 1 || b.z > 1) return '';
+  if (Math.abs(a.x) > 1.05 || a.y < -1 || a.y > 1.35) return '';
+  const span = a.y - b.y; if (span <= 0) return ''; const visM = 2 / span * (top.y - feet.y); // metres of the person covered by the frame height
+  if (visM > 18) return '大远景'; if (visM > 4.2) return '远景'; if (b.y > -1.02) return '全景';
+  if (visM > .85) return '中景'; if (visM > .5) return '近景'; if (visM > .2) return '特写'; return '大特写';
+}
+
+/* ---------------- world control ---------------- */
+function todLabel(t) { const h = Math.floor(t), m = Math.floor((t - h) * 60); return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`; }
+function setTod(t, force) { WORLD.tod = clamp(t, 5.5, 23.9); applyTimeOfDay(WORLD.tod, force); worldT = -1; }
+async function timeLapse(fromT, toT, n) {
+  const t0 = WORLD.t, save = WORLD.tod; toast(`延时摄影：${todLabel(fromT)} → ${todLabel(toT)}，${n} 帧`, '--set');
+  try { await renderSequence({ n, fps: 24, kind: 'lapse', label: `延时 ${todLabel(fromT)}–${todLabel(toT)}`,
+      setup: i => { const k = i / (n - 1); setTod(lerp(fromT, toT, k), true); return { t: t0 + i * 2.2, dur: 1 / 24 }; }, shutterFrac: .5, onProgress: p => { EXPBAR.show = true; EXPBAR.p = p; EXPBAR.label = '延时渲染'; } });
+  } finally { EXPBAR.show = false; setTod(save, true); WORLD.t = t0; }
+  toast('延时片段已存入片夹', '--film');
+}
+function placeCam() {
+  if (CAMS.length >= 4) { toast('最多 4 个机位；在片场面板里可以移除', '--set'); return; }
+  const bp = basePose({}); const c = { x: bp.x, y: bp.y, z: bp.z, yaw: bp.yaw, pitch: bp.pitch, focal: cam.focal, cam: new THREE.PerspectiveCamera(40, 16 / 9, .1, 2000) }; CAMS.push(c);
+  const post = new THREE.Group(); post.position.set(c.x, 0, c.z); const m = mat('tripodM', { color: lin('#2a2c2f'), roughness: .5, metalness: .4 });
+  for (let i = 0; i < 3; i++) { const l = mesh(new THREE.CylinderGeometry(.015, .012, c.y, 6), m, 0, c.y / 2, 0, post); l.rotation.z = .22; l.rotation.y = i / 3 * TAU; l.position.x = Math.sin(i / 3 * TAU) * .2; l.position.z = Math.cos(i / 3 * TAU) * .2; }
+  const head = mesh(new THREE.BoxGeometry(.13, .09, .07), mat('camBody', { color: lin('#18191b'), roughness: .6 }), 0, c.y, 0, post); head.rotation.y = c.yaw;
+  const lamp = mesh(new THREE.SphereGeometry(.012, 8, 6), new THREE.MeshBasicMaterial({ color: 0xff3020 }), 0, c.y + .06, 0, post); c.tally = lamp;
+  DYN.add(post); c.obj = post; buildMonitors(); toast(`机位 ${CAMS.length} 已架设：数字键 ${CAMS.length} 切到它，0 切回手持`, '--set');
+}
+function removeCam(i) { const c = CAMS[i]; if (!c) return; DYN.remove(c.obj); CAMS.splice(i, 1); if (PGM > CAMS.length) PGM = 0; buildMonitors(); }
+function buildMonitors() { const box = $('#monitors'); box.innerHTML = ''; MON.length = 0;
+  CAMS.forEach((c, i) => { const d = document.createElement('div'); d.className = 'mon' + (PGM === i + 1 ? ' pgm' : ''); d.innerHTML = `<span>CAM ${i + 1} · ${Math.round(c.focal * CROP)}mm</span>`; d.onclick = () => setPGM(i + 1); box.appendChild(d); MON.push(d); }); }
+function setPGM(n) { if (n > CAMS.length) return; PGM = n; buildMonitors(); CAMS.forEach((c, i) => c.tally.visible = PGM === i + 1); osdMsg(n ? `切到机位 ${n}` : '切回手持机位', 900); }
+
+/* ---------------- operator update ---------------- */
+function updatePlayer(dt) {
+  const locked = DIRECTOR.active || PGM > 0 || (cam.rig === 'tripod' && cam.tripodPos);
+  let fx = 0, fz = 0; if (!locked) { if (keys.has('KeyW')) fz -= 1; if (keys.has('KeyS')) fz += 1; if (keys.has('KeyA')) fx -= 1; if (keys.has('KeyD')) fx += 1; }
+  if (TOUCH.dir) { fx += TOUCH.dir[0]; fz += TOUCH.dir[1]; }
+  const len = Math.hypot(fx, fz); const sp = (keys.has('ShiftLeft') || keys.has('ShiftRight') ? 4.2 : 1.7) * (cam.rig === 'gimbal' ? .8 : 1);
+  if (len > 0) { fx /= len; fz /= len; const s = Math.sin(player.yaw), c = Math.cos(player.yaw); const wx = fx * c + fz * s, wz = -fx * s + fz * c;
+    const [x, z] = collide(player.x + wx * sp * dt, player.z + wz * sp * dt); player.x = x; player.z = z; player.walk += dt * sp * 3.4; }
+  player.moving = lerp(player.moving, len > 0 ? 1 : 0, 1 - Math.exp(-dt * 8));
+  if (!locked) { if (keys.has('KeyQ')) player.hOff = clamp(player.hOff + dt * .9, -1.25, 1.6); if (keys.has('KeyC')) player.hOff = clamp(player.hOff - dt * .9, -1.25, 1.6); }
+  player.breath = keys.has('KeyH') ? 1 : 0;
+  // zoom & focus rings held
+  if (keys.has('KeyZ') || keys.has('KeyX')) zoomBy((keys.has('KeyX') ? 1 : -1) * dt * 1.2);
+  if (keys.has('BracketLeft') || keys.has('BracketRight')) focusBy((keys.has('BracketRight') ? 1 : -1) * dt * 1.4);
+}
+function zoomBy(k) { const L = lens(); if (L.fMin === L.fMax) { osdMsg('定焦镜头：只能用脚变焦', 900); return; }
+  if (L.retract && !cam.extended) { cam.extended = true; osdMsg('镜头已展开', 800); click('tick'); return; }
+  const f0 = cam.focal; cam.focal = clamp(cam.focal * Math.exp(k), L.fMin, L.fMax);
+  if (L.retract && f0 <= L.fMin + .01 && k < 0 && cam.focal <= L.fMin + .01) { ZOOMRETRACT.t += Math.abs(k); if (ZOOMRETRACT.t > .6) { cam.extended = false; ZOOMRETRACT.t = 0; osdMsg('镜头已收起（关机状态）', 1200); } } else ZOOMRETRACT.t = 0; }
+const ZOOMRETRACT = { t: 0 };
+function focusBy(k) { if (cam.af !== 'MF') { cam.af = 'MF'; osdMsg('转动对焦环：切换到手动对焦 MF', 1200); } cam.focusGoal = clamp(cam.focusGoal * Math.exp(k), lensAt(cam.focal).mfd, 1000); cam.focusD = cam.focusGoal; }
+
+/* ---------------- dials & buttons ---------------- */
+function dial(which, steps) {
+  if (IMENU.open) { imenuChange(steps); return; }
+  const m = cam.mode;
+  if (keys.has('KeyI')) { if (which === 'main') { const i = nearestIdx(ISOS, cam.iso); cam.iso = ISOS[clamp(i + steps, 0, ISOS.length - 1)]; cam.autoIso = false; osdMsg(`ISO ${isoLabel(cam.iso)}`, 700); } else { cam.autoIso = !cam.autoIso; osdMsg(cam.autoIso ? 'ISO 感光度自动控制：开' : 'ISO 自动：关', 900); } return; }
+  if (keys.has('KeyE')) { cam.comp = clamp(Math.round((cam.comp + steps / 3) * 3) / 3, -5, 5); osdMsg(`曝光补偿 ${cam.comp > 0 ? '+' : ''}${cam.comp.toFixed(1)} EV`, 700); return; }
+  if (m === 'AUTO') { osdMsg('AUTO 档：相机全权决定曝光', 800); return; }
+  if (m === 'P') { if (which === 'main') { cam.shift = clamp(cam.shift + steps / 3, -4, 4); osdMsg(cam.shift ? `柔性程序 P* ${cam.shift > 0 ? '→小光圈' : '→大光圈'}` : '柔性程序复位', 700); } return; }
+  const tvStep = () => { const i = nearestIdx(TV, cam.t); cam.t = TV[clamp(i - steps, 0, TV.length - 1)]; };
+  const avStep = () => { const [lo, hi] = avIdxRange(); const i = nearestIdx(AV, cam.N); cam.N = AV[clamp(i + steps, lo, hi)]; };
+  if (m === 'S') { if (which === 'main') tvStep(); else { osdMsg('S 档：光圈由相机决定', 700); } }
+  if (m === 'A') { avStep(); if (which === 'main' && !HINTS.aMain) { HINTS.aMain = 1; toast('真机 A 档默认用副指令拨盘(Shift+滚轮)改光圈；这里主拨盘也能改', '--body'); } }
+  if (m === 'M') { if (which === 'main') tvStep(); else avStep(); }
+  if (cam.movie && (m === 'S' || m === 'M')) { cam.t = Math.min(cam.t, 1 / cam.fps); }
+}
+const HINTS = {};
+function setMode(dir) { const i = MODES.indexOf(cam.mode); cam.mode = MODES[(i + dir + MODES.length) % MODES.length]; cam.shift = 0; if (cam.mode === 'AUTO') { cam.wb = 'AUTO'; } osdMsg(`模式拨盘 → ${cam.mode}`, 800); click('tick'); onModeChange(); }
+function setCamUp(v) { camUp = v; $('#osd').classList.toggle('on', v); $('#chips').style.display = v ? 'none' : 'flex'; onModeChange(); }
+function cycleRig() {
+  const order = ['hand', 'gimbal', 'tripod']; const i = order.indexOf(cam.rig); cam.rig = order[(i + 1) % 3];
+  if (cam.rig === 'tripod') { const bp = { x: player.x, z: player.z, y: groundAt(player.x, player.z) + player.h + player.hOff }; cam.tripodPos = bp; toast('三脚架已架好：WASD 锁定，鼠标控制云台；按 T 收起', '--rig'); }
+  else { cam.tripodPos = null; toast(cam.rig === 'gimbal' ? '换上三轴稳定器：走动时画面平稳，手抖被电机抵消' : '回到手持', '--rig'); }
+  onModeChange();
+}
+function shutterPress() {
+  if (DIRECTOR.active) return; if (!canShoot()) return;
+  if (cam.movie) { REC.on ? recStop() : recStart(); return; }
+  if (cam.af === 'AF-S' && cam.afState !== 'ok') { poseSensor(WORLD.t, SENS); if (autofocus(SENS, true) === false && cam.afState === 'fail') { osdMsg('对焦失败：太暗或没有反差（快门优先释放）', 1000); } }
+  if (cam.release === 'T2' || cam.release === 'T10') { const n = cam.release === 'T2' ? 2 : 10; TIMER.left = n; TIMER.on = true; return; }
+  if (cam.release === 'CH' || cam.release === 'CL') { BURST.on = true; BURST.next = 0; return; }
+  startExposure();
+}
+function shutterRelease() { BURST.on = false; if (BULB.on) { BULB.on = false; startExposure({ bulbT: Math.max(.5, (performance.now() - BULB.t0) / 1000) }); } }
+const TIMER = { on: false, left: 0, acc: 0 }, BURST = { on: false, next: 0 }, BULB = { on: false, t0: 0 };
+
+/* ---------------- on-screen display ---------------- */
+const OSD = {}; ['oMode', 'oPC', 'oWB', 'oMet', 'oQ', 'oVR', 'oAF', 'oArea', 'oTv', 'oAv', 'oISO', 'oComp', 'oExtra', 'oCnt', 'fbox', 'facebox', 'osdmsg', 'timer', 'expbar', 'expTxt', 'expFill', 'hist', 'shotTag', 'rec', 'recT', 'level', 'grid', 'meterScale', 'lcdbar', 'chipsrow', 'osd'].forEach(id => OSD[id] = document.getElementById(id));
+(function buildScale() { let h = ''; for (let i = -9; i <= 9; i++) h += `<i class="${i % 3 === 0 ? 'maj' : ''}"></i>`; OSD.meterScale.innerHTML = h + '<b id="mInd"></b>'; OSD.mInd = document.getElementById('mInd'); })();
+let msgTimer = 0;
+function osdMsg(t, ms = 1200) { OSD.osdmsg.textContent = t; OSD.osdmsg.style.display = 'block'; clearTimeout(msgTimer); msgTimer = setTimeout(() => OSD.osdmsg.style.display = 'none', ms); if (!camUp) toast(t, '--body', ms); }
+function updateOSD() {
+  const E = EXPO; const r = VIEW.rect; const o = OSD.osd;
+  if (r) { o.style.left = r.x + 'px'; o.style.top = r.y + 'px'; o.style.width = r.w + 'px'; o.style.height = r.h + 'px'; }
+  const setT = (el, t) => { if (el.textContent !== t) el.textContent = t; };
+  setT(OSD.oMode, (cam.movie ? '🎬 ' : '') + cam.mode + (cam.mode === 'P' && cam.shift ? '*' : ''));
+  setT(OSD.oPC, cam.pc); setT(OSD.oWB, cam.wb === 'K' ? cam.wbK + 'K' : cam.wb === 'AUTO' ? 'AWB' : cam.wb); setT(OSD.oMet, METERS[cam.meter]);
+  setT(OSD.oQ, cam.movie ? `${cam.fps}p · ${Math.round(E.t * cam.fps * 360)}°` : 'JPEG 精细'); setT(OSD.oVR, lens().vr ? (cam.vr ? 'VR' : 'VR关') : '');
+  setT(OSD.oAF, cam.af); setT(OSD.oArea, AFAREAS[cam.area]);
+  setT(OSD.oTv, tvLabel(E.t)); OSD.oTv.classList.toggle('blink', E.blinkT); setT(OSD.oAv, 'F' + E.N); OSD.oAv.classList.toggle('blink', E.blinkN);
+  setT(OSD.oISO, (cam.autoIso || cam.mode === 'AUTO' ? 'ISO-A ' : 'ISO ') + isoLabel(E.iso));
+  setT(OSD.oComp, cam.comp ? (cam.comp > 0 ? '+' : '') + cam.comp.toFixed(1) : '');
+  setT(OSD.oExtra, `${Math.round((POSE.focal || cam.focal) * CROP)}mm等效 · ${RIGS[cam.rig]}${cam.release !== 'S' ? ' · ' + RELEASES[cam.release] : ''}`);
+  setT(OSD.oCnt, `[ ${Math.max(0, 999 - cam.count)} ]`);
+  // exposure indicator: in M it shows deviation; elsewhere only when out of range
+  const dev = clamp(-E.dev, -3, 3); OSD.mInd.style.left = `calc(${(dev + 3) / 6 * 100}% )`; OSD.meterScale.style.visibility = (cam.mode === 'M' || Math.abs(E.dev) > .34 || E.blinkT || E.blinkN) ? 'visible' : 'hidden';
+  // focus box
+  const fb = OSD.fbox; let fu = cam.fx, fv = cam.fy; let face = null;
+  if (cam.area === 'auto' && FRAME % 4 === 0) VIEW.face = faceInFrame(SENS); face = cam.area === 'auto' ? VIEW.face : null;
+  if (face) { fu = face.u; fv = face.v; OSD.facebox.style.display = 'block'; const s = clamp(face.size * 50, 3, 40); Object.assign(OSD.facebox.style, { left: (fu + 1) / 2 * 100 - s * .6 + '%', top: (1 - fv) / 2 * 100 - s + '%', width: s * 1.2 + '%', height: s * 2 * .66 * 1.5 + '%' }); } else OSD.facebox.style.display = 'none';
+  fb.style.display = face || cam.af === 'MF' ? 'none' : 'block'; fb.style.left = (fu + 1) / 2 * 100 + '%'; fb.style.top = (1 - fv) / 2 * 100 + '%';
+  fb.className = cam.afState === 'ok' ? 'ok' : cam.afState === 'fail' ? 'fail' : cam.afState === 'hunt' ? 'hunt' : ''; if (cam.area === 'wide') { fb.style.width = '110px'; fb.style.height = '70px'; } else { fb.style.width = '40px'; fb.style.height = '30px'; }
+  OSD.grid.style.display = cam.grid ? 'block' : 'none';
+  OSD.level.style.display = cam.level ? 'block' : 'none'; if (cam.level) { const roll = (POSE.roll || 0) + (_sh.roll || 0); OSD.level.style.transform = `translate(-50%,-50%) rotate(${-roll / DEG}deg)`; OSD.level.classList.toggle('flat', Math.abs(roll) < .6 * DEG); }
+  OSD.rec.style.display = REC.on ? 'block' : 'none'; if (REC.on) { const s = Math.floor(WORLD.t - REC.t0); setT(OSD.recT, `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`); }
+  $('#curtain').style.opacity = EXPBAR.show && camUp && JOB ? '.9' : $('#curtain').style.opacity === '.9' ? '0' : $('#curtain').style.opacity;
+  OSD.expbar.style.display = EXPBAR.show ? 'block' : 'none'; if (EXPBAR.show) { setT(OSD.expTxt, EXPBAR.label); OSD.expFill.style.width = EXPBAR.p * 100 + '%'; }
+  OSD.timer.style.display = TIMER.on ? 'block' : 'none'; if (TIMER.on) setT(OSD.timer, String(Math.ceil(TIMER.left)));
+  setT(OSD.shotTag, SHOTSIZE.label ? `景别：${SHOTSIZE.label}` : '景别：画面里没有阿禾'); 
+  OSD.hist.style.display = cam.dispMode === 0 ? 'block' : 'none';
+  if (cam.dispMode === 0 && FRAME % 6 === 0 && camUp) drawHist(histogramFrom(livePipe.ldr));
+  OSD.osd.querySelector('.top').style.display = cam.dispMode === 2 ? 'none' : 'flex';
+}
+function drawHist(b) { const g = OSD.hist.getContext('2d'); g.clearRect(0, 0, 170, 64); let mx = 1; for (let c = 0; c < 3; c++) for (let i = 1; i < 63; i++) mx = Math.max(mx, b[c][i]);
+  g.globalCompositeOperation = 'lighter'; ['#ff4040', '#40ff60', '#4080ff'].forEach((col, c) => { g.fillStyle = col; g.globalAlpha = .6; g.beginPath(); g.moveTo(3, 62); for (let i = 0; i < 64; i++) g.lineTo(3 + i * 164 / 63, 62 - Math.min(1, Math.sqrt(b[c][i] / mx)) * 56); g.lineTo(167, 62); g.fill(); });
+  g.globalCompositeOperation = 'source-over'; g.globalAlpha = 1; g.strokeStyle = 'rgba(255,255,255,.35)'; g.strokeRect(2.5, 5.5, 165, 57); }
+function updateLCDbar() {
+  const E = EXPO; const el = OSD.lcdbar; if (camUp) { el.style.display = 'none'; return; } el.style.display = 'flex';
+  const txt = `<span>${cam.movie ? '🎬' : ''}${cam.mode}</span><span>${tvLabel(E.t)}</span><span>F${E.N}</span><span>ISO ${isoLabel(E.iso)}</span><span>${Math.round(cam.focal)}mm</span><small>${RIGS[cam.rig]} · 右键 / V 举到眼前取景</small>`;
+  if (el._t !== txt) { el.innerHTML = txt; el._t = txt; }
+  const chips = [[todLabel(WORLD.tod), '--scene'], [WORLD.frozen ? '世界已冻结' : WORLD.speed !== 1 ? `时间 ×${WORLD.speed}` : '', '--scene'], [REC.on ? '● 录制中' : '', '--rec'], [STOP.active ? `定格 ${STOP.shot.frames.length} 帧` : '', '--set'], [PGM ? `导播：机位 ${PGM}` : '', '--set'], [DIRECTOR.active ? `运镜：${DIRECTOR.name}` : '', '--move']];
+  const h = chips.filter(c => c[0]).map(c => `<span class="chip"><i style="--c:var(${c[1]})"></i>${c[0]}</span>`).join('');
+  if (OSD.chipsrow._h !== h) { OSD.chipsrow.innerHTML = h; OSD.chipsrow._h = h; }
+}
+
+/* ---------------- main loop ---------------- */
+let FRAME = 0, lastT = performance.now(), READY = false;
+function tick(now) {
+  requestAnimationFrame(tick); if (!READY) return;
+  const dt = Math.min(.1, (now - lastT) / 1000); lastT = now; FRAME++;
+  if (!WORLD.frozen && !STOP.active) WORLD.t += dt * WORLD.speed;
+  if (WORLD.todSpeed) setTod(WORLD.tod + dt * WORLD.todSpeed / 60);
+  updatePlayer(dt);
+  if (DIRECTOR.active) { DIRECTOR.tNow = WORLD.t; if ((WORLD.t - DIRECTOR.active.start) / DIRECTOR.active.dur > 1.25) endMove(); }
+  if (WORLD.dirty) { WORLD.dirty = false; applyTimeOfDay(WORLD.tod, true); }
+  // meter + AF through the sensor
+  SENS.aspect = sensorAspect(); poseSensor(WORLD.t, SENS); setWorldTime(WORLD.t, WORLD.tod);
+  if (FRAME % 3 === 0) { const EVm = meterFrom(SENS); EXPO.EVm = FRAME < 10 ? EVm : lerp(EXPO.EVm, EVm, .5); }
+  if (!camUp && FRAME % 3 === 1) { // eye adaptation (slow, limited range)
+    const cells = meterScene(EYE); const lg = meterRead(cells, 'matrix'); const ls = log2(WORLD.sceneScale); const phys = lg - ls;
+    const want = Math.max(phys * .8 - 2.4 * .2, -10.5) + ls; eyeLog = lerp(eyeLog, want, FRAME < 20 ? 1 : .08); }
+  resolveExposure();
+  if (cam.af === 'AF-C' && FRAME % 5 === 0 || (DIRECTOR.active && DIRECTOR.active.af)) autofocus(SENS, false);
+  if (cam.af === 'AF-S' && keys.has('KeyF') && cam.afState !== 'ok' && FRAME % 4 === 0) { cam.afState = 'hunt'; autofocus(SENS, false); }
+  cam.focusD = lerp(cam.focusD, cam.focusGoal, 1 - Math.exp(-dt * (cam.af === 'MF' ? 30 : 14)));
+  if (FRAME % 8 === 0) SHOTSIZE.label = detectShotSize(SENS);
+  // timers & bursts
+  if (TIMER.on) { const p = Math.ceil(TIMER.left); TIMER.left -= dt; if (Math.ceil(TIMER.left) !== p) click('beep'); if (TIMER.left <= 0) { TIMER.on = false; startExposure(); } }
+  if (BURST.on && !JOB && JOBQ.length === 0) { BURST.next -= dt; if (BURST.next <= 0) { BURST.next = cam.release === 'CH' ? 1 / 11 : 1 / 4; startExposure({ silentCurtain: true }); } }
+  renderLive(dt);
+  recTick(); runJobs(JOB && JOB.t > .6 ? 22 : 60);
+  updateHandCamera(dt); updateOSD(); updateLCDbar();
+  if (FRAME % 15 === 0 && PANEL.live) PANEL.live();
+}
+
+/* =====================================================================
+   PART 4 — interface: dock, panels, widgets
+   ===================================================================== */
+function h(tag, attrs = {}, ...kids) { const e = document.createElement(tag); for (const k in attrs) { const v = attrs[k]; if (k === 'on') for (const ev in v) e.addEventListener(ev, v[ev]); else if (k === 'style' && typeof v === 'object') { for (const sk in v) sk.startsWith('--') ? e.style.setProperty(sk, v[sk]) : (e.style[sk] = v[sk]); } else if (k === 'html') e.innerHTML = v; else if (v !== undefined && v !== null && v !== false) e.setAttribute(k, v === true ? '' : v); }
+  for (const c of kids.flat()) if (c != null && c !== false) e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); return e; }
+function btn(label, fn, cls = '') { return h('button', { class: 'btn ' + cls, on: { click: e => { e.stopPropagation(); fn(e); } } }, label); }
+function seg(opts, cur, fn) { const w = h('div', { class: 'seg', role: 'group' }); const set = v => [...w.children].forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === String(v))));
+  opts.forEach(([v, lab]) => w.appendChild(h('button', { 'data-v': v, on: { click: e => { e.stopPropagation(); fn(v); set(v); } } }, lab))); set(cur); w.set = set; return w; }
+function slider(min, max, step, val, fn) { const i = h('input', { type: 'range', min, max, step, value: val }); i.addEventListener('input', () => fn(+i.value)); return i; }
+function card({ claim, viz, note, acts, extra }) { return h('div', { class: 'card' }, h('div', { class: 'claim' }, claim), viz ? h('div', { class: 'viz' }, viz) : null, extra || null, note ? h('div', { class: 'note', html: note }) : null, acts && acts.length ? h('div', { class: 'acts' }, ...acts) : null); }
+function svg(w, hgt, inner) { const d = document.createElement('div'); d.innerHTML = `<svg viewBox="0 0 ${w} ${hgt}" xmlns="http://www.w3.org/2000/svg">${inner}</svg>`; return d.firstChild; }
+let toastT = 0;
+function toast(msg, cvar = '--expo', ms = 3200) { const t = $('#toast'); t.textContent = msg; t.style.setProperty('--tc', `var(${cvar})`); t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), ms); }
+function stripAdd(src) { if (!src) return; const s = $('#strip'); const im = h('img', { src, alt: '' }); s.appendChild(im); while (s.children.length > 6) s.removeChild(s.firstChild); setTimeout(() => { im.style.transition = 'opacity .6s'; im.style.opacity = '0'; setTimeout(() => im.remove(), 700); }, 2600); }
+function onRollChange() { if (PANEL.id === 'film') openPanel('film', true); if (PANEL.id === 'set') PANEL.refresh && PANEL.refresh(); }
+function onModeChange() { if (PANEL.refresh) PANEL.refresh(); }
+
+/* ---------------- dock & panel frame ---------------- */
+const ICONS = {
+  shot: '<rect x="3" y="5" width="18" height="14" rx="1"/><rect x="7" y="8" width="10" height="8"/><rect x="10" y="10" width="4" height="4"/>',
+  move: '<path d="M4 18c4-10 12-10 16-2"/><path d="M17 12l3 4-4 1"/><circle cx="4" cy="18" r="1.5"/>',
+  expo: '<circle cx="12" cy="12" r="8"/><path d="M12 4l3.5 7M20 12l-7.6 1.2M16 18.9l-5.5-5.4M8 18.9l2.2-7.1M4 12l7.2-2.2M8 5.1l5.1 5.4"/>',
+  body: '<rect x="3" y="7" width="18" height="12" rx="2"/><circle cx="12" cy="13" r="3.5"/><path d="M8 7l1.5-3h5L16 7"/>',
+  rig: '<path d="M12 3v7M12 10l-6 11M12 10l6 11M12 10v11"/><rect x="8" y="3" width="8" height="4" rx="1"/>',
+  scene: '<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>',
+  set: '<path d="M3 9h18v11H3z"/><path d="M3 9l2-5 16 3-1 2"/><path d="M8 4.8l-1 4M13 5.6l-1 3.4"/>',
+  film: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M10 9l5 3-5 3z"/>',
+  help: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 1-1 1.7V14"/><circle cx="12" cy="17" r=".6"/>',
+};
+const PANEL = { id: null, live: null, refresh: null };
+const MODS = [];
+function openPanel(id, keepScroll) {
+  const m = MODS.find(x => x.id === id); const p = $('#panel'), body = $('#pbody');
+  if (PANEL.id === id && !keepScroll) { closePanel(); return; }
+  const sc = keepScroll ? body.scrollTop : 0;
+  PANEL.id = id; PANEL.live = null; PANEL.refresh = null;
+  p.style.setProperty('--mod', `var(${m.c})`); $('#ptitle').textContent = m.title; $('#pclaim').textContent = m.claim;
+  body.innerHTML = ''; m.build(body); p.classList.add('open'); body.scrollTop = sc;
+  [...$('#dock').children].forEach(b => b.setAttribute('aria-pressed', String(b.dataset.id === id)));
+}
+function closePanel() { $('#panel').classList.remove('open'); PANEL.id = null; PANEL.live = null; PANEL.refresh = null; [...$('#dock').children].forEach(b => b.setAttribute('aria-pressed', 'false')); }
+function buildDock() { const d = $('#dock'); MODS.forEach((m, i) => { const b = h('button', { 'data-id': m.id, 'aria-pressed': 'false', 'aria-label': m.title, style: { '--c': `var(${m.c})` }, on: { click: () => openPanel(m.id) } });
+  b.innerHTML = `<svg viewBox="0 0 24 24">${ICONS[m.id]}</svg>${m.n}<span class="k">${m.key || ''}</span>`; d.appendChild(b); }); $('#pclose').onclick = closePanel; }
+
+/* ---------------- 景别 ---------------- */
+MODS.push({ id: 'shot', n: '景别', c: '--shot', title: '景别 · 取多少', claim: '景别只回答一个问题：画框里装下了主体的多少。同一个阿禾，框得越紧，情绪越重。', build(b) {
+  const live = h('span', { class: 'pill' }, '—');
+  const ladder = svg(360, 150, SIZES.map((s, i) => { const x = 8 + i * 50; return `<g><rect x="${x}" y="8" width="44" height="100" rx="3" fill="#232830"/>${figure(x + 22, 8, 100, s.vis, s.cy)}<text x="${x + 22}" y="126" fill="#e8ecef" font-size="12" font-weight="700" text-anchor="middle" font-family="Noto Sans SC,sans-serif">${s.n}</text><text x="${x + 22}" y="141" fill="#9aa4ad" font-size="10" text-anchor="middle" font-family="Barlow Condensed,sans-serif">${s.en}</text></g>`; }).join(''));
+  const modeSeg = seg([['move', '移动机位（焦段固定）'], ['zoom', '原地变焦（机位固定）']], SHOTSIZE.mode, v => SHOTSIZE.mode = v);
+  b.appendChild(card({ claim: '七个景别，一次点一个：相机会替你走到正确的位置。', viz: ladder, extra: h('div', { class: 'row', style: { marginTop: '10px' } }, modeSeg),
+    note: '移动机位时，每个景别选一个常用焦段再算距离：<b>距离 = 画面覆盖高度 × 焦距 ÷ 传感器高度(15.7mm)</b>。原地变焦时，距离固定 6 米，你会很快撞上镜头焦段的极限。',
+    acts: SIZES.map(s => btn(s.n, () => goShotSize(s.id))) }));
+  b.appendChild(card({ claim: '取景器里实时判断当前景别——自己走位、变焦，看标签怎么变。', extra: h('div', { class: 'row' }, h('span', { class: 'lbl' }, '当前景别'), live), note: '判断方法：把阿禾的头顶和脚投影到画面上，算出“画框高度相当于她身上的几米”。' }));
+  const cmp = h('canvas', { width: 720, height: 250 });
+  b.appendChild(card({ claim: '“长焦压缩感”不是镜头的魔法，是站得远。', viz: cmp, note: '左：16mm 贴近拍；右：250mm 在 25 米外拍。阿禾一样大，但钟楼的大小天差地别——决定背景有多大的是<b>机位离主体和背景的距离比</b>，焦段只负责裁切。',
+    acts: [btn('拍一组对比', () => perspectivePair(cmp))] }));
+  b.appendChild(card({ claim: '机位高度决定观众和角色的权力关系。', viz: svg(360, 90, angleDiagram()), note: '仰拍让人物高大、有压迫感；俯拍让人物渺小、脆弱；荷兰角让世界失衡。',
+    acts: [['eye', '平视'], ['low', '仰拍'], ['high', '俯拍'], ['bird', '鸟瞰'], ['dutch', '荷兰角']].map(([id, n]) => btn(n, () => goAngle(id))) }));
+  PANEL.live = () => { live.textContent = SHOTSIZE.label || '画面里没有阿禾'; };
+} });
+function figure(cx, top, H, vis, cyW) { // silhouette of 阿禾 cropped to the shot size
+  const pm = H / vis, gy = H / 2 + cyW * pm, hr = .11 * pm;
+  return `<svg x="${cx - 22}" y="${top}" width="44" height="${H}" viewBox="-22 0 44 ${H}" overflow="hidden"><g transform="translate(0 ${gy})">
+    <rect x="${-.2 * pm}" y="${-1.47 * pm}" width="${.4 * pm}" height="${.72 * pm}" rx="${.07 * pm}" fill="#e2a93b"/>
+    <rect x="${-.15 * pm}" y="${-.8 * pm}" width="${.3 * pm}" height="${.8 * pm}" fill="#2d3440"/>
+    <circle cx="0" cy="${-1.53 * pm}" r="${hr}" fill="#e9c4a4"/><path d="M${-hr} ${-1.55 * pm}a${hr} ${hr} 0 0 1 ${2 * hr} 0z" fill="#2a1d17"/>
+    <circle cx="${-.036 * pm}" cy="${-1.52 * pm}" r="${Math.max(.3, .013 * pm)}" fill="#111"/><circle cx="${.036 * pm}" cy="${-1.52 * pm}" r="${Math.max(.3, .013 * pm)}" fill="#111"/>
+    <rect x="${-.11 * pm}" y="${-1.45 * pm}" width="${.22 * pm}" height="${.05 * pm}" fill="#b3262c"/></g></svg>`;
+}
+function angleDiagram() { return `<line x1="10" y1="80" x2="350" y2="80" stroke="#46505a"/><rect x="170" y="44" width="10" height="36" rx="3" fill="#e2a93b"/><circle cx="175" cy="38" r="6" fill="#e9c4a4"/>
+  ${[[60, 72, '仰拍'], [60, 42, '平视'], [95, 10, '俯拍'], [175, 4, '鸟瞰'], [290, 42, '荷兰角']].map(([x, y, t]) => `<rect x="${x - 8}" y="${y - 5}" width="16" height="10" rx="2" fill="#d98a3a"/><line x1="${x}" y1="${y}" x2="175" y2="${y < 20 && x === 175 ? 40 : 55}" stroke="#d98a3a" stroke-dasharray="3 3"/><text x="${x}" y="${y + (y > 60 ? -10 : 20)}" fill="#e8ecef" font-size="11" text-anchor="middle" font-family="Noto Sans SC,sans-serif">${t}</text>`).join('')}`; }
+async function perspectivePair(cv) {
+  const g = cv.getContext('2d'); g.fillStyle = '#15191d'; g.fillRect(0, 0, 720, 250); g.fillStyle = '#9aa4ad'; g.font = '15px sans-serif'; g.textAlign = 'center'; g.fillText('正在拍摄两张对比照…', 360, 125);
+  const save = { lensI: cam.lensI, focal: cam.focal, ext: cam.extended, rig: cam.rig, tp: cam.tripodPos, mode: cam.mode, px: player.x, pz: player.z, yaw: player.yaw, pitch: player.pitch, hOff: player.hOff, fr: WORLD.frozen, up: camUp };
+  const R0 = CHAR.ahe.root.position, T = CLOCK.pos; const dir = new THREE.Vector3(R0.x - T.x, 0, R0.z - T.z).normalize();
+  const out = []; WORLD.frozen = true; cam.rig = 'hand'; cam.tripodPos = null; cam.mode = 'A';
+  for (const s of [{ lensI: 0, f: 16, d: 1.9, lab: '16mm · 1.9 米' }, { lensI: 1, f: 250, d: 25, lab: '250mm · 25 米' }]) {
+    cam.lensI = s.lensI; cam.focal = s.f; cam.extended = true; cam.N = lensAt(s.f).nMin; const p = R0.clone().addScaledVector(dir, s.d); player.x = p.x; player.z = p.z; player.hOff = 0;
+    const a = aim(new THREE.Vector3(p.x, groundAt(p.x, p.z) + player.h, p.z), new THREE.Vector3(R0.x, R0.y + 1.15, R0.z)); player.yaw = a.yaw; player.pitch = a.pitch; player.roll = 0; cam.focusD = cam.focusGoal = a.dist;
+    SENS.aspect = 1.5; poseSensor(WORLD.t, SENS); EXPO.EVm = meterFrom(SENS); resolveExposure();
+    const fr = await new Promise(r => startExposure({ onDone: r, silentCurtain: true })); out.push([fr, s.lab]); }
+  Object.assign(cam, { lensI: save.lensI, focal: save.focal, extended: save.ext, rig: save.rig, tripodPos: save.tp, mode: save.mode });
+  Object.assign(player, { x: save.px, z: save.pz, yaw: save.yaw, pitch: save.pitch, hOff: save.hOff }); WORLD.frozen = save.fr;
+  g.fillStyle = '#15191d'; g.fillRect(0, 0, 720, 250);
+  for (let i = 0; i < 2; i++) { const bm = await createImageBitmap(out[i][0].blob); g.drawImage(bm, i * 362, 0, 358, 239); g.fillStyle = 'rgba(0,0,0,.6)'; g.fillRect(i * 362 + 6, 8, 120, 22); g.fillStyle = '#fff'; g.font = '700 13px sans-serif'; g.textAlign = 'left'; g.fillText(out[i][1], i * 362 + 12, 24); }
+}
+
+/* ---------------- 运镜 ---------------- */
+const MOVE_UI = { tgt: 'ahe' };
+function moveDiagram(id) { // top view: subject (yellow), camera path (blue)
+  const S = '<circle cx="80" cy="30" r="7" fill="#e2a93b"/>', cam0 = (x, y, a = 0) => `<g transform="translate(${x} ${y}) rotate(${a})"><rect x="-6" y="-4" width="12" height="8" rx="1.5" fill="#dfe3e8"/><path d="M6 -3l6 -4v14l-6 -4z" fill="#dfe3e8"/></g>`;
+  const P = (d) => `<path d="${d}" fill="none" stroke="#7b84d6" stroke-width="2.5" stroke-dasharray="4 3" marker-end="url(#ah)"/>`;
+  const defs = '<defs><marker id="ah" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0 0L6 3L0 6z" fill="#7b84d6"/></marker></defs>';
+  const m = { push: S + P('M20 78 L62 45') + cam0(20, 78, -40), pull: S + P('M62 45 L20 78') + cam0(62, 45, -40), zoom: S + cam0(20, 78, -40) + '<path d="M28 70 L70 20 M28 76 L85 45" stroke="#7b84d6" stroke-width="2"/><path d="M34 68 L60 40 M36 74 L72 52" stroke="#7b84d6" stroke-width="4" opacity=".5"/>',
+    pan: S + '<circle cx="40" cy="30" r="5" fill="#5b6068"/>' + cam0(60, 80, -90) + P('M40 50 A30 30 0 0 1 75 42'), tilt: '<rect x="70" y="8" width="20" height="70" fill="#5b6068"/>' + cam0(25, 80, 0) + P('M40 78 A40 40 0 0 0 60 20'),
+    truck: S + P('M20 80 L140 80') + cam0(20, 80, -90), follow: '<circle cx="90" cy="30" r="7" fill="#2f4e7e"/>' + P('M20 60 L78 40') + P('M100 30 L140 20') + cam0(20, 60, -20),
+    crane: S + cam0(30, 80, -30) + P('M30 70 L30 18') + cam0(30, 14, 20), arc: S + P('M40 60 A40 40 0 0 1 120 45') + cam0(40, 60, -30),
+    vertigo: S + '<rect x="120" y="10" width="30" height="20" fill="#5b6068"/>' + P('M60 45 L20 78') + cam0(60, 45, -40), whip: '<circle cx="30" cy="30" r="7" fill="#e2a93b"/><circle cx="130" cy="30" r="7" fill="#86a5cf"/>' + cam0(80, 80, -90) + P('M50 55 A40 40 0 0 1 110 55'),
+    dutch: S + `<g transform="rotate(18 80 60)"><rect x="40" y="45" width="80" height="45" fill="none" stroke="#7b84d6" stroke-width="2.5"/></g>`, rack: '<circle cx="40" cy="60" r="6" fill="#5b6068"/>' + S + cam0(15, 85, -30) + '<circle cx="40" cy="60" r="10" fill="none" stroke="#7b84d6" stroke-dasharray="2 2"/>' + P('M50 54 L70 38') };
+  return svg(160, 96, defs + '<rect width="160" height="96" fill="#1d2228"/>' + m[id]);
+}
+MODS.push({ id: 'move', n: '运镜', c: '--move', title: '运镜 · 怎么动', claim: '运镜不是为了炫技：每一种动法都在替观众做一次选择——靠近、揭示、跟随、或者失衡。', build(b) {
+  b.appendChild(card({ claim: '先选主体，再选动法。所有运镜都从你现在站的位置出发。', extra: seg(Object.entries(TARGETS).map(([k, v]) => [k, v.n]), MOVE_UI.tgt, v => MOVE_UI.tgt = v),
+    note: '<b>预演</b>：在取景器里实时看一遍。<b>录下来</b>：离线逐帧渲染 24fps，快门按 180° 规则积分出真实动态模糊。<b>定格×12</b>：每秒 12 张、快门极短、世界逐帧冻结——定格动画的“顿挫感”就是这么来的。' }));
+  MOVES.forEach(mv => b.appendChild(h('div', { class: 'card' }, h('div', { class: 'movecard' }, h('div', { class: 'viz' }, moveDiagram(mv.id)),
+    h('div', {}, h('div', { class: 'claim', style: { marginBottom: '4px' } }, `${mv.n} `, h('span', { class: 'mini' }, mv.en)), h('div', { class: 'note', style: { marginTop: '0' } }, mv.claim))),
+    h('div', { class: 'acts' }, btn('预演', () => previewMove(mv.id, MOVE_UI.tgt)), btn('录下来', () => recordMove(mv.id, MOVE_UI.tgt, false), 'ghost'), btn('定格×12', () => recordMove(mv.id, MOVE_UI.tgt, true), 'ghost')))));
+} });
+
+/* ---------------- 曝光 ---------------- */
+const TRI = { N: 5.6, t: 1 / 125, iso: 400, lock: false };
+function hyperDof(fmm, N, s) { const c = .02, f = fmm, S = s * 1000; const Hh = f * f / (N * c) + f; const near = S * (Hh - f) / (Hh + S - 2 * f); const far = S < Hh ? S * (Hh - f) / (Hh - S) : Infinity; return { near: near / 1000, far: far / 1000, H: Hh / 1000 }; }
+function irisSVG(N, blades) { const r = 34 * clamp(1.4 / N, .08, 1) + 2; let pts = ''; for (let i = 0; i < blades; i++) { const a = i / blades * TAU + .3; pts += `${50 + Math.cos(a) * r},${50 + Math.sin(a) * r} `; }
+  let bl = ''; for (let i = 0; i < blades; i++) { const a = i / blades * TAU + .3; bl += `<path d="M50 50 L${50 + Math.cos(a) * 46} ${50 + Math.sin(a) * 46} A46 46 0 0 1 ${50 + Math.cos(a + TAU / blades) * 46} ${50 + Math.sin(a + TAU / blades) * 46} Z" fill="${i % 2 ? '#2a2f36' : '#323841'}"/>`; }
+  return `<circle cx="50" cy="50" r="47" fill="#101316"/>${bl}<polygon points="${pts}" fill="#f5d98a"/><circle cx="50" cy="50" r="47" fill="none" stroke="#e8c53a" stroke-width="2"/>`; }
+MODS.push({ id: 'expo', n: '曝光', c: '--expo', title: '曝光 · 进多少光', claim: '画面亮度 = 光圈 × 快门 × ISO。三者可以互相换，但每一种换法都附赠一种“副作用”——景深、动感、颗粒。', build(b) {
+  const iris = h('div', { style: { width: '24%', flex: 'none' } }); const fan = h('canvas', { width: 200, height: 100, style: { width: '36%' } }); const grain = h('canvas', { width: 200, height: 100, style: { width: '36%' } });
+  const ev = h('b', {}), dofT = h('div', { class: 'kv' });
+  const redraw = () => { iris.innerHTML = `<svg viewBox="0 0 100 100">${irisSVG(TRI.N, lens().blades)}</svg>`; drawFan(fan, TRI.t); drawGrain(grain, TRI.iso);
+    const EV = log2(TRI.N * TRI.N / TRI.t) - log2(TRI.iso / 100); ev.textContent = `EV${EV >= 0 ? '' : ''} ${EV.toFixed(1)}（ISO 100 等效）`;
+    const d = hyperDof(cam.focal, TRI.N, cam.focusD); dofT.innerHTML = `<span>对焦距离</span><b>${cam.focusD.toFixed(1)} m</b><span>清晰范围</span><b>${d.near.toFixed(2)} m – ${isFinite(d.far) ? d.far.toFixed(1) + ' m' : '∞'}</b><span>超焦距</span><b>${d.H.toFixed(1)} m</b>`; };
+  const stepper = (key, arr, lab, fmt) => { const v = h('b', { class: 'num', style: { minWidth: '70px', display: 'inline-block', textAlign: 'center', fontSize: '18px' } });
+    const upd = () => v.textContent = fmt(TRI[key]);
+    const mv = d => { const i = nearestIdx(arr, TRI[key]); const ni = clamp(i + d, 0, arr.length - 1); const old = TRI[key]; TRI[key] = arr[ni];
+      const db = key === 'N' ? -2 * log2(TRI.N / old) : log2(TRI[key] / old); // change in brightness (stops)
+      if (TRI.lock && db) { const other = key === 'N' ? 't' : key === 't' ? 'iso' : 'N'; const oa = other === 'N' ? AV : other === 't' ? TV : ISOS;
+        const want = other === 'N' ? TRI.N * Math.pow(2, db / 2) : TRI[other] * Math.pow(2, -db); TRI[other] = oa[nearestIdx(oa, want)]; }
+      UIS.forEach(f => f()); redraw(); };
+    UIS.push(upd); upd(); return h('div', { class: 'row', style: { justifyContent: 'space-between' } }, h('span', { class: 'lbl' }, lab), h('div', { class: 'row' }, btn('−', () => mv(-1), 'ghost'), v, btn('+', () => mv(1), 'ghost'))); };
+  const UIS = [];
+  b.appendChild(card({ claim: '曝光三角：动一个，其余两个替你买单。', extra: h('div', {},
+      stepper('N', AV, '光圈 F', v => 'F' + v), stepper('t', TV, '快门', tvLabel), stepper('iso', ISOS, 'ISO', isoLabel),
+      h('div', { class: 'row', style: { marginTop: '8px' } }, h('label', { class: 'mini' }, h('input', { type: 'checkbox', on: { change: e => TRI.lock = e.target.checked } }), ' 等效锁定：改一项时自动补偿下一项，亮度不变'), h('span', { class: 'pill' }, ev))),
+    viz: h('div', { class: 'row', style: { padding: '8px', gap: '6px', justifyContent: 'space-between', flexWrap: 'nowrap' } }, iris, fan, grain),
+    note: '左：光圈叶片（F 值越大孔越小，景深越深）。中：风扇在这个快门下的样子（快门越长越糊）。右：这个 ISO 下的噪点（信号越弱放大越多，颗粒越粗）。',
+    acts: [btn('用 M 档应用到相机', () => { Object.assign(cam, { mode: 'M', N: TRI.N, t: TRI.t, iso: TRI.iso, autoIso: false }); toast('已切到 M 档并套用：举起相机(V)看看结果', '--expo'); }), btn('读取相机当前值', () => { TRI.N = EXPO.N; TRI.t = EXPO.t; TRI.iso = EXPO.iso; UIS.forEach(f => f()); redraw(); }, 'ghost')] }));
+  b.appendChild(card({ claim: '景深：焦点前后“看起来清晰”的一段距离。', extra: dofT, note: '按 DX 画幅弥散圆 0.02mm 计算。光圈越小、焦距越短、对焦越远，清晰范围越大；对到超焦距时，从一半超焦距到无穷远都清晰。' }));
+  const meterBox = h('div', { class: 'kv' });
+  b.appendChild(card({ claim: '测光表只会把画面平均成“中灰”。雪地会被拍灰，黑猫会被拍灰。', extra: meterBox,
+    note: '矩阵测光综合全画面；中央重点偏重中心；点测光只看对焦点附近约 3%；亮部重点保护高光——逆光剪影就靠它。',
+    acts: Object.entries(METERS).map(([k, v]) => btn(v, () => { cam.meter = k; toast('测光模式：' + v, '--expo'); }, 'ghost')) }));
+  PANEL.live = () => { const E = EXPO; meterBox.innerHTML = `<span>场景测光</span><b>EV ${E.EVm.toFixed(1)}</b><span>相机给出</span><b>${cam.mode} · ${tvLabel(E.t)} · F${E.N} · ISO ${isoLabel(E.iso)}</b><span>与测光差</span><b>${(-E.dev) > 0 ? '+' : ''}${(-E.dev).toFixed(1)} EV</b><span>测光模式</span><b>${METERS[cam.meter]}</b>`; };
+  // experiments
+  EXPERIMENTS.forEach(x => b.appendChild(card({ claim: x.claim, note: x.note, acts: [btn('布置这个实验', () => { x.go(); toast(x.hint, '--expo', 5200); })] })));
+  redraw();
+} });
+function drawFan(cv, t) { const g = cv.getContext('2d'); g.fillStyle = '#15191d'; g.fillRect(0, 0, 200, 100); const w = TAU * 4; const n = clamp(Math.ceil(t * w * 12), 1, 60);
+  g.globalAlpha = Math.max(.05, 1 / n); for (let k = 0; k < n; k++) { const a0 = .4 + w * t * (k / Math.max(1, n - 1)); for (let i = 0; i < 4; i++) { const a = a0 + i * TAU / 4; g.fillStyle = '#e8c53a'; g.beginPath(); g.ellipse(100 + Math.cos(a) * 24, 50 + Math.sin(a) * 24, 22, 7, a, 0, TAU); g.fill(); } }
+  g.globalAlpha = 1; g.fillStyle = '#dfe3e8'; g.beginPath(); g.arc(100, 50, 5, 0, TAU); g.fill(); g.fillStyle = '#9aa4ad'; g.font = '11px sans-serif'; g.fillText('风扇 4 转/秒', 6, 94); }
+function drawGrain(cv, iso) { const g = cv.getContext('2d'); const img = g.createImageData(200, 100); const G = iso / 100;
+  for (let y = 0; y < 100; y++) for (let x = 0; x < 200; x++) { const base = x < 100 ? .18 : .6; const s = Math.sqrt(base * G / 20000) + 3 * G / 20000; const n = (Math.random() + Math.random() + Math.random() - 1.5) * 1.2 * s; const ch = [0, 1, 2].map(() => (Math.random() - .5) * s * .9);
+    for (let c = 0; c < 3; c++) { const v = clamp(base + n + ch[c], 0, 1); img.data[(y * 200 + x) * 4 + c] = Math.round(Math.pow(v, 1 / 2.2) * 255); } img.data[(y * 200 + x) * 4 + 3] = 255; }
+  g.putImageData(img, 0, 0); g.fillStyle = '#fff'; g.font = '11px sans-serif'; g.fillText('ISO ' + isoLabel(iso) + ' 的颗粒', 6, 94); }
+function teleport(x, z, yaw, pitch = 0, hOff = 0) { endMove(); PGM = 0; const [a, b] = collide(x, z); player.x = a; player.z = b; player.yaw = yaw; player.pitch = pitch; player.hOff = hOff; player.roll = 0; cam.tripodPos = cam.rig === 'tripod' ? { x: a, z: b, y: groundAt(a, b) + player.h + hOff } : null; }
+function lookAtP(p) { const e = new THREE.Vector3(player.x, groundAt(player.x, player.z) + player.h + player.hOff, player.z); const a = aim(e, p); player.yaw = a.yaw; player.pitch = a.pitch; return a.dist; }
+function preset(o) { if (o.tod != null) setTod(o.tod, true); if (o.lensI != null) { cam.lensI = o.lensI; const L = lens(); cam.focal = clamp(o.focal || cam.focal, L.fMin, L.fMax); } else if (o.focal) cam.focal = clamp(o.focal, lens().fMin, lens().fMax);
+  cam.extended = true; if (o.rig) { cam.rig = o.rig; } if (o.at) teleport(o.at[0], o.at[1], 0, 0, o.hOff || 0); if (o.look) { const d = lookAtP(o.look); cam.focusD = cam.focusGoal = d; }
+  if (cam.rig === 'tripod') cam.tripodPos = { x: player.x, z: player.z, y: groundAt(player.x, player.z) + player.h + player.hOff };
+  ['mode', 'N', 't', 'iso', 'autoIso', 'meter', 'nd', 'release', 'af', 'vr', 'comp'].forEach(k => { if (o[k] !== undefined) cam[k] = o[k]; }); cam.movie = false; WORLD.frozen = false; WORLD.speed = 1; setCamUp(true); onModeChange(); }
+const EXPERIMENTS = [
+  { claim: '实验 1 · 冻结风车 vs 拖影：同一个风车，1/2000 与 1/8。', note: '用 S 档先拍一张 1/2000，再把快门拨到 1/8 拍一张，对比叶片。慢快门时记得开三脚架(T)。', hint: '主拨盘(滚轮)改快门：先 1/2000 拍一张，再拨到 1/8 拍一张', go: () => preset({ tod: 15, lensI: 1, focal: 120, at: [44, -18], look: new THREE.Vector3(89.4, WINDMILL.userData.pos.y, -35.4), mode: 'S', t: 1 / 2000, autoIso: true, rig: 'tripod' }) },
+  { claim: '实验 2 · 丝绢般的喷泉：白天想用慢门，必须给镜头戴“墨镜”。', note: '已换三脚架、2 秒自拍、ND64 减光镜(减 6 档)。A 档 F16，快门会慢到 1/2 秒左右——试试取下 ND（器材面板）会发生什么。', hint: 'ND64 + F16 + 三脚架 + 2 秒自拍：按快门，数两秒', go: () => preset({ tod: 16.5, lensI: 0, focal: 24, at: [5.2, 6.5], look: new THREE.Vector3(0, 1.6, 0), mode: 'A', N: 16, iso: 100, autoIso: false, nd: 6, rig: 'tripod', release: 'T2' }) },
+  { claim: '实验 3 · 夜晚光轨：21:30，8 秒，车灯画出线条。', note: 'M 档 8 秒 F11 ISO 100，三脚架 + 2 秒自拍。车身在 8 秒里走了约 70 米，只剩下亮的车灯留下痕迹。', hint: '按快门后要等 8 秒——真实的长曝光就是这么久', go: () => preset({ tod: 21.5, lensI: 0, focal: 16, at: [17, 30.5], hOff: .3, look: new THREE.Vector3(4, 1, 22), mode: 'M', N: 11, t: 8, iso: 100, autoIso: false, rig: 'tripod', release: 'T2', nd: 0 }) },
+  { claim: '实验 4 · 人像虚化：50mm f/1.8，站近一点，背景就化开了。', note: '已换 50mm f/1.8 定焦，A 档全开光圈。对焦点对阿禾的眼睛（自动区域会识别人脸）。收到 F8 再拍一张对比。', hint: '副拨盘(Shift+滚轮)改光圈，对比 F1.8 与 F8', go: () => { preset({ tod: 17.4, lensI: 2, focal: 50, mode: 'A', N: 1.8, autoIso: true, rig: 'hand', nd: 0, release: 'S' }); cam.area = 'auto'; cam.af = 'AF-S'; goShotSize('mcu'); } },
+  { claim: '实验 5 · 高 ISO 手持夜拍：快门要够快，就只能拉高 ISO。', note: '21:30 手持，A 档 F3.5，自动 ISO 上限 25600。放大照片看噪点，再打开高 ISO 降噪对比。', hint: '手持拍几张，按 P 回放看颗粒', go: () => { cam.isoMax = 25600; preset({ tod: 21.5, lensI: 0, focal: 16, at: [-9, 12], look: new THREE.Vector3(-14.5, 2.5, 0), mode: 'A', N: 3.5, autoIso: true, rig: 'hand', nd: 0, release: 'S' }); } },
+  { claim: '实验 6 · 安全快门：250mm 手持，1/30 秒会不会糊？', note: '经验法则：快门 ≥ 1/等效焦距（这里 1/375）。先关 VR 拍一张，再开 VR 拍一张。按住 H 屏住呼吸也有用。', hint: 'VR 开关在机身面板；按住 H 屏息', go: () => preset({ tod: 14, lensI: 1, focal: 250, at: [0, 18], look: CLOCK.pos, mode: 'S', t: 1 / 30, autoIso: true, rig: 'hand', vr: false, nd: 0, release: 'S' }) },
+  { claim: '实验 7 · 阳光 16 法则：晴天正午，F16 时快门 ≈ 1/ISO。', note: 'M 档 F16、1/125、ISO 100——不看测光表也差不多正确。看看测光刻度偏了多少。', hint: '看取景器底部的曝光刻度', go: () => preset({ tod: 12, lensI: 0, focal: 24, at: [8, 14], look: new THREE.Vector3(-2, 1.4, 5.7), mode: 'M', N: 16, t: 1 / 125, iso: 100, autoIso: false, rig: 'hand', nd: 0, release: 'S' }) },
+  { claim: '实验 8 · 逆光剪影：对着夕阳，用亮部测光。', note: '17:50 太阳低低地挂在西边。亮部重点测光会保护天空，把阿禾压成黑色轮廓。换成矩阵测光再拍一张。', hint: '测光模式在曝光卡片或 i 菜单里切换', go: () => preset({ tod: 17.85, lensI: 0, focal: 35, at: [10, 9], look: new THREE.Vector3(-2.1, 1.4, 5.7), mode: 'A', N: 8, autoIso: false, iso: 100, meter: 'high', rig: 'hand', nd: 0, release: 'S' }) },
+];
+
+/* ---------------- 机身 ---------------- */
+MODS.push({ id: 'body', n: '机身', c: '--body', title: '机身 · 怎么操作', claim: '这台无反的每个键都有真实的对应：拨盘改什么、按住哪个键再转、菜单里藏着什么，都按 Z50 的逻辑走。', build(b) {
+  const top = h('div', {}); const upd = () => { top.innerHTML = ''; top.appendChild(bodySVG()); }; upd(); PANEL.refresh = () => openPanel('body', true);
+  b.appendChild(card({ claim: '顶部：模式拨盘、主指令拨盘、快门、±、ISO。点一点试试。', viz: top, note: '模式拨盘 <kbd>M</kbd>：AUTO → P → S → A → M。按住 <kbd>I</kbd> 转滚轮改 ISO，按住 <kbd>E</kbd> 转滚轮做曝光补偿。' }));
+  b.appendChild(card({ claim: '两个拨盘，在不同模式下管不同的事。', extra: h('div', { class: 'kv' }, ...[['P', '主拨盘 = 柔性程序（同亮度换光圈/快门组合）'], ['S', '主拨盘 = 快门'], ['A', '副拨盘 = 光圈'], ['M', '主拨盘 = 快门，副拨盘 = 光圈'], ['按住 ISO', '主拨盘 = ISO，副拨盘 = 自动 ISO 开关'], ['按住 ±', '主拨盘 = 曝光补偿']].flatMap(([a, c]) => [h('b', {}, a), h('span', {}, c)])),
+    acts: MODES.map(m => btn(m, () => { cam.mode = m; cam.shift = 0; openPanel('body', true); }, cam.mode === m ? 'on' : 'ghost')) }));
+  b.appendChild(card({ claim: '镜头：焦段决定视角，最大光圈随焦段变化。', extra: h('div', {}, ...LENSES.map((L, i) => h('div', { class: 'row', style: { marginBottom: '6px' } }, btn(L.short, () => { cam.lensI = i; cam.focal = clamp(cam.focal, L.fMin, L.fMax); cam.extended = !L.retract; openPanel('body', true); toast(L.retract ? '这支镜头是折叠式的：转动变焦环(Z)才能展开拍摄' : '换上 ' + L.name, '--body'); }, cam.lensI === i ? 'on' : 'ghost'), h('span', { class: 'mini' }, `${L.fMin}${L.fMax !== L.fMin ? '–' + L.fMax : ''}mm · 等效 ${Math.round(L.fMin * CROP)}${L.fMax !== L.fMin ? '–' + Math.round(L.fMax * CROP) : ''}mm · f/${L.nW}${L.nT !== L.nW ? '–' + L.nT : ''} · ${L.blades} 片光圈${L.vr ? ' · VR ' + L.vr + ' 档' : ''}`)))),
+    note: 'DX 画幅（23.5×15.7mm）视角约等于全画幅焦距 ×1.5。<kbd>Z</kbd>/<kbd>X</kbd> 变焦，<kbd>[</kbd>/<kbd>]</kbd> 手动对焦环。' }));
+  const pcSeg = seg(Object.entries(PCS).map(([k, v]) => [k, v.n]), cam.pc, v => cam.pc = v);
+  const wbSeg = seg(Object.keys(WBS).map(k => [k, k === 'K' ? '色温K' : k === 'AUTO' ? '自动' : k]), cam.wb, v => cam.wb = v);
+  const kSl = slider(2500, 10000, 100, cam.wbK, v => { cam.wbK = v; cam.wb = 'K'; wbSeg.set('K'); kv.textContent = v + 'K'; }); const kv = h('b', { class: 'num' }, cam.wbK + 'K');
+  b.appendChild(card({ claim: '白平衡：告诉相机“什么是白”。设低了画面偏蓝，设高了偏暖。', extra: h('div', {}, wbSeg, h('div', { class: 'row', style: { marginTop: '8px' } }, h('span', { class: 'lbl' }, '色温'), kSl, kv)), note: '夕阳下用“自动”会把暖色修掉一部分；想保留金色，就用“晴天”或更高的 K 值。' }));
+  b.appendChild(card({ claim: '设定优化校准（Picture Control）：同一份数据，不同的“冲洗配方”。', extra: pcSeg }));
+  const opt = (lab, key, vals) => h('div', { class: 'row', style: { marginBottom: '6px' } }, h('span', { class: 'lbl' }, lab), seg(vals, cam[key], v => { cam[key] = v; }));
+  b.appendChild(card({ claim: '对焦：什么时候对、对哪里。', extra: h('div', {}, opt('对焦模式', 'af', AFMODES.map(v => [v, v])), opt('AF 区域', 'area', Object.entries(AFAREAS)), opt('释放模式', 'release', Object.entries(RELEASES).map(([k, v]) => [k, v.replace(' 11张/秒', '')]))),
+    note: '<kbd>F</kbd> 半按对焦，方向键移动对焦点。AF-S 对一次锁定，AF-C 持续追焦，MF 转对焦环（会自动打开峰值对焦的红色描边）。自动区域会找到阿禾的脸。' }));
+  b.appendChild(card({ claim: '菜单里的几项关键设定。', extra: h('div', {},
+    opt('动态 D-Lighting', 'adl', [[0, '关'], [.4, '标准'], [.8, '高']]), opt('高 ISO 降噪', 'nr', [[0, '关'], [.5, '低'], [1, '标准']]), opt('长时间曝光降噪', 'lenr', [[false, '关'], [true, '开']]), opt('VR 防抖', 'vr', [[true, '开'], [false, '关']]),
+    opt('峰值对焦', 'peaking', [[false, '关'], [true, '开']]), opt('高光警告', 'zebra', [[false, '关'], [true, '开']]), opt('网格', 'grid', [[true, '开'], [false, '关']]), opt('水平仪', 'level', [[false, '关'], [true, '开']])) }));
+  b.appendChild(card({ claim: '拍照 / 录像：视频有自己的规矩——快门由帧率决定上限。', extra: h('div', {}, opt('模式', 'movie', [[false, '拍照'], [true, '录像']]), opt('帧率', 'fps', [[24, '24p'], [25, '25p'], [30, '30p'], [60, '60p'], [120, '120p']])),
+    note: '180° 快门规则：快门 ≈ 1/(2×帧率)，24p 就是 1/50。更快的快门让动作“一顿一顿”，更慢的会拖出糊影。片场面板里可以直接选快门开角。' }));
+} });
+function bodySVG() {
+  const s = svg(360, 170, `<rect x="30" y="50" width="300" height="100" rx="18" fill="#1b1c1e"/><rect x="250" y="44" width="80" height="112" rx="20" fill="#121213"/><rect x="140" y="26" width="80" height="30" rx="8" fill="#1b1c1e"/>
+    <circle cx="180" cy="100" r="44" fill="#26282b"/><circle cx="180" cy="100" r="34" fill="#15242e"/><circle cx="180" cy="100" r="16" fill="#0c141a"/>
+    <g data-a="mode" style="cursor:pointer"><circle cx="275" cy="38" r="17" fill="#2a2c2f" stroke="#2fa7c2" stroke-width="2"/><text x="275" y="43" fill="#fff" font-size="13" font-weight="700" text-anchor="middle" font-family="Barlow Condensed">${cam.mode}</text></g>
+    <g data-a="shutter" style="cursor:pointer"><circle cx="310" cy="52" r="9" fill="#c7cbd0"/></g>
+    <g data-a="main+" style="cursor:pointer"><rect x="296" y="66" width="30" height="12" rx="6" fill="#3a3d41" stroke="#2fa7c2"/><text x="311" y="75" fill="#fff" font-size="9" text-anchor="middle">主+</text></g>
+    <g data-a="main-" style="cursor:pointer"><rect x="296" y="82" width="30" height="12" rx="6" fill="#3a3d41" stroke="#2fa7c2"/><text x="311" y="91" fill="#fff" font-size="9" text-anchor="middle">主−</text></g>
+    <g data-a="sub+" style="cursor:pointer"><rect x="232" y="118" width="30" height="12" rx="6" fill="#3a3d41" stroke="#2fa7c2"/><text x="247" y="127" fill="#fff" font-size="9" text-anchor="middle">副+</text></g>
+    <g data-a="sub-" style="cursor:pointer"><rect x="232" y="134" width="30" height="12" rx="6" fill="#3a3d41" stroke="#2fa7c2"/><text x="247" y="143" fill="#fff" font-size="9" text-anchor="middle">副−</text></g>
+    <g data-a="vr" style="cursor:pointer"><rect x="52" y="64" width="46" height="18" rx="4" fill="${cam.vr ? '#2fa7c2' : '#3a3d41'}"/><text x="75" y="77" fill="#fff" font-size="11" text-anchor="middle">VR ${cam.vr ? '开' : '关'}</text></g>
+    <g data-a="movie" style="cursor:pointer"><rect x="52" y="90" width="46" height="18" rx="4" fill="${cam.movie ? '#d7545a' : '#3a3d41'}"/><text x="75" y="103" fill="#fff" font-size="11" text-anchor="middle">${cam.movie ? '录像' : '拍照'}</text></g>
+    <g data-a="evf" style="cursor:pointer"><rect x="150" y="30" width="60" height="18" rx="4" fill="#3a3d41"/><text x="180" y="43" fill="#fff" font-size="11" text-anchor="middle">取景器</text></g>
+    <text x="180" y="165" fill="#9aa4ad" font-size="10" text-anchor="middle">通用无反机身示意（无品牌标识），操作逻辑按 Z50</text>`);
+  s.addEventListener('click', e => { const g = e.target.closest('[data-a]'); if (!g) return; const a = g.dataset.a;
+    if (a === 'mode') setMode(1); if (a === 'shutter') shutterPress(); if (a === 'main+') dial('main', 1); if (a === 'main-') dial('main', -1); if (a === 'sub+') dial('sub', 1); if (a === 'sub-') dial('sub', -1);
+    if (a === 'vr') cam.vr = !cam.vr; if (a === 'movie') { cam.movie = !cam.movie; } if (a === 'evf') setCamUp(!camUp); openPanel('body', true); });
+  return s;
+}
+
+/* ---------------- 器材 ---------------- */
+MODS.push({ id: 'rig', n: '器材', c: '--rig', title: '器材 · 怎么稳住', claim: '手会抖，身体会晃。三种支撑方式，抖动的曲线完全不同——而抖动在长快门里会变成模糊。', build(b) {
+  const trace = h('canvas', { width: 720, height: 200 }); const info = h('div', { class: 'kv' });
+  b.appendChild(card({ claim: '实时抖动曲线：过去 2 秒相机指向的偏移（角分）。', viz: trace, extra: h('div', { class: 'row', style: { marginTop: '8px' } }, seg([['hand', '手持'], ['gimbal', '稳定器'], ['tripod', '三脚架']], cam.rig, v => { if (v !== cam.rig) { while (cam.rig !== v) cycleRig(); } })),
+    note: '黄线：水平；蓝线：俯仰。灰色竖带 = 当前快门时长——带子里的曲线跨度越大，照片越糊。按住 <kbd>H</kbd> 屏息，手持抖动会立刻小一截。', }));
+  b.appendChild(card({ claim: '这一刻按下快门，会糊多少？', extra: info, note: '估算：快门期间指向的最大偏移 × 焦距 ÷ 像素间距（Z50 约 4.2µm）。超过 2 像素肉眼就能看出来。' }));
+  b.appendChild(card({ claim: '减光镜（ND）：白天也能用慢门。', extra: seg([[0, '无'], [3, 'ND8 (−3档)'], [6, 'ND64 (−6档)'], [10, 'ND1000 (−10档)']], cam.nd, v => { cam.nd = v; toast(v ? `装上减光镜：进光少 ${v} 档，测光表会自动跟上` : '取下减光镜', '--rig'); }), note: 'ND 只做一件事：均匀地挡光。于是同样的光圈，快门可以慢 2^N 倍——拍丝滑的水、消失的人群。' }));
+  b.appendChild(card({ claim: '三脚架上按快门，手指也会让相机抖一下。', note: '按快门那一下会让云台轻轻颤动约 0.2 秒。慢快门在三脚架上拍的时候，把释放模式设为<b>自拍 2 秒</b>——等颤动停了才曝光。' ,
+    acts: [btn('释放模式 → 自拍 2 秒', () => { cam.release = 'T2'; toast('释放模式：自拍 2 秒', '--rig'); }, 'ghost'), btn('释放模式 → 单张', () => { cam.release = 'S'; }, 'ghost')] }));
+  PANEL.live = () => { drawTrace(trace); const f = POSE.focal || cam.focal; let mx = 0, a0 = shakeAt(WORLD.t, {}), y0 = a0.yaw, p0 = a0.pitch; const n = 24; for (let i = 1; i <= n; i++) { const s = shakeAt(WORLD.t + EXPO.t * i / n, {}); mx = Math.max(mx, Math.hypot(s.yaw - y0, s.pitch - p0)); }
+    const px = mx * f / .0042; info.innerHTML = `<span>快门</span><b>${tvLabel(EXPO.t)}</b><span>焦距</span><b>${Math.round(f)}mm（等效 ${Math.round(f * CROP)}mm）</b><span>安全快门</span><b>1/${Math.round(f * CROP)}</b><span>预计模糊</span><b style="color:${px > 2 ? 'var(--rec)' : 'var(--ok)'}">${px.toFixed(1)} 像素 ${px > 2 ? '· 会糊' : '· 清晰'}</b>`; };
+} });
+function drawTrace(cv) { const g = cv.getContext('2d'); const W = 720, H = 200; g.fillStyle = '#15191d'; g.fillRect(0, 0, W, H); g.strokeStyle = '#2b3138'; g.lineWidth = 1; for (let y = 20; y < H; y += 40) { g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke(); }
+  const span = 2, sc = 1 / (DEG / 60) * 6; const t1 = WORLD.t; const tw = EXPO.t / span * W; g.fillStyle = 'rgba(255,255,255,.12)'; g.fillRect(W - Math.max(2, tw), 0, Math.max(2, tw), H);
+  [['yaw', '#e8c53a'], ['pitch', '#7fb6ff']].forEach(([k, col]) => { g.strokeStyle = col; g.lineWidth = 2; g.beginPath(); for (let i = 0; i <= 240; i++) { const t = t1 - span + i / 240 * span; const s = shakeAt(t, {}); const y = H / 2 - s[k] * sc; i ? g.lineTo(i / 240 * W, y) : g.moveTo(0, y); } g.stroke(); });
+  g.fillStyle = '#9aa4ad'; g.font = '20px sans-serif'; g.fillText(`${RIGS[cam.rig]}${player.breath ? ' · 屏息' : ''}${cam.vr && lens().vr ? ' · VR' : ''}  (每格 6.7′)`, 12, 28); }
+
+/* ---------------- 场景 ---------------- */
+function sunArc(tod) { let pts = ''; for (let t = 5.5; t <= 21; t += .25) { const s = sunInfo(t); const x = 20 + (t - 5.5) / 15.5 * 320, y = 80 - s.el / DEG * 1.1; pts += `${x},${y} `; }
+  const s = sunInfo(tod); const x = 20 + (clamp(tod, 5.5, 21) - 5.5) / 15.5 * 320, y = 80 - s.el / DEG * 1.1;
+  return `<rect width="360" height="110" fill="#15191d"/><line x1="10" y1="80" x2="350" y2="80" stroke="#46505a"/><polyline points="${pts}" fill="none" stroke="#86a5cf" stroke-width="2" stroke-dasharray="4 3"/>
+    <circle cx="${x}" cy="${y}" r="8" fill="${s.el > 0 ? '#ffd24a' : '#9fb4d8'}"/><text x="${x}" y="${y - 13}" fill="#fff" font-size="12" text-anchor="middle" font-family="Barlow Condensed">${todLabel(tod)}</text>
+    <text x="20" y="100" fill="#9aa4ad" font-size="10">日出 6:00</text><text x="340" y="100" fill="#9aa4ad" font-size="10" text-anchor="end">太阳高度 ${(s.el / DEG).toFixed(0)}° · 环境光 ${WORLD.logAmb.toFixed(1)} 档</text>`; }
+MODS.push({ id: 'scene', n: '场景', c: '--scene', title: '场景 · 什么时候、在哪里', claim: '同一个广场，早上、正午、黄昏、蓝调、深夜是五种完全不同的光。光比器材重要。', build(b) {
+  const arc = h('div', {}); const draw = () => arc.innerHTML = `<svg viewBox="0 0 360 110">${sunArc(WORLD.tod)}</svg>`; draw();
+  const sl = slider(5.5, 23.9, .01, WORLD.tod, v => { setTod(v); draw(); });
+  b.appendChild(card({ claim: '拖动时间：太阳沿着真实的弧线走，环境光按档位衰减。', viz: arc, extra: h('div', { class: 'row', style: { marginTop: '8px' } }, h('span', { class: 'lbl' }, '时间'), sl),
+    note: '从正午到日落，光线暗了约 3 档；日落后 20 分钟的“蓝调时刻”再暗 5 档；深夜只剩路灯和窗光。',
+    acts: [[6.5, '06:30 清晨'], [12, '12:00 正午'], [17.85, '17:50 黄昏'], [18.95, '18:57 蓝调'], [21.5, '21:30 夜']].map(([t, n]) => btn(n, () => { setTod(t, true); sl.value = t; draw(); }, 'ghost')) }));
+  b.appendChild(card({ claim: '世界的时间：可以冻结，也可以加速。', extra: h('div', {}, h('div', { class: 'row', style: { marginBottom: '6px' } }, h('span', { class: 'lbl' }, '世界'), seg([[false, '流动'], [true, '冻结 (B)']], WORLD.frozen, v => WORLD.frozen = v)),
+      h('div', { class: 'row', style: { marginBottom: '6px' } }, h('span', { class: 'lbl' }, '速度'), seg([[.25, '×0.25'], [.5, '×0.5'], [1, '×1'], [2, '×2']], WORLD.speed, v => WORLD.speed = v)),
+      h('div', { class: 'row', style: { marginBottom: '6px' } }, h('span', { class: 'lbl' }, '日光流逝'), seg([[0, '停'], [1, '1分/秒'], [10, '10分/秒']], WORLD.todSpeed || 0, v => WORLD.todSpeed = v)),
+      h('div', { class: 'row' }, h('span', { class: 'lbl' }, '雾'), slider(0, 6, .1, WORLD.fog, v => { WORLD.fog = v; scene.fog.density = .0016 * v; }))),
+    note: '冻结世界时，快门再慢，场景里的东西也不会糊——只剩手抖。这可以用来把两种模糊分开看。' }));
+  const tp = [['钟楼下', () => { teleport(3, -18, 0, .25); }], ['喷泉旁', () => { teleport(5.5, 7, 1.2, 0); }], ['阿禾面前', () => { teleport(-1.2, 9.4, -.15, -.05); lookAtP(aheHead(new THREE.Vector3())); }],
+    ['面包店门口', () => { teleport(22, 4, -1.57 + 3.14, 0); lookAtP(TARGETS.bakery.p()); }], ['咖啡馆露台', () => { teleport(-12, 6, 0, 0); lookAtP(new THREE.Vector3(-14.5, 1, 0)); }],
+    ['路口看车流', () => { teleport(17, 30.5, 0, 0); lookAtP(new THREE.Vector3(4, 1, 22)); }], ['东坡看风车', () => { teleport(44, -18, 0, 0); lookAtP(WINDMILL.userData.pos); }]];
+  b.appendChild(card({ claim: '快速到达：几个值得拍的位置。', acts: tp.map(([n, f]) => btn(n, f, 'ghost')), note: '小镇里在发生的事：阿禾在喷泉边等信；邮差绕着广场骑车，经过她时会挥手；面包师在门口擦手；小狗绕着喷泉跑“8”字；鸽子在钟楼上空盘旋；三辆车沿环路行驶。' }));
+  PANEL.live = () => { draw(); if (document.activeElement !== sl) sl.value = WORLD.tod; };
+} });
+
+/* ---------------- 片场 ---------------- */
+MODS.push({ id: 'set', n: '片场', c: '--set', title: '片场 · 做成片子', claim: '照片连起来就是电影。定格、延时、实时录像、多机位切换——四种把时间变成画面的方法。', build(b) {
+  const build = () => {
+    b.innerHTML = '';
+    const nf = STOP.active ? STOP.shot.frames.length : 0;
+    b.appendChild(card({ claim: STOP.active ? `定格拍摄中：已拍 ${nf} 帧（${(nf / 12).toFixed(1)} 秒 @12fps）` : '定格动画：世界冻结，每按一次快门，时间前进一小步。',
+      extra: h('div', {}, h('div', { class: 'row', style: { marginBottom: '6px' } }, h('span', { class: 'lbl' }, '每帧前进'), seg([[1 / 24, '1/24 秒'], [1 / 12, '1/12 秒'], [1 / 6, '1/6 秒'], [.5, '1/2 秒']], STOP.step, v => STOP.step = v)),
+        h('div', { class: 'row' }, h('span', { class: 'lbl' }, '洋葱皮'), seg([[true, '开'], [false, '关']], STOP.onion, v => STOP.onion = v))),
+      note: '洋葱皮会把上一帧半透明叠在取景器上，方便你判断移动了多少。挪一挪机位、转一转镜头，逐帧拍下去，就是“相机在动”的定格片。',
+      acts: [STOP.active ? btn('结束定格', () => { STOP.end(); build(); }) : btn('开始定格', () => { STOP.begin(); setCamUp(true); build(); toast('定格模式：每按一次快门拍一帧，世界前进一小步', '--set'); })] }));
+    const f = { from: 17.2, to: 19.4, n: 72 };
+    b.appendChild(card({ claim: '延时摄影：两个小时压成三秒。', extra: h('div', {}, h('div', { class: 'row', style: { marginBottom: '6px' } }, h('span', { class: 'lbl' }, '时段'), seg([['day', '17:10→19:25 日落'], ['night', '18:30→21:30 入夜'], ['dawn', '05:40→08:00 日出']], 'day', v => Object.assign(f, v === 'day' ? { from: 17.2, to: 19.4 } : v === 'night' ? { from: 18.5, to: 21.5 } : { from: 5.7, to: 8 }))),
+        h('div', { class: 'row' }, h('span', { class: 'lbl' }, '帧数'), seg([[48, '48'], [72, '72'], [120, '120']], 72, v => f.n = v))),
+      note: '相机不动（用你现在的机位），每帧之间太阳走过一段，曝光由当前模式自动决定——A 档会跟着天色变慢，M 档则会看着世界暗下去。',
+      acts: [btn('开始延时渲染', () => timeLapse(f.from, f.to, f.n))] }));
+    const angles = [[45, '45°'], [90, '90°'], [180, '180°'], [270, '270°'], [360, '360°']];
+    b.appendChild(card({ claim: REC.on ? '● 正在录像' : '实时录像：按 R 开始 / 停止。',
+      extra: h('div', {}, h('div', { class: 'row', style: { marginBottom: '6px' } }, h('span', { class: 'lbl' }, '帧率'), seg([[24, '24p'], [30, '30p'], [60, '60p']], cam.fps, v => cam.fps = v)),
+        h('div', { class: 'row' }, h('span', { class: 'lbl' }, '快门开角'), seg(angles, 180, v => { cam.movie = true; if (cam.mode !== 'M') cam.mode = 'S'; cam.t = v / 360 / cam.fps; toast(`快门 ${tvLabel(cam.t)}（${v}°）`, '--set'); }))),
+      note: '开角 = 快门时长占一帧时间的比例。180° 是电影的“自然”动感；45° 像战争片的锐利顿挫；360° 糊成一片梦境。',
+      acts: [btn(REC.on ? '停止录像' : '开始录像', () => { REC.on ? recStop() : recStart(); setTimeout(build, 50); })] }));
+    b.appendChild(card({ claim: `多机位导播：架好机位，一键切换。${CAMS.length ? `（已有 ${CAMS.length} 个）` : ''}`,
+      extra: h('div', {}, ...CAMS.map((c, i) => h('div', { class: 'row', style: { marginBottom: '4px' } }, h('span', { class: 'pill' }, `机位 ${i + 1}`), h('span', { class: 'mini' }, `${Math.round(c.focal * CROP)}mm 等效`), btn(PGM === i + 1 ? '在播' : '切到', () => { setPGM(i + 1); build(); }, PGM === i + 1 ? 'on' : 'ghost'), btn('移除', () => { removeCam(i); build(); }, 'ghost')))),
+      note: '走到一个位置、构好图，点“在此架机位”。数字键 <kbd>1</kbd>–<kbd>4</kbd> 切换，<kbd>0</kbd> 切回手持。录像时切机位，就是现场剪辑。',
+      acts: [btn('在此架机位', () => { placeCam(); build(); }), btn('切回手持 (0)', () => { setPGM(0); build(); }, 'ghost')] }));
+  };
+  build(); PANEL.refresh = build;
+} });
+
+/* ---------------- 放映 ---------------- */
+const PLAY = { fps: 12, on: false, idx: 0, list: [], timer: 0, rec: null };
+const KINDS = { photo: '照片', stop: '定格', clip: '视频', lapse: '延时' };
+MODS.push({ id: 'film', n: '放映', c: '--film', title: '放映 · 剪成一部小片', claim: '片夹里的每一条都是一个镜头。调顺序、定时长，然后连起来放——剪辑就是在选择“下一个画面是什么”。', build(b) {
+  if (!SHOTS.length) { b.appendChild(h('div', { class: 'empty', html: '片夹还是空的。<br>举起相机(<kbd>V</kbd>)按快门拍照，或在「运镜」「片场」里录一段。' })); return; }
+  const total = SHOTS.reduce((s, x) => s + shotDur(x), 0);
+  b.appendChild(card({ claim: `${SHOTS.length} 个镜头 · 总长 ${total.toFixed(1)} 秒`, extra: h('div', { class: 'row' }, h('span', { class: 'lbl' }, '照片/定格帧率'), seg([[8, '8'], [12, '12'], [24, '24']], PLAY.fps, v => { PLAY.fps = v; openPanel('film', true); })),
+    acts: [btn('▶ 放映全片', () => openPlayer()), btn('回放照片 (P)', () => openReview(), 'ghost')] }));
+  SHOTS.forEach((s, i) => { const d = shotDur(s);
+    b.appendChild(h('div', { class: 'tl' }, h('img', { src: s.thumb || '', alt: '' }), h('div', {},
+      h('div', { class: 't1' }, `${i + 1}. ${s.label}`), h('div', { class: 't2' }, `${KINDS[s.kind]} · ${s.frames.length} 帧 · ${d.toFixed(1)}s${s.meta ? ' · ' + shotLabel(s.meta) : ''}`),
+      h('div', { class: 'tb' }, h('button', { on: { click: () => { if (i > 0) { [SHOTS[i - 1], SHOTS[i]] = [SHOTS[i], SHOTS[i - 1]]; openPanel('film', true); } } } }, '↑'),
+        h('button', { on: { click: () => { if (i < SHOTS.length - 1) { [SHOTS[i + 1], SHOTS[i]] = [SHOTS[i], SHOTS[i + 1]]; openPanel('film', true); } } } }, '↓'),
+        s.kind === 'photo' ? h('button', { on: { click: () => { s.hold = Math.max(1, s.hold - 6); openPanel('film', true); } } }, '短') : null,
+        s.kind === 'photo' ? h('button', { on: { click: () => { s.hold += 6; openPanel('film', true); } } }, '长') : null,
+        h('button', { on: { click: () => openPlayer(i) } }, '▶'),
+        h('button', { on: { click: () => { SHOTS.splice(i, 1); openPanel('film', true); } } }, '删'))))); });
+} });
+function shotDur(s) { return s.kind === 'photo' ? s.hold / PLAY.fps : s.kind === 'stop' ? s.frames.length / PLAY.fps : s.frames.length / s.fps; }
+
+/* ---------------- 帮助 ---------------- */
+MODS.push({ id: 'help', n: '帮助', c: '--help', title: '帮助 · 全部按键', claim: '键盘就是机身。右手握“快门”，左手管“脚”。', build(b) {
+  const K = [['WASD', '走动（Shift 跑）'], ['鼠标', '看 / 转云台'], ['右键 或 V', '举起相机到眼前（取景器）'], ['左键 或 空格', '按下快门'], ['F', '半按快门：对焦'], ['滚轮', '主指令拨盘'], ['Shift+滚轮', '副指令拨盘'], ['按住 I + 滚轮', 'ISO（Shift+滚轮：自动 ISO）'], ['按住 E + 滚轮', '曝光补偿'],
+    ['M / Shift+M', '模式拨盘'], ['Z / X', '变焦环（广 / 长）'], ['[ / ]', '对焦环（近 / 远）'], ['方向键', '移动对焦点'], ['Tab', 'i 菜单'], ['G', 'DISP 切换信息显示'], ['P', '回放照片'], ['Y', '拍照 / 录像切换'], ['R', '录像开始 / 停止'],
+    ['Q / C', '机位升高 / 降低'], ['T', '手持 → 稳定器 → 三脚架'], ['H（按住）', '屏住呼吸'], ['B', '冻结 / 恢复世界'], ['1–4 / 0', '切换机位 / 回到手持'], ['Esc', '关闭菜单与面板']];
+  b.appendChild(card({ claim: '按键表', extra: h('div', { class: 'kv' }, ...K.flatMap(([k, v]) => [h('kbd', {}, k), h('span', {}, v)])) }));
+  b.appendChild(card({ claim: '这里真实模拟了什么', note: `<b>曝光</b>：场景按真实的相对亮度渲染（正午到深夜跨越约 12 档），光圈/快门/ISO 按 EV 公式换算。<br><b>快门</b>：一次曝光由多个时间切片累积，运动模糊和手抖都是积分出来的。<br><b>景深</b>：薄透镜公式算每个像素的弥散圆，收小光圈时焦外变成 ${LENSES[0].blades} 边形，F16 以后加入衍射。<br><b>噪点</b>：光子散粒噪声 + 读出噪声，随 ISO 放大；长曝光会出现热噪点。<br><b>机身</b>：外形是通用无反相机（没有任何品牌标识），拨盘分工、按键组合、镜头规格按 Z50 与其套机镜头设定。` }));
+} });
+
+/* ---------------- downloads capability ---------------- */
+let DL = null;
+(async () => { try { if (window.claude && window.claude.use) DL = await window.claude.use('downloads'); } catch (e) { DL = null; }
+  if (!DL) { $('#revSave').style.display = 'none'; $('#plExport').style.display = 'none'; } })();
+async function saveFile(filename, blob) {
+  if (!DL) { toast('这个视图里不能下载文件', '--film'); return; }
+  try { await DL.save({ filename, data: blob }); toast('已保存：' + filename, '--film'); }
+  catch (e) { const c = e && e.code; if (c === 'declined') return; if (c === 'rate_limited') toast('已有一个保存提示在等待确认', '--film'); else if (c === 'too_large') toast('文件太大，试试缩短片子', '--film'); else toast('无法保存：' + (e && e.message || c), '--film'); }
+}
+
+/* ---------------- photo review (P) ---------------- */
+const REV = { list: [], i: 0 };
+function allStills() { const a = []; SHOTS.forEach(s => { if (s.kind === 'photo' || s.kind === 'stop') s.frames.forEach(f => a.push(f)); }); return a; }
+async function showReview() { const f = REV.list[REV.i]; if (!f) return; const cv = $('#revCanvas'); const bm = await createImageBitmap(f.blob); cv.width = bm.width; cv.height = bm.height; cv.getContext('2d').drawImage(bm, 0, 0);
+  const m = f.meta || {}; $('#revMeta').textContent = `${REV.i + 1}/${REV.list.length}  ·  ${m.mode || ''}  ${m.t ? tvLabel(m.t) : ''}  F${m.N}  ISO ${m.iso ? isoLabel(m.iso) : ''}  ${Math.round(m.focal || 0)}mm (${m.lens || ''})  ·  ${m.wb || ''} · ${m.pc || ''} · ${m.meter || ''} · ${m.rig || ''} · ${m.tod || ''}${m.shotSize ? ' · ' + m.shotSize : ''}`; }
+function openReview() { REV.list = allStills(); if (!REV.list.length) { toast('还没有照片：举起相机(V)，按空格拍一张', '--film'); return; } REV.i = REV.list.length - 1; $('#review').classList.add('on'); showReview(); }
+function closeReview() { $('#review').classList.remove('on'); }
+$('#revPrev').onclick = () => { REV.i = (REV.i - 1 + REV.list.length) % REV.list.length; showReview(); };
+$('#revNext').onclick = () => { REV.i = (REV.i + 1) % REV.list.length; showReview(); };
+$('#revClose').onclick = closeReview;
+$('#revSave').onclick = () => { const f = REV.list[REV.i]; if (f) saveFile(`小镇片场_${String(REV.i + 1).padStart(3, '0')}.jpg`, f.blob); };
+
+/* ---------------- player & export ---------------- */
+function buildPlayList(only) { const L = []; (only != null ? [SHOTS[only]] : SHOTS).forEach(s => { if (!s) return;
+  if (s.kind === 'photo') L.push({ f: s.frames[0], ms: s.hold / PLAY.fps * 1000, s });
+  else s.frames.forEach(f => L.push({ f, ms: 1000 / (s.kind === 'stop' ? PLAY.fps : s.fps), s })); }); return L; }
+const bmCache = new Map();
+function bmFor(f) { if (!bmCache.has(f)) bmCache.set(f, createImageBitmap(f.blob)); if (bmCache.size > 60) { const k = bmCache.keys().next().value; bmCache.get(k).then(b => b.close && b.close()); bmCache.delete(k); } return bmCache.get(f); }
+function openPlayer(only) { PLAY.list = buildPlayList(only); if (!PLAY.list.length) return; PLAY.idx = 0; PLAY.on = true; $('#player').classList.add('on'); $('#plPlay').textContent = '暂停'; playStep(); }
+async function playStep() { clearTimeout(PLAY.timer); if (!PLAY.on) return; const it = PLAY.list[PLAY.idx]; if (!it) { PLAY.idx = 0; if (PLAY.rec) { stopExport(); return; } }
+  const cur = PLAY.list[PLAY.idx]; const t0 = performance.now(); for (let k = 1; k < 8; k++) { const n = PLAY.list[PLAY.idx + k]; if (n) bmFor(n.f); }
+  const bm = await bmFor(cur.f); const cv = $('#plCanvas'), g = cv.getContext('2d'); g.fillStyle = '#000'; g.fillRect(0, 0, 1280, 720);
+  const sc = Math.min(1280 / bm.width, 720 / bm.height); const w = bm.width * sc, hh = bm.height * sc; g.drawImage(bm, (1280 - w) / 2, (720 - hh) / 2, w, hh);
+  const si = SHOTS.indexOf(cur.s); $('#plMeta').textContent = `镜头 ${si + 1}/${SHOTS.length} · ${cur.s.label} · ${KINDS[cur.s.kind]}${PLAY.rec ? ' · 正在导出…' : ''}`;
+  PLAY.idx++; PLAY.timer = setTimeout(playStep, Math.max(0, cur.ms - (performance.now() - t0)));
+}
+function closePlayer() { PLAY.on = false; clearTimeout(PLAY.timer); if (PLAY.rec) { PLAY.rec.cancel = true; try { PLAY.rec.mr.stop(); } catch (e) { } PLAY.rec = null; } $('#player').classList.remove('on'); }
+$('#plClose').onclick = closePlayer;
+$('#plPlay').onclick = () => { PLAY.on = !PLAY.on; $('#plPlay').textContent = PLAY.on ? '暂停' : '播放'; if (PLAY.on) playStep(); else clearTimeout(PLAY.timer); };
+$('#plExport').onclick = () => {
+  if (PLAY.rec) return; const cv = $('#plCanvas'); if (!cv.captureStream || !window.MediaRecorder) { toast('这个浏览器不支持录制视频', '--film'); return; }
+  const types = [['video/mp4;codecs=avc1', 'mp4'], ['video/webm;codecs=vp9', 'webm'], ['video/webm;codecs=vp8', 'webm'], ['video/webm', 'webm']]; const tp = types.find(t => MediaRecorder.isTypeSupported(t[0])); if (!tp) { toast('这个浏览器不支持录制视频', '--film'); return; }
+  const stream = cv.captureStream(30); const mr = new MediaRecorder(stream, { mimeType: tp[0], videoBitsPerSecond: 8e6 }); const chunks = [];
+  mr.ondataavailable = e => e.data.size && chunks.push(e.data); PLAY.rec = { mr, ext: tp[1], chunks };
+  mr.onstop = () => { const r = PLAY.rec; PLAY.rec = null; if (!r || r.cancel) return; const blob = new Blob(chunks, { type: tp[0] }); saveFile('小镇片场.' + tp[1], blob); };
+  PLAY.list = buildPlayList(); PLAY.idx = 0; PLAY.on = true; mr.start(200); playStep();
+};
+function stopExport() { const r = PLAY.rec; if (!r) return; PLAY.on = false; setTimeout(() => { try { r.mr.stop(); } catch (e) { } }, 250); $('#plMeta').textContent = '导出完成，正在打包…'; }
+
+/* ---------------- i menu ---------------- */
+const IMENU = { open: false, i: 0 };
+const IITEMS = [
+  ['设定优化校准', () => cam.pc, d => { const k = Object.keys(PCS); cam.pc = k[(k.indexOf(cam.pc) + d + k.length) % k.length]; }, v => PCS[v].n],
+  ['白平衡', () => cam.wb, d => { const k = Object.keys(WBS); cam.wb = k[(k.indexOf(cam.wb) + d + k.length) % k.length]; }, v => v === 'K' ? cam.wbK + 'K' : v],
+  ['测光', () => cam.meter, d => { const k = Object.keys(METERS); cam.meter = k[(k.indexOf(cam.meter) + d + k.length) % k.length]; }, v => METERS[v]],
+  ['对焦模式', () => cam.af, d => { cam.af = AFMODES[(AFMODES.indexOf(cam.af) + d + 3) % 3]; }, v => v],
+  ['AF 区域', () => cam.area, d => { const k = Object.keys(AFAREAS); cam.area = k[(k.indexOf(cam.area) + d + k.length) % k.length]; }, v => AFAREAS[v]],
+  ['释放模式', () => cam.release, d => { const k = Object.keys(RELEASES); cam.release = k[(k.indexOf(cam.release) + d + k.length) % k.length]; }, v => RELEASES[v].replace(' 11张/秒', '')],
+  ['动态 D-Lighting', () => cam.adl, d => { const k = [0, .4, .8]; cam.adl = k[(k.indexOf(cam.adl) + d + 3) % 3]; }, v => ['关', '标准', '高'][[0, .4, .8].indexOf(v)]],
+  ['VR 防抖', () => cam.vr, () => { cam.vr = !cam.vr; }, v => v ? '开' : '关'],
+  ['高 ISO 降噪', () => cam.nr, d => { const k = [0, .5, 1]; cam.nr = k[(k.indexOf(cam.nr) + d + 3) % 3]; }, v => ['关', '低', '标准'][[0, .5, 1].indexOf(v)]],
+  ['峰值对焦', () => cam.peaking, () => { cam.peaking = !cam.peaking; }, v => v ? '开' : '关'],
+  ['自动 ISO', () => cam.autoIso, () => { cam.autoIso = !cam.autoIso; }, v => v ? '开' : '关'],
+  ['帧率', () => cam.fps, d => { const k = [24, 25, 30, 60, 120]; cam.fps = k[(k.indexOf(cam.fps) + d + 5) % 5]; }, v => v + 'p'],
+];
+function imenuRender() { const m = $('#imenu'); m.innerHTML = IITEMS.map((it, i) => `<div class="${i === IMENU.i ? 'sel' : ''}" data-i="${i}"><small>${it[0]}</small><b>${it[3](it[1]())}</b></div>`).join('');
+  const r = VIEW.rect; if (r && camUp) { m.style.left = r.x + 10 + 'px'; m.style.top = r.y + r.h - 130 + 'px'; } else { m.style.left = '50%'; m.style.top = 'auto'; m.style.bottom = '80px'; m.style.transform = 'translateX(-50%)'; } }
+function imenuToggle() { IMENU.open = !IMENU.open; $('#imenu').classList.toggle('on', IMENU.open); if (IMENU.open) imenuRender(); }
+function imenuChange(d) { IITEMS[IMENU.i][2](d > 0 ? 1 : -1); imenuRender(); onModeChange(); }
+$('#imenu').addEventListener('click', e => { const d = e.target.closest('[data-i]'); if (!d) return; IMENU.i = +d.dataset.i; imenuChange(1); });
+
+/* ---------------- input ---------------- */
+const TOUCH = { dir: null };
+const LOOK = { locked: false, drag: false, down: null, moved: 0, lockFailed: false };
+canvas.addEventListener('contextmenu', e => e.preventDefault());
+canvas.addEventListener('mousedown', e => {
+  canvas.focus();
+  if (e.button === 2) { setCamUp(!camUp); return; }
+  if (e.button !== 0) return;
+  if (LOOK.locked) { shutterPress(); return; }
+  LOOK.down = { x: e.clientX, y: e.clientY, t: performance.now() }; LOOK.moved = 0;
+});
+window.addEventListener('mousemove', e => {
+  if (LOOK.locked) { look(e.movementX, e.movementY); return; }
+  if (LOOK.down) { const dx = e.clientX - LOOK.down.x, dy = e.clientY - LOOK.down.y; LOOK.moved += Math.abs(dx) + Math.abs(dy); look(dx * 1.4, dy * 1.4); LOOK.down.x = e.clientX; LOOK.down.y = e.clientY; }
+});
+window.addEventListener('mouseup', e => {
+  if (e.button === 0 && LOOK.locked) { shutterRelease(); return; }
+  if (e.button === 0 && LOOK.down) { const click = LOOK.moved < 6 && performance.now() - LOOK.down.t < 350; LOOK.down = null;
+    if (click) { if (!LOOK.lockFailed && canvas.requestPointerLock && !HINTS.noLock) { try { const p = canvas.requestPointerLock(); if (p && p.catch) p.catch(() => { LOOK.lockFailed = true; }); } catch (err) { LOOK.lockFailed = true; } } else { shutterPress(); shutterRelease(); } } }
+});
+document.addEventListener('pointerlockchange', () => { LOOK.locked = document.pointerLockElement === canvas; if (LOOK.locked) toast('鼠标已锁定：移动看、左键快门、右键举机；Esc 释放鼠标', '--help', 2600); });
+document.addEventListener('pointerlockerror', () => { LOOK.lockFailed = true; toast('无法锁定鼠标：按住左键拖动来看，单击即快门', '--help'); });
+function look(dx, dy) {
+  const f = camUp || PGM ? eqF() : 30; const k = .0023 * Math.pow(30 / Math.max(f, 24), .85);
+  if (PGM > 0) { const c = CAMS[PGM - 1]; c.yaw -= dx * k; c.pitch = clamp(c.pitch - dy * k, -1.45, 1.45); return; }
+  if (DIRECTOR.active) return;
+  player.yaw -= dx * k; player.pitch = clamp(player.pitch - dy * k, -1.5, 1.5);
+}
+let wheelAcc = 0;
+canvas.addEventListener('wheel', e => { e.preventDefault(); wheelAcc += e.deltaY; const step = Math.abs(e.deltaY) >= 50 ? 50 : 60;
+  while (Math.abs(wheelAcc) >= step) { const d = wheelAcc > 0 ? 1 : -1; wheelAcc -= d * step; dial(e.shiftKey ? 'sub' : 'main', -d); click('tick'); } }, { passive: false });
+window.addEventListener('keydown', e => {
+  if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT')) return;
+  const c = e.code; if (['Space', 'Tab', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Slash'].includes(c)) e.preventDefault();
+  if (e.repeat && !['KeyZ', 'KeyX', 'BracketLeft', 'BracketRight'].includes(c)) return;
+  keys.add(c);
+  if ($('#intro').classList.contains('on')) { if (c === 'Enter' || c === 'Space') startGame(); return; }
+  if ($('#review').classList.contains('on')) { if (c === 'ArrowLeft') $('#revPrev').click(); if (c === 'ArrowRight') $('#revNext').click(); if (c === 'KeyP' || c === 'Escape') closeReview(); return; }
+  if ($('#player').classList.contains('on')) { if (c === 'Escape') closePlayer(); if (c === 'Space') $('#plPlay').click(); return; }
+  if (IMENU.open) { const cols = 6; if (c === 'ArrowRight') IMENU.i = (IMENU.i + 1) % 12; if (c === 'ArrowLeft') IMENU.i = (IMENU.i + 11) % 12; if (c === 'ArrowDown' || c === 'ArrowUp') IMENU.i = (IMENU.i + cols) % 12;
+    if (c === 'Enter') imenuChange(1); if (c === 'Tab' || c === 'Escape') imenuToggle(); else imenuRender(); return; }
+  switch (c) {
+    case 'Space': shutterPress(); break;
+    case 'KeyV': setCamUp(!camUp); break;
+    case 'KeyF': cam.afState = ''; if (cam.af !== 'MF') { poseSensor(WORLD.t, SENS); if (autofocus(SENS, false) !== false) click('beep'); } break;
+    case 'KeyM': setMode(e.shiftKey ? -1 : 1); break;
+    case 'Tab': imenuToggle(); break;
+    case 'KeyG': cam.dispMode = (cam.dispMode + 1) % 3; break;
+    case 'KeyP': openReview(); break;
+    case 'KeyY': if (!REC.on) { cam.movie = !cam.movie; osdMsg(cam.movie ? '录像模式：R 或快门开始录制' : '拍照模式', 900); onModeChange(); } break;
+    case 'KeyR': REC.on ? recStop() : recStart(); onModeChange(); break;
+    case 'KeyT': cycleRig(); break;
+    case 'KeyB': WORLD.frozen = !WORLD.frozen; osdMsg(WORLD.frozen ? '世界冻结' : '世界恢复流动', 800); break;
+    case 'ArrowLeft': case 'ArrowRight': case 'ArrowUp': case 'ArrowDown': if (cam.area === 'single') { cam.fx = clamp(cam.fx + (c === 'ArrowRight' ? .08 : c === 'ArrowLeft' ? -.08 : 0), -.85, .85); cam.fy = clamp(cam.fy + (c === 'ArrowUp' ? .09 : c === 'ArrowDown' ? -.09 : 0), -.8, .8); cam.afState = ''; } else osdMsg('在 AF 区域“单点”模式下才能移动对焦点', 900); break;
+    case 'Enter': cam.fx = 0; cam.fy = 0; break;
+    case 'Digit0': setPGM(0); break;
+    case 'Digit1': case 'Digit2': case 'Digit3': case 'Digit4': setPGM(+c.slice(5)); break;
+    case 'Slash': openPanel('help'); break;
+    case 'Escape': if (DIRECTOR.active) endMove(); else if (PANEL.id) closePanel(); break;
+  }
+});
+window.addEventListener('keyup', e => { keys.delete(e.code); if (e.code === 'Space') shutterRelease(); });
+window.addEventListener('blur', () => keys.clear());
+// touch
+(function touch() {
+  const isTouch = matchMedia('(pointer:coarse)').matches; if (!isTouch) return; $('#touch').classList.add('on');
+  const hold = (id, dir) => { const b = $(id); b.addEventListener('touchstart', e => { e.preventDefault(); TOUCH.dir = dir; }); b.addEventListener('touchend', () => TOUCH.dir = null); };
+  hold('#tUp', [0, -1]); hold('#tDown', [0, 1]); hold('#tLeft', [-1, 0]); hold('#tRight', [1, 0]);
+  $('#tEvf').addEventListener('touchstart', e => { e.preventDefault(); setCamUp(!camUp); }); $('#tShut').addEventListener('touchstart', e => { e.preventDefault(); shutterPress(); shutterRelease(); });
+  let last = null; canvas.addEventListener('touchstart', e => { const t = e.touches[0]; last = { x: t.clientX, y: t.clientY }; }, { passive: true });
+  canvas.addEventListener('touchmove', e => { const t = e.touches[0]; if (last) look((t.clientX - last.x) * 2, (t.clientY - last.y) * 2); last = { x: t.clientX, y: t.clientY }; }, { passive: true });
+})();
+window.addEventListener('resize', () => { renderer.setSize(innerWidth, innerHeight, false); EYE.aspect = innerWidth / innerHeight; });
+
+/* ---------------- start ---------------- */
+function startGame() { if (!READY) return; $('#intro').classList.remove('on'); click('tick'); canvas.focus(); toast('先按 V（或右键）把相机举到眼前。点一下画面锁定鼠标。', '--expo', 5000); }
+$('#goBtn').onclick = startGame;
+function init() {
+  try {
+    buildTown(); buildCharacters(); bakeStatic(); buildHandCamera(); buildDock();
+    AF_TARGETS.push(CHAR.ahe.root, CHAR.bike, CHAR.baker.root, CHAR.dog, ...CHAR.cars);
+    setTod(WORLD.tod, true); setWorldTime(WORLD.t, WORLD.tod);
+    SENS.aspect = 1.5; poseSensor(WORLD.t, SENS); lookAtP(aheHead(new THREE.Vector3())); cam.focusD = cam.focusGoal = 6;
+    renderer.compile(scene, EYE);
+    READY = true; const g = $('#goBtn'); g.disabled = false; g.textContent = '走进小镇'; $('#loading').textContent = `${renderer.info.programs ? renderer.info.programs.length : ''} 个着色器已就绪 · 建议在电脑上用键盘鼠标体验`;
+  } catch (err) { console.error(err); $('#loading').textContent = '初始化失败：' + err.message; }
+  requestAnimationFrame(tick);
+}
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => setTimeout(init, 30)); else setTimeout(init, 30);
+
+</script>
+</body>
+</html>
+```
+
