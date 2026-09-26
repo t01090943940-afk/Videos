@@ -1,0 +1,822 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>F12 in 60 Seconds</title>
+<style>
+@font-face{font-family:Brico;src:url(fonts/bricolage-grotesque-latin-800-normal.woff2);font-weight:800}
+@font-face{font-family:Brico;src:url(fonts/bricolage-grotesque-latin-600-normal.woff2);font-weight:600}
+@font-face{font-family:Brico;src:url(fonts/bricolage-grotesque-latin-400-normal.woff2);font-weight:400}
+@font-face{font-family:Plex;src:url(fonts/ibm-plex-sans-latin-400-normal.woff2);font-weight:400}
+@font-face{font-family:Plex;src:url(fonts/ibm-plex-sans-latin-500-normal.woff2);font-weight:500}
+@font-face{font-family:Plex;src:url(fonts/ibm-plex-sans-latin-600-normal.woff2);font-weight:600}
+@font-face{font-family:Plex;src:url(fonts/ibm-plex-sans-latin-700-normal.woff2);font-weight:700}
+@font-face{font-family:JBM;src:url(fonts/jetbrains-mono-latin-400-normal.woff2);font-weight:400}
+@font-face{font-family:JBM;src:url(fonts/jetbrains-mono-latin-600-normal.woff2);font-weight:600}
+@font-face{font-family:JBM;src:url(fonts/jetbrains-mono-latin-700-normal.woff2);font-weight:700}
+:root{--bg:#070A12;--ink:#EAF0FA;--mut:#8791A8;--blue:#6FA8DC;--green:#93C47D;--yellow:#FFE599;--orange:#F6B26B;--pink:#FF4F8B;--cyan:#3FD8F2;--acc:#6FA8DC;
+--dt:#1F2023;--dt2:#28292D;--dt3:#303136;--line:#3A3C42;--dtx:#E3E3E3;--dtm:#9AA0A6;--sel:#0B4A78;--tag:#5DB0D7;--attr:#9BBBDC;--val:#F29766;--str:#F29766;--num:#9980FF;--prop:#35D4C7;--kw:#C792EA}
+*{box-sizing:border-box}
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Plex,'DejaVu Sans',sans-serif}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden;background:radial-gradient(1200px 800px at 30% 45%,#101A33 0%,#070A12 70%)}
+#grid{position:absolute;inset:-80px;background-image:linear-gradient(rgba(111,168,220,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(111,168,220,.07) 1px,transparent 1px);background-size:40px 40px}
+#glow{position:absolute;width:1400px;height:1400px;left:-200px;top:-300px;border-radius:50%;background:radial-gradient(circle,var(--acc) 0%,transparent 60%);opacity:.10;mix-blend-mode:screen}
+#water{position:absolute;top:760px;left:0;white-space:nowrap;font:800 330px/1 Brico;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.06);letter-spacing:-.02em}
+#fx{position:absolute;inset:0;pointer-events:none}
+.scene{position:absolute;inset:0;display:none}
+#stage{position:absolute;left:56px;top:122px;width:1140px;height:808px}
+.si{position:absolute;inset:0;transform-origin:50% 50%}
+/* HUD */
+#hud-top{position:absolute;left:56px;right:56px;top:34px;height:60px;display:flex;gap:6px;align-items:flex-end}
+.seg{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;gap:7px}
+.seg b{font:600 13px/1 JBM;letter-spacing:.08em;color:#56607A;white-space:nowrap;overflow:hidden}
+.seg i{display:block;height:5px;background:#1A2236;border-radius:3px;overflow:hidden;position:relative}
+.seg i u{position:absolute;inset:0;transform-origin:left;background:var(--c,#6FA8DC);transform:scaleX(0)}
+.seg.on b{color:var(--c)}
+.seg.done b{color:#8A94AB}
+#hud-bot{position:absolute;left:0;right:0;bottom:0;height:62px;background:linear-gradient(90deg,#0C1222,#0A0F1C);border-top:1px solid #1C2640;display:flex;align-items:center;overflow:hidden}
+#tc{flex:none;width:250px;padding-left:56px;font:700 22px/1 JBM;color:var(--acc);letter-spacing:.02em}
+#tc small{display:block;font:600 11px/1.4 JBM;color:#5E6983;letter-spacing:.12em;margin-top:4px}
+#tick-wrap{flex:1;overflow:hidden;position:relative;height:100%;mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+#tick{position:absolute;top:0;height:100%;display:flex;align-items:center;white-space:nowrap;font:500 19px/1 Plex;color:#B8C2D6}
+#tick span{padding:0 26px;display:inline-flex;align-items:center;gap:10px}
+#tick b{font:700 13px/1 JBM;color:#070A12;background:var(--yellow);padding:4px 7px;border-radius:4px;letter-spacing:.06em}
+#tick code{font:600 17px/1 JBM;color:var(--cyan)}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;mix-blend-mode:screen}
+#bands{position:absolute;inset:0;pointer-events:none}
+#bands div{position:absolute;left:0;right:0;mix-blend-mode:screen}
+#vign{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55) 100%)}
+#scan{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.018) 0 1px,transparent 1px 3px)}
+/* INFO column */
+.info{position:absolute;left:1238px;top:122px;width:630px;height:808px;display:flex;flex-direction:column;gap:18px}
+.kick{font:700 16px/1 JBM;letter-spacing:.18em;color:var(--acc);display:flex;gap:12px;align-items:center}
+.kick::before{content:"";width:34px;height:3px;background:var(--acc)}
+.ttl{margin:0;font:800 104px/.9 Brico;letter-spacing:-.035em;color:#fff;white-space:nowrap;transform-origin:left center;text-shadow:0 0 40px color-mix(in srgb,var(--acc) 55%,transparent)}
+.sub{font:500 25px/1.25 Plex;color:#C9D2E3;max-width:610px}
+.sub em{font-style:normal;color:var(--acc)}
+.keys{display:flex;flex-wrap:wrap;gap:10px 18px}
+.combo{display:flex;align-items:center;gap:6px}
+.combo em{font:700 18px JBM;color:#58627A;font-style:normal}
+.combo small{font:500 16px/1 Plex;color:#95A0B8;margin-left:6px}
+.kc{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:44px;padding:0 11px;border-radius:9px;background:linear-gradient(#2A3350,#1B2238);border:1px solid #3D4868;box-shadow:0 4px 0 #0E1322,0 6px 14px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.12);font:700 18px/1 JBM;color:#fff}
+.bul{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-direction:column;gap:13px}
+.bul li{display:flex;gap:14px;align-items:flex-start;font:500 23px/1.28 Plex;color:#E4EAF5}
+.bul li i{flex:none;width:14px;height:14px;margin-top:7px;border:3px solid var(--acc);box-shadow:inset 0 0 0 3px #070A12,inset 0 0 0 9px var(--acc)}
+.bul li:nth-child(4n+2) i{border-color:var(--green);box-shadow:inset 0 0 0 3px #070A12,inset 0 0 0 9px var(--green)}
+.bul li:nth-child(4n+3) i{border-color:var(--yellow);box-shadow:inset 0 0 0 3px #070A12,inset 0 0 0 9px var(--yellow)}
+.bul li:nth-child(4n+4) i{border-color:var(--orange);box-shadow:inset 0 0 0 3px #070A12,inset 0 0 0 9px var(--orange)}
+.bul code,.sub code{font:600 .88em JBM;color:var(--cyan);background:rgba(63,216,242,.08);padding:1px 6px;border-radius:5px}
+.bul b{color:#fff}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font:600 15px/1 JBM;color:#AEB8CC}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend span::before{content:"";width:16px;height:16px;border-radius:3px;background:var(--c)}
+/* browser window */
+.win{position:absolute;inset:0;border-radius:14px;overflow:hidden;background:#1B1C1F;box-shadow:0 0 0 1px #34384A,0 40px 90px rgba(0,0,0,.6),0 0 120px color-mix(in srgb,var(--acc) 22%,transparent);display:flex;flex-direction:column}
+.bch{flex:none;background:#2B2C30}
+.btabs{height:40px;display:flex;align-items:flex-end;gap:2px;padding:0 12px;background:#1E1F22}
+.lights{display:flex;gap:8px;margin:0 14px 13px 4px}.lights i{width:13px;height:13px;border-radius:50%;background:#FF5F57}.lights i+i{background:#FEBC2E}.lights i+i+i{background:#28C840}
+.btab{height:32px;padding:0 14px;display:flex;align-items:center;gap:9px;font:500 14px Plex;color:#9AA0A6;border-radius:9px 9px 0 0;min-width:180px}
+.btab.on{background:#2B2C30;color:#E8EAED}
+.btab .fav{width:15px;height:15px;border-radius:4px;background:linear-gradient(135deg,#E4572E,#7A2E1A)}
+.btab b{margin-left:auto;font-weight:400;opacity:.6}
+.omni{height:44px;display:flex;align-items:center;gap:14px;padding:0 14px;color:#9AA0A6;font:500 18px Plex}
+.url{flex:1;height:32px;border-radius:16px;background:#1E1F22;display:flex;align-items:center;gap:10px;padding:0 16px;font:400 15px Plex;color:#E8EAED}
+.url s{text-decoration:none;color:#9AA0A6}
+.bbody{flex:1;display:flex;min-height:0;position:relative}
+.bbody.bottom{flex-direction:column}
+.pagebox{position:relative;overflow:hidden;background:#F4EFE8;flex:none}
+.dt{flex:1;min-width:0;min-height:0;background:var(--dt);color:var(--dtx);font:400 14px/1.35 Plex;display:flex;flex-direction:column;border-left:1px solid var(--line);position:relative}
+.bottom .dt{border-left:0;border-top:1px solid var(--line)}
+.dtt{height:36px;flex:none;display:flex;align-items:stretch;background:var(--dt2);border-bottom:1px solid var(--line);font:500 14px Plex;color:#BDC1C6}
+.dtt .ic{width:38px;display:flex;align-items:center;justify-content:center;border-right:1px solid var(--line)}
+.dtt .ic.on svg{stroke:#8AB4F8}
+.dtt span{padding:0 13px;display:flex;align-items:center;border-bottom:2px solid transparent;white-space:nowrap}
+.dtt span.on{color:#E8EAED;border-bottom-color:#8AB4F8;background:#303134}
+.dtt .rt{margin-left:auto;display:flex;align-items:center;gap:14px;padding:0 12px;color:#9AA0A6}
+.badge{font:600 12px JBM;padding:2px 7px;border-radius:9px;display:inline-flex;gap:5px;align-items:center}
+.badge.err{background:#4E1D1D;color:#F28B82}.badge.warn{background:#4A3C12;color:#FDD663}.badge.iss{background:#1D3350;color:#8AB4F8}
+svg.i{width:18px;height:18px;fill:none;stroke:#9AA0A6;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tb{height:32px;flex:none;display:flex;align-items:center;gap:12px;padding:0 10px;background:var(--dt2);border-bottom:1px solid var(--line);font:400 13px Plex;color:#BDC1C6;white-space:nowrap}
+.tb .sep{width:1px;height:18px;background:var(--line)}
+.tb .inp{height:22px;border-radius:4px;background:#1B1C1E;border:1px solid #45474C;padding:0 8px;display:flex;align-items:center;color:#9AA0A6;min-width:150px}
+.chk{display:inline-flex;align-items:center;gap:6px}
+.chk::before{content:"";width:13px;height:13px;border-radius:3px;border:1.5px solid #9AA0A6}
+.chk.y::before{background:#8AB4F8 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2l2.3 2.3 4.7-5' stroke='%23202124' stroke-width='1.8' fill='none'/%3E%3C/svg%3E") center/100%;border-color:#8AB4F8}
+.mono{font-family:JBM,monospace}
+/* demo site */
+.site{position:absolute;left:0;top:0;width:100%;font-family:Plex;color:#1C1714;background:#F4EFE8}
+.snav{display:flex;align-items:center;gap:18px;padding:14px 22px;font:500 13px Plex;color:#5B4F45;border-bottom:1px solid #E3D9CC}
+.snav b{font:800 17px Brico;letter-spacing:.12em;color:#1C1714;margin-right:auto}
+.shero{padding:26px 22px 22px}
+.stitle{margin:0;font:800 42px/1.02 Brico;letter-spacing:-.02em;color:#1C1714;display:inline-block}
+.shero p{margin:10px 0 18px;font:400 15px/1.4 Plex;color:#6A5D52}
+.scta{display:inline-block;background:#E4572E;color:#fff;padding:14px 28px;border-radius:999px;font:600 16px/1.25 Plex;margin:0 0 4px;transition:none}
+.scards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:6px 22px 22px;position:relative}
+.mini .shero{padding:10px 22px 0}.mini .stitle{font-size:26px}.mini .shero p,.mini .scta{display:none}
+.scard{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 0 #E3D9CC}
+.scard i{display:block;height:92px}
+.scard b{display:block;font:600 13px Plex;padding:8px 10px 0}
+.scard span{display:block;font:500 12px JBM;color:#8A7B6D;padding:2px 10px 10px}
+/* elements */
+.tree{flex:none;font:400 14px/23px JBM;padding:6px 0;white-space:nowrap;color:var(--dtx)}
+.tree div{padding-left:calc(var(--d,0)*18px + 14px);position:relative}
+.tree div.hov{background:#2A3B52}
+.tree div.selr{background:#0B4A78}
+.tg{color:var(--tag)}.an{color:var(--attr)}.av{color:var(--val)}.tx{color:#E3E3E3}.cm{color:#8C9296}
+.dol{color:#9AA0A6;font-size:12px;margin-left:8px}
+.flexb{font:600 10px Plex;color:#C8CCD1;border:1px solid #6F737A;border-radius:8px;padding:0 5px;margin-left:6px;vertical-align:1px}
+.flexb.on{background:#8AB4F8;color:#1F1F1F;border-color:#8AB4F8}
+.subt{height:30px;flex:none;display:flex;align-items:stretch;background:var(--dt2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);font:500 13px Plex;color:#BDC1C6}
+.subt span{padding:0 10px;display:flex;align-items:center;border-bottom:2px solid transparent;white-space:nowrap}
+.subt span.on{color:#E8EAED;border-bottom-color:#8AB4F8}
+.crumbs{height:26px;flex:none;border-top:1px solid var(--line);display:flex;align-items:center;gap:0;font:400 13px JBM;color:#BDC1C6;padding:0 6px;background:var(--dt2)}
+.crumbs span{padding:0 8px}.crumbs span.on{background:#3C4043}
+.styles{font:400 14px/22px JBM;padding:4px 0;color:var(--dtx)}
+.rule{padding:5px 12px 7px;border-bottom:1px solid #2E3035;position:relative}
+.rule .src{position:absolute;right:12px;top:5px;color:#9AA0A6;text-decoration:underline;font-size:12.5px}
+.rule .sel{color:#E3E3E3}
+.decl{padding-left:22px;position:relative}
+.decl .cb{position:absolute;left:0;top:5px;width:13px;height:13px;border:1.5px solid #9AA0A6;border-radius:2px;opacity:.9}
+.decl .cb.y{background:#8AB4F8;border-color:#8AB4F8}
+.pn{color:var(--prop)}.pv{color:#E3E3E3}
+.decl.off{text-decoration:line-through;color:#7F868C}.decl.off .pn,.decl.off .pv{color:#7F868C}
+.sw{display:inline-block;width:12px;height:12px;border:1px solid #777;vertical-align:-1px;margin-right:5px;border-radius:2px}
+.ua{color:#9AA0A6;font-style:italic}
+/* overlays */
+.ovl{position:absolute;pointer-events:none;display:none}
+.ovl div{position:absolute;box-sizing:border-box;border-style:solid;border-width:0}
+.tip{position:absolute;display:none;background:#fff;color:#202124;border-radius:6px;box-shadow:0 3px 14px rgba(0,0,0,.35);font:400 13px/1.45 Plex;padding:8px 11px;white-space:nowrap;z-index:5}
+.tip .tn{color:#881280;font-weight:600;font-family:JBM}.tip .tc{color:#1A1AA6;font-family:JBM}.tip .dim{color:#5F6368;float:right;margin-left:18px;font-family:JBM}
+.tip table{border-collapse:collapse;margin-top:4px;font:400 12.5px Plex}
+.tip td{padding:1px 0}.tip td+td{padding-left:26px;text-align:right;font-family:JBM}
+.tip .sec{font:700 10.5px Plex;letter-spacing:.08em;color:#5F6368;padding-top:6px}
+.cursor{position:absolute;left:0;top:0;width:34px;height:34px;z-index:20;pointer-events:none;filter:drop-shadow(0 3px 6px rgba(0,0,0,.6))}
+.ripple{position:absolute;width:10px;height:10px;border-radius:50%;border:3px solid #fff;z-index:19;pointer-events:none;opacity:0}
+/* console */
+.con{flex:1;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;font:400 15px/1.45 JBM;min-height:0}
+.cl{padding:4px 14px 4px 34px;border-bottom:1px solid #2C2E33;position:relative;white-space:pre}
+.cl::before{position:absolute;left:12px;top:4px;color:#8AB4F8}
+.cl.in::before{content:"›";color:#8AB4F8;font-weight:700}
+.cl.out::before{content:"←";color:#9AA0A6;font-size:13px}
+.cl.warn{background:#413A1B;color:#FDD663;border-color:#65571A}
+.cl.warn::before{content:"▲";color:#FDD663;font-size:11px;top:6px}
+.cl.err{background:#3C1E1E;color:#F28B82;border-color:#6B2B2B}
+.cl.err::before{content:"✕";color:#F28B82;font-weight:700;font-size:12px;top:5px}
+.cl .loc{position:absolute;right:14px;top:4px;color:#9AA0A6;text-decoration:underline;font-size:13px}
+.ctab{border-collapse:collapse;margin:4px 0 2px;font:400 14px JBM}
+.ctab td,.ctab th{border:1px solid #45474C;padding:2px 12px;text-align:left}
+.ctab th{background:#303134;font-weight:600;color:#E3E3E3}
+.caret{display:inline-block;width:9px;height:18px;background:#8AB4F8;vertical-align:-3px;margin-left:1px}
+.live{flex:none;border-bottom:1px solid var(--line);padding:6px 14px;font:400 14px/1.5 JBM;background:#232428}
+.live div{display:flex;gap:14px}.live b{color:#E3E3E3;font-weight:400}.live span{color:var(--num)}
+/* sources */
+.srcw{flex:1;display:flex;min-height:0}
+.nav{width:228px;flex:none;border-right:1px solid var(--line);font:400 14px/24px Plex;overflow:hidden}
+.nav .subt{border-top:0}
+.nav div.f{padding-left:calc(var(--d)*16px + 10px);white-space:nowrap;color:#D5D7DB;display:flex;align-items:center;gap:6px}
+.nav div.f.sel{background:#0B4A78}
+.fi{width:13px;height:14px;border-radius:2px;background:#6D8FB5;display:inline-block}.fi.d{background:#C9A15A;border-radius:1px 4px 2px 2px}.fi.js{background:#E8C547}.fi.css{background:#6FA8DC}.fi.cloud{background:#9AA0A6;border-radius:50%}
+.ed{flex:1;min-width:0;display:flex;flex-direction:column;border-right:1px solid var(--line)}
+.edt{height:32px;flex:none;display:flex;background:var(--dt2);border-bottom:1px solid var(--line);font:400 13px Plex;color:#BDC1C6}
+.edt span{padding:0 12px;display:flex;align-items:center;gap:8px;border-right:1px solid var(--line)}.edt span.on{background:var(--dt);color:#fff}
+.code{flex:1;font:400 15px/25px JBM;padding-top:6px;position:relative;overflow:hidden}
+.ln{display:flex;white-space:pre;position:relative}
+.ln .g{width:52px;flex:none;text-align:right;padding-right:14px;color:#6E7379;position:relative}
+.ln.cur{background:rgba(64,120,80,.45)}
+.ln.cur .g{color:#fff}
+.bp{position:absolute;right:3px;top:2px;height:21px;width:44px;background:#1A73E8;color:#fff;border-radius:2px 0 0 2px;clip-path:polygon(0 0,82% 0,100% 50%,82% 100%,0 100%);padding-right:12px;text-align:right;display:none}
+.bp.cond{background:#E37400}.bp.log{background:#D01884}
+.kw{color:#C792EA}.fn{color:#82AAFF}.st{color:#F29766}.nm{color:#9980FF}.co{color:#7F8C8D;font-style:italic}.vr{color:#E3E3E3}
+.inl{color:#9AA0A6;font-style:italic;margin-left:22px;background:rgba(138,180,248,.12);padding:0 6px;border-radius:3px;font-size:13.5px}
+.dbg{width:340px;flex:none;display:flex;flex-direction:column;font:400 14px/23px Plex;overflow:hidden}
+.dbgb{height:34px;flex:none;display:flex;align-items:center;gap:16px;padding:0 12px;background:var(--dt2);border-bottom:1px solid var(--line)}
+.dbgb svg{width:19px;height:19px}
+.pane{border-bottom:1px solid var(--line)}
+.pane h4{margin:0;font:600 13px/28px Plex;padding:0 10px;background:#27282C;color:#E3E3E3}
+.pane h4::before{content:"▾ ";color:#9AA0A6}
+.pane div{padding:0 14px;white-space:nowrap;font:400 13.5px/23px JBM}
+.pane .sk{color:#C792EA}
+.pausebar{position:absolute;left:50%;top:10px;transform:translateX(-50%);background:#FFF3C4;border:1px solid #E2C766;color:#3C3000;font:500 14px Plex;padding:6px 12px;border-radius:5px;display:flex;gap:12px;align-items:center;box-shadow:0 4px 12px rgba(0,0,0,.2);z-index:4}
+.pausebar i{font-style:normal;background:#1A73E8;color:#fff;width:24px;height:20px;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;font-size:11px}
+.dim{position:absolute;inset:0;background:rgba(0,0,0,.18);z-index:3}
+.ctx{position:absolute;background:#2D2E31;border:1px solid #4A4C52;border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,.5);font:400 14px/30px Plex;color:#E3E3E3;padding:5px 0;z-index:8;min-width:260px}
+.ctx div{padding:0 18px;white-space:nowrap}.ctx div.h{background:#0B4A78}.ctx hr{border:0;border-top:1px solid #45474C;margin:4px 0}
+.ctx div small{float:right;color:#9AA0A6;margin-left:30px}
+/* network */
+.nt{flex:1;display:flex;flex-direction:column;min-height:0;position:relative}
+.ntrow{display:grid;grid-template-columns:170px 60px 84px 100px 76px 72px 1fr;font:400 13.5px/24px Plex;border-bottom:1px solid #2C2E33;white-space:nowrap}
+.ntrow>*{padding:0 8px;overflow:hidden;text-overflow:ellipsis;border-right:1px solid #2C2E33}
+.ntrow.h{background:var(--dt2);color:#BDC1C6;font-weight:500}
+.ntrow:nth-child(even):not(.h){background:#232428}
+.ntrow.bad{color:#F28B82}
+.ntrow.pick{background:#0B4A78!important}
+.wf{position:relative}
+.wf i{position:absolute;top:8px;height:9px}
+.chips{display:flex;gap:4px;align-items:center}
+.chips span{padding:1px 9px;border-radius:10px;font:500 12.5px/20px Plex;color:#BDC1C6}
+.chips span.on{background:#3C4043;color:#fff}
+.ov{height:56px;flex:none;border-bottom:1px solid var(--line);position:relative;background:#1B1C1F}
+.status{height:28px;flex:none;border-top:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 10px;font:400 13px Plex;color:#BDC1C6;background:var(--dt2);white-space:nowrap}
+.status .dcl{color:#8AB4F8}.status .ld{color:#F28B82}
+.drawer{position:absolute;right:0;top:0;bottom:0;width:560px;background:var(--dt);border-left:1px solid var(--line);z-index:6;display:flex;flex-direction:column}
+.hdr{font:400 13.5px/23px Plex;padding:0 14px}
+.hdr .k{color:#9AA0A6;display:inline-block;width:190px}
+.hdr .v{color:#E3E3E3;font-family:JBM;font-size:13px}
+.hdr h5{margin:8px 0 2px;font:600 13px Plex;color:#E3E3E3}
+.hdr h5::before{content:"▾ ";color:#9AA0A6}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#F28B82;margin-right:6px}
+/* perf */
+.flame{position:relative;overflow:hidden}
+.flame i{position:absolute;height:19px;font:500 11.5px/19px Plex;color:#1B1B1B;padding:0 4px;overflow:hidden;white-space:nowrap;border-right:1px solid rgba(0,0,0,.25);font-style:normal}
+.flame i.lt::after{content:"";position:absolute;right:0;top:0;width:0;height:0;border-top:9px solid #E53935;border-left:9px solid transparent}
+.track{display:flex;border-bottom:1px solid var(--line);font:500 12.5px/1 Plex;color:#BDC1C6}
+.track>b{width:110px;flex:none;padding:6px 8px;font-weight:500;border-right:1px solid var(--line);background:#232428}
+.track>div{flex:1;position:relative}
+.vit{display:flex;gap:10px}
+.vit div{flex:1;background:#27282C;border-radius:8px;padding:10px 12px;border:1px solid #3A3C42}
+.vit b{display:block;font:600 11.5px/1 Plex;letter-spacing:.06em;color:#9AA0A6}
+.vit span{display:block;font:700 22px/1.2 JBM;margin-top:6px;white-space:nowrap}
+.vit small{font:500 12px Plex;color:#9AA0A6}
+.g{color:#81C995}.o{color:#FCAD70}.r{color:#F28B82}
+/* generic */
+.tile{position:absolute;background:var(--dt);border-radius:12px;border:1px solid #3A3C42;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.tile h6{margin:0;height:36px;display:flex;align-items:center;gap:10px;padding:0 14px;background:var(--dt2);border-bottom:1px solid var(--line);font:600 14px Plex;color:#E8EAED}
+.tile h6 em{font-style:normal;font:600 11px JBM;color:#070A12;background:var(--acc);padding:3px 7px;border-radius:4px;margin-left:auto}
+.gauge{display:flex;flex-direction:column;align-items:center;gap:10px;font:600 17px Plex;color:#E3E3E3}
+.gauge svg{width:150px;height:150px}
+.gauge text{font:700 44px JBM}
+/* intro */
+.bigkey{position:absolute;left:50%;top:50%;width:360px;height:300px;margin:-190px 0 0 -180px;border-radius:44px;background:linear-gradient(#34405F,#1B2238);border:2px solid #56648A;box-shadow:0 26px 0 #0B0F1C,0 40px 80px rgba(0,0,0,.7),inset 0 3px 0 rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font:800 150px/1 Brico;color:#fff;letter-spacing:-.04em}
+.ring{position:absolute;left:50%;top:50%;border-radius:50%;border:6px solid var(--blue);transform:translate(-50%,-50%);opacity:0}
+.hero-t{position:absolute;left:0;right:0;text-align:center;font:800 250px/.9 Brico;letter-spacing:-.05em;color:#fff}
+.hero-t span{display:inline-block}
+</style></head>
+<body><div id="root">
+<div id="grid"></div><div id="glow"></div><div id="water"></div>
+<canvas id="fx" width="1920" height="1080"></canvas>
+<div id="scenes"></div>
+<div id="hud-top"></div>
+<div id="hud-bot"><div id="tc">00:00.0<small>DEVTOOLS · 60S</small></div><div id="tick-wrap"><div id="tick"></div></div></div>
+<div id="bands"></div><div id="flash"></div><div id="scan"></div><div id="vign"></div>
+</div>
+<script>
+const B=60/128, BAR=4*B;
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const E={out:t=>1-Math.pow(1-t,3),back:t=>{const c1=1.9,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)},io:t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,expo:t=>t>=1?1:1-Math.pow(2,-10*t)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+function rng(seed){let s=seed>>>0||1;return()=>{s^=s<<13;s>>>=0;s^=s>>17;s^=s<<5;s>>>=0;return s/4294967296}}
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+
+/* ---------- icons ---------- */
+const I={
+inspect:'<svg class="i" viewBox="0 0 20 20"><path d="M8 3H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h4"/><path d="M9 8l8 3-3.5 1.5L12 16z"/></svg>',
+device:'<svg class="i" viewBox="0 0 20 20"><rect x="2" y="4" width="10" height="13" rx="1.5"/><rect x="13" y="8" width="5" height="9" rx="1"/></svg>',
+gear:'<svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="2.6"/><path d="M10 2v2.5M10 15.5V18M2 10h2.5M15.5 10H18M4.3 4.3l1.8 1.8M13.9 13.9l1.8 1.8M4.3 15.7l1.8-1.8M13.9 6.1l1.8-1.8"/></svg>',
+kebab:'<svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="4.5" r=".9"/><circle cx="10" cy="10" r=".9"/><circle cx="10" cy="15.5" r=".9"/></svg>',
+x:'<svg class="i" viewBox="0 0 20 20"><path d="M5 5l10 10M15 5L5 15"/></svg>',
+lock:'<svg class="i" viewBox="0 0 20 20" style="width:15px;height:15px"><rect x="4.5" y="9" width="11" height="8" rx="1.5"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9"/></svg>',
+clear:'<svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M5 15L15 5"/></svg>',
+eye:'<svg class="i" viewBox="0 0 20 20"><path d="M2 10s3-5.5 8-5.5S18 10 18 10s-3 5.5-8 5.5S2 10 2 10z"/><circle cx="10" cy="10" r="2.4"/></svg>',
+funnel:'<svg class="i" viewBox="0 0 20 20"><path d="M3 4h14l-5.5 6.5V16l-3-1.5v-4z"/></svg>',
+rec:'<svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="5.5" fill="#F28B82" stroke="none"/></svg>',
+resume:'<svg class="i" viewBox="0 0 20 20" style="stroke:#8AB4F8"><path d="M4 4v12M8 4l9 6-9 6z" fill="#8AB4F8"/></svg>',
+over:'<svg class="i" viewBox="0 0 20 20" style="stroke:#8AB4F8"><path d="M3 11a7 7 0 0 1 13-3"/><path d="M16.5 3.5V8H12"/><circle cx="10" cy="15" r="1.6" fill="#8AB4F8"/></svg>',
+into:'<svg class="i" viewBox="0 0 20 20" style="stroke:#8AB4F8"><path d="M10 2v9M6 7l4 4 4-4"/><circle cx="10" cy="16" r="1.6" fill="#8AB4F8"/></svg>',
+out:'<svg class="i" viewBox="0 0 20 20" style="stroke:#8AB4F8"><path d="M10 12V3M6 7l4-4 4 4"/><circle cx="10" cy="16" r="1.6" fill="#8AB4F8"/></svg>',
+step:'<svg class="i" viewBox="0 0 20 20" style="stroke:#8AB4F8"><path d="M3 10h11M10 6l4 4-4 4"/><circle cx="17" cy="10" r="1.4" fill="#8AB4F8"/></svg>',
+deact:'<svg class="i" viewBox="0 0 20 20"><path d="M3 5h10l4 5-4 5H3z"/><path d="M2 17L17 3"/></svg>',
+dl:'<svg class="i" viewBox="0 0 20 20"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>',
+};
+const cursorSVG={arrow:'<svg class="cursor" viewBox="0 0 24 24"><path d="M4 2l15 10.5-6.7 1.2 4 7.3-3 1.6-4-7.4L4 20z" fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round"/></svg>',
+touch:'<svg class="cursor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="rgba(120,120,120,.45)" stroke="rgba(255,255,255,.9)" stroke-width="1.5"/></svg>'};
+
+/* ---------- shared markup ---------- */
+function kc(k){return `<span class="kc">${k}</span>`}
+function combo(keys,label,tin){return `<div class="combo" data-in="${tin}" data-fx="pop">${keys.map(kc).join('<em>+</em>')}${label?`<small>${label}</small>`:''}</div>`}
+function chromeBar(url='driftwood.coffee/shop'){return `<div class="bch"><div class="btabs"><span class="lights"><i></i><i></i><i></i></span><div class="btab on"><span class="fav"></span>Driftwood — Specialty Coffee<b>×</b></div><div class="btab">New Tab<b>×</b></div><span style="color:#9AA0A6;margin:0 0 8px 8px;font:400 20px Plex">+</span></div><div class="omni"><span>‹</span><span>›</span><span>⟳</span><div class="url">${I.lock}<span>${url.split('/')[0]}<s>/${url.split('/').slice(1).join('/')}</s></span></div><span>☆</span><span>⋮</span></div></div>`}
+const PANELS=['Elements','Console','Sources','Network','Performance','Memory','Application','Lighthouse'];
+function dtTabs(active,extra=''){return `<div class="dtt"><div class="ic ${extra.includes('insp')?'on':''} insp">${I.inspect}</div><div class="ic dev">${I.device}</div>${PANELS.map(p=>`<span class="${p===active?'on':''}">${p}</span>`).join('')}<span>»</span><div class="rt"><span class="badge err">✕ ${extra.includes('e1')?'1':'0'}</span><span class="badge warn">▲ ${extra.includes('w1')?'1':'0'}</span><span class="badge iss">■ 2</span>${I.gear}${I.kebab}${I.x}</div></div>`}
+function site(cls=''){return `<div class="site ${cls}"><div class="snav"><b>DRIFTWOOD</b><span>Shop</span><span>Brew guides</span><span>Cart (2)</span></div><header class="shero"><h1 class="stitle">Slow coffee, fast site.</h1><p>Single-origin beans, roasted every Tuesday.</p><a class="scta">Order beans →</a></header><section class="scards"><div class="scard"><i style="background:linear-gradient(135deg,#C8553D,#F28F3B)"></i><b>Ethiopia Guji</b><span>$18.50</span></div><div class="scard"><i style="background:linear-gradient(135deg,#588B8B,#C8D5B9)"></i><b>Colombia Huila</b><span>$17.00</span></div><div class="scard"><i style="background:linear-gradient(135deg,#6B4E71,#E0A458)"></i><b>Kenya Nyeri</b><span>$19.50</span></div></section></div>`}
+function win(inner,{dock='right',page=460,url,pageCls=''}={}){const st=dock==='right'?`width:${page}px;height:100%`:`height:${page}px;width:100%`;return `<div class="win">${chromeBar(url)}<div class="bbody ${dock}"><div class="pagebox" style="${st}">${site(pageCls)}</div>${inner}</div></div>`}
+function info(s){return `<div class="info"><div class="kick" data-in="0.02" data-fx="left">${s.kick}</div><h2 class="ttl" data-in="0" data-fx="slam">${s.name}</h2><div class="sub" data-in="0.12" data-fx="wipe">${s.sub}</div><div class="keys">${(s.keys||[]).map((k,i)=>combo(k[0],k[1],0.2+i*0.1)).join('')}</div>${s.legend?`<div class="legend" data-in="0.45" data-fx="wipe">${s.legend}</div>`:''}<ul class="bul">${s.bul.map((b,i)=>`<li data-in="${(s.b0??0.55)+i*(s.bs??B)}" data-fx="left"><i></i><span>${b}</span></li>`).join('')}</ul></div>`}
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function hl(line){ // tiny JS highlighter for sources
+ return esc(line).replace(/(\/\*\*.*\*\/|\/\/.*$)/,'<span class="co">$1</span>').replace(/('[^']*')/g,'<span class="st">$1</span>').replace(/\b(import|from|export|function|let|const|for|of|if|return|async|await)\b/g,'<span class="kw">$1</span>').replace(/\b(\d+(\.\d+)?)\b/g,'<span class="nm">$1</span>').replace(/\b(calcTotal|checkout|round|post|json)\b/g,'<span class="fn">$1</span>')}
+
+/* ---------- scenes ---------- */
+const S=[];let T0=0;
+function scene(bars,def){def.start=T0;def.end=T0+bars*BAR;T0=def.end;S.push(def);return def}
+
+scene(2,{id:'intro',acc:'#6FA8DC',hud:false,water:'F12 F12 F12 F12 F12',
+ html:()=>`<div class="ring" id="r1"></div><div class="ring" id="r2" style="border-color:var(--orange)"></div><div class="bigkey" id="bk">F12</div>
+ <div class="hero-t" id="ht" style="top:250px;opacity:0">${'DEVTOOLS'.split('').map(c=>`<span>${c}</span>`).join('')}</div>
+ <div id="hs" style="position:absolute;left:0;right:0;top:520px;text-align:center;font:600 34px Plex;color:#C9D2E3;opacity:0">Every core panel of your browser's <span style="font:700 32px JBM;color:var(--yellow)">F12</span> tools — how each one looks and behaves</div>
+ <div id="hs2" style="position:absolute;left:0;right:0;top:600px;display:flex;justify-content:center;gap:14px;opacity:0">${['ELEMENTS','CONSOLE','SOURCES','NETWORK','PERFORMANCE','MEMORY','APPLICATION','DEVICE MODE','LIGHTHOUSE','COMMAND MENU'].map((p,i)=>`<span style="font:700 15px JBM;letter-spacing:.1em;padding:8px 12px;border:1.5px solid ${['#6FA8DC','#93C47D','#FFE599','#F6B26B'][i%4]};color:${['#6FA8DC','#93C47D','#FFE599','#F6B26B'][i%4]};border-radius:6px">${p}</span>`).join('')}</div>`,
+ update(lt,el){const bk=$('#bk',el);
+  const drop=E.out(clamp(lt/B));const y=lerp(-900,0,drop);const squash=lt>B&&lt<B+0.12?0.9:1;
+  let s=1, op=1;
+  if(lt>2.2*B){const p=clamp((lt-2.2*B)/(1.4*B));s=lerp(1,0.42,E.io(p));}
+  const ky=lt>2.2*B?lerp(0,-300,E.io(clamp((lt-2.2*B)/(1.4*B)))):0;
+  if(lt>6.4*B){op=1-clamp((lt-6.4*B)/(0.8*B))}
+  bk.style.transform=`translateY(${y+ky}px) scale(${s},${s*squash})`;bk.style.opacity=op;
+  [['#r1',B],['#r2',B+0.1]].forEach(([id,t0])=>{const p=clamp((lt-t0)/0.7);const r=$(id,el);r.style.opacity=p>0&&p<1?1-p:0;const d=lerp(200,1600,E.out(p));r.style.width=r.style.height=d+'px';});
+  const ht=$('#ht',el);ht.style.opacity=lt>3.4*B?1:0;
+  $$('span',ht).forEach((sp,i)=>{const p=clamp((lt-3.4*B-i*0.045)/0.3);sp.style.transform=`translateY(${lerp(120,0,E.back(p))}px) scale(${lerp(1.8,1,E.out(p))})`;sp.style.opacity=p;sp.style.color=p<1?['#6FA8DC','#93C47D','#FFE599','#F6B26B'][i%4]:'#fff'});
+  $('#hs',el).style.opacity=clamp((lt-4.6*B)/0.3);$('#hs',el).style.transform=`translateY(${lerp(20,0,E.out(clamp((lt-4.6*B)/0.3)))}px)`;
+  const h2=$('#hs2',el);h2.style.opacity=lt>5.2*B?1:0;$$('span',h2).forEach((sp,i)=>{const p=clamp((lt-5.2*B-i*0.05)/0.2);sp.style.opacity=p;sp.style.transform=`scale(${lerp(.4,1,E.back(p))})`});
+ }});
+
+scene(2,{id:'open',acc:'#8AB4F8',label:'OPEN',water:'OPEN · DOCK · OPEN · DOCK',
+ info:{kick:'CH 01 · OPEN IT',name:'OPEN IT',sub:'Four ways in. <em>F12</em> toggles the whole toolbox on any page.',keys:[[['F12'],'toggle'],[['Ctrl','Shift','I'],'open'],[['Ctrl','Shift','J'],'→ Console'],[['Ctrl','Shift','C'],'→ inspect'],[['⌘','⌥','I'],'macOS']],b0:0.9,bs:0.42,
+  bul:['Right-click anything → <b>Inspect</b>','Dock <b>right · bottom · left · undocked</b> via ⋮ menu','<code>Ctrl+Shift+D</code> swaps to the last dock side','<code>Esc</code> opens the Drawer under any panel','<code>Ctrl+[</code> / <code>Ctrl+]</code> cycle panels']},
+ html:()=>`<div class="si" id="w">${win(`<div class="dt" id="dtp">${dtTabs('Elements')}<div style="padding:20px;font:400 14px/23px JBM;color:#8C9296">&lt;!DOCTYPE html&gt;<br>&lt;html lang="en"&gt;<br>&nbsp;&nbsp;&lt;head&gt;…&lt;/head&gt;<br>&nbsp;&nbsp;&lt;body class="shop"&gt;…&lt;/body&gt;<br>&lt;/html&gt;</div></div>`,{page:1140})}</div>
+ <div class="ctx" id="rc" style="left:330px;top:380px;display:none"><div>Back</div><div>Reload</div><hr><div>Save as…</div><div>Print…</div><hr><div class="h">Inspect</div></div>
+ <div id="dockchip" style="position:absolute;right:24px;top:92px;z-index:9;font:700 15px JBM;background:#FFE599;color:#111;padding:8px 12px;border-radius:6px;opacity:0">DOCK ▸ RIGHT</div>`,
+ update(lt,el){const pb=$('.pagebox',el), dt=$('#dtp',el), bb=$('.bbody',el);
+  $('#rc',el).style.display=lt>0.25&&lt<0.95?'block':'none';
+  let mode='none';if(lt>1.0)mode='right';if(lt>2.0)mode='bottom';if(lt>2.9)mode='left';
+  const p=E.out(clamp((lt-(mode==='right'?1.0:mode==='bottom'?2.0:2.9))/0.3));
+  bb.className='bbody '+(mode==='bottom'?'bottom':'right');bb.style.flexDirection=mode==='left'?'row-reverse':'';
+  if(mode==='none'){pb.style.width='1140px';pb.style.height='100%';dt.style.display='none'}
+  else{dt.style.display='flex';if(mode==='bottom'){pb.style.width='100%';pb.style.height=lerp(732,330,p)+'px'}else{pb.style.height='100%';pb.style.width=lerp(1140,560,p)+'px'}}
+  const ch=$('#dockchip',el);ch.style.opacity=mode==='none'?0:1;ch.textContent='DOCK ▸ '+mode.toUpperCase();
+ },cursor:[[0,700,600],[0.22,390,360,1],[0.6,420,555],[0.8,420,555,1],[1.6,900,300]]});
+
+scene(3,{id:'elements',acc:'#6FA8DC',label:'ELEMENTS',water:'ELEMENTS <DOM/> ELEMENTS',
+ info:{kick:'CH 02 · ELEMENTS PANEL',name:'ELEMENTS',sub:'The <em>live DOM</em>, not your source file. Hover to see the box; edit anything in place.',keys:[[['Ctrl','Shift','C'],'pick an element'],[['Ctrl','F'],'search DOM']],
+  legend:'<span style="--c:rgba(111,168,220,.9)">content</span><span style="--c:rgba(147,196,125,.9)">padding</span><span style="--c:rgba(255,229,153,.9)">border</span><span style="--c:rgba(246,178,107,.9)">margin</span>',b0:0.8,bs:0.62,
+  bul:['Hover a node → page overlay shows <b>size, color, font, contrast</b>','Selected node becomes <code>$0</code> in the Console','Double-click to edit text, tags, attributes','<code>H</code> hides a node · <code>Del</code> removes · drag to reorder','Right-click → <b>Break on</b> subtree / attribute changes','<b>Alt-click</b> ▸ expands every descendant']},
+ html:()=>`<div class="si" id="w">${win(`<div class="dt">${dtTabs('Elements','insp')}
+ <div class="tree" style="height:305px;overflow:hidden">
+  <div class="cm" style="--d:0">&lt;!DOCTYPE html&gt;</div>
+  <div style="--d:0">▾<span class="tg">&lt;html</span> <span class="an">lang</span>=<span class="av">"en"</span><span class="tg">&gt;</span></div>
+  <div style="--d:1">▸<span class="tg">&lt;head&gt;</span>…<span class="tg">&lt;/head&gt;</span></div>
+  <div style="--d:1">▾<span class="tg">&lt;body</span> <span class="an">class</span>=<span class="av">"shop"</span><span class="tg">&gt;</span></div>
+  <div style="--d:2" id="r-nav">▸<span class="tg">&lt;nav</span> <span class="an">class</span>=<span class="av">"site-nav"</span><span class="tg">&gt;</span>…<span class="tg">&lt;/nav&gt;</span><span class="flexb">flex</span></div>
+  <div style="--d:2">▾<span class="tg">&lt;header</span> <span class="an">class</span>=<span class="av">"hero"</span><span class="tg">&gt;</span></div>
+  <div style="--d:3" id="r-h1"><span class="tg">&lt;h1</span> <span class="an">class</span>=<span class="av">"hero-title"</span><span class="tg">&gt;</span><span class="tx" id="h1txt">Slow coffee, fast site.</span><span class="tg">&lt;/h1&gt;</span></div>
+  <div style="--d:3"><span class="tg">&lt;p</span> <span class="an">class</span>=<span class="av">"lede"</span><span class="tg">&gt;</span><span class="tx">Single-origin beans…</span><span class="tg">&lt;/p&gt;</span></div>
+  <div style="--d:3" id="r-a"><span class="tg">&lt;a</span> <span class="an">class</span>=<span class="av">"btn cta"</span> <span class="an">href</span>=<span class="av">"/shop"</span><span class="tg">&gt;</span><span class="tx">Order beans →</span><span class="tg">&lt;/a&gt;</span><span class="dol" id="d0" style="display:none">== $0</span></div>
+  <div style="--d:2"><span class="tg">&lt;/header&gt;</span></div>
+  <div style="--d:2">▸<span class="tg">&lt;section</span> <span class="an">class</span>=<span class="av">"cards"</span><span class="tg">&gt;</span>…<span class="tg">&lt;/section&gt;</span><span class="flexb">grid</span></div>
+  <div style="--d:2"><span class="tg">&lt;script</span> <span class="an">src</span>=<span class="av">"/js/app.js"</span> <span class="an">type</span>=<span class="av">"module"</span><span class="tg">&gt;&lt;/script&gt;</span></div>
+ </div>
+ <div class="crumbs"><span>html</span><span>body.shop</span><span>header.hero</span><span class="on" id="crumb">h1.hero-title</span></div>
+ <div class="subt"><span class="on">Styles</span><span>Computed</span><span>Layout</span><span>Event Listeners</span><span>DOM Breakpoints</span><span>Properties</span><span>Accessibility</span></div>
+ <div class="tb"><div class="inp">Filter</div><span style="margin-left:auto">:hov</span><span>.cls</span><span>+</span></div>
+ <div class="styles" id="stA">
+  <div class="rule"><span class="sel">element.style</span> {<br>}</div>
+  <div class="rule"><span class="src">app.css:22</span><span class="sel">.hero-title</span> {<div class="decl"><span class="cb y"></span><span class="pn">font</span>: <span class="pv">800 42px/1.02 Bricolage, serif</span>;</div><div class="decl"><span class="cb y"></span><span class="pn">letter-spacing</span>: <span class="pv">-0.02em</span>;</div><div class="decl"><span class="cb y"></span><span class="pn">margin</span>: <span class="pv">▸ 0</span>;</div>}</div>
+  <div class="rule"><span class="src ua" style="text-decoration:none">user agent stylesheet</span><span class="sel">h1</span> {<div class="decl off"><span class="pn">margin-block</span>: <span class="pv">0.67em</span>;</div><div class="decl"><span class="pn">display</span>: <span class="pv">block</span>;</div>}</div>
+ </div>
+ <div class="styles" id="stB" style="display:none">
+  <div class="rule"><span class="sel">element.style</span> {<br>}</div>
+  <div class="rule"><span class="src">app.css:31</span><span class="sel">.btn.cta</span> {<div class="decl"><span class="cb y"></span><span class="pn">background</span>: <span class="pv"><i class="sw" style="background:#E4572E"></i>#E4572E</span>;</div><div class="decl"><span class="cb y"></span><span class="pn">padding</span>: <span class="pv">▸ 14px 28px</span>;</div><div class="decl"><span class="cb y"></span><span class="pn">border-radius</span>: <span class="pv">999px</span>;</div>}</div>
+  <div class="rule"><span class="src">app.css:12</span><span class="sel">.btn</span> {<div class="decl off"><span class="pn">background</span>: <span class="pv"><i class="sw" style="background:#333"></i>#333</span>;</div><div class="decl"><span class="pn">display</span>: <span class="pv">inline-block</span>;</div>}</div>
+ </div>
+ </div>`,{page:470})}
+ <div class="ovl" id="ov"><div class="m" style="border-color:rgba(246,178,107,.66)"></div><div class="b"></div><div class="p" style="border-color:rgba(147,196,125,.66)"></div><div class="c" style="background:rgba(111,168,220,.62)"></div></div>
+ <div class="tip" id="tip"></div></div>`,
+ update(lt,el){
+  const h1=$('.stitle',el), a=$('.scta',el), rh=$('#r-h1',el), ra=$('#r-a',el);
+  let tgt=null; if(lt>1.15&&lt<2.35)tgt=h1; if(lt>2.9&&lt<4.1)tgt=a;
+  rh.classList.toggle('hov',tgt===h1); ra.classList.toggle('hov',tgt===a&&lt<3.6); ra.classList.toggle('selr',lt>=3.6);
+  $('#d0',el).style.display=lt>=3.6?'inline':'none';
+  $('#crumb',el).textContent=lt>=3.6?'a.btn.cta':'h1.hero-title';
+  $('#stA',el).style.display=lt>=3.6?'none':'block';$('#stB',el).style.display=lt>=3.6?'block':'none';
+  drawOverlay(el,tgt,tgt===h1?`<span class="tn">h1</span><span class="tc">.hero-title</span><span class="dim">${Math.round(h1.offsetWidth)} × ${Math.round(h1.offsetHeight)}</span>`:
+   `<span class="tn">a</span><span class="tc">.btn.cta</span><span class="dim">${a.offsetWidth} × ${a.offsetHeight}</span><table><tr><td>Color</td><td><i class="sw" style="background:#fff"></i>#FFFFFF</td></tr><tr><td>Font</td><td>16px Plex, sans-serif</td></tr><tr><td>Background</td><td><i class="sw" style="background:#E4572E"></i>#E4572E</td></tr><tr><td>Padding</td><td>14px 28px</td></tr><tr><td colspan=2 class="sec">ACCESSIBILITY</td></tr><tr><td>Contrast</td><td>Aa 3.81 <b style="color:#E37400">⚠</b></td></tr><tr><td>Name</td><td>Order beans →</td></tr><tr><td>Role</td><td>link</td></tr><tr><td>Keyboard-focusable</td><td style="color:#188038">✓</td></tr></table>`);
+  // live edit
+  const target='Hello, DevTools.';let txt='Slow coffee, fast site.';
+  if(lt>4.35){const n=Math.floor((lt-4.35)*26);txt=target.slice(0,Math.min(n,target.length));}
+  $('#h1txt',el).innerHTML=lt>4.2&&lt<5.3?`<span style="outline:1px solid #8AB4F8;background:#1B1C1E;padding:0 3px">${esc(txt)}<span class="caret"></span></span>`:esc(lt>4.35?txt:'Slow coffee, fast site.');
+  h1.textContent=lt>4.35?(txt||' '):'Slow coffee, fast site.';
+ },cursor:[[0,1000,700],[0.5,40,60,1],[1.15,['.stitle',0.4,0.5]],[2.35,['.stitle',0.8,0.6]],[2.9,['.scta',0.5,0.5]],[3.55,['.scta',0.55,0.55],1],[3.9,['#r-h1',0.5,0.5]],[4.15,['#h1txt',0.5,0.5],1],[5.6,['#h1txt',0.6,0.5]]]});
+
+scene(2,{id:'styles',acc:'#93C47D',label:'STYLES',water:'CASCADE {} CASCADE {}',
+ info:{kick:'CH 03 · STYLES · COMPUTED · LAYOUT',name:'STYLES',sub:'Every rule that matches, in <em>cascade order</em>. Losers are struck through.',keys:[[['Shift','click'],'swatch = cycle hex/rgb/hsl'],[['↑','↓'],'nudge values']],b0:0.5,bs:0.4,
+  bul:['Checkbox toggles a declaration live','Color picker: <b>eyedropper, palettes, contrast AA/AAA</b>','<code>:hov</code> forces <b>:hover :focus :active</b>','<code>grid</code> / <code>flex</code> badges draw overlays on the page','<b>Computed</b> = final values + which rule won','<b>Changes</b> drawer diffs every edit you made']},
+ html:()=>`<div class="si" id="w">${win(`<div class="dt">${dtTabs('Elements')}
+ <div class="tree" style="height:118px;overflow:hidden;font-size:13.5px;line-height:22px">
+  <div style="--d:1">▾<span class="tg">&lt;header</span> <span class="an">class</span>=<span class="av">"hero"</span><span class="tg">&gt;</span></div>
+  <div style="--d:2" class="selr"><span class="tg">&lt;a</span> <span class="an">class</span>=<span class="av">"btn cta"</span><span class="tg">&gt;</span>Order beans →<span class="tg">&lt;/a&gt;</span><span class="dol">== $0</span></div>
+  <div style="--d:1"><span class="tg">&lt;/header&gt;</span></div>
+  <div style="--d:1">▸<span class="tg">&lt;section</span> <span class="an">class</span>=<span class="av">"cards"</span><span class="tg">&gt;</span>…<span class="tg">&lt;/section&gt;</span><span class="flexb" id="gb">grid</span></div>
+ </div>
+ <div class="subt"><span class="on">Styles</span><span>Computed</span><span>Layout</span><span>Event Listeners</span><span>Accessibility</span></div>
+ <div class="tb"><div class="inp">Filter</div><span style="margin-left:auto" id="hovb">:hov</span><span>.cls</span><span>+</span></div>
+ <div id="hovp" style="display:none;padding:6px 12px;border-bottom:1px solid var(--line);font:400 13px Plex;color:#BDC1C6;background:#232428"><div style="margin-bottom:4px">Force element state</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px"><span class="chk">:active</span><span class="chk" id="hovc">:hover</span><span class="chk">:focus</span><span class="chk">:visited</span><span class="chk">:focus-within</span><span class="chk">:focus-visible</span><span class="chk">:target</span></div></div>
+ <div class="styles" style="position:relative">
+  <div class="rule"><span class="sel">element.style</span> {<br>}</div>
+  <div class="rule" id="hrule" style="display:none;background:rgba(147,196,125,.08)"><span class="src">app.css:48</span><span class="sel">.btn.cta:hover</span> {<div class="decl"><span class="cb y"></span><span class="pn">transform</span>: <span class="pv">translateY(-3px)</span>;</div><div class="decl"><span class="cb y"></span><span class="pn">box-shadow</span>: <span class="pv">0 10px 22px <i class="sw" style="background:rgba(228,87,46,.5)"></i>rgb(228 87 46 / 45%)</span>;</div>}</div>
+  <div class="rule"><span class="src">app.css:31</span><span class="sel">.btn.cta</span> {<div class="decl"><span class="cb y"></span><span class="pn">background</span>: <span class="pv"><i class="sw" id="sw" style="background:#E4572E"></i><span id="hex">#E4572E</span></span>;</div><div class="decl"><span class="cb y"></span><span class="pn">color</span>: <span class="pv"><i class="sw" style="background:#fff"></i>#fff</span>;</div><div class="decl"><span class="cb y"></span><span class="pn">padding</span>: <span class="pv">▸ 14px 28px</span>;</div><div class="decl" id="brd"><span class="cb y" id="brcb"></span><span class="pn">border-radius</span>: <span class="pv">999px</span>;</div>}</div>
+  <div class="rule"><span class="src">app.css:12</span><span class="sel">.btn</span> {<div class="decl off"><span class="pn">background</span>: <span class="pv"><i class="sw" style="background:#333"></i>#333</span>;</div><div class="decl off"><span class="pn">padding</span>: <span class="pv">▸ 10px 16px</span>;</div><div class="decl"><span class="pn">display</span>: <span class="pv">inline-block</span>;</div>}</div>
+  <div class="rule"><span class="src ua" style="text-decoration:none">user agent stylesheet</span><span class="sel">a:-webkit-any-link</span> {<div class="decl off"><span class="pn">color</span>: <span class="pv">-webkit-link</span>;</div><div class="decl"><span class="pn">cursor</span>: <span class="pv">pointer</span>;</div>}</div>
+  <div id="cp" style="position:absolute;left:40px;top:118px;width:270px;background:#2D2E31;border:1px solid #4A4C52;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.6);display:none;z-index:4;overflow:hidden">
+   <div id="spec" style="height:130px;position:relative"><div style="position:absolute;inset:0;background:linear-gradient(90deg,#fff,transparent)"></div><div style="position:absolute;inset:0;background:linear-gradient(0deg,#000,transparent)"></div><i id="spk" style="position:absolute;width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #000;left:212px;top:18px"></i></div>
+   <div style="padding:10px 12px;display:flex;gap:10px;align-items:center"><span style="font-size:16px">⌖</span><i id="cpsw" style="width:26px;height:26px;border-radius:50%;background:#E4572E;flex:none"></i><div style="flex:1;display:flex;flex-direction:column;gap:7px"><div style="height:10px;border-radius:5px;background:linear-gradient(90deg,red,#ff0,lime,cyan,blue,#f0f,red);position:relative"><i id="hk" style="position:absolute;top:-2px;width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:0 0 0 1px #000;left:8px"></i></div><div style="height:10px;border-radius:5px;background:linear-gradient(90deg,transparent,#E4572E),repeating-conic-gradient(#666 0 25%,#999 0 50%) 0 0/8px 8px"></div></div></div>
+   <div style="padding:0 12px 8px;font:500 13px JBM;color:#E3E3E3;display:flex;justify-content:space-between"><span id="cphex">#E4572E</span><span style="color:#9AA0A6">HEX ⇅</span></div>
+   <div style="padding:6px 12px 10px;border-top:1px solid #45474C;font:400 12.5px Plex;color:#BDC1C6">Contrast ratio <b id="cr" style="font-family:JBM;color:#E3E3E3">3.81</b> <span id="crk" style="color:#F28B82">⚠</span><span style="float:right;color:#9AA0A6">AA 4.5</span></div>
+  </div>
+ </div>
+ <div style="margin-top:auto;padding:10px 14px 14px;border-top:1px solid var(--line);background:#232428"><div style="font:600 12px Plex;color:#9AA0A6;margin-bottom:8px">BOX MODEL</div>
+  <div style="font:500 12px JBM;color:#202124;text-align:center">
+   <div style="background:#F9CC9D;padding:4px 10px 6px;border:1px dashed #333;position:relative"><span style="position:absolute;left:5px;top:2px;font-size:10px">margin</span>0
+    <div style="background:#FFEEBC;padding:4px 10px 6px;border:1.5px solid #000;margin:3px 30px;position:relative"><span style="position:absolute;left:5px;top:2px;font-size:10px">border</span>–
+     <div style="background:#C3D08B;padding:4px 10px 6px;margin:3px 30px;position:relative"><span style="position:absolute;left:5px;top:2px;font-size:10px">padding</span>14
+      <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin:2px 0"><span>28</span><span style="background:#8CB6C0;padding:4px 14px;border:1px solid #555" id="bmc">129 × 20</span><span>28</span></div>14</div>–</div>0</div></div></div>
+ </div>`,{page:520})}
+ <div id="gov" style="position:absolute;display:none;pointer-events:none"></div></div>`,
+ update(lt,el){const a=$('.scta',el);
+  const off=lt>0.45&&lt<1.35;$('#brd',el).classList.toggle('off',off);$('#brcb',el).classList.toggle('y',!off);
+  a.style.borderRadius=off?'0':'999px';
+  // color picker
+  const cpOn=lt>1.35&&lt<2.55;$('#cp',el).style.display=cpOn?'block':'none';
+  const hp=E.io(clamp((lt-1.6)/0.8));const hue=lerp(13,212,hp);const L=lerp(54,40,hp);const col=`hsl(${hue} 76% ${L}%)`;
+  const hex=hslHex(hue,76,L);$('#spec',el).style.background=`hsl(${hue} 100% 50%)`;$('#hk',el).style.left=(8+hue/360*150)+'px';
+  [$('#sw',el),$('#cpsw',el)].forEach(x=>x.style.background=hex);$('#hex',el).textContent=hex;$('#cphex',el).textContent=hex;a.style.background=hex;
+  const cr=lerp(3.81,6.12,hp);$('#cr',el).textContent=cr.toFixed(2);$('#crk',el).textContent=cr>=4.5?'✓ AA':'⚠';$('#crk',el).style.color=cr>=4.5?'#81C995':'#F28B82';
+  // hov
+  $('#hovp',el).style.display=lt>2.45?'block':'none';$('#hovc',el).classList.toggle('y',lt>2.7);$('#hrule',el).style.display=lt>2.7?'block':'none';
+  a.style.transform=lt>2.7?'translateY(-3px)':'';a.style.boxShadow=lt>2.7?'0 10px 22px rgba(228,87,46,.45)':'';
+  // grid overlay
+  const gOn=lt>3.05;$('#gb',el).classList.toggle('on',gOn);const g=$('#gov',el);g.style.display=gOn?'block':'none';
+  if(gOn){const r=rel(el,$('.scards',el));g.style.left=r.x+'px';g.style.top=r.y+'px';g.style.width=r.w+'px';g.style.height=r.h+'px';
+   if(!g.dataset.b){g.dataset.b=1;const cw=(r.w-44-32)/3;let h='';const xs=[22,22+cw,22+cw+16,22+2*cw+16,22+2*cw+32,22+3*cw+32];
+    h+=`<div style="position:absolute;inset:6px 22px 22px;background:repeating-linear-gradient(45deg,rgba(186,104,200,.0) 0 6px,rgba(186,104,200,.0) 6px 12px)"></div>`;
+    [[xs[1],xs[2]],[xs[3],xs[4]]].forEach(([a1,b1])=>h+=`<div style="position:absolute;left:${a1}px;width:${b1-a1}px;top:6px;bottom:22px;background:repeating-linear-gradient(45deg,rgba(199,110,220,.55) 0 2px,transparent 2px 6px)"></div>`);
+    xs.forEach((x,i)=>h+=`<div style="position:absolute;left:${x}px;top:6px;bottom:22px;border-left:2px dashed #C76EDC"></div>`);
+    [1,2,3,4].forEach((n,i)=>h+=`<div style="position:absolute;left:${[xs[0],xs[2],xs[4],xs[5]][i]-10}px;top:-16px;background:#C76EDC;color:#fff;font:700 11px JBM;padding:1px 5px;border-radius:3px">${n}</div>`);
+    h+=`<div style="position:absolute;left:22px;right:22px;top:6px;bottom:22px;border:2px solid #C76EDC"></div>`;g.innerHTML=h;}}
+ },cursor:[[0,900,700],[0.35,['#brcb',0.5,0.5],1],[1.2,['#sw',0.5,0.5],1],[1.6,['#hk',0.5,0.5]],[2.4,['#hk',0.5,0.5]],[2.45,['#hovb',0.5,0.5],1],[2.65,['#hovc',0.2,0.5],1],[2.95,['#gb',0.5,0.5],1],[3.7,['#gb',0.6,0.6]]]});
+
+function hslHex(h,s,l){s/=100;l/=100;const k=n=>(n+h/30)%12,a=s*Math.min(l,1-l),f=n=>l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1)));return '#'+[f(0),f(8),f(4)].map(x=>Math.round(x*255).toString(16).padStart(2,'0')).join('').toUpperCase()}
+
+const conLines=[
+ {t:0.15,in:"document.title",out:`<span class="st">'Driftwood — Specialty Coffee'</span>`,d:0.5},
+ {t:0.75,in:"$0",out:`<span class="tg">&lt;a</span> <span class="an">class</span>=<span class="av">"btn cta"</span> <span class="an">href</span>=<span class="av">"/shop"</span><span class="tg">&gt;</span>Order beans →<span class="tg">&lt;/a&gt;</span>`,d:0.3},
+ {t:1.15,in:"$$('img').length",out:`<span class="nm">12</span>`,d:0.45},
+ {t:1.7,in:"console.table(orders)",table:true,d:0.5},
+ {t:2.75,in:"console.warn('Low stock:', 'Kenya Nyeri')",warn:`Low stock: Kenya Nyeri`,d:0.55,loc:'VM88:1'},
+ {t:3.45,in:"await fetch('/api/cart', {method:'POST'})",err:`POST https://driftwood.coffee/api/cart <b>500 (Internal Server Error)</b>\n    (anonymous)  @ VM212:1`,d:0.55,loc:'VM212:1'},
+ {t:4.25,in:"console.time('render'); renderCart(); console.timeEnd('render')",log:`render: <span class="nm">12.84</span> ms`,d:0.7,loc:'cart.js:52'},
+ {t:5.1,in:"copy($0.outerHTML)",out:`<span style="color:#9AA0A6">undefined</span>   <span style="color:#81C995;font-family:Plex;font-size:13px">✓ copied to clipboard</span>`,d:0.3},
+];
+scene(3,{id:'console',acc:'#FFE599',label:'CONSOLE',water:'> CONSOLE $0 $$ > CONSOLE',
+ info:{kick:'CH 04 · CONSOLE',name:'CONSOLE',sub:'A <em>live REPL</em> running inside the page, plus every log, warning and error it throws.',keys:[[['Ctrl','Shift','J'],'open'],[['Ctrl','L'],'clear']],b0:0.6,bs:0.62,
+  bul:['<code>$0</code>…<code>$4</code> recent picks · <code>$_</code> last result','<code>$(sel)</code> <code>$$(sel)</code> <code>$x(xpath)</code> query helpers','<code>console.table</code> · <code>group</code> · <code>time</code> · <code>count</code> · <code>trace</code>','<b>Live Expressions</b> (eye icon) re-evaluate constantly','Filter by level, text or <code>/regex/</code> · hide network','<code>copy()</code> · <code>monitor(fn)</code> · <code>getEventListeners()</code>']},
+ html:()=>`<div class="si" id="w">${win(`<div class="dt">${dtTabs('Console','e1w1')}
+ <div class="tb">${I.clear}<span style="padding:0 6px;border:1px solid #45474C;border-radius:4px">top ▾</span><span id="eyeb">${I.eye}</span><div class="inp" style="min-width:260px">Filter</div><span id="lv" style="position:relative">Default levels ▾</span><span style="margin-left:auto" class="badge iss">■ 2 Issues</span>${I.gear}</div>
+ <div class="live" id="live"><div><span style="color:#9AA0A6">⊙</span><b>performance.now()</b></div><div style="padding-left:24px"><span id="pn">0</span></div><div><span style="color:#9AA0A6">⊙</span><b>cart.items.length</b></div><div style="padding-left:24px"><span>3</span></div></div>
+ <div class="con" id="con">${conLines.map((c,i)=>`<div class="cl in" data-i="${i}"><span class="typ"></span></div>`+
+  (c.out?`<div class="cl out" data-o="${i}">${c.out}</div>`:'')+
+  (c.table?`<div class="cl" data-o="${i}" style="padding-left:34px"><table class="ctab"><tr><th>(index)</th><th>id</th><th>item</th><th>qty</th><th>total</th></tr><tr><td>0</td><td class="st">'A-1042'</td><td class="st">'Ethiopia Guji'</td><td class="nm">2</td><td class="nm">37</td></tr><tr><td>1</td><td class="st">'A-1043'</td><td class="st">'Colombia Huila'</td><td class="nm">1</td><td class="nm">17</td></tr><tr><td>2</td><td class="st">'A-1044'</td><td class="st">'Kenya Nyeri'</td><td class="nm">3</td><td class="nm">58.5</td></tr></table><span style="color:#9AA0A6">Array(3)</span></div>`:'')+
+  (c.warn?`<div class="cl warn" data-o="${i}">${c.warn}<span class="loc">${c.loc}</span></div>`:'')+
+  (c.err?`<div class="cl err" data-o="${i}">${c.err}<span class="loc">${c.loc}</span></div>`:'')+
+  (c.log?`<div class="cl" data-o="${i}">${c.log}<span class="loc">${c.loc}</span></div>`:'')).join('')}
+  <div class="cl in" id="prompt"><span class="caret"></span></div>
+ </div>
+ <div class="ctx" id="lvm" style="right:320px;top:74px;display:none;min-width:200px"><div>☑ Verbose</div><div>☑ Info</div><div class="h">☑ Warnings</div><div>☑ Errors</div></div>
+ </div>`,{dock:'bottom',page:128})}</div>`,
+ update(lt,el){$('#pn',el).textContent=(18422.6+lt*1000).toFixed(1);
+  let typing=-1;
+  conLines.forEach((c,i)=>{const row=$(`[data-i="${i}"]`,el);const on=lt>=c.t;row.style.display=on?'block':'none';
+   const n=Math.floor((lt-c.t)*62);const done=n>=c.in.length;row.querySelector('.typ').innerHTML=esc(c.in.slice(0,Math.max(0,n)))+(on&&!done?'<span class="caret"></span>':'');if(on&&!done)typing=i;
+   $$(`[data-o="${i}"]`,el).forEach(o=>o.style.display=lt>=c.t+c.d?'block':'none')});
+  $('#prompt',el).style.display=typing<0?'block':'none';
+  $('#lvm',el).style.display=lt>5.3?'block':'none';
+ },cursor:[[0,1050,650],[4.9,1050,650],[5.25,['#lv',0.5,0.5],1],[5.6,['#lv',0.5,1.6]]]});
+
+const code=["import { api } from './api.js';","","/** Sum the cart, apply bulk discount */","export function calcTotal(items) {","  let total = 0;","  for (const item of items) {","    const line = item.price * item.qty;","    total += line;","  }","  if (total > 100) total *= 0.9;","  return round(total);","}","","export async function checkout(cart) {","  const total = calcTotal(cart.items);","  const res = await api.post('/cart', { total });","  return res.json();","}"];
+const items=[{n:'Ethiopia Guji',p:18.5,q:2},{n:'Colombia Huila',p:17,q:1},{n:'Kenya Nyeri',p:19.5,q:3}];
+const dbgSteps=[ // [time, line, itemIdx, total, lineVal]
+ [0.75,7,0,0,undefined],[1.35,8,0,0,37],[1.85,7,1,37,undefined],[2.35,8,1,37,17],[2.85,7,2,54,undefined]];
+scene(3,{id:'sources',acc:'#F6B26B',label:'SOURCES',water:'BREAKPOINT ● STEP ⤼ BREAKPOINT',
+ info:{kick:'CH 05 · SOURCES · DEBUGGER',name:'SOURCES',sub:'Pause real code mid-flight, then <em>step line by line</em> and read every variable.',keys:[[['F8'],'resume'],[['F10'],'over'],[['F11'],'into'],[['Shift','F11'],'out'],[['Ctrl','P'],'open file']],b0:0.75,bs:0.6,
+  bul:['Click a line number → <b>breakpoint</b>','<b>Scope · Watch · Call Stack</b> at every pause','Inline values appear right in the code','<b style="color:#F6B26B">Conditional</b> breakpoints &amp; <b style="color:#FF7FC4">Logpoints</b> — no <code>console.log</code> edits','<code>{ }</code> pretty-prints minified bundles · source maps','<b>Overrides</b> persist edits · <b>Snippets</b> save scripts']},
+ html:()=>`<div class="si" id="w">${win(`<div class="dt">${dtTabs('Sources','e1')}
+ <div class="srcw"><div class="nav"><div class="subt"><span class="on">Page</span><span>Workspace</span><span>Overrides</span><span>Snippets</span></div>
+  <div style="padding-top:4px">${[[0,'▾ <span class="fi cloud"></span> top'],[1,'▾ <span class="fi cloud"></span> driftwood.coffee'],[2,'▸ <span class="fi d"></span> css'],[2,'▾ <span class="fi d"></span> js'],[3,'<span class="fi js"></span> api.js'],[3,'<span class="fi js"></span> app.js'],[3,'<span class="fi js"></span> cart.js','sel'],[2,'▸ <span class="fi d"></span> img'],[2,'<span class="fi"></span> (index)'],[1,'▸ <span class="fi cloud"></span> cdn.jsdelivr.net'],[1,'▸ <span class="fi cloud"></span> fonts.gstatic.com']].map(([d,t,c])=>`<div class="f ${c||''}" style="--d:${d}">${t}</div>`).join('')}</div></div>
+ <div class="ed"><div class="edt"><span>app.js ×</span><span class="on">cart.js ×</span><span style="margin-left:auto;border:0">{ }</span></div>
+  <div class="code" id="code">${code.map((l,i)=>`<div class="ln" data-l="${i+1}"><span class="g">${i+1}<span class="bp" data-bp="${i+1}">${i+1}</span></span><span>${hl(l)}</span><span class="inl" style="display:none"></span></div>`).join('')}
+   <div id="condbox" style="position:absolute;left:52px;top:0;right:12px;display:none;background:#2D2E31;border:1px solid #E37400;border-radius:4px;padding:8px 10px;font:400 13px Plex;color:#BDC1C6;z-index:3"><span style="color:#FCAD70">Conditional breakpoint ▾</span><div style="margin-top:6px;background:#1B1C1E;border:1px solid #45474C;padding:4px 8px;font:400 14px JBM;color:#E3E3E3" id="condtxt"></div></div>
+  </div>
+  <div id="lpout" style="display:none;border-top:1px solid var(--line);padding:4px 12px;font:400 13.5px JBM;background:#232428;color:#E3E3E3"><span style="color:#FF7FC4">◆ logpoint</span>&nbsp;&nbsp;posting <span class="nm">101.25</span><span style="float:right;color:#9AA0A6;text-decoration:underline">cart.js:16</span></div>
+ </div>
+ <div class="dbg"><div class="dbgb">${I.resume}${I.over}${I.into}${I.out}${I.step}${I.deact}</div>
+  <div id="pausedMsg" style="display:none;padding:6px 12px;background:#3A3517;color:#FDD663;font:500 13px Plex;border-bottom:1px solid var(--line)">⏸ Paused on breakpoint</div>
+  <div class="pane"><h4>Watch</h4><div><span class="vr">total &gt; 50</span>: <span class="kw" id="w1">false</span></div></div>
+  <div class="pane"><h4>Breakpoints</h4><div id="bpl1" style="display:none"><span class="chk y" style="font-family:JBM">cart.js:7</span></div><div id="bpl2" style="display:none;color:#FCAD70"><span class="chk y">cart.js:10  total &gt; 100</span></div><div id="bpl3" style="display:none;color:#FF7FC4"><span class="chk y">cart.js:16  'posting', total</span></div></div>
+  <div class="pane"><h4>Scope</h4><div style="color:#9AA0A6">▾ Local</div><div id="sc1" style="padding-left:28px"></div><div id="sc2" style="padding-left:28px"></div><div id="sc3" style="padding-left:28px"></div><div style="color:#9AA0A6">▸ Closure</div><div style="color:#9AA0A6">▸ Global <span style="float:right">Window</span></div></div>
+  <div class="pane"><h4>Call Stack</h4><div id="cs" style="display:none"><div style="padding:0;background:#0B4A78">▸ calcTotal <span style="float:right;color:#9AA0A6">cart.js:7</span></div><div style="padding:0">&nbsp; checkout <span style="float:right;color:#9AA0A6">cart.js:15</span></div><div style="padding:0">&nbsp; onClick <span style="float:right;color:#9AA0A6">app.js:22</span></div><div style="padding:0;color:#9AA0A6">&nbsp; — async —</div></div></div>
+ </div></div></div>`,{dock:'bottom',page:96,pageCls:'mini'})}
+ <div class="ctx" id="gctx" style="display:none"><div>Add breakpoint</div><div class="h">Add conditional breakpoint…</div><div>Add logpoint…</div><div>Never pause here</div><hr><div>Continue to here</div></div></div>`,
+ update(lt,el){const pb=$('.pagebox',el);
+  if(!pb.querySelector('.pausebar')){pb.insertAdjacentHTML('beforeend','<div class="dim"></div><div class="pausebar">Paused in debugger <i>▶</i><i>⤼</i></div>')}
+  const paused=lt>0.75&&lt<3.3;$('.pausebar',pb).style.display=paused?'flex':'none';$('.dim',pb).style.display=paused?'block':'none';
+  $('#pausedMsg',el).style.display=paused?'block':'none';$('#cs',el).style.display=paused?'block':'none';
+  $('[data-bp="7"]',el).style.display=lt>0.45?'block':'none';$('#bpl1',el).style.display=lt>0.45?'block':'none';
+  let st=null;dbgSteps.forEach(s=>{if(lt>=s[0])st=s});if(!paused)st=null;
+  $$('.ln',el).forEach(l=>{l.classList.toggle('cur',!!st&&+l.dataset.l===st[1]);l.querySelector('.inl').style.display='none'});
+  if(st){const it=items[st[2]];
+   $('#sc1',el).innerHTML=`<span class="vr">item</span>: <span style="color:#9AA0A6">{name: <span class="st">'${it.n}'</span>, price: <span class="nm">${it.p}</span>, qty: <span class="nm">${it.q}</span>}</span>`;
+   $('#sc2',el).innerHTML=`<span class="vr">line</span>: ${st[4]===undefined?'<span style="color:#9AA0A6">undefined</span>':`<span class="nm" style="background:rgba(255,229,153,.25)">${st[4]}</span>`}`;
+   $('#sc3',el).innerHTML=`<span class="vr">total</span>: <span class="nm" ${st[3]?'style="background:rgba(255,229,153,.25)"':''}>${st[3]}</span>`;
+   $('#w1',el).textContent=st[3]>50?'true':'false';
+   const inl=(ln,t)=>{const x=$(`[data-l="${ln}"] .inl`,el);x.style.display='inline';x.textContent=t};
+   inl(5,`total = ${st[3]}`);inl(6,`item = {name: '${it.n}', …}`);if(st[4]!==undefined)inl(7,`line = ${st[4]}`);
+  }else{['#sc1','#sc2','#sc3'].forEach(s=>$(s,el).innerHTML='');$('#sc1',el).innerHTML='<span style="color:#9AA0A6">Not paused</span>'}
+  const ctx=$('#gctx',el);ctx.style.display=lt>3.35&&lt<3.7?'block':'none';if(lt>3.3){const r=rel(el,$('[data-l="10"] .g',el));ctx.style.left=(r.x+40)+'px';ctx.style.top=(r.y-150)+'px'}
+  const cb=$('#condbox',el);const cOn=lt>3.7&&lt<4.5;cb.style.display=cOn?'block':'none';if(cOn){cb.style.top=($('[data-l="10"]',el).offsetTop+27)+'px';const s='total > 100';$('#condtxt',el).innerHTML=esc(s.slice(0,Math.floor((lt-3.75)*30)))+'<span class="caret"></span>'}
+  $('[data-bp="10"]',el).style.display=lt>4.45?'block':'none';$('[data-bp="10"]',el).className='bp cond';$('#bpl2',el).style.display=lt>4.45?'block':'none';
+  $('[data-bp="16"]',el).style.display=lt>4.8?'block':'none';$('[data-bp="16"]',el).className='bp log';$('#bpl3',el).style.display=lt>4.8?'block':'none';
+  $('#lpout',el).style.display=lt>5.15?'block':'none';
+ },cursor:[[0,700,700],[0.4,['[data-l="7"] .g',0.6,0.5],1],[1.2,['.dbgb svg:nth-child(2)',0.5,0.5],1],[1.75,['.dbgb svg:nth-child(2)',0.5,0.5],1],[2.25,['.dbgb svg:nth-child(2)',0.5,0.5],1],[2.75,['.dbgb svg:nth-child(2)',0.5,0.5],1],[3.2,['.dbgb svg:nth-child(1)',0.5,0.5],1],[3.35,['[data-l="10"] .g',0.6,0.5],1],[3.6,['[data-l="10"] .g',2.4,-5.2],1],[4.6,['[data-l="16"] .g',0.6,0.5],1],[5.6,['[data-l="16"] .g',1.2,0.5]]]});
+
+const reqs=[['shop','200','document','Other','14.2 kB',0,212,1],['app.css','200','stylesheet','shop','8.1 kB',230,64],['inter.woff2','200','font','app.css','48.3 kB',300,88],['app.js','200','script','shop','42.7 kB',232,120],['cart.js','200','script','app.js','6.4 kB',360,41],['hero.avif','200','avif','shop','182 kB',240,260],['guji.webp','200','webp','shop','34.2 kB',420,96],['huila.webp','200','webp','shop','31.8 kB',424,91],['nyeri.webp','200','webp','shop','36.0 kB',430,102],['products?limit=12','200','fetch','app.js:41','3.1 kB',520,148],['cart','500','fetch','cart.js:16','412 B',700,310],['analytics.js','200','script','(index)','22.5 kB',560,76],['collect?v=2','204','ping','analytics.js','0 B',760,35],['manifest.json','200','manifest','Other','1.1 kB',820,12],['sw.js','200','script','(index)','3.4 kB',840,26],['favicon.svg','200','svg+xml','Other','912 B',870,14]];
+scene(3,{id:'network',acc:'#3FD8F2',label:'NETWORK',water:'200 304 404 500 · NETWORK',
+ info:{kick:'CH 06 · NETWORK',name:'NETWORK',sub:'Every request the page makes, with <em>status, size and a timing waterfall</em>.',keys:[[['Ctrl','Shift','R'],'hard reload'],[['Ctrl','F'],'search bodies']],
+  legend:'<span style="--c:#9AA0A6">queue</span><span style="--c:#26A69A">DNS</span><span style="--c:#F6B26B">connect</span><span style="--c:#B388FF">TLS</span><span style="--c:#81C995">TTFB</span><span style="--c:#4FA3F7">download</span>',b0:0.7,bs:0.6,
+  bul:['Filter: <b>Fetch/XHR · Doc · CSS · JS · Font · Img · WS</b>','Throttle: <b>Fast 4G · Slow 4G · Offline</b> · custom','<b>Disable cache</b> + <b>Preserve log</b> across reloads','Headers · Payload · Preview · Response · Timing','<b>Copy as cURL / fetch</b> · Block URL · Replay XHR','Export / import <b>HAR</b> · Override responses']},
+ html:()=>`<div class="si" id="w">${win(`<div class="dt">${dtTabs('Network','e1')}
+ <div class="tb"><span id="recb">${I.rec}</span>${I.clear}${I.funnel}<div class="sep"></div><span class="chk y">Preserve log</span><span class="chk y">Disable cache</span><span id="thr" style="padding:1px 8px;border:1px solid #45474C;border-radius:4px;position:relative">No throttling ▾</span><span style="margin-left:auto">${I.dl}</span>${I.gear}</div>
+ <div class="tb"><div class="inp" style="min-width:150px">Filter</div><div class="chips"><span class="on">All</span><span>Fetch/XHR</span><span>Doc</span><span>CSS</span><span>JS</span><span>Font</span><span>Img</span><span>Media</span><span>Manifest</span><span>WS</span><span>Wasm</span><span>Other</span></div></div>
+ <div class="ov" id="ov"></div>
+ <div class="nt"><div class="ntrow h"><span>Name</span><span>Status</span><span>Type</span><span>Initiator</span><span>Size</span><span>Time</span><span>Waterfall</span></div>
+ ${reqs.map((r,i)=>`<div class="ntrow ${r[1]==='500'?'bad':''}" data-r="${i}"><span>${r[0]}</span><span>${r[1]}</span><span>${r[2]}</span><span style="color:${r[1]==='500'?'':'#8AB4F8'};text-decoration:underline">${r[3]}</span><span>${r[4]}</span><span class="tm">${r[6]} ms</span><span class="wf"></span></div>`).join('')}
+ <div id="thm" class="ctx" style="display:none;left:290px;top:-4px;min-width:200px"><div style="color:#9AA0A6;font-size:12px">Presets</div><div>No throttling</div><div>Fast 4G</div><div class="h">Slow 4G</div><div>3G</div><div>Offline</div><hr><div>Custom… Add</div></div>
+ <div class="drawer" id="drw" style="display:none"><div class="subt" style="border-top:0"><span>✕</span><span class="on">Headers</span><span>Payload</span><span>Preview</span><span>Response</span><span>Initiator</span><span>Timing</span><span>Cookies</span></div>
+  <div class="hdr"><h5>General</h5><div><span class="k">Request URL</span><span class="v">https://driftwood.coffee/api/cart</span></div><div><span class="k">Request Method</span><span class="v">POST</span></div><div><span class="k">Status Code</span><span class="v"><i class="dot"></i>500 Internal Server Error</span></div><div><span class="k">Remote Address</span><span class="v">104.18.22.7:443</span></div><div><span class="k">Referrer Policy</span><span class="v">strict-origin-when-cross-origin</span></div>
+  <h5>Response Headers</h5><div><span class="k">content-type</span><span class="v">application/json</span></div><div><span class="k">cache-control</span><span class="v">no-store</span></div><div><span class="k">server</span><span class="v">cloudflare</span></div><div><span class="k">x-request-id</span><span class="v">7f3a9c2e-51b0</span></div>
+  <h5>Request Headers</h5><div><span class="k">content-type</span><span class="v">application/json</span></div><div><span class="k">cookie</span><span class="v">session=8f2c…e91; cart_id=…</span></div><div><span class="k">origin</span><span class="v">https://driftwood.coffee</span></div></div></div>
+ <div class="ctx" id="nctx" style="display:none;left:150px;top:250px"><div>Open in new tab</div><div>Clear browser cache</div><hr><div class="h">Copy as cURL (bash) <small>▸</small></div><div>Copy as fetch</div><div>Copy response</div><hr><div>Block request URL</div><div>Replay XHR</div><div>Override content</div><hr><div>Save all as HAR with content</div></div>
+ </div>
+ <div class="status" id="stat"></div>
+ </div>`,{dock:'bottom',page:96,pageCls:'mini'})}</div>`,
+ update(lt,el){const slow=lt>2.3;const k=slow?lerp(1,3.2,E.io(clamp((lt-2.3)/0.9))):1;
+  const rowsIn=slow?2.35:0.1;const W=$('.wf',el).offsetWidth||380;const span=slow?6000:2000;
+  $('#thm',el).style.display=lt>1.75&&lt<2.3?'block':'none';$('#thr',el).textContent=slow?'Slow 4G ▾':'No throttling ▾';$('#thr',el).style.color=slow?'#FDD663':'';
+  reqs.forEach((r,i)=>{const row=$(`[data-r="${i}"]`,el);const t0=rowsIn+i*0.07;const vis=lt>=t0;row.style.visibility=vis?'visible':'hidden';
+   const grow=clamp((lt-t0)/0.5);const st=r[5]*k, du=r[6]*k*grow;
+   row.querySelector('.tm').textContent=Math.round(r[6]*k*Math.max(grow,.02))+' ms';
+   const px=v=>v/span*W;let h='';let x=px(st);const segs=r[7]?[['#9AA0A6',.05],['#26A69A',.12],['#F6B26B',.14],['#B388FF',.14],['#81C995',.35],['#4FA3F7',.2]]:[['#9AA0A6',.08],['#81C995',.6],['#4FA3F7',.32]];
+   segs.forEach(([c,f])=>{const w=Math.max(1,px(du*f));h+=`<i style="left:${x}px;width:${w}px;background:${c}"></i>`;x+=w});row.querySelector('.wf').innerHTML=h;
+   row.classList.toggle('pick',lt>3.55&&i===10)});
+  const ov=$('#ov',el);const OW=ov.offsetWidth;const dcl=412*k,ld=1210*k;
+  let oh=`<div style="position:absolute;left:${dcl/(slow?6000:2000)*OW}px;top:0;bottom:0;border-left:2px solid #8AB4F8"></div><div style="position:absolute;left:${ld/(slow?6000:2000)*OW}px;top:0;bottom:0;border-left:2px solid #F28B82"></div>`;
+  reqs.forEach((r,i)=>{const t0=rowsIn+i*0.07;if(lt<t0)return;const g=clamp((lt-t0)/0.5);oh+=`<i style="position:absolute;top:${6+i*3}px;height:2px;left:${r[5]*k/(slow?6000:2000)*OW}px;width:${Math.max(2,r[6]*k*g/(slow?6000:2000)*OW)}px;background:${r[1]==='500'?'#F28B82':'#4FA3F7'}"></i>`});
+  [0,1,2,3,4,5,6].forEach(n=>{if(n*(slow?1000:500)<(slow?6000:2000))oh+=`<span style="position:absolute;left:${n*(slow?1000:500)/(slow?6000:2000)*OW+3}px;top:40px;font:400 11px Plex;color:#6E7379">${n*(slow?1000:500)} ms</span>`});ov.innerHTML=oh;
+  $('#stat',el).innerHTML=`16 requests │ 432 kB transferred │ 1.3 MB resources │ Finish: ${(1.84*k).toFixed(2)} s │ <span class="dcl">DOMContentLoaded: ${Math.round(dcl)} ms</span> │ <span class="ld">Load: ${(ld/1000).toFixed(2)} s</span>`;
+  $('#drw',el).style.display=lt>3.6?'flex':'none';$('#nctx',el).style.display=lt>4.6?'block':'none';
+  $('#recb',el).style.opacity=(Math.floor(lt*4)%2)?1:.4;
+ },cursor:[[0,900,700],[1.6,['#thr',0.5,0.5],1],[2.05,['#thr',0.5,0.5]],[2.2,['#thm .h',0.4,0.5],1],[3.4,['[data-r="10"] span',0.4,0.5],1],[4.45,['[data-r="10"] span',0.4,0.5],1],[4.8,['#nctx .h',0.4,0.5]],[5.6,['#nctx .h',0.5,0.5]]]});
+
+/* flame chart data */
+const flame=[];(function(){const R=rng(7);
+ const F=(s,d,dep,l,c,lt)=>flame.push({s,d,dep,l,c,lt});
+ const Y='#F2C94C',Y2='#E6B84B',P='#A67CF7',G='#7CC57C',Gy='#8E9297',Bl='#6FA8DC';
+ F(60,110,0,'Task',Gy);F(62,40,1,'Parse HTML',Bl);F(104,64,1,'Evaluate Script',Y);F(106,20,2,'Compile Code',Y2);F(128,40,2,'(anonymous)',Y2);F(130,34,3,'renderProducts',Y);F(134,22,4,'createElement',Y2);
+ F(300,38,0,'Task',Gy);F(302,30,1,'Recalculate Style',P);F(334,4,1,'Layout',P);
+ F(420,70,0,'Task',Gy);F(422,66,1,'Evaluate Script',Y);F(424,50,2,'app.js',Y2);F(430,30,3,'hydrate',Y);F(436,18,4,'JSON.parse',Y2);
+ F(980,286,0,'Task',Gy,1);F(982,282,1,'Event: click',Y);F(984,190,2,'Function Call',Y2);F(986,186,3,'onClick',Y);F(988,120,4,'checkout',Y);F(990,70,5,'calcTotal',Y2);F(1062,44,5,'renderCart',Y2);F(1064,30,6,'innerHTML',Y);F(1110,58,4,'updateBadge',Y);F(1112,50,5,'getBoundingClientRect',P);F(1176,36,2,'Recalculate Style',P);F(1214,42,2,'Layout',P,1);F(1258,6,2,'Paint',G);
+ F(1400,30,0,'Task',Gy);F(1402,16,1,'Timer Fired',Y);F(1420,8,1,'Paint',G);F(1440,10,0,'Composite Layers',G);
+ F(1700,120,0,'Task',Gy,1);F(1702,110,1,'Animation Frame Fired',Y);F(1704,96,2,'updateCarousel',Y2);F(1710,40,3,'Layout',P);F(1760,30,3,'Recalculate Style',P);
+ F(2200,60,0,'Task',Gy,1);F(2202,54,1,'Event: load',Y);F(2204,40,2,'Run Microtasks',Y2);F(2206,32,3,'JSON.parse',Y);
+ for(let i=0;i<22;i++){const s=500+R()*2400;if((s>970&&s<1280)||(s>1690&&s<1830)||(s>2190&&s<2270))continue;const d=4+R()*18;F(s,d,0,'Task',Gy);F(s+1,d-2,1,['Timer Fired','Paint','Parse HTML','Minor GC','XHR Load'][i%5],[Y,G,Bl,Y2,Y][i%5])}
+})();
+scene(3,{id:'perf',acc:'#FF4F8B',label:'PERF',water:'60FPS · 16.7MS · LONG TASK',
+ info:{kick:'CH 07 · PERFORMANCE',name:'PERFORMANCE',sub:'Record a moment, then read the <em>main thread</em> millisecond by millisecond.',keys:[[['Ctrl','E'],'record'],[['Ctrl','Shift','E'],'reload + profile'],[['W','A','S','D'],'zoom & pan']],b0:0.7,bs:0.62,
+  bul:['Flame chart: <b>who ran, for how long, called by whom</b>','<b style="color:#F28B82">Red corner</b> = Long Task &gt; 50 ms blocks input','Live <b>Core Web Vitals</b>: LCP · CLS · INP','<b>CPU 4× / 6× slowdown</b> to fake a mid-range phone','Colors: <b style="color:#F2C94C">scripting</b> · <b style="color:#A67CF7">rendering</b> · <b style="color:#7CC57C">painting</b>','Bottom-Up / Call Tree find the heaviest functions']},
+ html:()=>`<div class="si" id="w">${win(`<div class="dt">${dtTabs('Performance')}
+ <div class="tb"><span id="prec">${I.rec}</span><span>⟳</span>${I.clear}<div class="sep"></div><span>driftwood.coffee ▾</span><span class="chk y">Screenshots</span><span class="chk">Memory</span><span style="margin-left:auto;color:#FDD663">CPU: 4× slowdown</span><span style="color:#FDD663">Network: Fast 4G</span>${I.gear}</div>
+ <div id="precd" style="position:absolute;left:50%;top:190px;transform:translateX(-50%);width:420px;background:#2D2E31;border:1px solid #4A4C52;border-radius:8px;padding:18px 20px;z-index:5;font:400 14px Plex;color:#E3E3E3;box-shadow:0 10px 30px rgba(0,0,0,.5)"><div style="display:flex;justify-content:space-between"><b id="prst">Recording</b><span class="mono" id="prt">0.0 s</span></div><div style="height:6px;background:#45474C;border-radius:3px;margin:12px 0"><i id="prb" style="display:block;height:100%;background:#8AB4F8;border-radius:3px;width:0"></i></div><div style="text-align:right"><span style="background:#8AB4F8;color:#202124;padding:5px 14px;border-radius:14px;font-weight:600">Stop</span></div></div>
+ <div id="pres" style="flex:1;display:flex;flex-direction:column;min-height:0">
+  <div style="height:78px;flex:none;position:relative;border-bottom:1px solid var(--line);background:#1B1C1F" id="povw"></div>
+  <div class="track" style="height:34px"><b>Frames</b><div id="frames"></div></div>
+  <div class="track" style="height:30px"><b>Interactions</b><div><i style="position:absolute;left:0;top:7px;height:16px;border-radius:3px;background:#F6B26B;font:600 11px/16px Plex;color:#111;padding:0 6px;font-style:normal" id="inter">click · 240 ms</i></div></div>
+  <div class="track" style="height:28px"><b>Timings</b><div id="timings"></div></div>
+  <div class="track" style="flex:1;min-height:0"><b>Main<br><small style="color:#6E7379;font-weight:400">driftwood.coffee</small></b><div class="flame" id="flame"></div></div>
+  <div style="height:150px;flex:none;border-top:1px solid var(--line);display:flex">
+   <div style="flex:1;padding:10px 14px;font:400 13.5px/1.6 Plex;color:#BDC1C6" id="psum"></div>
+   <div style="width:400px;padding:10px 14px;border-left:1px solid var(--line)" class="vit"><div><b>LCP</b><span class="g">1.62 s</span><small>good</small></div><div><b>CLS</b><span class="g">0.02</span><small>good</small></div><div><b>INP</b><span class="o">240 ms</span><small>needs work</small></div></div>
+  </div>
+ </div></div>`,{dock:'bottom',page:0})}<div class="tip" id="ptip"></div></div>`,
+ update(lt,el){const rec=lt<1.15;$('#precd',el).style.display=rec?'block':'none';$('#pres',el).style.visibility=rec?'hidden':'visible';
+  $('#prt',el).textContent=(Math.min(lt,0.8)*3.75).toFixed(1)+' s';$('#prst',el).textContent=lt<0.8?'Recording':'Loading profile…';$('#prb',el).style.width=(lt<0.8?clamp(lt/0.8)*100:clamp((lt-0.8)/0.35)*100)+'%';
+  if(rec)return;
+  const z=E.io(clamp((lt-1.8)/0.9));const v0=lerp(0,880,z),v1=lerp(3000,1360,z);const fl=$('#flame',el);const W=fl.offsetWidth;
+  if(!fl.dataset.b){fl.dataset.b=1;fl.innerHTML=flame.map((f,i)=>`<i data-f="${i}" class="${f.lt?'lt':''}" style="top:${4+f.dep*20}px;background:${f.c}">${f.l}</i>`).join('')}
+  $$('i',fl).forEach(n=>{const f=flame[+n.dataset.f];const x=(f.s-v0)/(v1-v0)*W,w=f.d/(v1-v0)*W;n.style.left=x+'px';n.style.width=Math.max(1,w)+'px';n.style.color=w>40?'#1B1B1B':'transparent';n.style.outline=(lt>2.85&&f.s===980&&f.dep===0)?'2px solid #8AB4F8':''});
+  const px=v=>(v-v0)/(v1-v0)*W;
+  $('#timings',el).innerHTML=[[180,'DCL','#8AB4F8'],[610,'FCP','#81C995'],[1620,'LCP','#0F9D58'],[1210,'L','#F28B82']].map(([t,l,c])=>`<i style="position:absolute;left:${px(t)}px;top:5px;font:700 11px/16px JBM;color:#111;background:${c};padding:0 4px;border-radius:2px;font-style:normal">${l}</i>`).join('');
+  $('#inter',el).style.left=px(980)+'px';$('#inter',el).style.width=Math.max(20,px(1220)-px(980))+'px';
+  let fh='';for(let t=0;t<3000;t+=16.7){const long=(t>980&&t<1266)||(t>1700&&t<1820);fh+=`<i style="position:absolute;left:${px(t)}px;width:${Math.max(1,px(t+16.7)-px(t)-1)}px;top:4px;bottom:4px;background:${long?'#F28B82':'#81C995'};opacity:${long?.9:.55}"></i>`}$('#frames',el).innerHTML=fh;
+  const pv=$('#povw',el);if(!pv.dataset.b){pv.dataset.b=1;const OW=pv.offsetWidth;let s='<svg width="'+OW+'" height="78" style="position:absolute;left:0;top:0">';const dens=t=>flame.filter(f=>f.dep===1&&t>=f.s&&t<f.s+f.d).length;
+   let pY='M0 78',pP='M0 78';for(let x=0;x<=OW;x+=4){const t=x/OW*3000;const d=dens(t);const busy=flame.some(f=>f.dep===0&&t>=f.s&&t<f.s+f.d);pY+=` L${x} ${busy?78-(d?44:10):78}`;pP+=` L${x} ${busy?78-(d?54:14):78}`}
+   s+=`<path d="${pP} L${OW} 78Z" fill="#A67CF7" opacity=".8"/><path d="${pY} L${OW} 78Z" fill="#F2C94C"/>`;for(let i=0;i<9;i++)s+=`<rect x="${i*OW/9+4}" y="4" width="${OW/9-8}" height="22" rx="2" fill="#F4EFE8" opacity=".85"/><rect x="${i*OW/9+10}" y="10" width="${(OW/9-20)*(i<2?.2:.7)}" height="5" fill="#1C1714" opacity=".7"/><rect x="${i*OW/9+10}" y="18" width="${i<3?0:(OW/9-20)*.4}" height="4" fill="#E4572E"/>`;s+='</svg>';pv.innerHTML=s+'<div id="vwin" style="position:absolute;top:0;bottom:0;border:1.5px solid #8AB4F8;background:rgba(138,180,248,.12)"></div>'}
+  const OW=pv.offsetWidth;$('#vwin',el).style.left=(v0/3000*OW)+'px';$('#vwin',el).style.width=((v1-v0)/3000*OW)+'px';
+  const sel=lt>2.85;$('#psum',el).innerHTML=sel?`<b style="color:#E3E3E3;font-size:15px">Task</b> <span style="color:#F28B82;margin-left:8px">⚠ Long task took <b>236.43 ms</b> (≥ 50 ms)</span><br>Total time <span class="mono">286.43 ms</span> &nbsp;·&nbsp; Self time <span class="mono">4.12 ms</span><br><span style="display:inline-flex;gap:16px;margin-top:6px">${[['#F2C94C','Scripting','842 ms'],['#A67CF7','Rendering','214 ms'],['#7CC57C','Painting','96 ms'],['#8E9297','System','121 ms'],['#E3E3E3','Idle','1,727 ms']].map(([c,a,b])=>`<span><i style="display:inline-block;width:10px;height:10px;background:${c};margin-right:5px"></i>${a} <span class="mono">${b}</span></span>`).join('')}</span>`:
+   `<b style="color:#E3E3E3">Summary</b> · Range 0 – 3,000 ms<br><span style="display:inline-flex;gap:16px;margin-top:6px">${[['#F2C94C','Scripting','842 ms'],['#A67CF7','Rendering','214 ms'],['#7CC57C','Painting','96 ms'],['#8E9297','System','121 ms']].map(([c,a,b])=>`<span><i style="display:inline-block;width:10px;height:10px;background:${c};margin-right:5px"></i>${a} <span class="mono">${b}</span></span>`).join('')}</span><br><span style="color:#9AA0A6">Bottom-up · Call tree · Event log</span>`;
+  const tip=$('#ptip',el);if(lt>2.6&&lt<2.85){const n=$('[data-f="15"]',el);const r=rel(el,n);tip.style.display='block';tip.style.left=(r.x+30)+'px';tip.style.top=(r.y-58)+'px';tip.innerHTML='<b class="mono">286.43 ms</b> Task<br><span style="color:#D93025">Long task took 236.43 ms.</span>'}else tip.style.display='none';
+ },cursor:[[0,900,700],[0.6,['#precd span span',0.5,0.5]],[0.75,['#precd span span',0.5,0.5],1],[2.4,700,500],[2.75,['[data-f="15"]',0.3,0.5],1],[5.6,['[data-f="15"]',0.35,0.5]]]});
+
+scene(2,{id:'memory',acc:'#B388FF',label:'MEMORY',water:'HEAP · DETACHED · RETAINERS',
+ info:{kick:'CH 08 · MEMORY',name:'MEMORY',sub:'Find <em>leaks</em>: what is on the heap, and who is still holding it.',keys:[[['🗑'],'force GC first']],b0:0.45,bs:0.45,
+  bul:['<b>Heap snapshot</b> · <b>Allocations on timeline</b> · Sampling','<b>Comparison</b> view shows growth between snapshots','Filter <code>Detached</code> → DOM removed but still referenced','<b>Retainers</b> explain why an object can’t be freed','Shallow vs <b>Retained size</b> — what freeing it saves']},
+ html:()=>`<div class="si" id="w">${win(`<div class="dt">${dtTabs('Memory')}
+ <div class="tb">${I.rec}${I.clear}<span>🗑</span><div class="sep"></div><span id="cmpb" style="padding:1px 8px;border:1px solid #45474C;border-radius:4px">Summary ▾</span><div class="inp" id="clsf" style="min-width:200px">Class filter</div><span>All objects ▾</span></div>
+ <div style="flex:1;display:flex;min-height:0">
+  <div style="width:220px;border-right:1px solid var(--line);font:400 13.5px/26px Plex;padding:6px 0">
+   <div style="padding:0 12px;color:#9AA0A6;font:600 11px/26px Plex;letter-spacing:.06em">HEAP SNAPSHOTS</div>
+   <div style="padding:0 12px" id="s1"><span style="color:#8AB4F8">▣</span> Snapshot 1 <span style="float:right" class="mono">12.4 MB</span></div>
+   <div style="padding:0 12px" id="s2"><span style="color:#8AB4F8">▣</span> Snapshot 2 <span style="float:right" class="mono">18.9 MB</span></div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;min-width:0;position:relative">
+   <div id="mprog" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font:400 15px Plex;color:#E3E3E3"><div>Snapshot 2 — <span id="mpt">Building dominator tree…</span></div><div style="width:360px;height:6px;background:#45474C;border-radius:3px"><i id="mpb" style="display:block;height:100%;width:0;background:#8AB4F8;border-radius:3px"></i></div></div>
+   <div id="mtab" style="display:none;flex:1">
+    <div id="alloc" style="height:64px;border-bottom:1px solid var(--line);position:relative;background:#1B1C1F"></div>
+    <div class="ntrow h" style="grid-template-columns:1fr 90px 90px 90px 110px"><span>Constructor</span><span># New</span><span># Deleted</span><span># Delta</span><span>Size Delta</span></div>
+    ${[['Detached &lt;div class="toast"&gt;','1,204','0','+1,204','+2.1 MB',1],['Detached &lt;img&gt;','402','0','+402','+860 kB',1],['Detached Text','3,611','0','+3,611','+115 kB',1],['(closure)','5,120','4,800','+320','+41 kB'],['Object','9,880','9,468','+412','+29 kB'],['Array','2,104','2,016','+88','+18 kB'],['(string)','14,202','12,188','+2,014','+306 kB'],['(compiled code)','1,006','1,001','+5','+12 kB'],['system / Context','640','610','+30','+3 kB']].map((r,i)=>`<div class="ntrow" data-m="${i}" data-det="${r[5]?1:0}" style="grid-template-columns:1fr 90px 90px 90px 110px;${r[5]?'color:#F6B26B':''}"><span>▸ ${r[0]}<span style="color:#9AA0A6"> ×${r[1]}</span></span><span class="mono">${r[1]}</span><span class="mono">${r[2]}</span><span class="mono">${r[3]}</span><span class="mono">${r[4]}</span></div>`).join('')}
+    <div id="ret" style="display:none;border-top:2px solid var(--line);font:400 13.5px/24px JBM;padding:4px 0"><div style="padding:0 12px;font:600 13px/28px Plex;background:#27282C">Retainers <span style="color:#9AA0A6;font-weight:400">— Object · Distance · Shallow · Retained</span></div>
+     <div style="padding:0 14px">▾ <span class="vr">[417]</span> in <span style="color:#F6B26B">Array</span> @84211 <span style="float:right;color:#9AA0A6">3 · 32 B · 2.1 MB</span></div><div style="padding:0 34px">▾ <span class="vr">toastCache</span> in <span style="color:#8AB4F8">Window</span> / driftwood.coffee <span style="float:right;color:#9AA0A6">2 · 64 B · 2.1 MB</span></div></div>
+   </div>
+  </div></div></div>`,{dock:'bottom',page:96})}</div>`,
+ update(lt,el){const done=lt>0.95;$('#mprog',el).style.display=done?'none':'flex';$('#mtab',el).style.display=done?'block':'none';$('#s2',el).style.visibility=done?'visible':'hidden';$('#s2',el).style.background=done?'#0B4A78':'';
+  $('#mpb',el).style.width=clamp(lt/0.9)*100+'%';$('#mpt',el).textContent=lt<0.45?'Snapshotting… '+Math.round(clamp(lt/0.45)*100)+'%':'Building dominator tree…';
+  $('#cmpb',el).textContent=lt>1.2?'Comparison ▾':'Summary ▾';$('#cmpb',el).style.color=lt>1.2?'#8AB4F8':'';
+  const fs='Detached';const ft=lt>1.55?fs.slice(0,Math.floor((lt-1.55)*28)):'';$('#clsf',el).innerHTML=ft?`<span style="color:#E3E3E3">${ft}</span>`:'Class filter';
+  const filt=ft.length>=8;$$('[data-m]',el).forEach(r=>{r.style.display=filt&&r.dataset.det==='0'?'none':'grid';r.classList.toggle('pick',lt>2.45&&r.dataset.m==='0')});
+  $('#ret',el).style.display=lt>2.5?'block':'none';
+  const al=$('#alloc',el);if(done&&!al.dataset.b){al.dataset.b=1;const R=rng(3);let h='';for(let i=0;i<70;i++){const hgt=6+R()*40;const live=R()>.55||i>52;h+=`<i style="position:absolute;bottom:4px;left:${8+i*11}px;width:6px;height:${hgt}px;background:${live?'#4FA3F7':'#5F6368'}"></i>`}al.innerHTML=h+'<span style="position:absolute;right:10px;top:6px;font:400 11px Plex;color:#9AA0A6">blue = still alive · grey = collected</span>'}
+ },cursor:[[0,700,600],[1.05,['#cmpb',0.5,0.5],1],[1.45,['#clsf',0.3,0.5],1],[2.35,['[data-m="0"]',0.2,0.5],1],[3.7,['[data-m="0"]',0.3,0.5]]]});
+
+scene(2,{id:'app',acc:'#93C47D',label:'APP',water:'STORAGE · COOKIES · SW',
+ info:{kick:'CH 09 · APPLICATION',name:'APPLICATION',sub:'Everything the site <em>stores on your machine</em> — readable and editable.',keys:[],b0:0.35,bs:0.45,
+  bul:['<b>Local / Session storage</b>: double-click to edit','<b>Cookies</b>: HttpOnly · Secure · SameSite · Expires','<b>IndexedDB</b> &amp; <b>Cache storage</b> browsers','<b>Service workers</b>: update, bypass, go offline','<b>Manifest</b> &amp; install checks · bfcache test','<b>Clear site data</b> wipes it all in one click']},
+ html:()=>`<div class="si" id="w">${win(`<div class="dt">${dtTabs('Application')}
+ <div style="flex:1;display:flex;min-height:0">
+  <div style="width:250px;flex:none;border-right:1px solid var(--line);font:400 13.5px/24px Plex;padding:4px 0;white-space:nowrap;overflow:hidden" id="atree">
+   ${[['h','Application'],[1,'📄 Manifest'],[1,'⚙ Service workers'],[1,'▤ Storage','st'],['h','Storage'],[1,'▾ ▦ Local storage'],[2,'driftwood.coffee','ls'],[1,'▸ ▦ Session storage'],[1,'▸ ⛁ IndexedDB'],[2,'driftwood-db · orders'],[1,'▾ ◔ Cookies'],[2,'driftwood.coffee','ck'],[1,'▸ ⛁ Cache storage'],[1,'▸ ⛁ Storage buckets'],['h','Background services'],[1,'⇆ Back/forward cache'],[1,'✉ Push messaging']].map(([d,t,id])=>d==='h'?`<div style="padding:4px 10px 0;font:600 11.5px/24px Plex;color:#9AA0A6;letter-spacing:.04em">${t}</div>`:`<div ${id?`data-a="${id}"`:''} style="padding-left:${d*16+4}px">${t}</div>`).join('')}
+  </div>
+  <div style="flex:1;min-width:0;position:relative" id="amain">
+   <div id="vls"><div class="tb"><span>⟳</span>${I.clear}<div class="inp">Filter</div></div><div class="ntrow h" style="grid-template-columns:180px 1fr"><span>Key</span><span>Value</span></div>
+    ${[['theme','dark'],['cart','[{"id":"guji","qty":2},{"id":"huila","qty":1},{"id":"nyeri","qty":3}]'],['lastVisit','2026-09-24T21:14:03Z'],['ab_hero','B'],['consent','{"analytics":true,"ads":false}']].map((r,i)=>`<div class="ntrow" style="grid-template-columns:180px 1fr;font-family:JBM;font-size:13px"><span>${r[0]}</span><span ${i===0?'id="thv"':''}>${esc(r[1])}</span></div>`).join('')}
+    <div style="padding:10px 14px;font:400 13px JBM;color:#9AA0A6;border-top:1px solid var(--line);margin-top:8px">▾ cart: Array(3)<br>&nbsp;&nbsp;▸ 0: {id: <span class="st">"guji"</span>, qty: <span class="nm">2</span>}<br>&nbsp;&nbsp;▸ 1: {id: <span class="st">"huila"</span>, qty: <span class="nm">1</span>}</div></div>
+   <div id="vck" style="display:none"><div class="tb"><span>⟳</span>${I.clear}<div class="inp">Filter</div><span class="chk">Only show cookies with an issue</span></div>
+    <div class="ntrow h" style="grid-template-columns:110px 1fr 130px 40px 110px 70px 70px 70px"><span>Name</span><span>Value</span><span>Domain</span><span>Path</span><span>Expires</span><span>HttpOnly</span><span>Secure</span><span>SameSite</span></div>
+    ${[['session','8f2c1d…e91','driftwood.coffee','/','Session','✓','✓','Lax'],['csrf_token','Zk3…Qa9','driftwood.coffee','/','Session','✓','✓','Strict'],['cart_id','c_20931','.driftwood.coffee','/','2026-10-24','','✓','None'],['_ga','GA1.1.4471…','.driftwood.coffee','/','2027-10-29','','','Lax'],['theme','dark','driftwood.coffee','/','2027-09-24','','✓','Lax']].map((r,i)=>`<div class="ntrow" style="grid-template-columns:110px 1fr 130px 40px 110px 70px 70px 70px;font-size:13px;${i===2?'background:rgba(253,214,99,.12)!important':''}">${r.map((c,j)=>`<span style="${j>=5&&j<=6?'color:#81C995;text-align:center':''}${j===1?';font-family:JBM':''}">${c}</span>`).join('')}</div>`).join('')}
+    <div style="padding:10px 14px;font:400 13px Plex;color:#FDD663">▲ cart_id: SameSite=None requires Secure — cookie will be rejected in cross-site contexts without it.</div></div>
+   <div id="vst" style="display:none;padding:18px 22px;font:400 14px Plex;color:#E3E3E3"><div style="font:600 18px Plex">Storage</div><div style="color:#9AA0A6;margin:4px 0 14px">https://driftwood.coffee</div>
+    <div style="display:flex;gap:28px;align-items:center"><svg viewBox="0 0 42 42" width="170" height="170" id="donut"><circle cx="21" cy="21" r="15.9" fill="none" stroke="#3C4043" stroke-width="6"/></svg>
+     <div style="font:400 14px/2 Plex"><div><b class="mono" id="usage" style="font-size:20px">4.2 MB</b> used of 1.8 GB quota</div><div><i style="display:inline-block;width:11px;height:11px;background:#4FA3F7;margin-right:8px"></i>IndexedDB <span class="mono">2.9 MB</span></div><div><i style="display:inline-block;width:11px;height:11px;background:#93C47D;margin-right:8px"></i>Cache storage <span class="mono">1.1 MB</span></div><div><i style="display:inline-block;width:11px;height:11px;background:#F6B26B;margin-right:8px"></i>Service workers <span class="mono">0.2 MB</span></div>
+      <div style="margin-top:8px"><span id="csd" style="background:#8AB4F8;color:#202124;padding:6px 14px;border-radius:14px;font-weight:600">Clear site data</span></div></div></div></div>
+  </div></div></div>`,{dock:'bottom',page:96})}</div>`,
+ update(lt,el){const v=lt<1.35?'ls':lt<2.55?'ck':'st';$('#vls',el).style.display=v==='ls'?'block':'none';$('#vck',el).style.display=v==='ck'?'block':'none';$('#vst',el).style.display=v==='st'?'block':'none';
+  $$('[data-a]',el).forEach(a=>a.style.background=a.dataset.a===v?'#0B4A78':'');
+  const th=$('#thv',el);if(lt>0.55&&lt<0.95)th.innerHTML=`<span style="outline:1px solid #8AB4F8;padding:0 4px;background:#1B1C1E">${'light'.slice(0,Math.floor((lt-0.6)*20))}<span class="caret"></span></span>`;else th.textContent=lt>=0.95?'light':'dark';
+  const cl=clamp((lt-3.05)/0.4);const f=1-E.out(cl);const segs=[[2.9,'#4FA3F7'],[1.1,'#93C47D'],[0.2,'#F6B26B']];let off=25,s='<circle cx="21" cy="21" r="15.9" fill="none" stroke="#3C4043" stroke-width="6"/>';const grow=E.out(clamp((lt-2.6)/0.4));
+  segs.forEach(([mb,c])=>{const pct=mb/4.2*100*f*grow;s+=`<circle cx="21" cy="21" r="15.9" fill="none" stroke="${c}" stroke-width="6" stroke-dasharray="${pct} ${100-pct}" stroke-dashoffset="${off}"/>`;off-=pct});$('#donut',el).innerHTML=s;
+  $('#usage',el).textContent=(4.2*f).toFixed(1)+' MB';$('#csd',el).style.background=lt>3.0&&lt<3.2?'#AECBFA':'#8AB4F8';
+ },cursor:[[0,700,600],[0.45,['#thv',0.1,0.5],1],[1.2,['[data-a="ck"]',0.5,0.5],1],[2.45,['[data-a="st"]',0.5,0.5],1],[2.95,['#csd',0.5,0.5],1],[3.7,['#csd',0.6,0.6]]]});
+
+scene(2,{id:'device',acc:'#F6B26B',label:'DEVICE',water:'393×852 · DPR 3 · TOUCH',
+ info:{kick:'CH 10 · DEVICE MODE',name:'DEVICE MODE',sub:'Test <em>mobile layouts</em> without a phone: viewport, touch, pixel ratio.',keys:[[['Ctrl','Shift','M'],'toggle toolbar']],b0:0.35,bs:0.45,
+  bul:['Presets (iPhone, Pixel, iPad…) or <b>Responsive</b> drag','Emulates <b>DPR</b>, touch events and user-agent','<b>Rotate</b> · throttle CPU &amp; network per device','Media-query bars jump to each breakpoint','<b>Capture screenshot</b> / full-size screenshot','Sensors: fake <b>geolocation</b> &amp; orientation']},
+ html:()=>`<div class="si" id="w"><div class="win">${chromeBar()}<div class="bbody right"><div class="pagebox" style="width:760px;height:100%;background:#2A2B2F">
+  <div style="height:38px;background:#35363A;display:flex;align-items:center;justify-content:center;gap:16px;font:400 13.5px Plex;color:#E3E3E3;border-bottom:1px solid #45474C;white-space:nowrap"><span>Dimensions: <b id="dname" style="font-weight:500">Responsive</b> ▾</span><span class="mono" id="ddim">760 × 690</span><span>100% ▾</span><span>DPR: <span id="dpr">1.0</span></span><span>No throttling ▾</span><span id="rot" style="font-size:17px">⟲</span></div>
+  <div style="height:22px;display:flex;flex-direction:column;gap:2px;padding:2px 0" id="mq"><i style="flex:1;background:#6FA8DC;opacity:.5;margin:0 30%"></i><i style="flex:1;background:#93C47D;opacity:.5;margin:0 18%"></i><i style="flex:1;background:#F6B26B;opacity:.5;margin:0 4%"></i></div>
+  <div style="position:absolute;left:0;right:0;top:64px;bottom:0;display:flex;align-items:center;justify-content:center">
+   <div id="phone" style="position:relative;background:#111;border-radius:0;padding:0;transition:none">
+    <div id="vp" style="position:relative;overflow:hidden;background:#F4EFE8;width:700px;height:620px">${site()}</div></div></div>
+  <div class="ctx" id="dmenu" style="display:none;left:190px;top:34px"><div>Responsive</div><div>iPhone SE</div><div>iPhone 14 Pro Max</div><div id="dpx">Pixel 7</div><div>Samsung Galaxy S20 Ultra</div><div>iPad Air</div><div>iPad Mini</div><div>Surface Pro 7</div><hr><div>Edit…</div></div>
+ </div><div class="dt">${dtTabs('Elements')}<div class="tree"><div style="--d:0">▾<span class="tg">&lt;body</span> <span class="an">class</span>=<span class="av">"shop"</span><span class="tg">&gt;</span></div><div style="--d:1">▸<span class="tg">&lt;nav&gt;</span>…</div><div style="--d:1">▸<span class="tg">&lt;header&gt;</span>…</div><div style="--d:1" class="selr">▸<span class="tg">&lt;section</span> <span class="an">class</span>=<span class="av">"cards"</span><span class="tg">&gt;</span>…<span class="flexb on">grid</span></div></div>
+ <div class="styles"><div class="rule"><span class="src">app.css:60</span><span class="sel">.cards</span> {<div class="decl"><span class="cb y"></span><span class="pn">grid-template-columns</span>: <span class="pv">repeat(3, 1fr)</span>;</div>}</div><div class="rule" id="mqr" style="opacity:.35"><span class="src">app.css:88</span><span style="color:#9AA0A6">@media (max-width: 600px)</span><br><span class="sel">.cards</span> {<div class="decl"><span class="cb y"></span><span class="pn">grid-template-columns</span>: <span class="pv">1fr</span>;</div>}</div></div></div></div></div></div>`,
+ update(lt,el){let w=700,h=620,name='Responsive',dpr='1.0',mob=false;
+  const p1=E.io(clamp((lt-0.2)/0.5));if(lt>0.2){w=lerp(700,300,p1);h=lerp(620,610,p1);name='iPhone 14 Pro';dpr='3.0'}
+  if(lt>1.75){name='Pixel 7';dpr='2.6';w=lerp(300,290,clamp((lt-1.75)/0.2));}
+  const rp=E.io(clamp((lt-2.35)/0.45));let rot=0;if(lt>2.35){rot=rp}
+  const W=rot?lerp(w,560,rot):w,H=rot?lerp(h,270,rot):h;
+  mob=W<600;$('#vp',el).style.width=W+'px';$('#vp',el).style.height=H+'px';
+  const s=$('.site',$('#vp',el));$('.scards',s).style.gridTemplateColumns=mob&&W<420?'1fr':'repeat(3,1fr)';$('.stitle',s).style.fontSize=W<420?'34px':'42px';
+  $('#mqr',el).style.opacity=W<420?1:.35;
+  const ph=$('#phone',el);ph.style.padding=lt>0.2?'14px 12px':'0';ph.style.borderRadius=lt>0.2?'34px':'0';ph.style.boxShadow=lt>0.2?'0 0 0 2px #444, 0 20px 40px rgba(0,0,0,.5)':'';
+  $('#dname',el).textContent=name;$('#ddim',el).textContent=lt<0.2?'760 × 690':(lt>2.35?(name==='Pixel 7'?'915 × 412':''):(name==='Pixel 7'?'412 × 915':'393 × 852'));$('#dpr',el).textContent=dpr;
+  $('#dmenu',el).style.display=lt>1.05&&lt<1.75?'block':'none';$('#dpx',el).className=lt>1.5?'h':'';
+ },cursor:[[0,600,600],[0.9,['#dname',0.5,0.5],1],[1.2,['#dname',0.5,0.5]],[1.55,['#dpx',0.3,0.5],1],[2.2,['#rot',0.5,0.5],1],[3.0,['#vp .scta',0.5,0.5],'touch'],[3.7,['#vp .scta',0.5,0.5]]],touchFrom:2.9});
+
+scene(2,{id:'lh',acc:'#81C995',label:'LIGHTHOUSE',water:'94 · 100 · 96 · 100',
+ info:{kick:'CH 11 · LIGHTHOUSE',name:'LIGHTHOUSE',sub:'A one-click <em>audit</em> with scores, metrics and exact fixes.',keys:[],b0:0.35,bs:0.5,
+  bul:['<b>Performance · Accessibility · Best Practices · SEO</b>','Modes: <b>Navigation · Timespan · Snapshot</b>','Mobile or desktop, with simulated throttling','<b style="color:#F28B82">0–49</b> · <b style="color:#FCAD70">50–89</b> · <b style="color:#81C995">90–100</b>','Every failed audit links to the fix + savings']},
+ html:()=>`<div class="si" id="w">${win(`<div class="dt">${dtTabs('Lighthouse')}
+ <div class="tb"><span>+</span><span>driftwood.coffee — 2:08:14 AM ▾</span>${I.clear}<span style="margin-left:auto;color:#9AA0A6">Emulated Moto G Power · Lighthouse 12.8 · Slow 4G</span></div>
+ <div style="flex:1;padding:18px 26px;display:flex;flex-direction:column;gap:18px;overflow:hidden">
+  <div style="display:flex;justify-content:space-around" id="gs">${[['Performance',94],['Accessibility',100],['Best Practices',96],['SEO',100]].map(([n,v],i)=>`<div class="gauge"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="rgba(129,201,149,.1)" stroke="rgba(129,201,149,.18)" stroke-width="9"/><circle class="arc" data-v="${v}" cx="60" cy="60" r="52" fill="none" stroke="#81C995" stroke-width="9" stroke-linecap="round" transform="rotate(-90 60 60)" stroke-dasharray="0 400"/><text x="60" y="76" text-anchor="middle" fill="#81C995" class="gv">0</text></svg>${n}</div>`).join('')}</div>
+  <div style="border-top:1px solid var(--line);padding-top:12px"><div style="font:600 13px Plex;color:#9AA0A6;letter-spacing:.06em;margin-bottom:10px">METRICS</div>
+   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px 30px;font:400 14px Plex" id="lhm">${[['First Contentful Paint','0.8 s'],['Largest Contentful Paint','1.6 s'],['Total Blocking Time','90 ms'],['Cumulative Layout Shift','0.01'],['Speed Index','1.2 s']].map(([a,b],i)=>`<div data-in="${1.3+i*0.1}" data-fx="up" style="display:flex;justify-content:space-between;border-bottom:1px solid #2E3035;padding-bottom:6px"><span><i style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#81C995;margin-right:8px"></i>${a}</span><b class="mono g" style="font-size:18px">${b}</b></div>`).join('')}</div></div>
+  <div><div style="font:600 13px Plex;color:#9AA0A6;letter-spacing:.06em;margin-bottom:6px">DIAGNOSTICS</div>${[['Properly size images','Est savings of 420 KiB','#FCAD70'],['Reduce unused JavaScript','Est savings of 138 KiB','#FCAD70'],['Eliminate render-blocking resources','Est savings of 310 ms','#F28B82'],['Serve static assets with an efficient cache policy','14 resources found','#9AA0A6']].map(([a,b,c],i)=>`<div data-in="${2.0+i*0.14}" data-fx="left" style="display:flex;justify-content:space-between;font:400 14px/34px Plex;border-bottom:1px solid #2E3035"><span><b style="color:${c}">▲</b>&nbsp; ${a}</span><span style="color:#9AA0A6">${b} ▾</span></div>`).join('')}</div>
+ </div></div>`,{dock:'bottom',page:80,pageCls:'mini'})}</div>`,
+ update(lt,el){$$('.arc',el).forEach((a,i)=>{const v=+a.dataset.v;const p=E.out(clamp((lt-0.15-i*0.12)/1.0));const val=Math.round(v*p);const C=2*Math.PI*52;a.setAttribute('stroke-dasharray',`${C*val/100} 400`);a.parentNode.querySelector('.gv').textContent=val;
+  const col=val>=90?'#81C995':val>=50?'#FCAD70':'#F28B82';a.setAttribute('stroke',col);a.parentNode.querySelector('.gv').setAttribute('fill',col)});
+ }});
+
+const cmds=[['Panel','Show Coverage'],['Drawer','Show Rendering'],['Panel','Show Recorder'],['Drawer','Show Animations'],['Drawer','Show Changes'],['Screenshot','Capture full size screenshot'],['Debugger','Disable JavaScript'],['Rendering','Emulate CSS prefers-color-scheme: dark'],['Appearance','Switch to light theme']];
+scene(2,{id:'power',acc:'#FF4F8B',label:'POWER',water:'CTRL+SHIFT+P › RUN COMMAND',
+ info:{kick:'CH 12 · POWER TOOLS',name:'POWER TOOLS',sub:'<code>Ctrl+Shift+P</code> runs <em>any of 400+ commands</em> by name.',keys:[[['Ctrl','Shift','P'],'command menu'],[['Ctrl','Shift','F'],'search all files']],b0:0.45,bs:0.42,
+  bul:['<b>Coverage</b>: red = bytes never executed','<b>Rendering</b>: paint flashing, layout-shift regions, FPS','<b>Recorder</b>: record a user flow, replay, measure','<b>Changes</b>: diff of every CSS/JS edit','Screenshot a node, the viewport, or full page','Emulate dark mode, reduced motion, vision deficiencies']},
+ html:()=>`<div class="si" id="w">
+  <div class="tile" id="cmdm" style="left:60px;top:30px;width:1020px;z-index:3"><div style="padding:18px 18px;border-bottom:1px solid var(--line);font:400 26px JBM;color:#E3E3E3;display:flex;gap:10px;align-items:center"><span style="color:#8AB4F8">Run ›</span><span id="cq"></span><span class="caret"></span></div>
+   <div id="cl">${cmds.map((c,i)=>`<div data-c="${i}" style="display:flex;gap:18px;padding:0 18px;font:400 20px/50px Plex;color:#E3E3E3"><span style="width:130px;color:#9AA0A6;font-size:15px;flex:none">${c[0]}</span><span>${c[1].replace(/(show|s)/i,'<b style="color:#8AB4F8">$1</b>')}</span></div>`).join('')}</div><div style="display:flex;gap:22px;padding:14px 18px;border-top:1px solid var(--line);font:500 16px Plex;color:#BDC1C6;background:#232428">${[['&gt;','run command'],['!','run snippet'],['@','go to symbol'],[':','go to line'],['?','help'],['(none)','open file']].map(([k,v])=>`<span><b class="mono" style="color:#FFE599;margin-right:6px">${k}</b>${v}</span>`).join('')}</div></div>
+  <div class="tile" data-in="1.55" data-fx="pop" style="left:0;top:0;width:560px;height:390px"><h6>Coverage <em>JS + CSS</em></h6><div class="ntrow h" style="grid-template-columns:130px 60px 90px 1fr"><span>URL</span><span>Type</span><span>Unused</span><span>Usage</span></div>
+   ${[['vendor.js','JS','188 kB',64],['app.js','JS','42.7 kB',71],['app.css','CSS','8.1 kB',58],['analytics.js','JS','22.5 kB',83],['cart.js','JS','6.4 kB',22]].map((r,i)=>`<div class="ntrow" style="grid-template-columns:130px 60px 90px 1fr"><span>${r[0]}</span><span>${r[1]}</span><span class="mono">${r[3]}%</span><span style="display:flex;align-items:center;padding-top:6px"><i data-in="${1.7+i*0.08}" data-fx="bar" style="display:flex;height:12px;width:${60+ (5-i)*25}px"><b style="flex:${100-r[3]};background:#4FA3F7"></b><b style="flex:${r[3]};background:#E46962"></b></i></span></div>`).join('')}
+   <div style="padding:10px 12px;font:400 13px Plex;color:#9AA0A6">268 kB of 412 kB (65%) is unused. Click a row to see red lines in Sources.</div></div>
+  <div class="tile" data-in="1.8" data-fx="pop" style="left:580px;top:0;width:560px;height:390px"><h6>Rendering <em>overlays</em></h6><div style="display:flex;height:354px"><div style="flex:1;position:relative;overflow:hidden" id="rpage">${site()}<div id="pf"></div></div>
+   <div style="width:210px;padding:10px;font:400 13px/2 Plex;color:#E3E3E3;border-left:1px solid var(--line)"><div class="chk y">Paint flashing</div><div class="chk y">Layout Shift Regions</div><div class="chk y">Frame Rendering Stats</div><div class="chk">Scrolling issues</div><div style="color:#9AA0A6;margin-top:4px">prefers-color-scheme</div><div style="border:1px solid #45474C;border-radius:4px;padding:0 8px;line-height:24px">dark ▾</div><div style="color:#9AA0A6">Vision deficiency</div><div style="border:1px solid #45474C;border-radius:4px;padding:0 8px;line-height:24px">Blurred vision ▾</div></div></div></div>
+  <div class="tile" data-in="2.05" data-fx="pop" style="left:0;top:410px;width:560px;height:398px"><h6>Recorder <em>user flow</em></h6><div style="padding:10px 16px;font:400 14px/1.2 Plex;color:#E3E3E3">${[['Navigate','driftwood.coffee/shop'],['Click','a.btn.cta  "Order beans →"'],['Change','input#qty  → "2"'],['Click','button  "Checkout"'],['Wait for','aria/Order placed']].map((s,i)=>`<div data-in="${2.15+i*0.12}" data-fx="left" style="display:flex;gap:12px;align-items:center;padding:7px 0"><i style="width:14px;height:14px;border-radius:50%;background:${i<4?'#8AB4F8':'#81C995'};flex:none;box-shadow:0 0 0 4px rgba(138,180,248,.2)"></i><b style="width:80px">${s[0]}</b><span class="mono" style="color:#BDC1C6;font-size:13px">${s[1]}</span></div>`).join('')}
+   <div style="display:flex;gap:10px;margin-top:14px"><span style="background:#8AB4F8;color:#202124;padding:7px 16px;border-radius:16px;font-weight:600">▶ Replay</span><span style="border:1px solid #8AB4F8;color:#8AB4F8;padding:7px 16px;border-radius:16px;font-weight:600">Measure performance</span><span style="color:#9AA0A6;padding:7px 4px">Export as Puppeteer ▾</span></div></div></div>
+  <div class="tile" data-in="2.3" data-fx="pop" style="left:580px;top:410px;width:560px;height:398px"><h6>Changes <em>diff</em></h6><div style="font:400 14px/26px JBM;padding:8px 0">
+   <div style="padding:0 14px;color:#9AA0A6">app.css</div>
+   <div style="padding:0 14px;background:rgba(228,105,98,.18);color:#F28B82">- 31  background: #E4572E;</div><div style="padding:0 14px;background:rgba(129,201,149,.18);color:#81C995">+ 31  background: #2E6BE4;</div>
+   <div style="padding:0 14px;background:rgba(228,105,98,.18);color:#F28B82">- 34  border-radius: 999px;</div><div style="padding:0 14px;background:rgba(129,201,149,.18);color:#81C995">+ 34  border-radius: 12px;</div>
+   <div style="padding:0 14px;color:#9AA0A6;margin-top:6px">index.html</div><div style="padding:0 14px;background:rgba(228,105,98,.18);color:#F28B82">- &lt;h1&gt;Slow coffee, fast site.&lt;/h1&gt;</div><div style="padding:0 14px;background:rgba(129,201,149,.18);color:#81C995">+ &lt;h1&gt;Hello, DevTools.&lt;/h1&gt;</div>
+   <div style="padding:10px 14px 0;font:400 13px Plex;color:#8AB4F8">⎘ Copy all changes as CSS</div></div></div>
+ </div>`,
+ update(lt,el){const q='show';$('#cq',el).textContent=q.slice(0,Math.floor(clamp((lt-0.1)/0.3)*4));const cm=$('#cmdm',el);cm.style.display=lt<1.5?'block':'none';
+  const vis=[0,1,2,3,4,8];const hi=vis[Math.min(5,Math.floor(clamp((lt-0.45)/0.95)*6))];$$('[data-c]',el).forEach((d,i)=>{d.style.background=i===hi?'#0B4A78':'';d.style.display=(lt>0.4&&i>4&&i<8)?'none':'flex'});
+  const pf=$('#pf',el);if(lt>1.8){const k=Math.floor(lt*6)%3;pf.innerHTML=[[20,120,170,60],[210,300,120,50],[20,200,250,30]].map((r,i)=>`<div style="position:absolute;left:${r[0]}px;top:${r[1]}px;width:${r[2]}px;height:${r[3]}px;background:${i===2?'rgba(79,163,247,.35)':'rgba(0,255,0,.35)'};border:2px solid ${i===2?'#4FA3F7':'#0f0'};opacity:${(k+i)%3===0?1:.15}"></div>`).join('')+`<div style="position:absolute;right:8px;top:8px;background:rgba(0,0,0,.75);color:#81C995;font:700 12px JBM;padding:6px 8px;border-radius:4px">60 fps<br><span style="color:#9AA0A6;font-weight:400">GPU raster: on</span></div>`}
+ }});
+
+scene(1,{id:'outro',acc:'#FFE599',hud:false,water:'F12 · INSPECT EVERYTHING',
+ html:()=>`<div id="og" style="position:absolute;left:120px;right:120px;top:170px;display:grid;grid-template-columns:repeat(6,1fr);gap:16px">${['Elements','Styles','Console','Sources','Network','Performance','Memory','Application','Device Mode','Lighthouse','Coverage','Recorder'].map((p,i)=>`<div data-in="${i*0.05}" data-fx="pop" style="height:84px;border-radius:12px;border:2px solid ${['#6FA8DC','#93C47D','#FFE599','#F6B26B'][i%4]};display:flex;align-items:center;justify-content:center;font:700 22px Plex;color:#fff;background:rgba(255,255,255,.03)">${p}</div>`).join('')}</div>
+ <div style="position:absolute;left:0;right:0;top:430px;text-align:center" data-in="0.55" data-fx="slam"><span style="font:800 200px/1 Brico;letter-spacing:-.05em;color:#fff">Press </span><span class="kc" style="font:800 150px/1 Brico;height:210px;min-width:360px;border-radius:40px;vertical-align:-20px">F12</span></div>
+ <div style="position:absolute;left:0;right:0;top:720px;text-align:center;font:600 40px Plex;color:#C9D2E3" data-in="0.95" data-fx="up">Inspect everything. Break anything. <span style="color:var(--yellow)">Fix it live.</span></div>`});
+
+/* ---------- build ---------- */
+const root=$('#scenes');
+S.forEach((s,i)=>{const d=document.createElement('div');d.className='scene';d.id='sc-'+s.id;d.style.setProperty('--acc',s.acc);
+ d.innerHTML=(s.info?`<div id="stage">${s.html()}</div>`+info(s.info):s.html());root.appendChild(d);s.el=d;
+ s.anims=$$('[data-in]',d).map(e=>({e,tin:+e.dataset.in,d:+(e.dataset.d||0.3),fx:e.dataset.fx||'up'}));
+ if(s.info){const ttl=$('.ttl',d);s.ttl=ttl;}
+ if(s.cursor){d.querySelector('#stage').insertAdjacentHTML('beforeend',cursorSVG.arrow.replace('class="cursor"','class="cursor" data-k="arrow"')+cursorSVG.touch.replace('class="cursor"','class="cursor" data-k="touch" style="display:none"')+'<div class="ripple"></div>')}
+});
+// fit titles
+document.fonts.ready.then(()=>{S.forEach(s=>{if(s.ttl){s.el.style.display='block';const w=s.ttl.scrollWidth;if(w>630){s.ttl.style.fontSize=(104*630/w)+'px'}s.el.style.display='none'}});window.__ready=true});
+// HUD
+const chap=S.filter(s=>s.label);$('#hud-top').innerHTML=chap.map(s=>`<div class="seg" style="--c:${s.acc}" data-s="${s.id}"><b>${s.label}</b><i><u></u></i></div>`).join('');
+const tips=[['TIP','Right-click ⟳ with DevTools open → <code>Empty cache and hard reload</code>'],['TIP','<code>debugger;</code> in code pauses like a breakpoint'],['TIP','Shift-click a color swatch to cycle HEX / RGB / HSL'],['TIP','<code>$_</code> holds the last Console result'],['TIP','Network: hold Shift over a row — green = initiators, red = dependents'],['TIP','<code>Ctrl+P</code> opens any source file by name'],['TIP','Elements: <code>H</code> toggles visibility of the selected node'],['TIP','<code>monitorEvents(window, "resize")</code> logs events live'],['TIP','Sources ▸ Snippets: save scripts you run on any page'],['TIP','Console: <code>queryObjects(Promise)</code> lists live instances'],['TIP','Drag a row in the Elements tree to move it in the DOM'],['TIP','Performance ▸ Enable advanced paint instrumentation for layer detail']];
+const tk=tips.map(t=>`<span><b>${t[0]}</b>${t[1]}</span>`).join('');$('#tick').innerHTML=tk+tk;
+
+/* ---------- geometry ---------- */
+function rel(sceneEl,node){const st=sceneEl.querySelector('#stage')||sceneEl;const si=st;const a=si.getBoundingClientRect(),b=node.getBoundingClientRect();const sc=a.width/si.offsetWidth||1;return{x:(b.left-a.left)/sc,y:(b.top-a.top)/sc,w:b.width/sc,h:b.height/sc}}
+function drawOverlay(el,node,tipHTML){const ov=$('#ov',el),tip=$('#tip',el);if(!node){ov.style.display='none';tip.style.display='none';return}
+ const r=rel(el,node);const cs=getComputedStyle(node);const n=k=>parseFloat(cs[k])||0;
+ const m=[n('marginTop'),n('marginRight'),n('marginBottom'),n('marginLeft')],p=[n('paddingTop'),n('paddingRight'),n('paddingBottom'),n('paddingLeft')];
+ ov.style.display='block';const M=$('.m',ov),Bd=$('.b',ov),P=$('.p',ov),C=$('.c',ov);
+ const set=(e,x,y,w,h)=>{e.style.left=x+'px';e.style.top=y+'px';e.style.width=w+'px';e.style.height=h+'px'};
+ ov.style.left='0';ov.style.top='0';set(M,r.x-m[3],r.y-m[0],r.w+m[1]+m[3],r.h+m[0]+m[2]);M.style.borderWidth=m.map(v=>v+'px').join(' ');set(Bd,r.x,r.y,0,0);set(P,r.x,r.y,r.w,r.h);P.style.borderWidth=p.map(v=>v+'px').join(' ');set(C,r.x+p[3],r.y+p[0],r.w-p[1]-p[3],r.h-p[0]-p[2]);
+ tip.style.display='block';tip.innerHTML=tipHTML;tip.style.left=Math.max(6,r.x)+'px';const th=tip.offsetHeight;tip.style.top=(r.y+r.h+m[2]+10+th>800?r.y-m[0]-th-10:r.y+r.h+m[2]+10)+'px'}
+function resolvePt(el,p){if(typeof p[1]==='number')return{x:p[1],y:p[2]};const [sel,fx,fy]=p[1];const n=el.querySelector(sel);if(!n)return{x:500,y:400};const r=rel(el,n);return{x:r.x+r.w*fx,y:r.y+r.h*fy}}
+
+/* ---------- fx canvas ---------- */
+const cv=$('#fx'),cx=cv.getContext('2d');
+function drawFX(t,acc,energy){cx.clearRect(0,0,1920,1080);
+ // glyph drift
+ const R=rng(99);cx.font='600 22px JBM';for(let i=0;i<34;i++){const gx=(R()*1920+t*(20+R()*40))%1980-30;const gy=(R()*1000+Math.sin(t*.7+i)*20);cx.fillStyle=`rgba(138,180,248,${0.05+R()*0.08})`;cx.fillText(['{ }','</>','$0','=>','200','F12','::','px','#','fn','[ ]','ms'][i%12],gx,gy)}
+ // beat sparks
+ const bi=Math.floor(t/B);for(let k=0;k<2;k++){const b=bi-k;if(b<0)continue;const tb=t-b*B;if(tb>0.6)continue;const r2=rng(b*31+7);const n=Math.round(10*energy);const ox=200+r2()*1520,oy=150+r2()*700;
+  for(let i=0;i<n;i++){const a=r2()*Math.PI*2,sp=200+r2()*500;const x=ox+Math.cos(a)*sp*tb,y=oy+Math.sin(a)*sp*tb+300*tb*tb;const al=Math.max(0,1-tb/0.6);cx.fillStyle=i%3?acc:'#ffffff';cx.globalAlpha=al*0.8;cx.fillRect(x,y,3+r2()*3,3+r2()*3)}cx.globalAlpha=1}}
+
+/* ---------- render ---------- */
+const DROP=[[7.5,39.375],[43.125,58.125]];
+function energyAt(t){for(const [a,b] of DROP)if(t>=a&&t<b)return 1;return t<7.5?0.35:0.5}
+let lastScene=null;
+window.render=function(t){
+ const s=S.find(x=>t>=x.start&&t<x.end)||S[S.length-1];const lt=t-s.start;
+ if(lastScene!==s){S.forEach(x=>x.el.style.display='none');s.el.style.display='block';lastScene=s;document.documentElement.style.setProperty('--acc',s.acc);$('#water').textContent=(s.water+' · ').repeat(3)}
+ const en=energyAt(t);const bp=(t%B)/B;const kick=Math.exp(-bp*7)*en;
+ // generic anims
+ s.anims.forEach(a=>{const p=clamp((lt-a.tin)/a.d);const e=a.e;if(a.fx==='bar'){e.style.transform=`scaleX(${E.out(p)})`;e.style.transformOrigin='left';return}
+  e.style.opacity=p<=0?0:Math.min(1,p*2.2);let tr='';
+  if(a.fx==='up')tr=`translateY(${(1-E.out(p))*22}px)`;else if(a.fx==='left')tr=`translateX(${(1-E.out(p))*-40}px)`;else if(a.fx==='pop')tr=`scale(${lerp(.4,1,E.back(p))})`;else if(a.fx==='slam')tr=`scale(${lerp(1.9,1,E.expo(p))})`;
+  else if(a.fx==='wipe'){e.style.clipPath=`inset(0 ${(1-E.out(p))*100}% 0 0)`;e.style.opacity=p>0?1:0}
+  e.style.transform=tr});
+ if(s.ttl){s.ttl.style.transform+=` scale(${1+kick*0.035})`}
+ if(s.update)s.update(lt,s.el);
+ // cursor
+ if(s.cursor){const cur=s.el.querySelector('[data-k="arrow"]'),tch=s.el.querySelector('[data-k="touch"]'),rp=s.el.querySelector('.ripple');const K=s.cursor;let i=0;while(i<K.length-1&&lt>=K[i+1][0])i++;
+  const a=K[i],b=K[Math.min(i+1,K.length-1)];const pa=resolvePt(s.el,a),pb=resolvePt(s.el,b);const seg=b[0]-a[0];const f=seg>0?E.io(clamp((lt-a[0])/Math.min(seg,0.45))):1;
+  const x=lerp(pa.x,pb.x,f),y=lerp(pa.y,pb.y,f);const touch=s.touchFrom&&lt>=s.touchFrom;const c=touch?tch:cur;cur.style.display=touch?'none':'block';tch.style.display=touch?'block':'none';
+  c.style.transform=`translate(${x-(touch?17:6)}px,${y-(touch?17:3)}px)`;
+  let rip=null;K.forEach(k=>{if(k[3]&&lt>=k[0]&&lt<k[0]+0.4)rip=k});rp.style.opacity=0;if(rip){const q=(lt-rip[0])/0.4;const pt=resolvePt(s.el,rip);const d=10+q*50;rp.style.opacity=1-q;rp.style.width=rp.style.height=d+'px';rp.style.left=(pt.x-d/2)+'px';rp.style.top=(pt.y-d/2)+'px';rp.style.borderColor=s.acc}}
+ // stage entrance & pulse
+ const st=s.el.querySelector('#stage');if(st){const ep=E.expo(clamp(lt/0.45));st.style.transform=`perspective(1600px) translateX(${(1-ep)*-80}px) rotateY(${(1-ep)*8}deg) scale(${lerp(0.9,1,ep)*(1+kick*0.006)})`;st.style.opacity=clamp(lt/0.12)}
+ // HUD
+ $('#hud-top').style.opacity=s.hud===false?0:1;$('#hud-bot').style.opacity=1;
+ chap.forEach(c=>{const seg=$(`[data-s="${c.id}"]`);const p=clamp((t-c.start)/(c.end-c.start));seg.querySelector('u').style.transform=`scaleX(${p})`;seg.className='seg'+(c===s?' on':p>=1?' done':'')});
+ const ci=chap.indexOf(s);$('#tc').innerHTML=`${String(Math.floor(t/60)).padStart(2,'0')}:${(t%60).toFixed(1).padStart(4,'0')}<small>${ci>=0?`PANEL ${String(ci+1).padStart(2,'0')}/${chap.length} · ${s.label}`:'DEVTOOLS · 60S'}</small>`;
+ $('#tick').style.transform=`translateX(${-(t*150)%($('#tick').scrollWidth/2)}px)`;
+ $('#grid').style.transform=`translate(${-(t*30)%40}px,${-(t*18)%40}px)`;
+ $('#water').style.transform=`translateX(${-t*90%1400}px)`;
+ $('#glow').style.opacity=0.08+kick*0.12;$('#glow').style.left=(-200+Math.sin(t*.4)*200)+'px';
+ // transitions: flash + glitch bands
+ const since=lt, until=s.end-t;const fl=Math.max(0,1-since/0.16)*0.55*(s.id==='intro'?0:1)+(s.id==='intro'&&lt>B&&lt<B+0.12?0.6*(1-(lt-B)/0.12):0);$('#flash').style.opacity=fl;
+ const gl=since<0.14||until<0.06;const bands=$('#bands');if(gl){const R=rng(Math.floor(t*30)+5);let h='';for(let i=0;i<7;i++){h+=`<div style="top:${R()*1080}px;height:${4+R()*50}px;background:${['rgba(255,79,139,.55)','rgba(63,216,242,.55)','rgba(255,229,153,.4)'][i%3]};transform:translateX(${(R()-.5)*200}px)"></div>`}bands.innerHTML=h;$('#scenes').style.filter='drop-shadow(-7px 0 0 rgba(255,40,100,.6)) drop-shadow(7px 0 0 rgba(0,220,255,.6))';$('#scenes').style.transform=`translateX(${(R()-.5)*30}px)`}else{bands.innerHTML='';$('#scenes').style.filter='';$('#scenes').style.transform=''}
+ drawFX(t,s.acc,en);
+};
+</script></body></html>

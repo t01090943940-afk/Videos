@@ -1,0 +1,176 @@
+{
+  "title": "超越生成",
+  "duration": 120,
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "bpm": 128,
+  "music": "Original procedural electronic score; no third-party recording used",
+  "scenes": [
+    {
+      "index": 1,
+      "start": 3.75,
+      "end": 11.25,
+      "start_frame": 113,
+      "style": "纯线条手绘",
+      "title": "先定义问题",
+      "caption": "目标、约束、验收标准，先于提示词。",
+      "tag": "HAND-DRAWN / 01",
+      "beats": 16
+    },
+    {
+      "index": 2,
+      "start": 11.25,
+      "end": 18.75,
+      "start_frame": 338,
+      "style": "3D MC 方块世界",
+      "title": "把任务拆开",
+      "caption": "能用清晰工作流，就先别堆复杂 Agent。",
+      "tag": "BLOCK WORLD / 02",
+      "beats": 16
+    },
+    {
+      "index": 3,
+      "start": 18.75,
+      "end": 26.25,
+      "start_frame": 563,
+      "style": "粘土定格",
+      "title": "给足上下文",
+      "caption": "给任务相关材料，不是无限堆字数。",
+      "tag": "CLAYMATION / 03",
+      "beats": 16
+    },
+    {
+      "index": 4,
+      "start": 26.25,
+      "end": 33.75,
+      "start_frame": 788,
+      "style": "Vox 式解释拼贴",
+      "title": "让答案有出处",
+      "caption": "外部事实要检索，关键结论要回源。",
+      "tag": "EDITORIAL COLLAGE / 04",
+      "beats": 16
+    },
+    {
+      "index": 5,
+      "start": 33.75,
+      "end": 41.25,
+      "start_frame": 1013,
+      "style": "SVG 几何矢量",
+      "title": "用工具接入现实",
+      "caption": "工具负责执行；调用结果仍然要验证。",
+      "tag": "PURE VECTOR / 05",
+      "beats": 16
+    },
+    {
+      "index": 6,
+      "start": 41.25,
+      "end": 48.75,
+      "start_frame": 1238,
+      "style": "8-BIT 像素街机",
+      "title": "记忆要可控",
+      "caption": "区分临时上下文与长期保存的信息。",
+      "tag": "PIXEL ARCADE / 06",
+      "beats": 16
+    },
+    {
+      "index": 7,
+      "start": 48.75,
+      "end": 56.25,
+      "start_frame": 1463,
+      "style": "半调漫画",
+      "title": "流畅 ≠ 正确",
+      "caption": "听起来合理，不等于有事实依据。",
+      "tag": "HALFTONE COMIC / 07",
+      "beats": 16
+    },
+    {
+      "index": 8,
+      "start": 56.25,
+      "end": 63.75,
+      "start_frame": 1688,
+      "style": "蓝晒工程制图",
+      "title": "让结果可测试",
+      "caption": "把“做得不错”变成明确的验收条件。",
+      "tag": "BLUEPRINT / 08",
+      "beats": 16
+    },
+    {
+      "index": 9,
+      "start": 63.75,
+      "end": 71.25,
+      "start_frame": 1913,
+      "style": "瑞士动态字体",
+      "title": "最小权限",
+      "caption": "只开放必要工具；高风险动作需确认。",
+      "tag": "KINETIC TYPE / 09",
+      "beats": 16
+    },
+    {
+      "index": 10,
+      "start": 71.25,
+      "end": 78.75,
+      "start_frame": 2138,
+      "style": "立体剪纸剧场",
+      "title": "让人保留决定权",
+      "caption": "重要节点可以暂停、复核、撤回。",
+      "tag": "PAPER THEATRE / 10",
+      "beats": 16
+    },
+    {
+      "index": 11,
+      "start": 78.75,
+      "end": 86.25,
+      "start_frame": 2363,
+      "style": "东方水墨",
+      "title": "不确定，就说明",
+      "caption": "缺证据时，标注未知，不填补想象。",
+      "tag": "INK & SILENCE / 11",
+      "beats": 16
+    },
+    {
+      "index": 12,
+      "start": 86.25,
+      "end": 93.75,
+      "start_frame": 2588,
+      "style": "霓虹赛博线框",
+      "title": "反馈驱动改进",
+      "caption": "执行、检查、修正，并设置停止条件。",
+      "tag": "NEON SYSTEM / 12",
+      "beats": 16
+    },
+    {
+      "index": 13,
+      "start": 93.75,
+      "end": 101.25,
+      "start_frame": 2813,
+      "style": "液态铬金属",
+      "title": "算清成本与延迟",
+      "caption": "更长推理，不自动等于更大价值。",
+      "tag": "LIQUID CHROME / 13",
+      "beats": 16
+    },
+    {
+      "index": 14,
+      "start": 101.25,
+      "end": 108.75,
+      "start_frame": 3038,
+      "style": "粒子数据宇宙",
+      "title": "先做小规模验证",
+      "caption": "用真实任务与失败样本，测试整体系统。",
+      "tag": "PARTICLE COSMOS / 14",
+      "beats": 16
+    },
+    {
+      "index": 15,
+      "start": 108.75,
+      "end": 116.25,
+      "start_frame": 3263,
+      "style": "棱镜玻璃光学",
+      "title": "把创造力还给人",
+      "caption": "AI 提供更多可能；目标与责任仍由人承担。",
+      "tag": "PRISMATIC GLASS / 15",
+      "beats": 16
+    }
+  ]
+}

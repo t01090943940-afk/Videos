@@ -1,0 +1,22 @@
+{
+  "name": "the-age-of-intelligence-source",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Font sources for 'The Age of Intelligence' code-rendered video. Rendering itself is Python; npm is only used to fetch fonts.",
+  "scripts": {
+    "fonts": "python3 scripts/build_fonts.py",
+    "render": "bash scripts/render_all.sh",
+    "encode": "bash scripts/encode.sh",
+    "qa": "bash scripts/qa.sh",
+    "all": "bash scripts/render_all.sh && bash scripts/encode.sh && bash scripts/qa.sh"
+  },
+  "dependencies": {
+    "@fontsource/anton": "5.3.0",
+    "@fontsource/bebas-neue": "5.3.0",
+    "@fontsource/inter": "5.3.0",
+    "@fontsource/jetbrains-mono": "5.3.0",
+    "@fontsource/noto-sans-sc": "5.3.0",
+    "@fontsource/space-grotesk": "5.3.0",
+    "@fontsource/unbounded": "5.3.0"
+  }
+}

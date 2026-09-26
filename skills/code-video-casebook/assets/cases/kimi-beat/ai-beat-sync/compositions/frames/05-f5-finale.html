@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>05-f5-finale</title>
+  </head>
+  <body>
+    <template>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;900&family=IBM+Plex+Mono:wght@500&family=Noto+Sans+SC:wght@700;900&display=swap"
+      />
+      <style>
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-400.ttf") format("truetype"); font-weight: 400; font-display: block; }
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-600.ttf") format("truetype"); font-weight: 600; font-display: block; }
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-700.ttf") format("truetype"); font-weight: 700; font-display: block; }
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-800.ttf") format("truetype"); font-weight: 800; font-display: block; }
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-900.ttf") format("truetype"); font-weight: 900; font-display: block; }
+        @font-face { font-family: "IBM Plex Mono"; src: url("assets/fonts/IBMPlexMono-500.ttf") format("truetype"); font-weight: 500; font-display: block; }
+        @font-face { font-family: "Noto Sans SC"; src: url("assets/fonts/NotoSansSC-700.ttf") format("truetype"); font-weight: 700; font-display: block; }
+        @font-face { font-family: "Noto Sans SC"; src: url("assets/fonts/NotoSansSC-900.ttf") format("truetype"); font-weight: 900; font-display: block; }
+        @font-face { font-family: "Microsoft YaHei"; src: local("Microsoft YaHei"); font-weight: 400 900; font-display: block; }
+
+        *,
+        *::before,
+        *::after {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        #stage {
+          position: relative;
+          width: 1920px;
+          height: 1080px;
+          overflow: hidden;
+          background: #111111;
+          container-type: size;
+          font-family: "Barlow", "Noto Sans SC", sans-serif;
+        }
+
+        /* ── group containers (0ms cuts driven by the timeline) ─────────── */
+        #g1,
+        #g2,
+        #g3 {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+        #g1 {
+          background: #111111;
+        }
+        #g2,
+        #g3 {
+          visibility: hidden;
+          opacity: 0;
+        }
+
+        /* ═══ g1 — per-onset hypercut typography ═══ */
+        #g1_chrome {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          z-index: 6;
+        }
+        #g1_counter {
+          position: absolute;
+          top: 5.5cqw;
+          left: 5.5cqw;
+          font-family: "IBM Plex Mono", monospace;
+          font-weight: 500;
+          font-size: 0.72cqw;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #888880;
+        }
+        #g1_mark {
+          position: absolute;
+          top: 5.5cqw;
+          right: 5.5cqw;
+          font-family: "IBM Plex Mono", monospace;
+          font-weight: 500;
+          font-size: 0.72cqw;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #888880;
+        }
+        #g1_ticks {
+          position: absolute;
+          left: 5.5cqw;
+          bottom: 5.5cqw;
+          display: flex;
+          gap: 10px;
+        }
+        .g1_tick {
+          width: 34px;
+          height: 6px;
+          background: #282826;
+        }
+        #g1_shake {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          will-change: transform;
+        }
+        .g1_word {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 900;
+          line-height: 0.95;
+          white-space: nowrap;
+          color: #f0ece5;
+          opacity: 0;
+          will-change: transform, filter, opacity;
+        }
+        .g1_word.cjk {
+          font-family: "Noto Sans SC", sans-serif;
+          letter-spacing: -0.02em;
+        }
+        .g1_word.lat {
+          font-family: "Barlow", "Noto Sans SC", sans-serif;
+          letter-spacing: -0.04em;
+        }
+        #g1_w0 { font-size: 14cqw; }
+        #g1_w1 { font-size: 17cqw; }
+        #g1_w2 { font-size: 17cqw; }
+        #g1_w3 { font-size: 12.5cqw; }
+        #g1_w4 { font-size: 15.5cqw; }
+        #g1_w5 { font-size: 12.5cqw; }
+        #g1_flash {
+          position: absolute;
+          inset: 0;
+          background: #f0ece5;
+          opacity: 0;
+          pointer-events: none;
+          z-index: 8;
+        }
+
+        /* ═══ g2 — held-text-strobe-burst fork: "all in" (orange register) ═══ */
+        .g2_base,
+        .g2_look {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+        .g2_base {
+          background: #e85d26;
+        }
+        .g2_look {
+          opacity: 0;
+          background: var(--bg, #111111);
+        }
+        .g2_wrap {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .g2_word {
+          font-family: "Barlow", "Noto Sans SC", sans-serif;
+          font-weight: 900;
+          font-size: 24.5cqw;
+          line-height: 1.05;
+          letter-spacing: -0.03em;
+          white-space: nowrap;
+          text-align: center;
+          color: transparent;
+          background-image: var(--solid-fill), var(--texture-url);
+          background-blend-mode: multiply;
+          background-size: 100% 100%, 150% 150%;
+          background-position: center, center;
+          background-repeat: repeat;
+          -webkit-background-clip: text;
+          background-clip: text;
+        }
+        .g2_word.g2_solid {
+          background-image: none;
+          color: #111111;
+        }
+
+        /* ═══ g3 — crash-zoom final slam: "未来已来" ═══ */
+        #g3 {
+          background: #111111;
+        }
+        #g3_radial {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(
+            circle at 50% 50%,
+            rgba(232, 93, 38, 0.1) 0%,
+            transparent 38%,
+            rgba(0, 0, 0, 0.55) 85%
+          );
+          opacity: 0;
+          will-change: opacity, transform;
+        }
+        #g3_lines {
+          position: absolute;
+          inset: 0;
+          background: repeating-radial-gradient(
+            circle at 50% 50%,
+            transparent 0px,
+            transparent 7px,
+            rgba(240, 236, 229, 0.09) 8px,
+            transparent 9px
+          );
+          opacity: 0;
+          mix-blend-mode: screen;
+          will-change: opacity, transform;
+        }
+        #g3_zoom {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0;
+          will-change: transform, filter, opacity;
+        }
+        #g3_stack {
+          position: relative;
+          white-space: nowrap;
+          font-family: "Noto Sans SC", sans-serif;
+          font-weight: 900;
+          font-size: 16.7cqw;
+          line-height: 1;
+          letter-spacing: -0.02em;
+          will-change: transform;
+        }
+        .g3_spacer {
+          color: #f0ece5;
+        }
+        .g3_layer {
+          position: absolute;
+          top: 0;
+          left: 0;
+          will-change: transform;
+        }
+        .g3_o {
+          color: #e85d26;
+        }
+        .g3_m {
+          color: #888880;
+        }
+        .g3_main {
+          color: #f0ece5;
+        }
+        #g3_flash {
+          position: absolute;
+          inset: 0;
+          background: #f0ece5;
+          opacity: 0;
+          pointer-events: none;
+          z-index: 8;
+        }
+      </style>
+
+      <div
+        id="stage"
+        data-composition-id="05-f5-finale"
+        data-width="1920"
+        data-height="1080"
+        data-duration="11.633"
+        data-root="true"
+      >
+        <!-- g1 · hypercut typography · local [0, 6.594) -->
+        <div id="g1">
+          <div id="g1_shake">
+            <div class="g1_word cjk" id="g1_w0">看懂的人</div>
+            <div class="g1_word cjk" id="g1_w1">已经</div>
+            <div class="g1_word cjk" id="g1_w2">上车</div>
+            <div class="g1_word lat" id="g1_w3">builders win</div>
+            <div class="g1_word cjk" id="g1_w4">信息差</div>
+            <div class="g1_word cjk" id="g1_w5" data-layout-allow-overflow>就是生产力</div>
+          </div>
+          <div id="g1_chrome">
+            <div id="g1_counter">hit 00 / 11</div>
+            <div id="g1_mark">no. 05 / finale</div>
+            <div id="g1_ticks">
+              <div class="g1_tick" id="g1_tick0"></div>
+              <div class="g1_tick" id="g1_tick1"></div>
+              <div class="g1_tick" id="g1_tick2"></div>
+              <div class="g1_tick" id="g1_tick3"></div>
+              <div class="g1_tick" id="g1_tick4"></div>
+              <div class="g1_tick" id="g1_tick5"></div>
+              <div class="g1_tick" id="g1_tick6"></div>
+              <div class="g1_tick" id="g1_tick7"></div>
+              <div class="g1_tick" id="g1_tick8"></div>
+              <div class="g1_tick" id="g1_tick9"></div>
+              <div class="g1_tick" id="g1_tick10"></div>
+            </div>
+          </div>
+          <div id="g1_flash"></div>
+        </div>
+
+        <!-- g2 · held-text-strobe-burst · local [6.594, 9.985) -->
+        <div id="g2">
+          <div class="g2_base">
+            <div class="g2_wrap"><div class="g2_word g2_solid">all in</div></div>
+          </div>
+          <div class="g2_look" id="g2_look0" style="--bg: #111111">
+            <div class="g2_wrap">
+              <div
+                class="g2_word"
+                style="
+                  --texture-url: url('assets/texture-mask-text/masks/onyx.png');
+                  --solid-fill: linear-gradient(#e85d26, #e85d26);
+                "
+              >
+                all in
+              </div>
+            </div>
+          </div>
+          <div class="g2_look" id="g2_look1" style="--bg: #1a1a18">
+            <div class="g2_wrap">
+              <div
+                class="g2_word"
+                style="
+                  --texture-url: url('assets/texture-mask-text/masks/metal-041-a.png');
+                  --solid-fill: linear-gradient(#f0ece5, #f0ece5);
+                "
+              >
+                all in
+              </div>
+            </div>
+          </div>
+          <div class="g2_look" id="g2_look2" style="--bg: #e85d26">
+            <div class="g2_wrap">
+              <div
+                class="g2_word"
+                style="
+                  --texture-url: url('assets/texture-mask-text/masks/lava.png');
+                  --solid-fill: linear-gradient(#111111, #111111);
+                "
+              >
+                all in
+              </div>
+            </div>
+          </div>
+          <div class="g2_look" id="g2_look3" style="--bg: #111111">
+            <div class="g2_wrap">
+              <div
+                class="g2_word"
+                style="
+                  --texture-url: url('assets/texture-mask-text/masks/tiles-138.png');
+                  --solid-fill: linear-gradient(#f0ece5, #f0ece5);
+                "
+              >
+                all in
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- g3 · crash-zoom final slam · local [9.985, 11.633] -->
+        <div id="g3">
+          <div id="g3_radial"></div>
+          <div id="g3_lines"></div>
+          <div id="g3_zoom">
+            <div id="g3_stack" data-layout-allow-overlap>
+              <span class="g3_spacer" data-layout-allow-overlap>未来已来</span>
+              <span class="g3_layer g3_o" id="g3_lo" data-layout-allow-overlap>未来已来</span>
+              <span class="g3_layer g3_m" id="g3_lm" data-layout-allow-overlap>未来已来</span>
+              <span class="g3_layer g3_main" data-layout-allow-overlap>未来已来</span>
+            </div>
+          </div>
+          <div id="g3_flash"></div>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          var tl = gsap.timeline({ paused: true });
+
+          var SPAN0 = 36.966; // frame start (track seconds)
+          var DUR = 11.633; // 48.599 − 36.966
+          var G1_END = 6.594; // 43.560 − span0 → cut g1 → g2
+          var G2_END = 9.985; // 46.951 − span0 → cut g2 → g3
+
+          function L(t) {
+            return +(t - SPAN0).toFixed(4);
+          }
+
+          /* ── group cuts (0ms swaps) ──────────────────────────────────── */
+          tl.set("#g1", { autoAlpha: 1 }, 0);
+          tl.set("#g1", { autoAlpha: 0 }, G1_END);
+          tl.set("#g2", { autoAlpha: 1 }, G1_END);
+          tl.set("#g2", { autoAlpha: 0 }, G2_END);
+          tl.set("#g3", { autoAlpha: 1 }, G2_END);
+
+          /* ═══ g1 — one slammed word per kick ═══ */
+          // copy order: 看懂的人 / 已经 / 上车 / builders win / 信息差 / 就是生产力
+          var WORDS = ["#g1_w0", "#g1_w1", "#g1_w2", "#g1_w3", "#g1_w4", "#g1_w5"];
+          // 11 anchors (block order); word index per anchor; snare = last
+          var ANCHORS = [
+            { t: L(37.17), w: 0, whip: true },
+            { t: L(37.31), w: 1, whip: true },
+            { t: L(37.45), w: 2, whip: true },
+            { t: L(37.55), w: 3, whip: true },
+            { t: L(38.2), w: 4 },
+            { t: L(39.1), w: 5 },
+            { t: L(39.75), w: 3 },
+            { t: L(40.4), w: 0 },
+            { t: L(40.52), w: 1 },
+            { t: L(41.08), w: 5 },
+            { t: L(42.86), w: 5, snare: true },
+          ];
+          var SHAKE_BASE = [26, -22, 18, -14, 10, -6];
+
+          function shake(target, t, amps, step) {
+            for (var i = 0; i < amps.length; i++) {
+              tl.set(
+                target,
+                { x: amps[i], y: +(amps[i] * 0.6 * (i % 2 ? -1 : 1)).toFixed(1) },
+                +(t + i * step).toFixed(4)
+              );
+            }
+            tl.set(target, { x: 0, y: 0 }, +(t + amps.length * step).toFixed(4));
+          }
+
+          // t = 0 ground truth: word 0 already held (no blank first frame)
+          tl.set(WORDS[0], { opacity: 1 }, 0);
+
+          ANCHORS.forEach(function (a, i) {
+            var word = WORDS[a.w];
+            var flashColor = a.snare ? "#E85D26" : "#F0ECE5";
+            // flash-cut frame — swap happens under the flash
+            tl.set("#g1_flash", { opacity: 0.9, backgroundColor: flashColor }, a.t);
+            tl.set("#g1_flash", { opacity: 0 }, +(a.t + 0.05).toFixed(4));
+            // word swap (class-wide hide, then reveal target)
+            tl.set(".g1_word", { opacity: 0 }, +(a.t + 0.02).toFixed(4));
+            tl.set(word, { opacity: 1 }, +(a.t + 0.02).toFixed(4));
+            // braam punch (hypercut-whip x-entry on the opening 4-kick burst)
+            tl.fromTo(
+              word,
+              {
+                scale: a.snare ? 0.7 : 0.78,
+                x: a.whip ? (i % 2 ? 520 : -520) : 0,
+                filter: "blur(14px)",
+              },
+              { scale: 1, x: 0, filter: "blur(0px)", duration: 0.16, ease: "power4.out" },
+              a.t
+            );
+            // screen shake — amplitude grows through the sequence
+            var gain = 1 + i * 0.05;
+            shake(
+              "#g1_shake",
+              +(a.t + 0.01).toFixed(4),
+              SHAKE_BASE.map(function (v) {
+                return Math.round(v * gain);
+              }),
+              0.028
+            );
+            // chrome: hit counter + accumulating ticks
+            tl.set(
+              "#g1_counter",
+              { textContent: "hit " + (i + 1 < 10 ? "0" : "") + (i + 1) + " / 11" },
+              a.t
+            );
+            tl.set("#g1_tick" + i, { backgroundColor: "#E85D26" }, a.t);
+            // palette-flip on the snare (stays in the dark register)
+            if (a.snare) {
+              tl.set(word, { color: "#E85D26" }, +(a.t + 0.02).toFixed(4));
+              tl.set("#g1_counter", { color: "#E85D26" }, a.t);
+              tl.set("#g1", { backgroundColor: "#1A1A18" }, a.t);
+            }
+          });
+          // slow drift keeps the held word alive across the 4.114 → 5.894 gap
+          tl.fromTo("#g1_w5", { scale: 1 }, { scale: 1.025, duration: 1.6, ease: "none" }, 4.28);
+
+          /* ═══ g2 — "all in" strobe (fork of held-text-strobe-burst) ═══ */
+          var LOOKS = ["#g2_look0", "#g2_look1", "#g2_look2", "#g2_look3"];
+          var lookStep = 0;
+          var lookPrev = null;
+          function flip(t) {
+            var cur = LOOKS[lookStep % LOOKS.length];
+            if (lookPrev && lookPrev !== cur) tl.set(lookPrev, { opacity: 0 }, t);
+            tl.set(cur, { opacity: 1 }, t);
+            lookPrev = cur;
+            lookStep += 1;
+          }
+          function off(t) {
+            if (lookPrev) tl.set(lookPrev, { opacity: 0 }, t);
+            lookPrev = null;
+          }
+          // entry punch on the downbeat cut
+          tl.fromTo("#g2", { scale: 1.06 }, { scale: 1, duration: 0.24, ease: "power4.out" }, G1_END);
+          // strobe ride — kick roll 44.164–44.605 (hits at .164/.257/.396/.605)
+          flip(L(44.164));
+          flip(L(44.257));
+          flip(L(44.396));
+          flip(L(44.605));
+          off(L(44.605) + 0.09);
+          // double-hit 45.33 / 45.56
+          flip(L(45.325));
+          off(L(45.325) + 0.09);
+          flip(L(45.557));
+          off(L(45.557) + 0.09);
+          // final flicker — double roll-kick 46.60–46.95; last look holds into the g3 cut
+          flip(L(46.602));
+          flip(L(46.695));
+          flip(L(46.858));
+
+          /* ═══ g3 — crash-zoom final slam ═══ */
+          var CRASH = G2_END; // 9.985 — word begins mid-crash right off the cut
+          var LAND = L(47.276); // 10.31 — last snare of the track
+
+          // non-empty first frame: speed-lines + vignette already converging
+          tl.fromTo(
+            "#g3_lines",
+            { opacity: 0.35, scale: 0.3 },
+            { opacity: 0.9, scale: 1.4, duration: 0.325, ease: "expo.in" },
+            CRASH
+          );
+          tl.fromTo(
+            "#g3_radial",
+            { opacity: 0.25, scale: 0.5 },
+            { opacity: 0.9, scale: 1.25, duration: 0.325, ease: "expo.in" },
+            CRASH
+          );
+          // the crash — lands exactly on the 47.276 snare
+          tl.fromTo("#g3_zoom", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power1.in", immediateRender: false }, CRASH);
+          tl.fromTo(
+            "#g3_zoom",
+            { scale: 0.05, filter: "blur(24px)" },
+            { scale: 1, filter: "blur(0px)", duration: 0.325, ease: "expo.in", immediateRender: false },
+            CRASH
+          );
+          // landing: flash + braam settle + chromatic split + shake
+          tl.set("#g3_flash", { opacity: 0.8 }, LAND);
+          tl.set("#g3_flash", { opacity: 0 }, +(LAND + 0.06).toFixed(4));
+          tl.to("#g3_stack", { scale: 0.955, duration: 0.09, ease: "power3.out" }, LAND);
+          tl.to("#g3_stack", { scale: 1, duration: 0.55, ease: "elastic.out(1, 0.55)" }, +(LAND + 0.09).toFixed(4));
+          tl.set("#g3_lo", { x: -28, y: -6 }, LAND);
+          tl.set("#g3_lm", { x: 26, y: 5 }, LAND);
+          tl.to("#g3_lo", { x: 0, y: 0, duration: 0.5, ease: "power2.out" }, +(LAND + 0.05).toFixed(4));
+          tl.to("#g3_lm", { x: 0, y: 0, duration: 0.5, ease: "power2.out" }, +(LAND + 0.05).toFixed(4));
+          shake("#g3_zoom", LAND, [16, -13, 10, -8, 6, -4, 2], 0.03);
+          // swoosh decay → static hold into the void (f6 picks up from here)
+          tl.to("#g3_lines", { opacity: 0, duration: 0.45, ease: "power2.out" }, +(LAND + 0.05).toFixed(4));
+          tl.to("#g3_radial", { opacity: 0.4, duration: 0.5, ease: "power2.out" }, LAND);
+
+          window.__timelines["05-f5-finale"] = tl;
+          tl.seek(0);
+        })();
+      </script>
+    </template>
+  </body>
+</html>

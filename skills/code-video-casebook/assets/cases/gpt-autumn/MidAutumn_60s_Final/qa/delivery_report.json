@@ -1,0 +1,29 @@
+{
+  "file": "MidAutumn_Final_60s_1080p60.mp4",
+  "duration_seconds": 60.0,
+  "dimensions": [
+    1920,
+    1080
+  ],
+  "fps": 60,
+  "video_frames": 3600,
+  "audio_sample_rate": 48000,
+  "audio_channels": 2,
+  "file_bytes": 29332124,
+  "shots": 21,
+  "full_decode_passed": true,
+  "blank_sample_times_seconds": [],
+  "identical_consecutive_quarter_second_samples": [],
+  "sampled_min_luma": 28.39891975308642,
+  "sampled_min_luma_std": 16.118771294692472,
+  "median_quarter_second_frame_change": 1.9562654495239258,
+  "silence_checked_interval": [
+    5.54,
+    5.96
+  ],
+  "silence_peak": 0.0,
+  "decoded_audio_peak": 0.8536791801452637,
+  "sha256": "cf9d9c078a67ef0f15f94f3e4d01a3243f317ece73d8fcddcc672f05b74b8c30",
+  "narration": false,
+  "notes": "Technical checks do not constitute a guarantee of aesthetic quality. The 5.5-6.0 second music stop is intentional. Core AAC silence is checked clear of codec edge ringing."
+}

@@ -1,0 +1,45 @@
+[
+  {
+    "layer": "music",
+    "what": "pad",
+    "progression": [
+      "C",
+      "Am7",
+      "Fmaj7",
+      "Gsus2",
+      "Em7",
+      "Am7",
+      "Fmaj7",
+      "G",
+      "Cadd9"
+    ]
+  },
+  {
+    "layer": "music",
+    "what": "guzheng arpeggios; glissando",
+    "t": 23.782
+  },
+  {
+    "layer": "music",
+    "what": "xiao melody",
+    "phrases": 5
+  },
+  {
+    "layer": "music",
+    "what": "bells on lanterns/stars/scale/title"
+  },
+  {
+    "layer": "music",
+    "what": "silence (punctuation)",
+    "t0": 23.52,
+    "t1": 23.78
+  },
+  {
+    "layer": "sfx",
+    "what": "window whoosh, pen, pages, breeze, motes, lantern puffs, star shimmer, moonlight, pen tap, stretch, ring, sky lanterns, seal, brush, petals"
+  },
+  {
+    "layer": "amb",
+    "what": "night air + three crickets"
+  }
+]

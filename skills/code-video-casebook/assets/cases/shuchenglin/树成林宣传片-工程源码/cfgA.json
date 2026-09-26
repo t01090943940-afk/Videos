@@ -1,0 +1,4 @@
+[{"name":"site_intro","url":"index.html","dur":6.5},
+ {"name":"site_full","url":"index.html","dur":35.3,"pre":[["adv",7]],"scroll":"t*1400"},
+ {"name":"strangers","url":"showcase-assets/video-matrix/code-video-strangers.html","dur":10,"pre":[["click","#startBtn"],["adv",0.3],["click","#ctrlHide"]]}
+]

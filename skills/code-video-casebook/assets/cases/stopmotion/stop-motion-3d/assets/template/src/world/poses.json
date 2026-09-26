@@ -1,0 +1,784 @@
+{
+ "seated": {
+  "sit": true,
+  "legL": [
+   -90,
+   0,
+   0
+  ],
+  "legR": [
+   -90,
+   0,
+   0
+  ]
+ },
+ "seated_idle": {
+  "base": "seated",
+  "head": [
+   10,
+   0,
+   0
+  ],
+  "handL": {
+   "reach": "keyboard",
+   "offset": [
+    -0.15,
+    0,
+    -0.1
+   ]
+  },
+  "handR": {
+   "reach": "keyboard",
+   "offset": [
+    0.15,
+    0,
+    -0.1
+   ]
+  }
+ },
+ "seated_breathe": {
+  "base": "seated_idle",
+  "torso": [
+   -3,
+   0,
+   0
+  ],
+  "head": [
+   6,
+   2,
+   0
+  ]
+ },
+ "type_a": {
+  "base": "seated",
+  "torso": [
+   3,
+   0,
+   0
+  ],
+  "head": [
+   14,
+   -2,
+   0
+  ],
+  "handL": {
+   "reach": "keyboard",
+   "offset": [
+    -0.1,
+    0,
+    0.0
+   ]
+  },
+  "handR": {
+   "reach": "keyboard",
+   "offset": [
+    0.08,
+    0,
+    0.03
+   ]
+  }
+ },
+ "type_b": {
+  "base": "seated",
+  "torso": [
+   3,
+   0,
+   0
+  ],
+  "head": [
+   13,
+   2,
+   0
+  ],
+  "handL": {
+   "reach": "keyboard",
+   "offset": [
+    -0.07,
+    0,
+    0.03
+   ]
+  },
+  "handR": {
+   "reach": "keyboard",
+   "offset": [
+    0.11,
+    0,
+    -0.01
+   ]
+  }
+ },
+ "look_screen": {
+  "base": "seated_idle",
+  "head": [
+   4,
+   0,
+   0
+  ],
+  "torso": [
+   2,
+   0,
+   0
+  ]
+ },
+ "anticipate_enter": {
+  "base": "seated",
+  "torso": [
+   -6,
+   -10,
+   0
+  ],
+  "head": [
+   16,
+   -10,
+   0
+  ],
+  "handL": {
+   "reach": "keyboard",
+   "offset": [
+    -0.1,
+    0,
+    0.02
+   ]
+  },
+  "handR": {
+   "reach": "enter",
+   "lift": 0.24
+  }
+ },
+ "hit_enter": {
+  "base": "seated",
+  "torso": [
+   6,
+   -4,
+   0
+  ],
+  "head": [
+   20,
+   -6,
+   0
+  ],
+  "handL": {
+   "reach": "keyboard",
+   "offset": [
+    -0.1,
+    0,
+    0.02
+   ]
+  },
+  "handR": {
+   "reach": "enter",
+   "exact": true
+  }
+ },
+ "cheer": {
+  "base": "seated",
+  "torso": [
+   -8,
+   0,
+   0
+  ],
+  "head": [
+   -14,
+   0,
+   0
+  ],
+  "armL": [
+   -172,
+   0,
+   -14
+  ],
+  "armR": [
+   -172,
+   0,
+   14
+  ]
+ },
+ "cheer_b": {
+  "base": "seated",
+  "torso": [
+   -6,
+   0,
+   3
+  ],
+  "head": [
+   -10,
+   0,
+   6
+  ],
+  "armL": [
+   -160,
+   0,
+   -28
+  ],
+  "armR": [
+   -160,
+   0,
+   28
+  ]
+ },
+ "reach_mug": {
+  "base": "seated",
+  "torso": [
+   4,
+   6,
+   0
+  ],
+  "head": [
+   16,
+   10,
+   0
+  ],
+  "handL": {
+   "reach": "keyboard",
+   "offset": [
+    -0.12,
+    0,
+    -0.06
+   ]
+  },
+  "handR": {
+   "reach": "mug_home",
+   "offset": [
+    0.05,
+    0.04,
+    0
+   ],
+   "exact": true
+  }
+ },
+ "hold_mug": {
+  "base": "seated",
+  "torso": [
+   -2,
+   0,
+   0
+  ],
+  "head": [
+   6,
+   4,
+   0
+  ],
+  "handL": {
+   "reach": "keyboard",
+   "offset": [
+    -0.12,
+    0,
+    -0.06
+   ]
+  },
+  "handR": {
+   "reach": "mouth",
+   "offset": [
+    0.06,
+    -0.36,
+    0.12
+   ]
+  }
+ },
+ "sip": {
+  "base": "seated",
+  "torso": [
+   -6,
+   0,
+   0
+  ],
+  "head": [
+   -14,
+   0,
+   0
+  ],
+  "handL": {
+   "reach": "keyboard",
+   "offset": [
+    -0.12,
+    0,
+    -0.06
+   ]
+  },
+  "handR": {
+   "reach": "mouth",
+   "offset": [
+    0.05,
+    -0.13,
+    0.03
+   ]
+  },
+  "tiltR": -25
+ },
+ "content": {
+  "base": "seated",
+  "torso": [
+   -4,
+   0,
+   0
+  ],
+  "head": [
+   -4,
+   0,
+   -6
+  ],
+  "handL": {
+   "reach": "keyboard",
+   "offset": [
+    -0.12,
+    0,
+    -0.06
+   ]
+  },
+  "handR": {
+   "reach": "mouth",
+   "offset": [
+    0.07,
+    -0.34,
+    0.13
+   ]
+  }
+ },
+ "set_mug": {
+  "base": "reach_mug"
+ },
+ "reach_sheet": {
+  "base": "seated",
+  "torso": [
+   6,
+   8,
+   0
+  ],
+  "head": [
+   18,
+   12,
+   0
+  ],
+  "handL": {
+   "reach": "keyboard",
+   "offset": [
+    -0.12,
+    0,
+    -0.06
+   ]
+  },
+  "handR": {
+   "reach": "stack",
+   "offset": [
+    0,
+    0.02,
+    -0.1
+   ],
+   "exact": true
+  }
+ },
+ "show_sheet": {
+  "base": "seated",
+  "torso": [
+   -4,
+   0,
+   0
+  ],
+  "head": [
+   -2,
+   -14,
+   0
+  ],
+  "handL": {
+   "reach": "keyboard",
+   "offset": [
+    -0.12,
+    0,
+    -0.06
+   ]
+  },
+  "handR": {
+   "reach": "mouth",
+   "offset": [
+    0.1,
+    -0.02,
+    0.34
+   ]
+  }
+ },
+ "study_sheet": {
+  "base": "show_sheet",
+  "head": [
+   8,
+   0,
+   0
+  ]
+ },
+ "point_up": {
+  "base": "seated",
+  "torso": [
+   -2,
+   0,
+   0
+  ],
+  "head": [
+   -6,
+   -10,
+   0
+  ],
+  "armL": [
+   -10,
+   0,
+   -10
+  ],
+  "armR": [
+   -150,
+   0,
+   8
+  ]
+ },
+ "draw_a": {
+  "base": "seated",
+  "torso": [
+   8,
+   0,
+   0
+  ],
+  "head": [
+   24,
+   -10,
+   0
+  ],
+  "handL": {
+   "reach": "keyboard",
+   "offset": [
+    0,
+    0,
+    0
+   ]
+  },
+  "handR": {
+   "reach": "tablet",
+   "offset": [
+    -0.05,
+    0,
+    -0.03
+   ],
+   "exact": true
+  }
+ },
+ "draw_b": {
+  "base": "seated",
+  "torso": [
+   8,
+   0,
+   0
+  ],
+  "head": [
+   24,
+   -12,
+   0
+  ],
+  "handL": {
+   "reach": "keyboard",
+   "offset": [
+    0,
+    0,
+    0
+   ]
+  },
+  "handR": {
+   "reach": "tablet",
+   "offset": [
+    0.02,
+    0,
+    0.02
+   ],
+   "exact": true
+  }
+ },
+ "draw_c": {
+  "base": "seated",
+  "torso": [
+   8,
+   0,
+   0
+  ],
+  "head": [
+   23,
+   -8,
+   0
+  ],
+  "handL": {
+   "reach": "keyboard",
+   "offset": [
+    0,
+    0,
+    0
+   ]
+  },
+  "handR": {
+   "reach": "tablet",
+   "offset": [
+    0.06,
+    0,
+    -0.02
+   ],
+   "exact": true
+  }
+ },
+ "think": {
+  "base": "seated",
+  "torso": [
+   -2,
+   0,
+   0
+  ],
+  "head": [
+   2,
+   10,
+   8
+  ],
+  "handL": {
+   "reach": "keyboard",
+   "offset": [
+    0,
+    0,
+    0
+   ]
+  },
+  "handR": {
+   "reach": "mouth",
+   "offset": [
+    0.03,
+    -0.2,
+    0.02
+   ]
+  }
+ },
+ "tap": {
+  "base": "seated",
+  "torso": [
+   6,
+   0,
+   0
+  ],
+  "head": [
+   22,
+   -8,
+   0
+  ],
+  "handL": {
+   "reach": "keyboard",
+   "offset": [
+    0,
+    0,
+    0
+   ]
+  },
+  "handR": {
+   "reach": "tablet",
+   "offset": [
+    0.08,
+    0,
+    0.02
+   ],
+   "exact": true
+  }
+ },
+ "lean_back": {
+  "base": "seated",
+  "torso": [
+   -14,
+   0,
+   0
+  ],
+  "head": [
+   -6,
+   0,
+   0
+  ],
+  "armL": [
+   -14,
+   0,
+   -16
+  ],
+  "armR": [
+   -14,
+   0,
+   16
+  ]
+ },
+ "nod_a": {
+  "base": "lean_back",
+  "head": [
+   6,
+   0,
+   4
+  ],
+  "torso": [
+   -12,
+   0,
+   2
+  ]
+ },
+ "nod_b": {
+  "base": "lean_back",
+  "head": [
+   -10,
+   0,
+   -4
+  ],
+  "torso": [
+   -15,
+   0,
+   -2
+  ]
+ },
+ "point_screen": {
+  "base": "seated",
+  "torso": [
+   6,
+   0,
+   0
+  ],
+  "head": [
+   8,
+   -4,
+   0
+  ],
+  "armL": [
+   -14,
+   0,
+   -16
+  ],
+  "armR": [
+   -82,
+   -6,
+   -6
+  ]
+ },
+ "fist_pump": {
+  "base": "seated",
+  "torso": [
+   -8,
+   0,
+   0
+  ],
+  "head": [
+   -12,
+   0,
+   0
+  ],
+  "armL": [
+   -14,
+   0,
+   -16
+  ],
+  "armR": [
+   -168,
+   0,
+   6
+  ]
+ },
+ "reach_can": {
+  "base": "seated",
+  "torso": [
+   6,
+   6,
+   0
+  ],
+  "head": [
+   18,
+   10,
+   0
+  ],
+  "handL": {
+   "reach": "keyboard",
+   "offset": [
+    0,
+    0,
+    0
+   ]
+  },
+  "handR": {
+   "reach": "can_home",
+   "offset": [
+    0,
+    0.155,
+    0
+   ],
+   "exact": true
+  }
+ },
+ "lift_can": {
+  "base": "seated",
+  "torso": [
+   2,
+   10,
+   0
+  ],
+  "head": [
+   20,
+   16,
+   0
+  ],
+  "handL": {
+   "reach": "keyboard",
+   "offset": [
+    0,
+    0,
+    0
+   ]
+  },
+  "handR": {
+   "reach": "plant",
+   "offset": [
+    -0.02,
+    0.0,
+    -0.15
+   ]
+  }
+ },
+ "pour": {
+  "base": "lift_can",
+  "tiltR": 38,
+  "head": [
+   24,
+   18,
+   0
+  ]
+ },
+ "admire": {
+  "base": "seated",
+  "torso": [
+   -4,
+   4,
+   0
+  ],
+  "head": [
+   4,
+   18,
+   6
+  ],
+  "handL": {
+   "reach": "keyboard",
+   "offset": [
+    0,
+    0,
+    0
+   ]
+  },
+  "handR": {
+   "reach": "keyboard",
+   "offset": [
+    0.16,
+    0,
+    -0.08
+   ]
+  }
+ },
+ "admire_can": {
+  "base": "lift_can",
+  "head": [
+   10,
+   22,
+   4
+  ],
+  "torso": [
+   -4,
+   8,
+   0
+  ]
+ }
+}

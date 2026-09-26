@@ -1,0 +1,37 @@
+[aist#0:0/pcm_s16le @ 0x562d98553340] Guessed Channel Layout: stereo
+Input #0, wav, from '/mnt/data/cosmos_build/score.wav':
+  Metadata:
+    encoder         : Lavf61.7.103
+  Duration: 00:01:12.00, bitrate: 1536 kb/s
+  Stream #0:0: Audio: pcm_s16le ([1][0][0][0] / 0x0001), 48000 Hz, stereo, s16, 1536 kb/s
+Stream mapping:
+  Stream #0:0 -> #0:0 (pcm_s16le (native) -> pcm_s16le (native))
+Press [q] to stop, [?] for help
+Output #0, null, to 'pipe:':
+  Metadata:
+    encoder         : Lavf61.7.103
+  Stream #0:0: Audio: pcm_s16le, 192000 Hz, stereo, s16, 6144 kb/s
+      Metadata:
+        encoder         : Lavc61.19.101 pcm_s16le
+size=N/A time=00:00:03.80 bitrate=N/A speed= 7.6x    
+size=N/A time=00:00:14.90 bitrate=N/A speed=14.8x    
+size=N/A time=00:00:25.30 bitrate=N/A speed=16.8x    
+size=N/A time=00:00:36.10 bitrate=N/A speed=  18x    
+size=N/A time=00:00:46.90 bitrate=N/A speed=18.7x    
+size=N/A time=00:00:57.30 bitrate=N/A speed=19.1x    
+size=N/A time=00:01:08.30 bitrate=N/A speed=19.5x    
+[Parsed_loudnorm_0 @ 0x7f65cc002740] 
+{
+	"input_i" : "-14.00",
+	"input_tp" : "-2.01",
+	"input_lra" : "4.70",
+	"input_thresh" : "-24.12",
+	"output_i" : "-14.35",
+	"output_tp" : "-1.30",
+	"output_lra" : "4.00",
+	"output_thresh" : "-24.40",
+	"normalization_type" : "dynamic",
+	"target_offset" : "0.35"
+}
+[out#0/null @ 0x562d98553500] video:0KiB audio:54000KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+size=N/A time=00:01:12.00 bitrate=N/A speed=19.5x    

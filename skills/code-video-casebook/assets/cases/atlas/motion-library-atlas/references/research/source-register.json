@@ -1,0 +1,1556 @@
+[
+  {
+    "library": "remotion",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://www.remotion.dev/docs/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "remotion",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://www.remotion.dev/showcase",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "hyperframes",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://www.heygen.com/research/html-to-video",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "hyperframes",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://developers.heygen.com/hyperframes-overview",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "motion-canvas",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://motioncanvas.io/docs/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "motion-canvas",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://motioncanvas.io/examples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "manim",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://docs.manim.community/en/stable/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "manim",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://docs.manim.community/en/stable/examples.html",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "manimgl",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/3b1b/manim",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "manimgl",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://www.3blue1brown.com/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "moviepy",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://zulko.github.io/moviepy/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "moviepy",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://zulko.github.io/moviepy/user_guide/compositing.html",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "matplotlib",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://matplotlib.org/stable/api/animation_api.html",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "matplotlib",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://matplotlib.org/stable/gallery/animation/index.html",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "gsap",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://gsap.com/docs/v3/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "gsap",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://gsap.com/showcase/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "anime",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://animejs.com/documentation/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "anime",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://animejs.com/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "motion",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://motion.dev/docs",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "motion",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://motion.dev/examples",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "react-spring",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/pmndrs/react-spring",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "react-spring",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://www.react-spring.dev/examples",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "tweenjs",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/tweenjs/tween.js",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "tweenjs",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://tweenjs.github.io/tween.js/examples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "theatre",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://www.theatrejs.com/docs/latest",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "theatre",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://www.theatrejs.com/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "waapi",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "waapi",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/Animation/currentTime",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "css-animation",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animations",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "css-animation",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/animation",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "mojs",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://mojs.github.io/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "mojs",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://mojs.github.io/tutorials/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "splittext",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://gsap.com/docs/v3/Plugins/SplitText/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "splittext",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://gsap.com/docs/v3/Plugins/SplitText/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "scrambletext",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://gsap.com/docs/v3/Plugins/ScrambleTextPlugin/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "scrambletext",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://gsap.com/docs/v3/Plugins/ScrambleTextPlugin/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "pretext",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/chenglou/pretext",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "pretext",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://github.com/chenglou/pretext#readme",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "opentype",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/opentypejs/opentype.js",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "opentype",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://opentype.js.org/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "troika",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://protectwise.github.io/troika/troika-three-text/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "troika",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://protectwise.github.io/troika/troika-three-text/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "katex",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://katex.org/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "katex",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://katex.org/docs/supported.html",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "svgjs",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://svgjs.dev/docs/3.0/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "svgjs",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://svgjs.dev/docs/3.0/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "flubber",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/veltman/flubber",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "flubber",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://veltman.github.io/flubber/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "paper",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://paperjs.org/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "paper",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://paperjs.org/examples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "two",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://two.js.org/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "two",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://two.js.org/examples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "rough",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://roughjs.com/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "rough",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://roughjs.com/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "rough-notation",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://roughnotation.com/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "rough-notation",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://roughnotation.com/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "vivus",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/maxwellito/vivus",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "vivus",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://maxwellito.github.io/vivus/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "perfect-freehand",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/steveruizok/perfect-freehand",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "perfect-freehand",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://perfect-freehand-example.vercel.app/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "pixi",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://pixijs.com/8.x/guides/",
+    "status": "入口已收录",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "pixi",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://pixijs.com/8.x/examples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "konva",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://konvajs.org/docs/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "konva",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://konvajs.org/docs/tweens/All_Controls.html",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "fabric",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://www.fabricjs.com/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "fabric",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://fabricjs.com/demos/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "canvas2d",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "canvas2d",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "skia-canvas",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://skia-canvas.org/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "skia-canvas",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://skia-canvas.org/pages/getting-started",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "d3",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://d3js.org/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "d3",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://observablehq.com/@d3/gallery",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "echarts",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://echarts.apache.org/handbook/en/basics/release-note/5-2-0/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "echarts",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://echarts.apache.org/examples/en/index.html",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "chartjs",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://www.chartjs.org/docs/latest/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "chartjs",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://www.chartjs.org/docs/latest/samples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "vega",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://vega.github.io/vega/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "vega",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://vega.github.io/vega/examples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "vega-lite",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://vega.github.io/vega-lite/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "vega-lite",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://vega.github.io/vega-lite/examples.html",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "observable-plot",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://observablehq.github.io/plot/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "observable-plot",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://observablehq.com/@observablehq/plot-gallery",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "visx",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://visx.airbnb.tech/",
+    "status": "入口已收录",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "visx",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://visx.airbnb.tech/gallery",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "p5",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://p5js.org/reference/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "p5",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://p5js.org/examples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "canvas-sketch",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/mattdesl/canvas-sketch",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "canvas-sketch",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://github.com/mattdesl/canvas-sketch/tree/master/examples",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "regl",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/regl-project/regl",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "regl",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://regl-project.github.io/regl/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "ogl",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/oframe/ogl",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "ogl",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://oframe.github.io/ogl/examples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "tsparticles",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://particles.js.org/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "tsparticles",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://particles.js.org/samples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "three",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://threejs.org/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "three",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://threejs.org/examples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "r3f",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/pmndrs/react-three-fiber",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "r3f",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://r3f.docs.pmnd.rs/getting-started/examples",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "drei",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/pmndrs/drei",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "drei",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://drei.docs.pmnd.rs/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "babylon",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/BabylonJS/Babylon.js",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "babylon",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://www.babylonjs.com/demos/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "playcanvas",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://developer.playcanvas.com/user-manual/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "playcanvas",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://playcanvas.com/explore",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "model-viewer",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://modelviewer.dev/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "model-viewer",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://modelviewer.dev/examples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "vtk",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://kitware.github.io/vtk-js/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "vtk",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://kitware.github.io/vtk-js/examples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "rapier",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://rapier.rs/docs/user_guides/javascript/getting_started_js/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "rapier",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://rapier.rs/demos3d/index.html",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "matter",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://brm.io/matter-js/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "matter",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://brm.io/matter-js/demo/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "cannon",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/pmndrs/cannon-es",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "cannon",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://pmndrs.github.io/cannon-es/examples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "planck",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/piqnt/planck.js",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "planck",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://piqnt.com/planck.js/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "webgl",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "webgl",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Tutorial",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "webgpu",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "webgpu",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://webgpu.github.io/webgpu-samples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "typegpu",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://docs.swmansion.com/TypeGPU/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "typegpu",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://docs.swmansion.com/TypeGPU/examples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "postprocessing",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/pmndrs/postprocessing",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "postprocessing",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://pmndrs.github.io/postprocessing/public/demo/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "gl-transitions",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/gl-transitions/gl-transitions",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "gl-transitions",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://gl-transitions.com/gallery",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "pixi-filters",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/pixijs/filters",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "pixi-filters",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://pixijs.io/filters/examples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "maplibre",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://maplibre.org/maplibre-gl-js/docs/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "maplibre",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://maplibre.org/maplibre-gl-js/docs/examples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "mapbox",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://docs.mapbox.com/mapbox-gl-js/guides/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "mapbox",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://docs.mapbox.com/mapbox-gl-js/example/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "deck",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://deck.gl/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "deck",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://deck.gl/examples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "cesium",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://cesium.com/platform/cesiumjs/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "cesium",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://sandcastle.cesium.com/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "leaflet",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://leafletjs.com/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "leaflet",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://leafletjs.com/examples.html",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "lottie",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/airbnb/lottie-web",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "lottie",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://airbnb.io/lottie/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "dotlottie",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://docs.lottiefiles.com/en/runtimes/distributions/js",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "dotlottie",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://developers.lottiefiles.com/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "rive",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://rive.app/docs/runtimes/web/web-js",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "rive",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://rive.app/community/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "spine",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://esotericsoftware.com/spine-runtimes",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "spine",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://esotericsoftware.com/spine-demos",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "tone",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://tonejs.github.io/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "tone",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://tonejs.github.io/examples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "web-audio",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "web-audio",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/OfflineAudioContext",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "howler",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://howlerjs.com/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "howler",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://howlerjs.com/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "wavesurfer",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://wavesurfer.xyz/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "wavesurfer",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://wavesurfer.xyz/examples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "meyda",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://meyda.js.org/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "meyda",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://meyda.js.org/audio-features",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "midi",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/Tonejs/Midi",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "midi",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://tonejs.github.io/Midi/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "ffmpeg",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://ffmpeg.org/documentation.html",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "ffmpeg",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://ffmpeg.org/ffmpeg-filters.html",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "ffmpegwasm",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://ffmpegwasm.netlify.app/docs/overview/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "ffmpegwasm",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://ffmpegwasm.netlify.app/docs/getting-started/examples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "mediabunny",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://mediabunny.dev/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "mediabunny",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://mediabunny.dev/examples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "webcodecs",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "webcodecs",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API/Using_the_WebCodecs_API",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "playwright",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://playwright.dev/docs/videos",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "playwright",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://playwright.dev/docs/screenshots",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "puppeteer",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://pptr.dev/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "puppeteer",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://pptr.dev/guides/screenshots",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "canvas-record",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/dmnsgn/canvas-record",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "canvas-record",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://dmnsgn.github.io/canvas-record/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "ccapture",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/spite/ccapture.js",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "ccapture",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://spite.github.io/ccapture.js/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "blender",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://www.blender.org/features/",
+    "status": "入口已收录",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "blender",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://studio.blender.org/films/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "blender-python",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://docs.blender.org/api/current/index.html",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "blender-python",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://docs.blender.org/api/current/info_quickstart.html",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "blender-mcp",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/ahujasid/mcp-for-blender",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "blender-mcp",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://github.com/ahujasid/mcp-for-blender#readme",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "gltf-transform",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://gltf-transform.dev/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "gltf-transform",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://gltf-transform.dev/functions",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "otio",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://opentimelineio.readthedocs.io/en/latest/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "otio",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://opentimelineio.readthedocs.io/en/latest/tutorials.html",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "usd",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://openusd.org/release/index.html",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "usd",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://openusd.org/release/tut_usd_tutorials.html",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "polyhaven",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://polyhaven.com/license",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "polyhaven",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://polyhaven.com/models",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "reactbits",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://reactbits.dev/",
+    "status": "入口已收录",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "reactbits",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://reactbits.dev/text-animations/split-text",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "magicui",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://magicui.design/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "magicui",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://magicui.design/docs/components",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "aceternity",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://ui.aceternity.com/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "aceternity",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://ui.aceternity.com/components",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "animista",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://animista.net/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "animista",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://animista.net/play",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "embla",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/davidjerleke/embla-carousel",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "embla",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://www.embla-carousel.com/examples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "morphsvg",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://gsap.com/docs/v3/Plugins/MorphSVGPlugin/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "morphsvg",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://gsap.com/docs/v3/Plugins/MorphSVGPlugin/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "drawsvg",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://gsap.com/docs/v3/Plugins/DrawSVGPlugin/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "drawsvg",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://gsap.com/docs/v3/Plugins/DrawSVGPlugin/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "flip",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://gsap.com/docs/v3/Plugins/Flip/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "flip",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://gsap.com/docs/v3/Plugins/Flip/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "motionpath",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://gsap.com/docs/v3/Plugins/MotionPathPlugin/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "motionpath",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://gsap.com/docs/v3/Plugins/MotionPathPlugin/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "scrolltrigger",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://gsap.com/docs/v3/Plugins/ScrollTrigger/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "scrolltrigger",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://gsap.com/demos/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "svg",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/SVG",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "svg",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "mediarecorder",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "mediarecorder",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/captureStream",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "reactflow",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://reactflow.dev/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "reactflow",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://reactflow.dev/examples",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "mermaid",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://mermaid.js.org/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "mermaid",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://mermaid.js.org/syntax/flowchart.html",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "revideo",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/midrender/revideo",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "revideo",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://github.com/midrender/revideo/tree/main/examples",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "lil-gui",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://lil-gui.georgealways.com/",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "lil-gui",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://lil-gui.georgealways.com/examples/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "leva",
+    "title": "官方文档 / 作者仓库",
+    "url": "https://github.com/pmndrs/leva",
+    "status": "核心定位已核对",
+    "reviewedAt": "2026-09-24"
+  },
+  {
+    "library": "leva",
+    "title": "官方案例 / 扩展资料入口",
+    "url": "https://leva.pmnd.rs/",
+    "status": "导航入口；未逐作审美鉴定",
+    "reviewedAt": "2026-09-24"
+  }
+]

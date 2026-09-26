@@ -1,0 +1,158 @@
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/mnt/data/AI_BEYOND_GENERATION_1080p.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    title           : 超越生成 | BEYOND GENERATION
+    artist          : Original procedural animation and sound design
+    encoder         : Lavf61.7.103
+    comment         : 15 visual worlds; original 128 BPM score; 1920x1080, 30 fps. Research and provenance in the project.
+  Duration: 00:02:00.00, start: 0.000000, bitrate: 3524 kb/s
+  Chapters:
+    Chapter #0:0: start 0.000000, end 3.750000
+      Metadata:
+        title           : OPEN / BEYOND GENERATION
+    Chapter #0:1: start 3.750000, end 11.250000
+      Metadata:
+        title           : 01 / 纯线条手绘
+    Chapter #0:2: start 11.250000, end 18.750000
+      Metadata:
+        title           : 02 / 3D MC 方块世界
+    Chapter #0:3: start 18.750000, end 26.250000
+      Metadata:
+        title           : 03 / 粘土定格
+    Chapter #0:4: start 26.250000, end 33.750000
+      Metadata:
+        title           : 04 / Vox 式解释拼贴
+    Chapter #0:5: start 33.750000, end 41.250000
+      Metadata:
+        title           : 05 / SVG 几何矢量
+    Chapter #0:6: start 41.250000, end 48.750000
+      Metadata:
+        title           : 06 / 8-BIT 像素街机
+    Chapter #0:7: start 48.750000, end 56.250000
+      Metadata:
+        title           : 07 / 半调漫画
+    Chapter #0:8: start 56.250000, end 63.750000
+      Metadata:
+        title           : 08 / 蓝晒工程制图
+    Chapter #0:9: start 63.750000, end 71.250000
+      Metadata:
+        title           : 09 / 瑞士动态字体
+    Chapter #0:10: start 71.250000, end 78.750000
+      Metadata:
+        title           : 10 / 立体剪纸剧场
+    Chapter #0:11: start 78.750000, end 86.250000
+      Metadata:
+        title           : 11 / 东方水墨
+    Chapter #0:12: start 86.250000, end 93.750000
+      Metadata:
+        title           : 12 / 霓虹赛博线框
+    Chapter #0:13: start 93.750000, end 101.250000
+      Metadata:
+        title           : 13 / 液态铬金属
+    Chapter #0:14: start 101.250000, end 108.750000
+      Metadata:
+        title           : 14 / 粒子数据宇宙
+    Chapter #0:15: start 108.750000, end 116.250000
+      Metadata:
+        title           : 15 / 棱镜玻璃光学
+    Chapter #0:16: start 116.250000, end 120.000000
+      Metadata:
+        title           : END / BUILD WITH INTENT
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709/unknown/unknown, progressive), 1920x1080, 3237 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+      Metadata:
+        handler_name    : VideoHandler
+        vendor_id       : [0][0][0][0]
+        encoder         : Lavc61.19.101 libx264
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 277 kb/s (default)
+      Metadata:
+        handler_name    : SoundHandler
+        vendor_id       : [0][0][0][0]
+  Stream #0:2[0x3](eng): Data: bin_data (text / 0x74786574), 0 kb/s
+      Metadata:
+        handler_name    : SubtitleHandler
+Stream mapping:
+  Stream #0:1 -> #0:0 (aac (native) -> pcm_s16le (native))
+Press [q] to stop, [?] for help
+Output #0, null, to 'pipe:':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    title           : 超越生成 | BEYOND GENERATION
+    artist          : Original procedural animation and sound design
+    comment         : 15 visual worlds; original 128 BPM score; 1920x1080, 30 fps. Research and provenance in the project.
+    encoder         : Lavf61.7.103
+  Chapters:
+    Chapter #0:0: start 0.000000, end 3.750000
+      Metadata:
+        title           : OPEN / BEYOND GENERATION
+    Chapter #0:1: start 3.750000, end 11.250000
+      Metadata:
+        title           : 01 / 纯线条手绘
+    Chapter #0:2: start 11.250000, end 18.750000
+      Metadata:
+        title           : 02 / 3D MC 方块世界
+    Chapter #0:3: start 18.750000, end 26.250000
+      Metadata:
+        title           : 03 / 粘土定格
+    Chapter #0:4: start 26.250000, end 33.750000
+      Metadata:
+        title           : 04 / Vox 式解释拼贴
+    Chapter #0:5: start 33.750000, end 41.250000
+      Metadata:
+        title           : 05 / SVG 几何矢量
+    Chapter #0:6: start 41.250000, end 48.750000
+      Metadata:
+        title           : 06 / 8-BIT 像素街机
+    Chapter #0:7: start 48.750000, end 56.250000
+      Metadata:
+        title           : 07 / 半调漫画
+    Chapter #0:8: start 56.250000, end 63.750000
+      Metadata:
+        title           : 08 / 蓝晒工程制图
+    Chapter #0:9: start 63.750000, end 71.250000
+      Metadata:
+        title           : 09 / 瑞士动态字体
+    Chapter #0:10: start 71.250000, end 78.750000
+      Metadata:
+        title           : 10 / 立体剪纸剧场
+    Chapter #0:11: start 78.750000, end 86.250000
+      Metadata:
+        title           : 11 / 东方水墨
+    Chapter #0:12: start 86.250000, end 93.750000
+      Metadata:
+        title           : 12 / 霓虹赛博线框
+    Chapter #0:13: start 93.750000, end 101.250000
+      Metadata:
+        title           : 13 / 液态铬金属
+    Chapter #0:14: start 101.250000, end 108.750000
+      Metadata:
+        title           : 14 / 粒子数据宇宙
+    Chapter #0:15: start 108.750000, end 116.250000
+      Metadata:
+        title           : 15 / 棱镜玻璃光学
+    Chapter #0:16: start 116.250000, end 120.000000
+      Metadata:
+        title           : END / BUILD WITH INTENT
+  Stream #0:0(und): Audio: pcm_s16le, 192000 Hz, stereo, s16, 6144 kb/s (default)
+      Metadata:
+        handler_name    : SoundHandler
+        vendor_id       : [0][0][0][0]
+        encoder         : Lavc61.19.101 pcm_s16le
+size=N/A time=00:00:18.10 bitrate=N/A speed=36.2x    size=N/A time=00:00:37.20 bitrate=N/A speed=37.2x    size=N/A time=00:00:56.00 bitrate=N/A speed=37.3x    size=N/A time=00:01:14.40 bitrate=N/A speed=37.2x    size=N/A time=00:01:33.90 bitrate=N/A speed=37.5x    size=N/A time=00:01:53.80 bitrate=N/A speed=37.9x    [Parsed_loudnorm_0 @ 0x7fbf58002740] 
+{
+	"input_i" : "-16.70",
+	"input_tp" : "-1.02",
+	"input_lra" : "1.30",
+	"input_thresh" : "-26.73",
+	"output_i" : "-16.16",
+	"output_tp" : "-1.00",
+	"output_lra" : "1.30",
+	"output_thresh" : "-26.17",
+	"normalization_type" : "dynamic",
+	"target_offset" : "0.16"
+}
+[out#0/null @ 0x563ba345a640] video:0KiB audio:90000KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+size=N/A time=00:02:00.00 bitrate=N/A speed=38.4x    

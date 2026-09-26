@@ -1,0 +1,10 @@
+[{"name":"zero_intro","url":"showcase-assets/live-works/视觉效果比较好的/从0到1是最贵的（树林）.html","dur":4},
+ {"name":"zero_full","url":"showcase-assets/live-works/视觉效果比较好的/从0到1是最贵的（树林）.html","dur":8.6,"pre":[["adv",4]],"scroll":"t*1500"},
+ {"name":"truth_intro","url":"showcase-assets/live-works/视觉效果比较好的/AI时代的残酷真相与破局之道.html","dur":3.5},
+ {"name":"truth_full","url":"showcase-assets/live-works/视觉效果比较好的/AI时代的残酷真相与破局之道.html","dur":18.6,"pre":[["adv",3.5]],"scroll":"t*1500"},
+ {"name":"lang_intro","url":"showcase-assets/live-works/视觉效果比较好的/语言的力量.html","dur":3},
+ {"name":"lang_full","url":"showcase-assets/live-works/视觉效果比较好的/语言的力量.html","dur":7.5,"pre":[["adv",3]],"scroll":"t*1500"},
+ {"name":"attn_intro","url":"showcase-assets/live-works/把注意力放回自己身上（树林）.html","dur":3},
+ {"name":"attn_part","url":"showcase-assets/live-works/把注意力放回自己身上（树林）.html","dur":5,"pre":[["adv",3]],"scroll":"t*1400"},
+ {"name":"last2","url":"showcase-assets/video-matrix/code-video-最后两天.html","dur":10,"pre":[["click","#play"],["adv",0.2]]}
+]

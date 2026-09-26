@@ -1,0 +1,317 @@
+{
+ "title": "月光替你亮着灯 · 送学姐的中秋小礼物",
+ "mode": "A — continuous 3D, one take",
+ "look": "moonwash — 月夜水彩 Moonlit Watercolor",
+ "fps": 24,
+ "width": 1920,
+ "height": 1080,
+ "plate": [
+  1600,
+  900
+ ],
+ "total": 672,
+ "fontsOk": true,
+ "shots": [
+  {
+   "id": "B1",
+   "look": "moonwash",
+   "start": 0,
+   "frames": 72,
+   "camera": "ONE_TAKE",
+   "beat": "world"
+  },
+  {
+   "id": "B2",
+   "look": "moonwash",
+   "start": 72,
+   "frames": 72,
+   "camera": "ONE_TAKE",
+   "beat": "character"
+  },
+  {
+   "id": "B3",
+   "look": "moonwash",
+   "start": 144,
+   "frames": 72,
+   "camera": "ONE_TAKE",
+   "beat": "work"
+  },
+  {
+   "id": "B4",
+   "look": "moonwash",
+   "start": 216,
+   "frames": 72,
+   "camera": "ONE_TAKE",
+   "beat": "work"
+  },
+  {
+   "id": "B5",
+   "look": "moonwash",
+   "start": 288,
+   "frames": 72,
+   "camera": "ONE_TAKE",
+   "beat": "opportunity"
+  },
+  {
+   "id": "B6",
+   "look": "moonwash",
+   "start": 360,
+   "frames": 72,
+   "camera": "ONE_TAKE",
+   "beat": "turn"
+  },
+  {
+   "id": "B7",
+   "look": "moonwash",
+   "start": 432,
+   "frames": 72,
+   "camera": "ONE_TAKE",
+   "beat": "result"
+  },
+  {
+   "id": "B8",
+   "look": "moonwash",
+   "start": 504,
+   "frames": 72,
+   "camera": "ONE_TAKE",
+   "beat": "echo"
+  },
+  {
+   "id": "B9",
+   "look": "moonwash",
+   "start": 576,
+   "frames": 96,
+   "camera": "ONE_TAKE",
+   "beat": "echo"
+  }
+ ],
+ "events": [],
+ "cues": {
+  "bpm": 80,
+  "bar": 3,
+  "subs": [
+   {
+    "id": "L1",
+    "bar": 1,
+    "out": 2.84,
+    "segs": [
+     {
+      "text": "今晚月亮很圆，",
+      "at": 0.28
+     },
+     {
+      "text": "你的台灯也还亮着。",
+      "at": 1.9
+     }
+    ]
+   },
+   {
+    "id": "L2",
+    "bar": 2,
+    "out": 5.8,
+    "segs": [
+     {
+      "text": "这几个月会很难，",
+      "at": 3.12
+     },
+     {
+      "text": "但你一直在认真走。",
+      "at": 4.3
+     }
+    ]
+   },
+   {
+    "id": "L3",
+    "bar": 3,
+    "out": 8.84,
+    "segs": [
+     {
+      "text": "不急——",
+      "at": 6.1
+     },
+     {
+      "text": "一页一页，",
+      "at": 6.62
+     },
+     {
+      "text": "一晚一晚。",
+      "at": 7.86
+     }
+    ]
+   },
+   {
+    "id": "L4",
+    "bar": 4,
+    "out": 11.82,
+    "segs": [
+     {
+      "text": "每个认真的夜晚，",
+      "at": 9.12
+     },
+     {
+      "text": "都算数。",
+      "at": 10.5
+     }
+    ]
+   },
+   {
+    "id": "L5",
+    "bar": 5,
+    "out": 14.82,
+    "segs": [
+     {
+      "text": "你想让世界更公平、",
+      "at": 12.12
+     },
+     {
+      "text": "更温柔一点，",
+      "at": 13.36
+     }
+    ]
+   },
+   {
+    "id": "L6",
+    "bar": 6,
+    "out": 17.82,
+    "segs": [
+     {
+      "text": "这份心，",
+      "at": 15.12
+     },
+     {
+      "text": "本身就是力量。",
+      "at": 15.95
+     }
+    ]
+   },
+   {
+    "id": "L7",
+    "bar": 7,
+    "out": 20.82,
+    "segs": [
+     {
+      "text": "你照亮过很多人，",
+      "at": 18.12
+     },
+     {
+      "text": "今晚换月亮照亮你。",
+      "at": 19.36
+     }
+    ]
+   },
+   {
+    "id": "L8",
+    "bar": 8,
+    "out": 23.5,
+    "segs": [
+     {
+      "text": "你在争取的未来，",
+      "at": 21.12
+     },
+     {
+      "text": "你配得上。",
+      "at": 22.36
+     }
+    ]
+   }
+  ],
+  "title": {
+   "text": "学姐，中秋快乐！",
+   "at": 24.02,
+   "gold": [
+    "中秋快乐"
+   ]
+  },
+  "seal": {
+   "text": "加油",
+   "at": 25.5
+  },
+  "inscription": {
+   "text": "丙午中秋 · 赠学姐",
+   "at": 26.05
+  },
+  "silence": [
+   23.52,
+   23.78
+  ],
+  "handFlips": [
+   6.62,
+   7.37
+  ],
+  "handFlipDur": 0.52,
+  "breezeFlips": [
+   7.92,
+   8.08,
+   8.24,
+   8.4
+  ],
+  "moteEmit": [
+   6.88,
+   7.63,
+   8.1,
+   8.26,
+   8.42,
+   8.58
+  ],
+  "lanternIgnite": [
+   9.375,
+   9.75,
+   10.125,
+   10.5,
+   10.875,
+   11.25
+  ],
+  "constLift0": 12.05,
+  "constSettle0": 12.95,
+  "constStagger": 0.09,
+  "constLines": [
+   13.45,
+   14.85
+  ],
+  "scaleLevel": [
+   15.78,
+   16.5
+  ],
+  "scaleChime": 16.5,
+  "streams": [
+   16.6,
+   17.85
+  ],
+  "moonFull": [
+   16.55,
+   18.7
+  ],
+  "moonbeam": 19.36,
+  "petalsIn": 18.4,
+  "ring": [
+   21.35,
+   23.45
+  ],
+  "skyLanterns": 24,
+  "act": {
+   "lookLanterns": 9.7,
+   "lookMoon": 18.25,
+   "smile": 19.55,
+   "penDown": [
+    21.12,
+    21.5
+   ],
+   "stretch": [
+    21.62,
+    22.72
+   ],
+   "relax": [
+    22.72,
+    23.4
+   ],
+   "cheer": [
+    25.12,
+    25.5
+   ],
+   "cheerDown": [
+    26.3,
+    27.1
+   ]
+  }
+ }
+}

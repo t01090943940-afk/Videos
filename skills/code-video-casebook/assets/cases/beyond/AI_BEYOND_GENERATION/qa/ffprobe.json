@@ -1,0 +1,375 @@
+{
+    "streams": [
+        {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "High",
+            "codec_type": "video",
+            "codec_tag_string": "avc1",
+            "codec_tag": "0x31637661",
+            "width": 1920,
+            "height": 1080,
+            "coded_width": 1920,
+            "coded_height": 1080,
+            "closed_captions": 0,
+            "film_grain": 0,
+            "has_b_frames": 2,
+            "pix_fmt": "yuv420p",
+            "level": 40,
+            "color_range": "tv",
+            "color_space": "bt709",
+            "chroma_location": "left",
+            "field_order": "progressive",
+            "refs": 1,
+            "is_avc": "true",
+            "nal_length_size": "4",
+            "id": "0x1",
+            "r_frame_rate": "30/1",
+            "avg_frame_rate": "30/1",
+            "time_base": "1/15360",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "duration_ts": 1843200,
+            "duration": "120.000000",
+            "bit_rate": "3237841",
+            "bits_per_raw_sample": "8",
+            "nb_frames": "3600",
+            "extradata_size": 50,
+            "disposition": {
+                "default": 1,
+                "dub": 0,
+                "original": 0,
+                "comment": 0,
+                "lyrics": 0,
+                "karaoke": 0,
+                "forced": 0,
+                "hearing_impaired": 0,
+                "visual_impaired": 0,
+                "clean_effects": 0,
+                "attached_pic": 0,
+                "timed_thumbnails": 0,
+                "non_diegetic": 0,
+                "captions": 0,
+                "descriptions": 0,
+                "metadata": 0,
+                "dependent": 0,
+                "still_image": 0,
+                "multilayer": 0
+            },
+            "tags": {
+                "language": "und",
+                "handler_name": "VideoHandler",
+                "vendor_id": "[0][0][0][0]",
+                "encoder": "Lavc61.19.101 libx264"
+            }
+        },
+        {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "codec_tag_string": "mp4a",
+            "codec_tag": "0x6134706d",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 2,
+            "channel_layout": "stereo",
+            "bits_per_sample": 0,
+            "initial_padding": 0,
+            "id": "0x2",
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/48000",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "duration_ts": 5760000,
+            "duration": "120.000000",
+            "bit_rate": "277804",
+            "nb_frames": "5626",
+            "extradata_size": 5,
+            "disposition": {
+                "default": 1,
+                "dub": 0,
+                "original": 0,
+                "comment": 0,
+                "lyrics": 0,
+                "karaoke": 0,
+                "forced": 0,
+                "hearing_impaired": 0,
+                "visual_impaired": 0,
+                "clean_effects": 0,
+                "attached_pic": 0,
+                "timed_thumbnails": 0,
+                "non_diegetic": 0,
+                "captions": 0,
+                "descriptions": 0,
+                "metadata": 0,
+                "dependent": 0,
+                "still_image": 0,
+                "multilayer": 0
+            },
+            "tags": {
+                "language": "und",
+                "handler_name": "SoundHandler",
+                "vendor_id": "[0][0][0][0]"
+            }
+        },
+        {
+            "index": 2,
+            "codec_name": "bin_data",
+            "codec_long_name": "binary data",
+            "codec_type": "data",
+            "codec_tag_string": "text",
+            "codec_tag": "0x74786574",
+            "id": "0x3",
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/1000",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "duration_ts": 120000,
+            "duration": "120.000000",
+            "bit_rate": "40",
+            "nb_frames": "17",
+            "extradata_size": 63,
+            "disposition": {
+                "default": 0,
+                "dub": 0,
+                "original": 0,
+                "comment": 0,
+                "lyrics": 0,
+                "karaoke": 0,
+                "forced": 0,
+                "hearing_impaired": 0,
+                "visual_impaired": 0,
+                "clean_effects": 0,
+                "attached_pic": 0,
+                "timed_thumbnails": 0,
+                "non_diegetic": 0,
+                "captions": 0,
+                "descriptions": 0,
+                "metadata": 0,
+                "dependent": 0,
+                "still_image": 0,
+                "multilayer": 0
+            },
+            "tags": {
+                "language": "eng",
+                "handler_name": "SubtitleHandler"
+            }
+        }
+    ],
+    "chapters": [
+        {
+            "id": 0,
+            "time_base": "1/1000",
+            "start": 0,
+            "start_time": "0.000000",
+            "end": 3750,
+            "end_time": "3.750000",
+            "tags": {
+                "title": "OPEN / BEYOND GENERATION"
+            }
+        },
+        {
+            "id": 1,
+            "time_base": "1/1000",
+            "start": 3750,
+            "start_time": "3.750000",
+            "end": 11250,
+            "end_time": "11.250000",
+            "tags": {
+                "title": "01 / 纯线条手绘"
+            }
+        },
+        {
+            "id": 2,
+            "time_base": "1/1000",
+            "start": 11250,
+            "start_time": "11.250000",
+            "end": 18750,
+            "end_time": "18.750000",
+            "tags": {
+                "title": "02 / 3D MC 方块世界"
+            }
+        },
+        {
+            "id": 3,
+            "time_base": "1/1000",
+            "start": 18750,
+            "start_time": "18.750000",
+            "end": 26250,
+            "end_time": "26.250000",
+            "tags": {
+                "title": "03 / 粘土定格"
+            }
+        },
+        {
+            "id": 4,
+            "time_base": "1/1000",
+            "start": 26250,
+            "start_time": "26.250000",
+            "end": 33750,
+            "end_time": "33.750000",
+            "tags": {
+                "title": "04 / Vox 式解释拼贴"
+            }
+        },
+        {
+            "id": 5,
+            "time_base": "1/1000",
+            "start": 33750,
+            "start_time": "33.750000",
+            "end": 41250,
+            "end_time": "41.250000",
+            "tags": {
+                "title": "05 / SVG 几何矢量"
+            }
+        },
+        {
+            "id": 6,
+            "time_base": "1/1000",
+            "start": 41250,
+            "start_time": "41.250000",
+            "end": 48750,
+            "end_time": "48.750000",
+            "tags": {
+                "title": "06 / 8-BIT 像素街机"
+            }
+        },
+        {
+            "id": 7,
+            "time_base": "1/1000",
+            "start": 48750,
+            "start_time": "48.750000",
+            "end": 56250,
+            "end_time": "56.250000",
+            "tags": {
+                "title": "07 / 半调漫画"
+            }
+        },
+        {
+            "id": 8,
+            "time_base": "1/1000",
+            "start": 56250,
+            "start_time": "56.250000",
+            "end": 63750,
+            "end_time": "63.750000",
+            "tags": {
+                "title": "08 / 蓝晒工程制图"
+            }
+        },
+        {
+            "id": 9,
+            "time_base": "1/1000",
+            "start": 63750,
+            "start_time": "63.750000",
+            "end": 71250,
+            "end_time": "71.250000",
+            "tags": {
+                "title": "09 / 瑞士动态字体"
+            }
+        },
+        {
+            "id": 10,
+            "time_base": "1/1000",
+            "start": 71250,
+            "start_time": "71.250000",
+            "end": 78750,
+            "end_time": "78.750000",
+            "tags": {
+                "title": "10 / 立体剪纸剧场"
+            }
+        },
+        {
+            "id": 11,
+            "time_base": "1/1000",
+            "start": 78750,
+            "start_time": "78.750000",
+            "end": 86250,
+            "end_time": "86.250000",
+            "tags": {
+                "title": "11 / 东方水墨"
+            }
+        },
+        {
+            "id": 12,
+            "time_base": "1/1000",
+            "start": 86250,
+            "start_time": "86.250000",
+            "end": 93750,
+            "end_time": "93.750000",
+            "tags": {
+                "title": "12 / 霓虹赛博线框"
+            }
+        },
+        {
+            "id": 13,
+            "time_base": "1/1000",
+            "start": 93750,
+            "start_time": "93.750000",
+            "end": 101250,
+            "end_time": "101.250000",
+            "tags": {
+                "title": "13 / 液态铬金属"
+            }
+        },
+        {
+            "id": 14,
+            "time_base": "1/1000",
+            "start": 101250,
+            "start_time": "101.250000",
+            "end": 108750,
+            "end_time": "108.750000",
+            "tags": {
+                "title": "14 / 粒子数据宇宙"
+            }
+        },
+        {
+            "id": 15,
+            "time_base": "1/1000",
+            "start": 108750,
+            "start_time": "108.750000",
+            "end": 116250,
+            "end_time": "116.250000",
+            "tags": {
+                "title": "15 / 棱镜玻璃光学"
+            }
+        },
+        {
+            "id": 16,
+            "time_base": "1/1000",
+            "start": 116250,
+            "start_time": "116.250000",
+            "end": 120000,
+            "end_time": "120.000000",
+            "tags": {
+                "title": "END / BUILD WITH INTENT"
+            }
+        }
+    ],
+    "format": {
+        "filename": "/mnt/data/ai_dimensions/AI_BEYOND_GENERATION_1080p.mp4",
+        "nb_streams": 3,
+        "nb_programs": 0,
+        "nb_stream_groups": 0,
+        "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+        "format_long_name": "QuickTime / MOV",
+        "start_time": "0.000000",
+        "duration": "120.000000",
+        "size": "52870272",
+        "bit_rate": "3524684",
+        "probe_score": 100,
+        "tags": {
+            "major_brand": "isom",
+            "minor_version": "512",
+            "compatible_brands": "isomiso2avc1mp41",
+            "title": "超越生成 | BEYOND GENERATION",
+            "artist": "Original procedural animation and sound design",
+            "encoder": "Lavf61.7.103",
+            "comment": "15 visual worlds; original 128 BPM score; 1920x1080, 30 fps. Research and provenance in the project."
+        }
+    }
+}
