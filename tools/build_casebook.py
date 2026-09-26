@@ -22,11 +22,11 @@ Inclusion policy for assets/cases/<id>/:
     Everything left out is listed in FILES.md with size, sha256 and how to regenerate/replace it.
 
 Packaging (--zip):
-  dist/code-video-casebook.skill            full standard skill (Claude Code / Agent SDK / API; >200 files)
-  dist/code-video-casebook-claude-ai.skill  same skill for claude.ai web upload (<=200 files): each case's
-                                            source tree becomes one lossless text bundle assets/cases/<id>/SOURCE.md
-                                            (binaries dropped, inline base64 >= 4 KB replaced by a marker);
-                                            scripts/casebook.py reads either layout transparently.
+  skills/dist/code-video-casebook.skill            full standard skill (Claude Code / Agent SDK / API; >200 files)
+  skills/dist/code-video-casebook-claude-ai.skill  same skill for claude.ai web upload (<=200 files): each case's
+                                                   source tree becomes one lossless text bundle assets/cases/<id>/SOURCE.md
+                                                   (binaries dropped, inline base64 >= 4 KB replaced by a marker);
+                                                   scripts/casebook.py reads either layout transparently.
 
 Usage:  python3 tools/build_casebook.py [--only id,id] [--zip]
 """
@@ -51,13 +51,13 @@ NAME = "code-video-casebook"
 SKILL = REPO / "skills" / NAME
 REFS = SKILL / "references"
 ASSETS = SKILL / "assets" / "cases"
-DIST = REPO / "dist"
+DIST = REPO / "skills" / "dist"
 SURVEY = REPO / "00-supercut-trailer" / "_survey"
 
 MAX_BIN = 1_000_000
 DROP_KINDS = {"video", "audio"}
-DROP_GLOBS = ["qa/*", "*/qa/*", "*reference/*.jpg", "_survey/*", "assets/posters/*", "*assets/avatars/*",
-              "*storyboard*.jpg", "*contact_sheet*.jpg"]
+DROP_GLOBS = ["qa/*", "*/qa/*", "qa-frames/*", "*/qa-frames/*", "*reference/*.jpg", "_survey/*", "assets/posters/*",
+              "*assets/avatars/*", "*storyboard*.jpg", "*contact_sheet*.jpg"]
 
 B64_MIN = 4096
 B64_RE = re.compile(r"(data:([A-Za-z0-9.+/-]+);base64,)([A-Za-z0-9+/=]{%d,})" % B64_MIN)
@@ -382,7 +382,7 @@ def write_files_md(case: Case, info: dict, out: Path) -> None:
     L = [f"# {case.id} · 源码文件索引（自动生成）", "", f"> {case.title}。原目录 `{case.folder}/`。"]
     if not info["files"] and not info["omitted"]:
         L += ["", "本案例没有单独的源码包：**代码与方法全部写在 [CoExp.md](CoExp.md) 里**（含关键代码片段、参数、命令）。", ""]
-        out.write_text("\n".join(L), encoding="utf-8")
+        out.write_bytes("\n".join(L).encode("utf-8"))
         return
     L += [f"> 源码已原样解压在 **`assets/cases/{case.id}/`**（逐字节等于原档案，sha256 见 `references/index.json`）。",
           f"> 读文件：`python3 scripts/casebook.py show {case.id} <路径>`；拷出来改：`python3 scripts/casebook.py copy {case.id} <目标目录>`。", "",
@@ -410,7 +410,7 @@ def write_files_md(case: Case, info: dict, out: Path) -> None:
             note = o["note"].replace("|", "\\|")
             L.append(f"| `{o['path']}` | {o['kind']} | {human(o['bytes'])} | `{o['sha256'][:12]}` | {note} |")
     L.append("")
-    out.write_text("\n".join(L), encoding="utf-8")
+    out.write_bytes("\n".join(L).encode("utf-8"))
 
 
 def write_inventory(infos: list[dict]) -> None:
@@ -433,7 +433,7 @@ def write_inventory(infos: list[dict]) -> None:
           "- **源码**：原档案（zip / tgz / 目录 / 单 HTML）**原样解压**到 `assets/cases/<id>/`，所有文本文件逐字节保留（含内嵌 base64 的 HTML）；≤ 1 MB 的字体与图片也原样随附。",
           "- **不收录**：原视频、成片、镜头代理、所有音频（成片音乐由源码可再生成；外部曲库/音效不再分发）、> 1 MB 的大字体与纹理、QA 联系表、真实人物头像。每一项都在对应 `FILES.md` 里列出大小、sha256 和补回方法。",
           "- 完整原件始终在本仓库各项目目录里。", ""]
-    (REFS / "inventory.md").write_text("\n".join(L), encoding="utf-8")
+    (REFS / "inventory.md").write_bytes("\n".join(L).encode("utf-8"))
 
 
 # ------------------------------------------------------------------ claude.ai compact bundle
@@ -530,7 +530,7 @@ def main() -> None:
               f"({human(sum(f['bytes'] for f in i['files']))}) omitted={len(i['omitted']):3d} "
               f"({human(sum(f['bytes'] for f in i['omitted']))}) preview={'Y' if i['preview'] else '-'}")
     idx = {"name": NAME, "generated_by": "tools/build_casebook.py", "cases": infos}
-    idx_path.write_text(json.dumps(idx, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    idx_path.write_bytes((json.dumps(idx, ensure_ascii=False, indent=1) + "\n").encode("utf-8"))
     write_inventory(infos)
     if args.zip:
         package(infos)

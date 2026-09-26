@@ -4,7 +4,7 @@
 
 | 案例 | 原目录 | CoExp | 源码（assets/cases/<id>/） | 未收录 | 来源档案 |
 |---|---|---:|---|---|---|
-| [supercut](cases/supercut/CARD.md) | `00-supercut-trailer` | — | 22 个 · 1.0 MB | 179 个 · 159.7 MB | `00-supercut-trailer` |
+| [supercut](cases/supercut/CARD.md) | `00-supercut-trailer` | — | 24 个 · 1.2 MB | 441 个 · 881.5 MB | `00-supercut-trailer` |
 | [beyond](cases/beyond/CARD.md) | `gpt-15-style-ai-beyond-generation` | — | 19 个 · 126.3 KB | 72 个 · 81.6 MB | `AI_BEYOND_GENERATION_Project.zip` |
 | [moon-letter](cases/moon-letter/CARD.md) | `gpt-mid-autumn-for-my-dg03` | — | 1 个 · 938.3 KB | 0 个 · 0.0 KB | `Moon_Letter_Interactive.html` |
 | [gpt-autumn](cases/gpt-autumn/CARD.md) | `gpt-mid-autumn-general-video` | 45.2 KB | 18 个 · 86.9 KB | 3 个 · 11.6 MB | `MidAutumn_Final_60s_Source.zip` |
@@ -36,7 +36,7 @@
 | [kimi-film](cases/kimi-film/CARD.md) | `swe-kimi-source-intro` | 16.7 KB | 6 个 · 51.9 KB | 0 个 · 0.0 KB | `kimi_film_source.zip` |
 | [town-camera-lab](cases/town-camera-lab/CARD.md) | `.` | — | 1 个 · 223.0 KB | 0 个 · 0.0 KB | `town-camera-lab.html` |
 
-合计：收录源码 15.8 MB；未收录 403.7 MB。
+合计：收录源码 15.9 MB；未收录 1125.5 MB。
 
 ## 收录规则
 

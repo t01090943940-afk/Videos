@@ -309,6 +309,43 @@ def tunnel_sfx(d):
     beat_amp = 1 - 0.5 * np.exp(-((tt % BEAT) / 0.09))
     return out * np.minimum(1, 0.3 + tt / d) * np.exp(-np.maximum(0, tt - d + 0.3) / 0.12) * beat_amp * 0.7
 
+# ── V2 机械 foley ──────────────────────────────────────────────────────────
+def boot_sfx():
+    # BIOS 蜂鸣 + 硬盘寻道
+    n = T(0.9); tt = np.arange(n) / SR
+    beep = np.sin(2 * np.pi * 880 * tt) * np.exp(-tt * 9) * 0.45
+    seek = swept_lowpass(rng.standard_normal(n), lambda tt_: 900 + 2600 * (tt_ / 0.9))
+    return overlay(beep, seek * 0.4 * np.minimum(1, tt / 0.05))
+
+def tick():
+    n = T(0.05); tt = np.arange(n) / SR
+    return np.sin(2 * np.pi * 1900 * tt) * np.exp(-tt * 160) * 0.8
+
+def drafting(d):
+    # 铅笔制图：滤波噪声的沙沙脉冲
+    n = T(d); tt = np.arange(n) / SR
+    x = swept_lowpass(rng.standard_normal(n), lambda tt_: 1600 + 900 * np.sin(tt_ * 9))
+    e = (0.5 + 0.5 * np.sin(2 * np.pi * tt / 0.11)) * np.minimum(1, tt / 0.2) * np.exp(-np.maximum(0, tt - d + 0.4) / 0.2)
+    return x * e * 0.32
+
+def modem():
+    # 调制解调器握手 ≈1.6s：DTMF 拨号音 → 载波嘶声 → 应答 chirp
+    n = T(1.7); tt = np.arange(n) / SR
+    out = np.zeros(n)
+    for i, fr in enumerate([697, 770, 852, 941, 1209, 1336, 1477]):
+        t0 = 0.05 + i * 0.07
+        out += np.sin(2 * np.pi * fr * (tt - t0)) * ((tt >= t0) & (tt < t0 + 0.05)) * 0.4
+    hiss = swept_lowpass(rng.standard_normal(n), lambda tt_: 3200) * ((tt > 0.65) & (tt < 1.55)) * 0.22
+    chirp = np.sin(2 * np.pi * (1100 + 900 * tt) * tt) * ((tt > 1.0) & (tt < 1.4)) * 0.28
+    return out + hiss + chirp
+
+def crtoff():
+    # CRT 断电：高压哨声下扫 + 电容放电砰
+    n = T(0.8); tt = np.arange(n) / SR
+    whine = np.sin(2 * np.pi * np.cumsum(16000 * np.exp(-tt / 0.14) + 60) / SR) * np.exp(-tt / 0.3) * 0.3
+    cap = np.sin(2 * np.pi * np.cumsum(200 * np.exp(-tt / 0.03) + 40) / SR) * np.exp(-tt / 0.18) * 0.7
+    return overlay(whine, cap)
+
 # ── 和声与主旋律 ──────────────────────────────────────────────────────────
 CHORDS = {
     'Dm': [50, 53, 57],      # D3 F3 A3
@@ -358,33 +395,32 @@ def arrange():
                 tt = (b + (s * 0.5 if n16 else 0.5)) * BEAT
                 add(hat(open_=(off and e > 0.8)), tt, g=0.32 if off else 0.25, pan=(hash_(b) - 0.5) * 0.7)
     # 贝斯：跟和弦根音，侧链让位给底鼓
-    for bar in range(40):
+    for bar in range(75):
         sec = section_energy(bar * 4)
         if sec['energy'] >= 0.5 and sec['id'] not in ('breath', 'outro'):
             root = bar_root(bar) + (0 if sec['energy'] < 0.9 else 12)
             for bt in range(4):
                 add(subbass(root, BEAT * 0.9, side=sec['energy']), (bar * 4 + bt) * BEAT, g=0.5, pan=0)
     # supersaw 和弦 stab：小节强拍 + 后半拍
-    for bar in range(40):
+    for bar in range(75):
         sec = section_energy(bar * 4)
         if sec['energy'] >= 0.75:
             add(supersaw(bar_chord(bar), BAR, cut=3000), bar * BAR, g=0.28)
             if sec['energy'] >= 0.9:
                 add(supersaw(bar_chord(bar), BEAT * 0.7, cut=4200), (bar * 4 + 3.5) * BEAT, g=0.2)
     # 主旋律：动机按段落移调
-    for bar in range(40):
+    for bar in range(75):
         sec = section_energy(bar * 4)
-        if sec['id'] in ('era1', 'era2', 'era3', 'drop', 'wall'):
-            shift = {'era1': 0, 'era2': 2, 'era3': 5, 'drop': 7, 'wall': 12}.get(sec['id'], 0)
+        if sec['id'] in ('era1', 'era2', 'era3', 'drop', 'wall', 'marathon'):
+            shift = {'era1': 0, 'era2': 2, 'era3': 5, 'drop': 7, 'wall': 12, 'marathon': 10}.get(sec['id'], 0)
             for beat_idx, m in MOTIF:
                 add(pluck(m + shift, 0.5, bright=5200), (bar * 4 + beat_idx) * BEAT, g=0.34)
-    # Pad：冷开场 + 凝视 + 尾声 的静默织体
-    for bar in [0, 1, 2, 3]:
+    # Pad：冷开场 + 凝视 + 解剖底噪 + 尾声 的静默织体
+    for bar in range(0, 6):
         add(pad(CHORDS['Dm'], BAR * 1.05, lp=900, g=1.4), bar * BAR)
-    for bar in range(40, 44):  # outro 前段
-        pass
-    add(pad([38, 41, 45, 50], 14, lp=700, g=1.2), 26 * BAR)  # breath
-    add(pad([50, 53, 57, 62], 22, lp=1100, g=0.9), 35 * BAR) # outro
+    add(pad([38, 41, 45, 50], 8, lp=700, g=1.3), 150 * BEAT)   # breath
+    add(pad([38, 41, 45], 12, lp=460, g=0.8), 166 * BEAT)      # autopsy 机房低鸣
+    add(pad([50, 53, 57, 62], 17, lp=1100, g=0.9), 256 * BEAT) # outro
 
 def hash_(x):  # 确定性的小装饰
     s = np.sin(x * 127.1 + 311.7) * 43758.5453
@@ -418,6 +454,11 @@ def sfx():
         'suck': lambda o: suck((o['b1'] - o['b']) * BEAT),
         'downlifter': lambda o: downlifter((o['b1'] - o['b']) * BEAT),
         'tunnel': lambda o: tunnel_sfx((o['b1'] - o['b']) * BEAT),
+        'boot': lambda o: boot_sfx(),
+        'tick': lambda o: tick(),
+        'drafting': lambda o: drafting((o['b1'] - o['b']) * BEAT),
+        'modem': lambda o: modem(),
+        'crtoff': lambda o: crtoff(),
     }
     for cue in cues['sfx']:
         mk = makers.get(cue['kind'])

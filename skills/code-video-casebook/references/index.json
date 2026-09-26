@@ -11,26 +11,26 @@
     {
      "kind": "dir",
      "path": "00-supercut-trailer",
-     "bytes": 168477836,
+     "bytes": 925570107,
      "sha256": null
     }
    ],
    "files": [
     {
      "path": "README.md",
-     "bytes": 2730,
-     "sha256": "37ad55afe60436145045382fd55063993bea3846568a997bb2ba18449ad09106",
+     "bytes": 4270,
+     "sha256": "9b035e1091a69cffac46145df1cf96c532743ad4334a272454786b01f1f18317",
      "kind": "text",
-     "lines": 47,
-     "summary": "00-supercut-trailer · AI-Coding SuperVideos 合集总片"
+     "lines": 62,
+     "summary": "00-supercut-trailer · AI-Coding SuperVideos 合集总片 V2"
     },
     {
      "path": "STORYBOARD.md",
-     "bytes": 4377,
-     "sha256": "902118f7128973a0f2190050f4396a62f92b2e6cfdd227ed36679e807952c789",
+     "bytes": 7194,
+     "sha256": "22bc530d39921864b1d8155e23bf4f96d492e789d2274238b324397eb9cd77ac",
      "kind": "text",
-     "lines": 52,
-     "summary": "STORYBOARD · AI-CODING SUPERVIDEOS 总片（62.4s @150BPM）"
+     "lines": 71,
+     "summary": "STORYBOARD · AI-CODING SUPERVIDEOS 总片 V2（120s @150BPM · 4K120）"
     },
     {
      "path": "_survey/index.txt",
@@ -85,19 +85,25 @@
      "summary": "GSAP 3.15.0"
     },
     {
+     "path": "audio/__pycache__/score.cpython-314.pyc",
+     "bytes": 53482,
+     "sha256": "a4019a3ea7445f499c55806845cfa0ab92ad6cbd128eb25df5451526a457e77f",
+     "kind": "binary"
+    },
+    {
      "path": "audio/score.py",
-     "bytes": 18880,
-     "sha256": "390bbf31fa126ac3de573d2937cf4c8fdc13a368029042bac76bce0fa28547f5",
+     "bytes": 21543,
+     "sha256": "3acf88da8ca6b9540cff0ffdc22dc86014c7e6bb2fedc06c9361d2d078c78625",
      "kind": "text",
-     "lines": 449,
+     "lines": 490,
      "summary": "时变截止的低通：按 2048 样本分块，块内按中心频率滤波、跨块续状态。"
     },
     {
      "path": "index.html",
-     "bytes": 163296,
-     "sha256": "bd691b1dbc1af5d7639c94501451aa382e231f5358160bd1511ea29bcce27c01",
+     "bytes": 208050,
+     "sha256": "80dde23116a6e0a66935ef190f3f01c956f3962494f6b03bf122f0c697aca8c5",
      "kind": "text",
-     "lines": 1994,
+     "lines": 2458,
      "summary": "AI-Coding SuperVideos · 通通开源"
     },
     {
@@ -134,50 +140,58 @@
     },
     {
      "path": "src/edl.mjs",
-     "bytes": 15645,
-     "sha256": "d3c2a858d71b0b615c59624b35da98b724e3ba81385bfc65924ca27a1ade36d1",
+     "bytes": 23666,
+     "sha256": "6c73fd01e1f9dd534408104dd94bb09937a37e75ad11d676e4ed9a390b20e39d",
      "kind": "text",
-     "lines": 286,
-     "summary": "EDL · 整支片子的\"乐谱\"（唯一真相源）"
+     "lines": 399,
+     "summary": "EDL · 整支片子的\"乐谱\"（唯一真相源）— V2 · 300 拍 / 120 s / 4K·120fps"
     },
     {
      "path": "src/runtime.js",
-     "bytes": 45175,
-     "sha256": "cee7c297921280e8917ef5c6136295d5870715b37c703d304b1241b51313bf3b",
+     "bytes": 55267,
+     "sha256": "d6e28fe61982ac83b81d6fcd980bfdcdac08a90ac6fb45afa7d972fe24250503",
      "kind": "text",
-     "lines": 900,
+     "lines": 1077,
      "summary": "runtime.js · 整支片子 = 一个函数 render(t)"
     },
     {
      "path": "src/style.css",
-     "bytes": 25788,
-     "sha256": "c1995b7317e389727ef8e72825041c12bfaea8b9c12c510e4ec189be8169044f",
+     "bytes": 33398,
+     "sha256": "e9d5933b51897ea21901a153ac0ddacd5aa98ad69aa44d03f667e9f1e27ce2ec",
      "kind": "text",
-     "lines": 293,
+     "lines": 373,
      "summary": "SUPERCUT · 视觉系统"
     },
     {
      "path": "tools/build.mjs",
-     "bytes": 18178,
-     "sha256": "75c9e47ed8cc21b7961d733f724fdae357d437d58098215d4d7eb9af002c8b0c",
+     "bytes": 21432,
+     "sha256": "2e41e82de5ab78f39c4ad1d80e6edfb38c0805932bd972aa6831545311909277",
      "kind": "text",
-     "lines": 368,
+     "lines": 408,
      "summary": "build.mjs · EDL + 目录 → 静态 index.html（HyperFrames 合成）+ build/cues.json（配乐用）"
     },
     {
-     "path": "tools/prep_media.mjs",
-     "bytes": 8586,
-     "sha256": "0c1030f78b3253b066e41dd570207adedf502c09044b8d50d46df2d61ffed2bd",
+     "path": "tools/dbg_probe.mjs",
+     "bytes": 1335,
+     "sha256": "3ae5c89937f1a66d28a070ebc47f33d098f55698de45f45d9644f90ebd45e21a",
      "kind": "text",
-     "lines": 160,
+     "lines": 26,
+     "summary": ""
+    },
+    {
+     "path": "tools/prep_media.mjs",
+     "bytes": 8869,
+     "sha256": "a06936103aa656c563c7a5e49c8a995a32c63bbedfed8e16e14294b2f51d0d72",
+     "kind": "text",
+     "lines": 162,
      "summary": "prep_media.mjs · 把 28 部原片切成本片要用的代理素材"
     },
     {
      "path": "tools/qa_probe.mjs",
-     "bytes": 2048,
-     "sha256": "7e18e370ddac3f469deb3c9a757d92609c481e7ee139ef9c144a7aea036b661e",
+     "bytes": 2383,
+     "sha256": "18b771aac5580d47cb8a4af27b7818fe488a6b78add6ec1f1c849037931f6e6b",
      "kind": "text",
-     "lines": 30,
+     "lines": 31,
      "summary": "qa_probe.mjs · 用 Playwright 加载 index.html，抓 JS 错误/控制台，并按时刻渲染自查"
     }
    ],
@@ -379,6 +393,293 @@
      "note": "28 部成片的 20 格联系表（已缩制为各案例的 preview.jpg）"
     },
     {
+     "path": "assets/clips/a0.mp4",
+     "bytes": 1267219,
+     "sha256": "9d3cd5b769826b505fad6ad1667654c33d445703aa7c08bc30d8651c2be0c9fa",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/a1.mp4",
+     "bytes": 698287,
+     "sha256": "d25829a8a7f891e44543f1bae08ce9576370e2d7f4b4e720c0e48806fd30a969",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/a2.mp4",
+     "bytes": 1042455,
+     "sha256": "902c3e82a0f2b8f265bb15b3e349d72074d81e453901fbcbbf1df24ed2335865",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/a3.mp4",
+     "bytes": 2681826,
+     "sha256": "b9eb6b15fdc1a77192fadb57480dab41bf4325a373707449d2888db503722bf4",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d01.mp4",
+     "bytes": 968032,
+     "sha256": "fee58b7c1706a8859e77b1215555a95003290a314a1533d0bc332e57a60a1d7e",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d02.mp4",
+     "bytes": 11103775,
+     "sha256": "800cf2a30937ca25725f42cd8fb9aad8045ff57346c9ee62cff058c6ab0f715a",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d03.mp4",
+     "bytes": 1964250,
+     "sha256": "373966aea11093b598ffa034fbe79b3b577bc6e64b264d9657bb948f309e1fca",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d04.mp4",
+     "bytes": 1255761,
+     "sha256": "45624dae17d86c888629137d28bb8ee80cf4204936a15e52d9d672ecc8c01b60",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d05.mp4",
+     "bytes": 301236,
+     "sha256": "952865fac43d42614e3b4b62935218168fc9ca0677107d1b0d30c3218c409903",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d06.mp4",
+     "bytes": 1554484,
+     "sha256": "9e34d229b0e39d96ca19e17657c82b754151dc482ed2097e6fadd7a0ab3434f7",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d07.mp4",
+     "bytes": 567038,
+     "sha256": "3e927036cf28008b09e12d9560bfac3d7a4f0ee6a17be7b8a04522eb398d2de1",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d08.mp4",
+     "bytes": 1613124,
+     "sha256": "4143bb9b8804e30753f8e61c97c6fdc49df55abcfc440bcc5ff804ca65212b85",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d09.mp4",
+     "bytes": 420878,
+     "sha256": "7702cd511a2b9a3faa7c3de55cd17213e2c17e7016954d10295b43ca7efc8d42",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d10.mp4",
+     "bytes": 271454,
+     "sha256": "9556fb488a531be3f2abe50412fc4b053fb84d17356d47114003ad637756e63c",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d11.mp4",
+     "bytes": 599023,
+     "sha256": "5a654c45510b2e5783a674c9a561bac6bf76649906c76c5b8f23a34b9e6cca8f",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d12.mp4",
+     "bytes": 485420,
+     "sha256": "8401e7aeee9194120b02bbaa90be0ad5939e58f1cd2d2f2dba0e568a537f1668",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d13.mp4",
+     "bytes": 732446,
+     "sha256": "12f75eee563b57326cf9316260d4dfb5b8134111df13fe16296c25698a1080f4",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d14.mp4",
+     "bytes": 1402130,
+     "sha256": "381f3db4940a985037103494bdec48f859d08a7d7f7968d066bc96b22c6a3fb4",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d15.mp4",
+     "bytes": 1687084,
+     "sha256": "a1012bd6efa4ab787f33f0a8618c55d3ccb8083154edbe6cf18c64f6108e456a",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d16.mp4",
+     "bytes": 886765,
+     "sha256": "01ee96dfcb05046c3eee9fbbbbaae4cd41204c65bf97c30e35c73d1949958eeb",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d17.mp4",
+     "bytes": 711351,
+     "sha256": "5a4c8a838500b016597f34b01b80b8f5a3fc5625db2c34c497f683a8ca2d49ba",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d18.mp4",
+     "bytes": 620364,
+     "sha256": "6a7a0f0ad278f5d209cd2e5a0a1ab81f621dca764fb562fc57fcf0c478b6681c",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d19.mp4",
+     "bytes": 2361938,
+     "sha256": "6b9e3d0b3b87413abcd933f9a767f0983de16193b85ea7c9cb746f811371e282",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d20.mp4",
+     "bytes": 1229489,
+     "sha256": "bc0480c33c3d0048bfd5e28333fe3d6a2b7ad518d66165ff11ac128e3af44a78",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d21.mp4",
+     "bytes": 687809,
+     "sha256": "8d826336def2105c99a11d47b65fd67b62439c2cfd784e31cfbf5435583b3464",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d22.mp4",
+     "bytes": 1317107,
+     "sha256": "2c30839a19b9ea8e6372465f68d399c95454ca9d05df6c4213104ba8f2f1025f",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d23.mp4",
+     "bytes": 5937541,
+     "sha256": "03280ac8c25bd2dabbefbc9ea993df25cb68adedc39a6bacb26c7db731bad835",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d24.mp4",
+     "bytes": 1408752,
+     "sha256": "250c51c5c8c330550ed1bf156fcd1b97d0ee8cd88d5a940d57fb3b63637e1a80",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d25.mp4",
+     "bytes": 7070614,
+     "sha256": "2ceb1f35a5b7e7285db9c1f316adffdf891d767a08d31c84ae26eacc78b94d84",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/d26.mp4",
+     "bytes": 2542633,
+     "sha256": "7a0291d7979a7a9e69bafce9b04ac4269c4168453d210946523ba11a7a057b22",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/duoA.mp4",
+     "bytes": 1968570,
+     "sha256": "12c756a0678d6985cf1a414dba1710ec7357e9e6f115b52c9542bfb9bfb202b0",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/duoB.mp4",
+     "bytes": 808589,
+     "sha256": "0cb856620c2aa8b97274b0d71bf9823766115c73a0cf0996cb39b71244cbb2fe",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/f01.mp4",
+     "bytes": 829481,
+     "sha256": "77420c4df29431cc5144d278e0fa40831b6f7386711ab99e3024bab68f22a09a",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/f02.mp4",
+     "bytes": 1101795,
+     "sha256": "81614beaedf04e5a88845f4fddc8049c4a80d89a3985ef8b9ac3cb80da1f0c2d",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/f03.mp4",
+     "bytes": 410477,
+     "sha256": "0fed1a14a17780f1590491c9c52ae35167a8fb033b6bef141eb8288e63e5d9cb",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/f04.mp4",
+     "bytes": 250178,
+     "sha256": "61f323264ce229cc5767e4bd12b0de3a0082368256ff712e7d1f06f6fbc448cc",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/f05.mp4",
+     "bytes": 471713,
+     "sha256": "0bedb333615657f0f7e3ad074e0d045b35fa3732938887432077a524d8c2af59",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/f06.mp4",
+     "bytes": 1185007,
+     "sha256": "620386060b6eb989b448026da2def8177d259788e7c0e74b96ba136171560e7a",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/f07.mp4",
+     "bytes": 453170,
+     "sha256": "65cd4b0b2472c1557ecebfc7c3bc542ff1ad47523f42e94b29ef8884e74c2cbc",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/f08.mp4",
+     "bytes": 1550707,
+     "sha256": "2a244eaebd4c6e7c754fc68a3b7d4586b71d941a6e17b21d7ca2728890051a5b",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/f09.mp4",
+     "bytes": 1200226,
+     "sha256": "fcb11742b356a37fb1e1704e20d47e408204caeee198ffd1f249c56c6f90005c",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
      "path": "assets/clips/g01.mp4",
      "bytes": 829481,
      "sha256": "77420c4df29431cc5144d278e0fa40831b6f7386711ab99e3024bab68f22a09a",
@@ -438,6 +739,20 @@
      "path": "assets/clips/g09.mp4",
      "bytes": 603949,
      "sha256": "ed22e504cd30c6ba776c38a1afc8b09d42398d1f5f0cae35908d93cea1bebe5b",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/g10.mp4",
+     "bytes": 1968570,
+     "sha256": "12c756a0678d6985cf1a414dba1710ec7357e9e6f115b52c9542bfb9bfb202b0",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/g11.mp4",
+     "bytes": 808589,
+     "sha256": "0cb856620c2aa8b97274b0d71bf9823766115c73a0cf0996cb39b71244cbb2fe",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
@@ -660,22 +975,22 @@
     },
     {
      "path": "assets/clips/p1.mp4",
-     "bytes": 1505713,
-     "sha256": "961137d4611bfdb6447832539b957939e1b3e076ed9c935d4e13ae7990a1e745",
+     "bytes": 1591628,
+     "sha256": "2e93b77b622307763c4982cc93a328942d68c81623c2ff9453446d2a2a305bdf",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/p2.mp4",
-     "bytes": 174926,
-     "sha256": "df678357e51c9a30e4e5e235942e77a984060e402927c3a6784deb9ce53f631c",
+     "bytes": 269069,
+     "sha256": "94b9dfdc320acd3f54cc9089f07889565a44376b9174fc04d2071cec664f3515",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/p3.mp4",
-     "bytes": 526293,
-     "sha256": "fba83bd23a59a452cd37646df3061fe0453308171d57a54f77a02eede4c23b93",
+     "bytes": 882518,
+     "sha256": "86dce40878cc265a36f77056d5200b82eb1002942da9cc85b6e3d0493a44a41c",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
@@ -744,22 +1059,22 @@
     },
     {
      "path": "assets/clips/w01.mp4",
-     "bytes": 929177,
-     "sha256": "f5d632c4149e3906cc5738ed98780048da864874dfd79ca1f7d74d024608a312",
+     "bytes": 1199149,
+     "sha256": "a3c008655229d3c8f97f151345e31e1942cce2f85ebbf567b11f3413fc7a599e",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/w02.mp4",
-     "bytes": 715282,
-     "sha256": "9c5da52465cabe14d07952ade2739289a17502f4f1d73071996400fff11043ee",
+     "bytes": 1022420,
+     "sha256": "1afc3fbbdec2cea48ae9077f891405f3a4640492ed42f0e6010f928d44e5a951",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/w03.mp4",
-     "bytes": 2444823,
-     "sha256": "1817dc1c4162c7b3f538659b8b7428f4e0cd3f4d94c7778c86f85d5a5f8ea766",
+     "bytes": 2981437,
+     "sha256": "99689498213ee548380d298d895fbd216931c7bc82f7533bc8ce4b6319d8bca5",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
@@ -772,239 +1087,267 @@
     },
     {
      "path": "assets/clips/w05.mp4",
-     "bytes": 12308347,
-     "sha256": "324a93804532bb27a2f0a334ba7138138845a32e4f45e69dc90c041d3077b817",
+     "bytes": 704490,
+     "sha256": "080f5596fa614b79c39dbffe5be53c54dafdbd4a8c0b5badb5c62a1b3a2a1030",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/w06.mp4",
-     "bytes": 11521027,
-     "sha256": "593fdb4d4c233d084b3a9d35aeca81a4b981b14a52fb5cae97460c69215a36f0",
+     "bytes": 884313,
+     "sha256": "303daf4d06b1148809dce819ddfdae927abb3d9d7e7f65a741986fb252f15cd4",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/w07.mp4",
-     "bytes": 4646795,
-     "sha256": "558782cd07e420e7ef7208066aaab0db8e6093927b30fadac8f1a322123f7fc1",
+     "bytes": 21744950,
+     "sha256": "9ddb881f76782c18f518aaa73dc30edc165b349a38f8fbb8340c04047dd0e8a5",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/w08.mp4",
-     "bytes": 7004390,
-     "sha256": "80665c879d9fb54cd50d9aff7287ad9e517f5df505976675842316423aa8e9bb",
+     "bytes": 19970289,
+     "sha256": "331c8d09b9062cbe5891491bc9c4fe53a2d596a967b1c5bbbc277b2e3f1971a2",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/w09.mp4",
-     "bytes": 3539096,
-     "sha256": "64ce1ccb570ce9980dc00a9efee70e11f824a5f03fdb17ed8a89f64c9042f20c",
+     "bytes": 13052382,
+     "sha256": "a1962a8fcb577061f4668196f19ba86f6fc121e1ad3550308207e1dda350ebb3",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/w10.mp4",
-     "bytes": 1769876,
-     "sha256": "4cf2ad019298de9ff49cdfe3cb50634d78aab393f845929dcc238691e80bf99b",
+     "bytes": 16466802,
+     "sha256": "5df245b3afad13858a7f05a9de11466d1822c42280c924984ae89d87459b2efa",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/w11.mp4",
+     "bytes": 10464712,
+     "sha256": "2cb9f52d1fa7424efdc56e76cc239d37870fbd17ab2d6dd4973dce4c3641d66a",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/w12.mp4",
+     "bytes": 6344629,
+     "sha256": "1715c8d7d186f2de7ca9269a43b43e07a9f6c534825333cb54609adfd021df0f",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/w13.mp4",
+     "bytes": 9397060,
+     "sha256": "65ef508f4bc0e3d2ebd85f9a31fa714844dde39f4c3ee4406028c98448fc443e",
+     "kind": "video",
+     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
+    },
+    {
+     "path": "assets/clips/w14.mp4",
+     "bytes": 1774623,
+     "sha256": "71351cf0eb66a4fa80c2ff760c80f45abde2a80a01f545cd79b734322a2868f9",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-ageint.mp4",
-     "bytes": 255880,
-     "sha256": "4babd0e3d517a08656faa5b1231da99c6c2efc7a39abba6f3e4bfff3efdda519",
+     "bytes": 338332,
+     "sha256": "eeb00843ebb06ee2f56905b2ca25c31027e6ec274a627f60c81eb3b2b3de6ac5",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-ai-rise.mp4",
-     "bytes": 369277,
-     "sha256": "8739c250b24a9d25d8043f338dc2c93670465b812cfd7a27229ad64075cc41f4",
+     "bytes": 554620,
+     "sha256": "ce679cf8cb6e2941c2004fc0ecf5d0c2ded7f817465fb6b40b9783445e3f2ed6",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-beyond.mp4",
-     "bytes": 234906,
-     "sha256": "7663d1c42a74faa78ec028c15183d230d93e654f3c2416902efd6e5c2c831e6c",
+     "bytes": 317527,
+     "sha256": "ce900c42f6a922514b91889a79ec9b40c492c44895075c7b4e786d0dabe7c895",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-claude15.mp4",
-     "bytes": 163358,
-     "sha256": "bd747f61ef9bed7661c734786f92e05a060c3f69e7036a4f451d8a47ed74abcc",
+     "bytes": 210266,
+     "sha256": "3195bb14f6a0c3107e1e03af9f9e1cb81dc4176afd52cb7a4f7ce35547fa4bb0",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-codecosmos.mp4",
-     "bytes": 599267,
-     "sha256": "838e13433be6869a97631f68204f4ec7778ef0fa87c920d8e24cb40519df1d74",
+     "bytes": 700317,
+     "sha256": "1c5171e0b6f2ffcf60765718571dddaff7ee2047ae28dfcb56b5a5d8d7d4e5f4",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-cosmos30.mp4",
-     "bytes": 266309,
-     "sha256": "bb10c6eddc95b90666dde592274ed97cf39c18a0c2bfef60ae484daf52220ea0",
+     "bytes": 382444,
+     "sha256": "91cc9d1d5b499a389d0c768c6d72f5791b172283020f76e4c8de9c221aad3426",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-dingge.mp4",
-     "bytes": 669620,
-     "sha256": "a16b2b2403f83ca6a4974967a4cf8c17cfed6b81400b201d0037bf62cd5119c7",
+     "bytes": 840763,
+     "sha256": "242d8d4e63392e57938cb9acab5bd0e6f17c990b72546d29282c8824d1ab7cbe",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-f12.mp4",
-     "bytes": 258067,
-     "sha256": "da4275dcb8d79fd0893ae624e8e7b2a61263febc99795c0f5d250b0f3f7f369e",
+     "bytes": 334925,
+     "sha256": "2e78a600226d8e9fd55ff824d3b93ef796e3ed5209739ee100fefaf69f76f556",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-gongcishi.mp4",
-     "bytes": 761163,
-     "sha256": "165d4aff76c661b8037e43c6edec2294bab6d77b5c4bcfe318239376cd2f1a44",
+     "bytes": 932228,
+     "sha256": "9b91c990aa0a6af1eb511a75174ec86c7f3216de892ecb3525b82367c5fdba80",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-gpt-autumn.mp4",
-     "bytes": 209381,
-     "sha256": "7273b5dfd26d81e3ced673608351b3afaebe139f795f778d29b26ef663551280",
+     "bytes": 278185,
+     "sha256": "53204868519e70cbf08a74514158b91779943c08fd35b4b6b466bdf1b5548809",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-hust1037.mp4",
-     "bytes": 82467,
-     "sha256": "190b75e511747c4f20382c84895b68d7af9a9a1ecec72a375aacecee4c79997d",
+     "bytes": 108087,
+     "sha256": "94f59ba2b94eaa5b178420373be73b9f8918a64e03469f3826f3271451d8292d",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-kimi-beat.mp4",
-     "bytes": 241026,
-     "sha256": "95cc1413784c802640a63e4354d35cbbf8d0fa00e02a943d0b5c75e1ce3b65b4",
+     "bytes": 275120,
+     "sha256": "04b7c7b1a7ba4796bff9191c4ec1dd5591f32309044e553e66d60d8dce5f261c",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-kimi-film.mp4",
-     "bytes": 160346,
-     "sha256": "6594349e4ae575054a0095d69d7d37efcd1dcf626e6d0844b464115968d67991",
+     "bytes": 220954,
+     "sha256": "b4e2cc140ce9ed80b77883ef186e235b860009411cc0c2cbf328fae5569b9acf",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-moon-letter.mp4",
-     "bytes": 73972,
-     "sha256": "c74c201b9f990526feff7b05746de58ddcd63d9ffe3d917b055cfb3ab1d07245",
+     "bytes": 102291,
+     "sha256": "14a734830379184379c6f6e57e7b0343d252789284a7a9f64029bdd973c83a63",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-moonlamp.mp4",
-     "bytes": 272621,
-     "sha256": "650df804a0c4d064f7659b46fcc954f6b9114b4cc5f41b67cc9fc0d0815b3aa9",
+     "bytes": 369897,
+     "sha256": "f8d3fa9151ab117141dc1111978315142c0ebe1d1b5ce930baa7c8c66e25fff6",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-oneink.mp4",
-     "bytes": 241440,
-     "sha256": "27bff354c885718cda8b1f13baec071a43b585bfffbb96d169e60fa67c053589",
+     "bytes": 356453,
+     "sha256": "836c32fe24fd51a18e9ea960688db8c14ef710609663eb71dd657398f3f65bb1",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-phasegate.mp4",
-     "bytes": 199997,
-     "sha256": "4736e3395f954d746245ac8c746232d3d091f87565670fd3a9cb7d3912bda301",
+     "bytes": 325289,
+     "sha256": "d0b9860f495540222ba5fdb894686a54d711bd92e57ad0187a427a255585c8e9",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-protocom.mp4",
-     "bytes": 143501,
-     "sha256": "7add92be36e4572aa19e5b28c9b924e9845eb97f290ec8bbe8ff6ea73298c0cd",
+     "bytes": 177946,
+     "sha256": "57ba1fef353856a5528f342860a992d9b4e4c5e00b6410994f6337b9c9d4547d",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-readclub.mp4",
-     "bytes": 49094,
-     "sha256": "8d54599211a0dbdd8c4dfaead69153e6d9bfc077d60dc7db94d81cabde7263f7",
+     "bytes": 68490,
+     "sha256": "60615a3528dd935d4aeaf78f0f91cfa0de658740b059c73a03220ebb71245e97",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-samemoon.mp4",
-     "bytes": 137693,
-     "sha256": "7b2744d43d9cace08ff1c40cb23a58d92c607fae28f02108c38900046190cf37",
+     "bytes": 178744,
+     "sha256": "19bff425b01d10ad10931cf4d9eb1499dc3451ab50e4fd02c3a037cb1246e1fe",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-senpai.mp4",
-     "bytes": 97331,
-     "sha256": "f85b19f98fe4f6b166389922de2f64831044adef086d5eb8f03fc0eef8186b91",
+     "bytes": 125077,
+     "sha256": "192da6c4a3f4fc6ab331e22d537b3af8852f33bb0c5b5d453cdc92f1f38f1377",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-shatter.mp4",
-     "bytes": 474723,
-     "sha256": "d1815484af9fc028c080f5f77fe0d392d76523fc8a8185bf7c32431a79686453",
+     "bytes": 645006,
+     "sha256": "349fe3851bcb24506ae311e8fe5ccf812874fbf2c0566d85c5f39e9e364eff75",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-shuchenglin.mp4",
-     "bytes": 158859,
-     "sha256": "6d046255dfe5bc2c181268f952a9926efa429587fa44c351cf61e689e9b91fc1",
+     "bytes": 206791,
+     "sha256": "1fdd05a4be801f3cc89d4ab44bc17cc369568eec829a98c7b63c28ecfe392475",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-skillshub.mp4",
-     "bytes": 432080,
-     "sha256": "a0ba621c1444963956a4aed09fb8065b6425c6c1af98d49b2dd833598b951adb",
+     "bytes": 517318,
+     "sha256": "d32e9daf58da42ef16332009310d91413aec9ba832279c5fe60bbd7d90a61100",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-stopmotion.mp4",
-     "bytes": 513024,
-     "sha256": "202c10d2e3948e6d11497d19d997d7fc7d1e6bb75f869f2d195b70762df7412b",
+     "bytes": 659589,
+     "sha256": "7655b59c169397a3c393e50b3fd664ef87e9f0ae51dac2e06e4ce1bb9fa22367",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-studysolo.mp4",
-     "bytes": 242534,
-     "sha256": "316054a2e249adbc8a3520279262ebdd827010b920a17f622b74fd744315249d",
+     "bytes": 337628,
+     "sha256": "38504f23e9877701725d3394c991221bc36258933aff8330cb7604da0b2384cd",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-xuanlan.mp4",
-     "bytes": 243389,
-     "sha256": "98f6e5ab44e11500a7a0a76998ef1e681fca6a96c03ddae6a24b578691cd4bdb",
+     "bytes": 294686,
+     "sha256": "ac3e9a06b030778b93f8ed65f5ad982d0f04ced5f095653b0c6eb6a9f927b80d",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
      "path": "assets/clips/wall-yusheng.mp4",
-     "bytes": 397853,
-     "sha256": "3a3f539df5a7f255d3e1a379c6828f79aa70981268d39148a9f7a4b6fb75f9ca",
+     "bytes": 510209,
+     "sha256": "e37bd44b7c05eca37fb71c214dfb3db41d2389c59a444f09e8fd2a01e81efb05",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
@@ -1038,8 +1381,8 @@
     },
     {
      "path": "assets/posters/ageint-end.jpg",
-     "bytes": 28915,
-     "sha256": "5bdf871a52dbfebe3c39875e1bad8f29d1c50f39db776074313afcab3d83cccb",
+     "bytes": 25942,
+     "sha256": "f55239f4bc404660f061ecf607d7d425407b22fa5ea6c226f0a5eb8c16e1147c",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1052,8 +1395,8 @@
     },
     {
      "path": "assets/posters/ai-rise-end.jpg",
-     "bytes": 29012,
-     "sha256": "e98183e51a2f344ba0f4501ced57e92221d26820d5071c54d5dc0c77b8d2410a",
+     "bytes": 31848,
+     "sha256": "30a2f566cd6a09d0154150ef4af7e48c192f44a0a382882b777289c85fcf8e33",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1066,8 +1409,8 @@
     },
     {
      "path": "assets/posters/beyond-end.jpg",
-     "bytes": 36172,
-     "sha256": "531fdb39d192d51a30fc394d9fda0840ea21f7c8087a64b469fefd1dd692efb1",
+     "bytes": 35793,
+     "sha256": "eec4e1d367433e927e8112f47027823ce9de324870853d5bf7e2955d4f0d9311",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1080,8 +1423,8 @@
     },
     {
      "path": "assets/posters/claude15-end.jpg",
-     "bytes": 31886,
-     "sha256": "5a80914ba314270d0c0510f628f199b8b46fcfd3bbd6f89b5fff9e975957fbca",
+     "bytes": 32794,
+     "sha256": "d405498db992a465713102844922eaacb99c45ddae6053de36db9f9adb9f5543",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1094,8 +1437,8 @@
     },
     {
      "path": "assets/posters/codecosmos-end.jpg",
-     "bytes": 62694,
-     "sha256": "494f899eaa8bf504e278ba1abad6a6651c75dd5ee4ebb5c1a97608b0960b9fd0",
+     "bytes": 14216,
+     "sha256": "685fa103fd6655ace299db5965991e8e199800fdd325fcefe279df836a2c9b98",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1108,8 +1451,8 @@
     },
     {
      "path": "assets/posters/cosmos30-end.jpg",
-     "bytes": 77905,
-     "sha256": "140bca392c2f1f7cb9833244477d1815a388cba0c1f7ab86cc04fb41d7e68ef5",
+     "bytes": 77233,
+     "sha256": "df2804cf7d8e3ce1e12d6e605d1a8345c618bc4d374843c543a1bffa19977af2",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1122,8 +1465,8 @@
     },
     {
      "path": "assets/posters/dingge-end.jpg",
-     "bytes": 58449,
-     "sha256": "b511dad0a4274dae8acf671478135d1205b17bdb719eaac22bac48902b69fa9f",
+     "bytes": 58354,
+     "sha256": "fab9d3234601d4c20f144830ae885e6a50a024408ea8f32b6406b4c763bc5ae9",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1136,8 +1479,8 @@
     },
     {
      "path": "assets/posters/f12-end.jpg",
-     "bytes": 40110,
-     "sha256": "983cb7550023d4fcb270bdd8dee14fa8599f5f5954a1ed76059c065dbe776bd5",
+     "bytes": 24087,
+     "sha256": "b560226cfc22ceb63e2786594670885d42731ef512f29540e1dfbf360928f762",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1150,8 +1493,8 @@
     },
     {
      "path": "assets/posters/gongcishi-end.jpg",
-     "bytes": 43415,
-     "sha256": "69bd5cf6a1ec1159407bc094aeb297335784b9a354ec72662fc465477f82d879",
+     "bytes": 42118,
+     "sha256": "2cacd2a26c8dd7564e7ad0c8c6872a78367cb405c86ebb42ae4aa69db047cd3d",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1164,8 +1507,8 @@
     },
     {
      "path": "assets/posters/gpt-autumn-end.jpg",
-     "bytes": 26588,
-     "sha256": "11fffccdc5a947114cea44fc711e1e03a45780eac2b9e5ca3a403adbb35c242c",
+     "bytes": 27298,
+     "sha256": "64a3883ec8885ebdaa175b54afc601b0ea67d44d67092885550c5dcd79e43ac2",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1178,8 +1521,8 @@
     },
     {
      "path": "assets/posters/hust1037-end.jpg",
-     "bytes": 14984,
-     "sha256": "de2b4c49bd904121513b2e1367fc1fcad3ac087875d0c902b499a23c77b4275d",
+     "bytes": 14969,
+     "sha256": "dd66ff0f663cae36d175094b1387972bbe84374c6fe37b32c0b829ef37b12292",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1192,8 +1535,8 @@
     },
     {
      "path": "assets/posters/kimi-beat-end.jpg",
-     "bytes": 21571,
-     "sha256": "14dbd8392d1ad5cfa6617d403b486d85585edde4830a7bce24a2cab64f771cb0",
+     "bytes": 15013,
+     "sha256": "7aac9f92caf4b1754f619ba8b06bcead4e129ef7ac6ad1a7334dfa6692eef40f",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1206,8 +1549,8 @@
     },
     {
      "path": "assets/posters/kimi-film-end.jpg",
-     "bytes": 15167,
-     "sha256": "ed75bda3733f942699ada9f676be64581b355d66cc753ad24f7e892fe13803e8",
+     "bytes": 15440,
+     "sha256": "9903a323c6469905ec3d1da9bd52dcbc796e9e9f38137e1382bd836c052d4077",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1220,8 +1563,8 @@
     },
     {
      "path": "assets/posters/moon-letter-end.jpg",
-     "bytes": 9793,
-     "sha256": "8ad7afa315e3f72beb985f1c2d3cb09e692326d532d6283ca2a9886716d0a188",
+     "bytes": 12232,
+     "sha256": "4d9ecdf88df61f7cca7789fa77319ad1cdc4d420123c664dda0345508ca157f8",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1234,8 +1577,8 @@
     },
     {
      "path": "assets/posters/moonlamp-end.jpg",
-     "bytes": 22050,
-     "sha256": "7528b77eab475cc4810e80fd3500bbb3e06347885505f39fe2e68fe1c8f10a06",
+     "bytes": 25076,
+     "sha256": "0665206ec031ed05fa484d49334a7f776e5f0126d8c45257d57b9cd39d4eb19a",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1248,8 +1591,8 @@
     },
     {
      "path": "assets/posters/oneink-end.jpg",
-     "bytes": 26975,
-     "sha256": "c7ca129546b5b9eb6da9fd283a98334c73cd35d2ad78071cfa49c2dab3fc28de",
+     "bytes": 27364,
+     "sha256": "3c944305492ad6de59cbba5dc2df8307fc7d085153096b479451218a35b15bf4",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1262,8 +1605,8 @@
     },
     {
      "path": "assets/posters/phasegate-end.jpg",
-     "bytes": 20088,
-     "sha256": "023a1d1bb1c40391504167a1f816b022cd9adf8b305f77ea677dc700b82ac8c4",
+     "bytes": 33750,
+     "sha256": "23d9ecde79eaf26d7ece823c6b8fcf8cd4989512fa31fa1cf1a2d8c13325650a",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1276,8 +1619,8 @@
     },
     {
      "path": "assets/posters/protocom-end.jpg",
-     "bytes": 25129,
-     "sha256": "8ba828ca3aaa8f00a3de830387114597a6b0c48bbf04f8a0648675122f9427f6",
+     "bytes": 25119,
+     "sha256": "97692f13109250e61e1be7938cfa73cf0404dfe1f787bad7021b216ef612ec6f",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1290,8 +1633,8 @@
     },
     {
      "path": "assets/posters/readclub-end.jpg",
-     "bytes": 3329,
-     "sha256": "3eaced64b96209505bc8cd8faab9d97854197defc4c28c04a0a6e59eb960f33d",
+     "bytes": 9748,
+     "sha256": "6a4bebbff640cf2d1053afebead8d4680736027e6b62711c779472735474438c",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1304,8 +1647,8 @@
     },
     {
      "path": "assets/posters/samemoon-end.jpg",
-     "bytes": 17407,
-     "sha256": "771e4a678cb4404592ffb5b5a6628e37ebcc5e37aece771fdb9c89c28e3e17f0",
+     "bytes": 17713,
+     "sha256": "76092f3626e20c8bd736d4505a2993f2ce58a0b5c59352590c312ae0e85a188b",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1318,8 +1661,8 @@
     },
     {
      "path": "assets/posters/senpai-end.jpg",
-     "bytes": 12090,
-     "sha256": "36cae18600fc09a3805326d230bc4ae01bb062d6b754e19e74745adf295c7507",
+     "bytes": 12798,
+     "sha256": "21ed3cfcb7b1415de241ae152d4a19a6db857b07b8684173fc15b34fbecb9477",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1332,8 +1675,8 @@
     },
     {
      "path": "assets/posters/shatter-end.jpg",
-     "bytes": 37129,
-     "sha256": "30e5a9ecd34c6fbec0dba06b14e3428c342a6627b5f7493534624eff4d406f7f",
+     "bytes": 38377,
+     "sha256": "1a691543ad0a054b47f1ec02e0d30813a88193902edbe8a9fd7d39d4d28ac008",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1346,8 +1689,8 @@
     },
     {
      "path": "assets/posters/shuchenglin-end.jpg",
-     "bytes": 17688,
-     "sha256": "946f09597da46111eb348c86b518bf4fc642388d0668ccf802a93f3798a423e0",
+     "bytes": 16873,
+     "sha256": "4c50ce6ec2d07513d086cd50db35891a7c649d1dddc20271666fbbb2351d1d7d",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1360,8 +1703,8 @@
     },
     {
      "path": "assets/posters/skillshub-end.jpg",
-     "bytes": 22776,
-     "sha256": "e40d4f326a69463e825fb345caf09c0658f474852cf73713b73e673090bdf9d8",
+     "bytes": 21455,
+     "sha256": "cc2147ff1d1586357c46c2991a57c9f2a146f415c15570f6312644018057707e",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1374,8 +1717,8 @@
     },
     {
      "path": "assets/posters/stopmotion-end.jpg",
-     "bytes": 46359,
-     "sha256": "c472267a76192ea885ea5cad5d39c31966e9cc89a58675fcdf6f323476acc749",
+     "bytes": 49215,
+     "sha256": "c5b5534560dfe5721136cbd4d8406ed212dc40074a546ee089858656dfd3f317",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1388,8 +1731,8 @@
     },
     {
      "path": "assets/posters/studysolo-end.jpg",
-     "bytes": 28869,
-     "sha256": "38f5e717d5006c673ea8fd6cb2554be5b648ac1959b9333d7272ece5b12a3d56",
+     "bytes": 32603,
+     "sha256": "5864a3a748d9dccec842ea53a3e91cd84f84d62fd39f2ea955855d8d3c88de13",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1402,8 +1745,8 @@
     },
     {
      "path": "assets/posters/xuanlan-end.jpg",
-     "bytes": 31019,
-     "sha256": "8ae079071d7b780893833d0b719658179d65c6992b3a565ede1d6cd2fcf90152",
+     "bytes": 30724,
+     "sha256": "ab63e1e26890d55455e5003eb5c2e079472affc04e6f5cd8c05a91fa457dc3bd",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1416,8 +1759,8 @@
     },
     {
      "path": "assets/posters/yusheng-end.jpg",
-     "bytes": 21509,
-     "sha256": "3b3e0d407a25addf1153ac54deac1fb01cbcdd723ba655b610070159690a67af",
+     "bytes": 27887,
+     "sha256": "ccc60e2e5e2d69ca66fcacbfbca3d75c0169e0110945d4c68ef4635257ec839e",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -1430,10 +1773,1515 @@
     },
     {
      "path": "assets/score.wav",
-     "bytes": 12172844,
-     "sha256": "fd3664c3faa299944f85b913209cbc589432a3aa16b131ca02ed81a491a3e25b",
+     "bytes": 23232044,
+     "sha256": "33d79b140797494ed4a562e405b4d8101ec8ae5cfc46c91488ec77d5ba60639b",
      "kind": "audio",
      "note": "配乐：npm run score（audio/score.py）生成"
+    },
+    {
+     "path": "qa-frames/card.png",
+     "bytes": 784495,
+     "sha256": "6974148f9150a01d5411dde891f2e63fefb53dbb76340b0a5fde9723f1c6587d",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/pv-119.3.png",
+     "bytes": 9021,
+     "sha256": "87a9be0f54f4f265361e267739e529e62796a3eb3d0ac77ec89feb6107a53c93",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/pv-66.8.png",
+     "bytes": 256494,
+     "sha256": "732783ba43d35c5ed0a79ce8a7668f0b7449b6f2b00c1346fbc7aae35132cafa",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/pv-80.6.png",
+     "bytes": 446095,
+     "sha256": "24024e859edc1f2bcba3238496b7ffdfb9c59c81204d70627d2a68a78c824e8f",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/pv-83.6.png",
+     "bytes": 466977,
+     "sha256": "2e9d927a8778085fd9710b105f13e94a3871f1d6fc59ae050bf0ba9a07e30cb1",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/qr-4k120.png",
+     "bytes": 2167261,
+     "sha256": "f8f74f83d1781ab09cd78d818fc18ba7248e4ea059a7781b00f8237c48cd4657",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/reveal.png",
+     "bytes": 279862,
+     "sha256": "dc548afd58c41949b70189f79862a46611914841f60cf4bd44c0e38905c7b735",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/stack.png",
+     "bytes": 480289,
+     "sha256": "d88d18ab7e97fa76c35de21e27b9f728812cd2d0b69cc6fe4f3c5b2cffd999f6",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t0.png",
+     "bytes": 2093835,
+     "sha256": "d66675702b68e40196f200e212f6610736a49e93534830e86ca5bb55cf5f5786",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t1.png",
+     "bytes": 2120264,
+     "sha256": "c55ecbb134b6a7599d187a1e7e59ee0a6729c14518fb3ccd5c387e3d2ba52e1c",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t100.png",
+     "bytes": 2069985,
+     "sha256": "aff2fd9c84430966dc6ad44bd84a79c297352b45998c782bfc326cb91b0689c4",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t101.png",
+     "bytes": 2083107,
+     "sha256": "30103f9008f5ffcf1c6b770fa013479162e9bde5e95e93f9fee77d213d5ad1cc",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t102_5.png",
+     "bytes": 2164112,
+     "sha256": "77803dafcadfede2ee464ef8da4f46798cd3acd630e88a33aecd438dfb4e3e9d",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t103.png",
+     "bytes": 1668991,
+     "sha256": "cd366afcb913e7a1228d9d7fb3b626811064c9b82c3529f1d43dfad86f2d0fbc",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t104.png",
+     "bytes": 1676160,
+     "sha256": "1aadef230cc19435fe36aa33d3d0d0108d7ae374bcee56125935118ba0d5a684",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t106.png",
+     "bytes": 1737030,
+     "sha256": "ca52a8da044190714cbbbdcbde33a0dfb2b6544b067c97891065c66d694d75a2",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t109.png",
+     "bytes": 1764755,
+     "sha256": "fdeb90396f5411aedebc415b416aaeecd3921df94f15c61846892e974b053039",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t11.png",
+     "bytes": 1769812,
+     "sha256": "dac7274aba77bbd1eddf44fc75743bcad764e4b1dac3637a0a5a854abb03a18a",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t110.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t112.png",
+     "bytes": 1767328,
+     "sha256": "4a8acd8342945fb50102cf29d8ca17538145cb9847391a5d513fafcb327a4e6a",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t114.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t114_5.png",
+     "bytes": 1763863,
+     "sha256": "090da0d49b6826f45a70885e08e60ff1ad8245dcc5d93f32390875ccce252b9e",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t115.png",
+     "bytes": 1765748,
+     "sha256": "c9ed0f93aac0137369c01700c3c5261e2c99c9b900b9e6673609856a1dee7413",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t117.png",
+     "bytes": 1765290,
+     "sha256": "af09bac6c564e8a19e269cccb4ec45b506c83cd0ff0096a1f04f23adb676a5aa",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t118_5.png",
+     "bytes": 1590553,
+     "sha256": "046d2f8a63b8b0a83ceb82f0fae75c9c7e1fe588bf60e937c97601b82ee5b118",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t119.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t119_5.png",
+     "bytes": 8671,
+     "sha256": "2d61646dba7be06bb32f5c1d4f9b1d23fa02973bd02d6dbb00ec92f77bab6b93",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t11_2.png",
+     "bytes": 2595108,
+     "sha256": "b297e91009228bc6049d0b1274f6aa5708d1e6ca5eda8b06bb6e42835c52a073",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t121.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t124.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t126.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t127.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t12_5.png",
+     "bytes": 1786122,
+     "sha256": "14dba802b8b4035ddda7003f4fc6291eb640093d1933fc9721cb2ed2ee1a87e6",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t13.png",
+     "bytes": 1789922,
+     "sha256": "d6eec40dc1506e2886cb80ef6e6030a4029ceac092add9eefa6e661343640742",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t130.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t134.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t137.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t139.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t14.png",
+     "bytes": 2237626,
+     "sha256": "e55f5e61a4e9111d59d2da2a63253a99f54b0df66c3d29f519ec85c02bee6889",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t141.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t144.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t145.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t147.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t149.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t15.png",
+     "bytes": 2233786,
+     "sha256": "c5a4f9d026d44a19798bcb7c97595e065b2e52d05fd577ce5a194dca61e4a7e4",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t150.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t151.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t154.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t155.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t157.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t160.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t163.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t167.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t16_5.png",
+     "bytes": 2035710,
+     "sha256": "20a6e9c35c17e8caa31ab20cace1b587273377424f834e0c7cdf54bb9c947515",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t170.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t174.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t178.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t17_2.png",
+     "bytes": 2615914,
+     "sha256": "ba40899388dfbc6a6db0f4edd4de70c7821114d8d51d83fca58486856df1d7b2",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t17_5.png",
+     "bytes": 2221260,
+     "sha256": "4653beae22147a8ca529691faf1810cbf376dd88cad1aa596bc454504ddbf10d",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t18.png",
+     "bytes": 2223826,
+     "sha256": "fafaf15e2f0fc9b662f8ec53bc415fe9ade8daa9773661e1e2898917b48a2a0b",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t182.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t186.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t18_6.png",
+     "bytes": 2709511,
+     "sha256": "d3595e19d8a18003539ff6dc3988b760f6004d96f2885e43463ccbe175676584",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t19.png",
+     "bytes": 2106358,
+     "sha256": "5e4640897d2108b913a7c2a1ebfa98bbba97b2069d9459350a00e36e4c20ceca",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t190.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t193.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t197.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t19_2.png",
+     "bytes": 2151661,
+     "sha256": "be06ff59655f51bf493fc1fb84a83d308fda31231ff94930afacd37e50f259b3",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t19_5.png",
+     "bytes": 2108233,
+     "sha256": "9d8020b62be454a4cdf549764171b8fbc3e0ef992aee2b307027b749da8a7d76",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t19_7.png",
+     "bytes": 2600617,
+     "sha256": "8285b124567f0815ae300f1afbc55d97482350e0daca47ee0a9b61793dd82994",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t1_2.png",
+     "bytes": 2105700,
+     "sha256": "61ecd06759e078f76c3e79c421076c48ff320d733bf646ca70db6bb3610eccfc",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t2.png",
+     "bytes": 2115425,
+     "sha256": "c5a59a59cafaffd3c78a6bff13e83b387f24658ba0eb266053177ad4cf1c0d34",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t200.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t203.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t207.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t209_5.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t20_1.png",
+     "bytes": 2278307,
+     "sha256": "c2774b01f9a8191a78ba52b38caf8deb3ec9ec7068489bd6b31ddcd4f3163b38",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t21.png",
+     "bytes": 2108991,
+     "sha256": "19edc4b2a41404cce699f5dde15017f9f5cf8c3407c7a963a0919c2bae86e060",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t211.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t214.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t217.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t221.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t224.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t228.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t22_5.png",
+     "bytes": 2113865,
+     "sha256": "1db0e90014e3f834ccee85758c3d74123b56bf7aefb8990fc6941416d4e9bfdc",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t23.png",
+     "bytes": 2839466,
+     "sha256": "13a0259ee40cf30b868374be04bbee39fa09e6a357093dbdd75a1a65db164882",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t233.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t237.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t23_5.png",
+     "bytes": 2234175,
+     "sha256": "720f6278715839211ac4965548011756bbb40e510a50d722571c6a64de4900a6",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t24.png",
+     "bytes": 2238573,
+     "sha256": "1bfb0f2ff371087141a43483f2c08f4e481d92bd8c67be06356ff135bbdef457",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t241.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t245.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t24_2.png",
+     "bytes": 2816465,
+     "sha256": "9aee9ba8cf2d9f0f1cb700d1743ab20b83dbc13468ab1aaad9194fd54be42ba3",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t25.png",
+     "bytes": 2390703,
+     "sha256": "18e5887b2d60d5a94f146418feca8e9533adf2afb3b13d41b9c9599479000f75",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t250.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t254.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t257.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t259.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t25_2.png",
+     "bytes": 2748394,
+     "sha256": "8994c5ea02cea830805dea2a3efb94f1230a286c2eecdf6614fde0e49515945a",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t25_6.png",
+     "bytes": 109485,
+     "sha256": "9222893c4da6407d8d3d85123a42b1a857da7f40887dc486e813fbac732243aa",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t26.png",
+     "bytes": 2432305,
+     "sha256": "e4f5724e1b06ea1bcee845c8bff782bf36ba4ea619bac5063527854da36f88c8",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t261.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t264.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t267.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t26_5.png",
+     "bytes": 2713431,
+     "sha256": "1b718805e514d59e3637fed89897b096f5f83a46ddcbcca63a2a620b4b87e2b3",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t27.png",
+     "bytes": 2414351,
+     "sha256": "e66ffe099bcf252479e9d27173e395af4c8b3fe173b7f9d5e985502a3b27247a",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t272.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t28.png",
+     "bytes": 2356994,
+     "sha256": "1b420a16a3b3af7f628f9eae497edfdd28c7ebdeca1a8a8918e68a4e124fa548",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t280.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t28_5.png",
+     "bytes": 2238127,
+     "sha256": "c8bf794d54db4df0e49a3a3ddd450895f00d6c41313371892a714ddb6312b90c",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t29.png",
+     "bytes": 2314315,
+     "sha256": "4e5d5e31ce9029f5bb6d5017ded32196cb6b21f3680d4dd397aa7cce09363686",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t290.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t296.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t298.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t299_5.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t3.png",
+     "bytes": 2151105,
+     "sha256": "0f7d90e413000bb404abadeab921248ad78b34710eeed9eee835cb7266641e44",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t30.png",
+     "bytes": 2228734,
+     "sha256": "d5b777ac03777a18877c843722ed0c659304faf16562d9c73d6446bbd4e76d5a",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t31.png",
+     "bytes": 2291600,
+     "sha256": "d9fe12003db92a0255c20876ff444880a94d65aee7c87ce96fc602ad9769f048",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t31_5.png",
+     "bytes": 2487569,
+     "sha256": "eba2b0141d6af1ef2782d046baec1ebaa7926da8bbee6089bb70146772b16667",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t32_5.png",
+     "bytes": 3004728,
+     "sha256": "3577db64be69b8443c67a7c1bcd12c0adf6624ffb559955caa3547556c5d2776",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t33.png",
+     "bytes": 2117905,
+     "sha256": "650d37db7c262edffd1fc4d2550c1a16be4479ec7a6c09f37575826a656d8a81",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t33_4.png",
+     "bytes": 2709312,
+     "sha256": "e43ae696dd9db49d8919d628f8710f8b2281d96711a431e0140208adfc349ffe",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t34.png",
+     "bytes": 2357336,
+     "sha256": "30d3c1319ec83399e269e689c823c8a8f1a055cd34019e47f7157bedc7c0779c",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t34_2.png",
+     "bytes": 3199084,
+     "sha256": "d4efb350cffa734007beaab945eca2782f357a3de348a80ed38f34f69a848786",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t34_5.png",
+     "bytes": 2349311,
+     "sha256": "b69536f697188a1b8e8fb81b1e02f9b9c9238ad957d6b8960167c6ef19ae7126",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t34_9.png",
+     "bytes": 2989324,
+     "sha256": "b7528ae19fa38cc1d78388187fd2e9d80e52052651f0d8d5b5c8009e3da116b5",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t35_5.png",
+     "bytes": 2220520,
+     "sha256": "7f243087917f6e70ea15f14ec6424701c1bfa133857596a19704c0b4fe6ea8f4",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t36.png",
+     "bytes": 2655797,
+     "sha256": "213b75906da20e3930913779f58e0211d682647de788806299963c1e69efdc3f",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t36_5.png",
+     "bytes": 3091367,
+     "sha256": "ed259a2a4e3f9f536747e0c53c6b698ce6bedb9a5c5816f6206660e9dc58790c",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t37.png",
+     "bytes": 2023954,
+     "sha256": "69868eb8ea14a0c2b71a0838093c38a700c20ba9e340a25301c4f180c3febdf0",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t38.png",
+     "bytes": 2809892,
+     "sha256": "48f78dde8a76832b26f976df83b7649a738c4db8c767ee0c2f662b5a1704f0f0",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t38_5.png",
+     "bytes": 2132765,
+     "sha256": "1b47c5f288371b59125f36a40c8d85a8abe0af5d243aa6746c614abc102d1995",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t39_5.png",
+     "bytes": 3017950,
+     "sha256": "2fe4df04ea73f19b3bfd4a22b59e947f2a74a209d672467a59289ad1a97d8655",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t3_5.png",
+     "bytes": 2188490,
+     "sha256": "77f311ef3e02352ca2a21e6952426692803777f7737c8741e18a15057b26def3",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t40.png",
+     "bytes": 2186844,
+     "sha256": "2030367a6710712bfd515d424732bcf94600c38d6fa286f36598673e954cb283",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t41_5.png",
+     "bytes": 2427754,
+     "sha256": "f73106775ec7e801ee63252750eacfd8a03a5cdc89d396f1595733cd61d0553a",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t42.png",
+     "bytes": 1880906,
+     "sha256": "91eb7192bbf4ee6208e1436125beae146f475354b40a0a059114c41efba42748",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t42_5.png",
+     "bytes": 2173009,
+     "sha256": "36752953da2b0b72811c92251bd63ae487326058dd3ee6c93ec70129b68e3833",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t43.png",
+     "bytes": 2637775,
+     "sha256": "59de3ea2f295ffc5a4038ac4dfd97c27e4ce11d8a72f562f452708e7eb17844e",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t44.png",
+     "bytes": 2195533,
+     "sha256": "f2d85bea98e4e2ae3835e91cdc71c24650d4680698161c26bb81c763e828369f",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t44_5.png",
+     "bytes": 2497771,
+     "sha256": "fa23ed0cfeef13603dbeef7002a328eb6909c1afdff935eefa14f3e1eca6fc72",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t46.png",
+     "bytes": 2669909,
+     "sha256": "050c0c2203c08f7c8a44e795b2091aa44b3e47cb70eb97817762fa8a5c7556e5",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t46_6.png",
+     "bytes": 2616411,
+     "sha256": "3cfa31d6a48646f082192a9d0bcd085942a8cede0e4a0885fcb3edecfd21fe21",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t47.png",
+     "bytes": 2471504,
+     "sha256": "510aebdeb31a6b6262d47c0a2f06c03bec3864ef8e22ecdabff63d658c214a1d",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t48_5.png",
+     "bytes": 2655557,
+     "sha256": "0f94caac1a304ff96fe0d0e707b846dec350a64bad565ad6d6ec132f8131d032",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t4_5.png",
+     "bytes": 2261773,
+     "sha256": "83664e1031ffaf8667ac98b7cc93d2c6521c41c78bad1c2123c69c7476617261",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t50.png",
+     "bytes": 2492228,
+     "sha256": "814b7ff66bb6b9835af9e450aec5be661640a1b4cb9d3a5e73a81d1e9876cd19",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t50_5.png",
+     "bytes": 2721748,
+     "sha256": "939b76ae5201c64a74b9fceb276592ae243c2a6047cdaf78f160944635d01f4e",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t51_5.png",
+     "bytes": 2691346,
+     "sha256": "390039d820ef35b791c93c9d95a6299f25e455db7f5d5b33555ed654f9a821bb",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t52_5.png",
+     "bytes": 2456958,
+     "sha256": "9dc3b494e7f75a860f7b0ff6e246a62dd857316e38ea6d69d3f35e38c5412d94",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t53.png",
+     "bytes": 2640941,
+     "sha256": "bf6054227698e68612b1c7c83de225d14d78467797da051dfda145c175c7c489",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t54.png",
+     "bytes": 2645941,
+     "sha256": "630661f2bac35f124e67265b70e19ab93b0b30723da8771866de887d28d70ad1",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t55.png",
+     "bytes": 2350997,
+     "sha256": "3a4420115608266f47c7299972013917387d1c2a2a2bfeac8041a803b86f5bd4",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t56_5.png",
+     "bytes": 2509683,
+     "sha256": "bf54659f7a2edb0c16a3db231064346ba0322a9ee7268bb68d33a53ff853e341",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t57.png",
+     "bytes": 2551129,
+     "sha256": "ce96350d1faa493167712ce1ceeec8e976c14e7bf8b2ae0a7d1e8b86c5a81183",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t57_5.png",
+     "bytes": 1964183,
+     "sha256": "7fba39215f86f1618e696d969ca5d82d4f345078b1a8d52749b3f32d3063c9d4",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t58.png",
+     "bytes": 2534666,
+     "sha256": "fb65b77df4a83be328b684b3e3d4b4c682e0a771c84c018cc36dcfffd722c9f6",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t59.png",
+     "bytes": 2583693,
+     "sha256": "7c19110929225f94c1f6498f5e4ffd927047abebb578fb82c4f87addc3dd9d11",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t59_3.png",
+     "bytes": 2342028,
+     "sha256": "dc34756c9e4c06d61114edaafc3fce4d1c3edfafb563b12d23d84511479f0130",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t59_5.png",
+     "bytes": 2499790,
+     "sha256": "c4850a9c5bac5b79f75e60c0da3e3d5df4beda8884dd8701c3a5dd2d37f1f16f",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t5_2.png",
+     "bytes": 2622692,
+     "sha256": "8d7a5969066d8458419c5f4a93f6582b9685963838aeb69f7ac1ccd9b63e493b",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t5_5.png",
+     "bytes": 2179040,
+     "sha256": "662b3cf87e5265c68f8fbf68802150b78bdda0647c0ca1cbcc9f6c231ede8fd9",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t5_9.png",
+     "bytes": 2868374,
+     "sha256": "b68042cc3e5315208d699a5930d342668fa747f3fe307a066b7bbb0b23c947c2",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t60.png",
+     "bytes": 2022184,
+     "sha256": "f7fe215d32f3ac2247eca9fac89c1d82d41d17b19e7c27fff97b4a3fe3cc2e5c",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t60_5.png",
+     "bytes": 1893301,
+     "sha256": "2c324a887f93ef9f7421e7dd4e57e9cfc49e3dfa9f91ff4d4b39b9baaa4fe1b7",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t61.png",
+     "bytes": 1891594,
+     "sha256": "fcbaa47afee5b98a87191770282794d366849c9ed62bcb38d798a8cd8d35ab66",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t62.png",
+     "bytes": 1898161,
+     "sha256": "8804ab903e019efeee79814721a067478a88f96b8e2c3d4cd26e3463368bacd7",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t63.png",
+     "bytes": 1912597,
+     "sha256": "c6a8f7b3456314c022192a0a0d40905ed9a4ce1629f2f754875a8a0ff8c2f0bf",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t63_2.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t64.png",
+     "bytes": 1855059,
+     "sha256": "34d7be0f9d1c0a0b2d242ba05dcd44f55f78f69153ad1ef60d96661f9f86a70b",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t64_5.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t65.png",
+     "bytes": 1872851,
+     "sha256": "18aae43d4b013c62bfe8ccf401f42f3ecda56872aa722ec59128d614c73a6ca2",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t66.png",
+     "bytes": 1820006,
+     "sha256": "af06173a9902a66adcb00d66e3bbbe59b8c7a0c3a0f7524dcb64b99f8ee463f5",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t66_5.png",
+     "bytes": 2148706,
+     "sha256": "d9ef08dc6e2ebb2fc6f9687f0d044e690ceceb7a57a1a6704381f261fe0fc2c2",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t67.png",
+     "bytes": 2157900,
+     "sha256": "329970abaa85b3ed8c093b6732c34d526181945e003cc6e74764b5ed96e5735c",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t67_5.png",
+     "bytes": 2156132,
+     "sha256": "4fa9c8743edf2ca5bb6303b93bb6577c30819e9f9bce1fc63c544908b23c7983",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t69.png",
+     "bytes": 2019994,
+     "sha256": "deaaf676c2b76828a6efb03d5fd932637b43115f49c7785685978c36bd3b7d76",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t6_5.png",
+     "bytes": 2630605,
+     "sha256": "8e88e7f2bc4354d0a8e595497e5ede42baad71d6308b4cdb2a8dcdcd804a186b",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t7.png",
+     "bytes": 2615197,
+     "sha256": "7b05cd06b4c333874492212882583f24d7fe1ef588640237562a50738af7a5b3",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t70.png",
+     "bytes": 2117837,
+     "sha256": "f0a830929b80988ec95479f446312b3e58634c02b9408456b54d79b40aa7e427",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t70_3.png",
+     "bytes": 1877986,
+     "sha256": "6d29450a6e7fdd2784aef6a9c0d5c5bd6fbfb1fa58b74cf30fa367cab002c11c",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t71.png",
+     "bytes": 1892689,
+     "sha256": "a2a5c4c8d5b0dda4c8da0a9179d9815875857dccacf424865910009410d3395e",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t73.png",
+     "bytes": 1968694,
+     "sha256": "50254fd3f0b1fa766a1041eeda174dda09ec40a10b15830668c19c71634a1df4",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t75.png",
+     "bytes": 1758521,
+     "sha256": "6abe32892cd03356ad36ecc2a13252988e45c40fa9bcddfb44631bfe33094f0f",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t77.png",
+     "bytes": 2190915,
+     "sha256": "60422610deea237d8ba63a16df8d48497563ff3ce5aca2dd9ab09835f049fd30",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t78.png",
+     "bytes": 2115839,
+     "sha256": "85dff346495e36588c57704cdb925cb245452418de2e58428d286680383ea798",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t79.png",
+     "bytes": 2282300,
+     "sha256": "6e5eace051f417b67657eb7748f58985ca8531759ef9bb93ff32095af8e8ca11",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t7_8.png",
+     "bytes": 2633500,
+     "sha256": "d0d946b0620450befb8dc43f52458579a8e74017abdb29443c3064d59e8d1549",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t80.png",
+     "bytes": 2382781,
+     "sha256": "9dcda512335ab4509e17abdd3042368a4609af7f0e8c8a53af96db3d521044eb",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t80_5.png",
+     "bytes": 2280079,
+     "sha256": "9e3b0bd0d0aee30daabca992e1fbc97c68a89ade09bb94dd2aeb1b53518b7ae2",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t81.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t82.png",
+     "bytes": 2306274,
+     "sha256": "250fce2d849c3b3af4758a59e516f1b314dc2be638d798a744a296f37c950a63",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t83.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t83_5.png",
+     "bytes": 2300264,
+     "sha256": "d9a55ebec817334884e16f4dfb621f2f5ed761ee41a99428d24c3ef84d1bc3b8",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t84.png",
+     "bytes": 1139156,
+     "sha256": "130d28ba48ba6ca39a76b0d76d2f931be4aedc9bf39f7c29d79324261fb8bb3f",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t85.png",
+     "bytes": 2194727,
+     "sha256": "82b6b8abcc863eddba8a0053dafcd043f06fbbc6e2240cc731d12313c20651bb",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t86_5.png",
+     "bytes": 2163602,
+     "sha256": "b75d03b31224a7e20fbb3db04216382be6891e5822907dc7346a870365f1e06a",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t87.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t87_5.png",
+     "bytes": 2188586,
+     "sha256": "52416ee318697857642ab7f78dfc6e31eb452ffdcb182f97a19e6d3e07fce692",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t88.png",
+     "bytes": 2190020,
+     "sha256": "da467438bb7da2c8cf51f4d7e91020bb94faad26fb4b22b4766ac7e6b32bec9f",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t88_5.png",
+     "bytes": 2189017,
+     "sha256": "ab20c2c83dc61a8c6980f783bdeaf053e052666e27cdc6b4c43d0fc480351c50",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t89_5.png",
+     "bytes": 2313120,
+     "sha256": "db97fe8c9027ed72f2c3f8a7e6939639d82c546afcb951f2abc22cb4ca8e88fb",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t8_5.png",
+     "bytes": 2257289,
+     "sha256": "40793b07eb8258b58e6e2bd6719163ffc07a4c04c5c20d44aeee24cadf8fe0d0",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t9.png",
+     "bytes": 1955961,
+     "sha256": "6cffd5ebe7151f2612e42ffd8d36c6c68a5add0f098741da92512a1b966f9c38",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t90.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t90_5.png",
+     "bytes": 2308277,
+     "sha256": "a6ea4c75007c11a061003e168ed5f88a657065c1a004c7c704d4ab8980a1410d",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t91.png",
+     "bytes": 2322455,
+     "sha256": "6899340d334eb51608f61eeec31a26d894469afea15299267e41f78addd19383",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t93_5.png",
+     "bytes": 2290607,
+     "sha256": "98289144038ec3bcfc4b1fe2878de2b938be95053eea4ad32929c1551b08a6f2",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t94.png",
+     "bytes": 1979666,
+     "sha256": "361c8b52da2fd292339fa9f7dfe43bf65f4a8339a425d279b9466c31f5cc95e3",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t95.png",
+     "bytes": 2175341,
+     "sha256": "a3ef756fc149052719dcfe33debdcb8556512fe02f10c1a68979dbbf98fff7fb",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t96_5.png",
+     "bytes": 8508,
+     "sha256": "82a2e41ba517809f5b58a7da95b52f22e165cd40afabe2fa4b082bc45388d894",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t97.png",
+     "bytes": 2228159,
+     "sha256": "9934eccd874b5169b8f698d909f65b47bbfaf610ac460406adb287b92630bdeb",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t99.png",
+     "bytes": 2067950,
+     "sha256": "21d27e9818769d082d85bd26aac8f36f7f57699fa06b840b331bedcf1ac76d63",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "qa-frames/t9_5.png",
+     "bytes": 2047717,
+     "sha256": "c05e44d671e99253a91353f489b75af4de1374860516ecef3b1de2d7ecb651cc",
+     "kind": "image",
+     "note": "QA / 审片证据图"
+    },
+    {
+     "path": "源码.zip",
+     "bytes": 295831043,
+     "sha256": "2b5a357d22d759744ad97c90512c38cf9adb696a8516175c1e01f576a24ca3ca",
+     "kind": "binary",
+     "note": ""
     }
    ],
    "preview": true

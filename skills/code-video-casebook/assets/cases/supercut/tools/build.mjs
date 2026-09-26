@@ -47,6 +47,7 @@ const TX = E.TEXT;
 
 const coldHTML = `
 <div id="cold" class="layer">
+  <div id="cold-boot">${TX.cold.boot.map((l, i) => `<div class="ln" id="bt${i}">${esc(l)}</div>`).join('')}</div>
   <div id="cold-term"><span class="prompt">$</span><span id="cold-cmd"></span><span class="cursor" id="cold-cursor"></span></div>
   ${TX.cold.nos.map((n, i) => `<div class="cold-no" id="no${i}"><span class="txt">${esc(n.text)}<span class="strike"></span></span></div>`).join('\n  ')}
   <div id="cold-thesis">${esc(TX.cold.thesis)}</div>
@@ -227,7 +228,7 @@ const pillarsHTML = TX.pillars.items
 
 const revealHTML = `
 <div id="reveal" class="layer">
-  <div id="rv-row">${TX.reveal.chars.map((c, i) => `<div class="rv-ch" id="rc${i}">${esc(c)}</div>`).join('')}</div>
+  <div id="rv-row">${TX.reveal.chars.map((c, i) => `<div class="rv-ch" id="rc${i}"><span class="sl sl-t" data-layout-allow-overlap>${esc(c)}</span><span class="sl sl-m" data-layout-allow-overlap>${esc(c)}</span><span class="sl sl-b" data-layout-allow-overlap>${esc(c)}</span></div>`).join('')}</div>
   <div id="rv-en">${esc(TX.reveal.en)}</div>
   <div id="rv-sweep"></div>
 </div>
@@ -258,9 +259,46 @@ const cardHTML = `
   <div id="card-note">${esc(TX.card.note)}</div>
 </div>`;
 
+// 【V2 旗舰】解剖场景：左边该项目真实源码行逐行点亮，右边是它的成片输出
+const pairShots = E.SHOTS.filter((s) => s.type === 'pair');
+const autopsyHTML = `
+<div id="autopsy" class="layer">
+  <div id="at-head" data-layout-allow-overlap><div id="at-title">${esc(TX.autopsy.title)}</div><div id="at-sub">${esc(TX.autopsy.sub)}</div></div>
+${E.PAIRS.map((pr, i) => {
+  const sh = pairShots.find((x) => x.id === pr.shot);
+  const w = byKey[pr.work];
+  return `  <div class="pair" id="pair-${i}" data-layout-allow-overlap>
+    <div class="code-pane">
+      <div class="cp-head"><i></i><i></i><i></i><span class="cp-file" data-layout-allow-overlap>${esc(pr.lines[0].src)}</span><span class="cp-live" data-layout-allow-overlap>● LIVE</span></div>
+      <div class="cp-body">${pr.lines.map((l, j) => `<div class="cl" id="cl-${i}-${j}" data-layout-allow-overlap><span class="ln">${j + 1}</span><span class="lc">${esc(l.line)}</span></div>`).join('')}</div>
+      <div class="cp-foot">▸ render(t) → frame</div>
+    </div>
+    <div class="beam" id="beam-${i}"><i></i><i></i><i></i></div>
+    <div class="film-pane">
+      <div class="film-media">${video(pr.shot, `assets/clips/${pr.shot}.mp4`, sh.b0, sh.b1)}</div>
+      <div class="lock"><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i><span class="lk-tag">TRACKING</span></div>
+      <div class="film-label"><span class="chip" style="--c:${col(pr.work)}">${esc(MODELS[w.model].label)}</span><b>${esc(pr.title)}</b><span class="ft">${esc(pr.tech)}</span></div>
+    </div>
+  </div>`;
+}).join('\n')}
+  <div id="stats">
+${TX.autopsy.stats.map((st, i) => `    <div class="stat" id="st${i}"><b class="sn" id="sn${i}" data-to="${st.num}">0</b><span class="sl2">${esc(st.label)}${esc(st.suffix)}</span></div>`).join('\n')}
+  </div>
+  <div id="at-tail">${esc(TX.autopsy.tail)}</div>
+</div>`;
+
+// 【V2】马拉松闪回：28 部 × 半拍，海报带横扫 + 计数器
+const marathonHTML = `
+<div id="marathon" class="layer">
+  <div id="mar-strip">${WORKS.map((w, i) => `<div class="mtile" id="mt-${w.key}" style="--c:${col(w.key)}"><img src="assets/posters/${w.key}.jpg" alt=""><div class="ml"><i>${String(i + 1).padStart(2, '0')}</i>${esc(w.title)}</div></div>`).join('')}</div>
+  <div id="mar-count"><b id="mar-n">01</b><span>/ 28</span></div>
+  <div id="mar-title">${esc(TX.marathon.title)}</div>
+</div>`;
+
 const outroHTML = `
 <div id="outro" class="layer">
   <div id="out-term"><span class="prompt">$</span><span id="out-cmd"></span><span class="cursor" id="out-cursor"></span></div>
+  <div id="out-self">${esc(TX.outro.self)}</div>
   <div id="out-answer"><span class="arrow">▸</span>${esc(TX.outro.answer)}</div>
   ${TX.outro.credits.map((c, i) => `<div class="credit" id="cr${i}">${esc(c)}</div>`).join('\n  ')}
 </div>
@@ -290,7 +328,7 @@ const runtime = fs.readFileSync(P('src/runtime.js'), 'utf8');
 const DATA = {
   BEAT, FPS: E.FPS, DURATION: E.DURATION, TOTAL_BEATS: E.TOTAL_BEATS,
   SECTIONS: E.SECTIONS, ERAS: E.ERAS, SHOTS: E.SHOTS, GRID: E.GRID, WALL: E.WALL, TUNNEL: E.TUNNEL, TEXT: E.TEXT,
-  STACK_END: E.STACK_END,
+  STACK_END: E.STACK_END, PAIRS: E.PAIRS, MARATHON: E.MARATHON,
   WORKS: WORKS.map((w, i) => ({ key: w.key, model: w.model, color: col(w.key), title: w.title, slot: i })),
   MODELS, firstSeen, CODE_LINES, SHARE, STATS,
   wall: { TW, TH, GAP, x0: wx0, y0: wy0 },
@@ -298,7 +336,7 @@ const DATA = {
 
 const html = `<!doctype html>
 <!--
-  AI-CODING · SUPERVIDEOS —— 合集总片（62.4s · 150 BPM · 1920×1080）
+  AI-CODING · SUPERVIDEOS —— 合集总片 V2（120s · 150 BPM · 1920×1080 → 4K120 输出）
   ⚠ 本文件由 tools/build.mjs 生成，请勿手改。改 src/edl.mjs / src/catalog.mjs / src/runtime.js / src/style.css 后重新 build。
 -->
 <html lang="zh-CN">
@@ -314,7 +352,7 @@ ${css}
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="${E.DURATION}" data-width="1920" data-height="1080" data-fps="60" data-layout-allow-overflow>
   <div id="bg" class="fill"></div>
-  <canvas id="fxback" class="fx" width="1920" height="1080"></canvas>
+  <canvas id="fxback" class="fx" width="3840" height="2160"></canvas>
   <div id="stage" class="fill">
 ${coldHTML}
 ${eraHTML}
@@ -329,11 +367,13 @@ ${tunnelHTML}
 ${wallHTML}
 ${breathHTML}
 ${flyersHTML}
+${autopsyHTML}
+${marathonHTML}
 ${revealHTML}
 ${cardHTML}
 ${outroHTML}
   </div>
-  <canvas id="fxfront" class="fx" width="1920" height="1080" data-layout-allow-occlusion></canvas>
+  <canvas id="fxfront" class="fx" width="3840" height="2160" data-layout-allow-occlusion></canvas>
   <div id="vignette"></div>
   <div id="scanlines"></div>
   <div id="lbx-top" class="lbx"></div>

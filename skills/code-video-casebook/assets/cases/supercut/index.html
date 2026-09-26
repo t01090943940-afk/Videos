@@ -1,6 +1,6 @@
 <!doctype html>
 <!--
-  AI-CODING · SUPERVIDEOS —— 合集总片（62.4s · 150 BPM · 1920×1080）
+  AI-CODING · SUPERVIDEOS —— 合集总片 V2（120s · 150 BPM · 1920×1080 → 4K120 输出）
   ⚠ 本文件由 tools/build.mjs 生成，请勿手改。改 src/edl.mjs / src/catalog.mjs / src/runtime.js / src/style.css 后重新 build。
 -->
 <html lang="zh-CN">
@@ -304,15 +304,96 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
 #scanlines { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; pointer-events: none; opacity: 0.07;
   background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0 1px, transparent 1px 3px); }
 
+/* ═══════════════════════ V2 · 120s / 4K120 ═══════════════════════════════ */
+
+/* ── 冷开场 boot 日志 ─────────────────────────────────────────────────── */
+#cold-boot {
+  position: absolute; left: 120px; top: 110px; font-family: var(--mono); font-size: 26px;
+  color: var(--dim); line-height: 2.1; letter-spacing: 0.04em;
+}
+#cold-boot .ok { color: var(--kimi); }
+#cold-boot .ln { opacity: 0; }
+
+/* ── 解剖场景：左真实源码 / 右成片输出 ────────────────────────────────── */
+#autopsy { }
+#at-head { position: absolute; left: 96px; top: 84px; display: flex; align-items: baseline; gap: 28px; }
+#at-title { font-family: var(--serif); font-weight: 900; font-size: 88px; letter-spacing: 0.04em; }
+#at-sub { font-family: var(--mono); font-size: 24px; color: var(--dim); letter-spacing: 0.1em; }
+.pair { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; opacity: 0; }
+.code-pane {
+  position: absolute; left: 96px; top: 216px; width: 830px; height: 620px; border-radius: 14px;
+  background: #0b0d12; border: 1.5px solid rgba(255,255,255,0.14); overflow: hidden;
+  box-shadow: 0 30px 90px rgba(0,0,0,.65);
+}
+.cp-head { height: 42px; display: flex; align-items: center; gap: 9px; padding: 0 16px;
+  background: linear-gradient(#1b1e26,#13151b); border-bottom: 1px solid rgba(255,255,255,0.08); }
+.cp-head i { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; }
+.cp-head i:nth-child(2) { background: #febc2e; } .cp-head i:nth-child(3) { background: #28c840; }
+.cp-file { margin-left: 12px; font-family: var(--mono); font-size: 17px; color: rgba(255,255,255,0.72); white-space: nowrap; overflow: hidden; }
+.cp-live { margin-left: auto; font-family: var(--num); font-weight: 800; font-size: 15px; color: var(--red); letter-spacing: .12em; }
+.cp-body { padding: 18px 0; }
+.cl { display: flex; font-family: var(--mono); font-size: 20px; line-height: 2.0; color: rgba(243,239,230,.38); white-space: nowrap; }
+.cl .ln { width: 52px; text-align: right; padding-right: 18px; color: rgba(255,255,255,0.2); flex: none; }
+.cl .lc { overflow: hidden; text-overflow: ellipsis; }
+.cl.hot { color: #fff; background: linear-gradient(90deg, rgba(255,122,61,.16), transparent 80%); }
+.cl.hot .lc { text-shadow: 0 0 18px rgba(255,122,61,.5); }
+.cl.hot .ln { color: var(--orange); }
+.cp-foot { position: absolute; left: 0; bottom: 0; width: 100%; padding: 10px 18px; font-family: var(--mono); font-size: 16px; color: var(--kimi); border-top: 1px solid rgba(255,255,255,0.08); background: #0d1017; }
+.beam { position: absolute; left: 926px; top: 526px; width: 120px; height: 2px; }
+.beam i { position: absolute; left: 0; top: 0; height: 2px; width: 100%; background: linear-gradient(90deg, var(--orange), transparent); transform-origin: 0 50%; }
+.film-pane { position: absolute; left: 1046px; top: 216px; width: 780px; height: 440px; }
+.film-media { position: absolute; left: 0; top: 0; width: 780px; height: 440px; overflow: hidden; border-radius: 10px;
+  box-shadow: 0 30px 90px rgba(0,0,0,.65), 0 0 0 1.5px rgba(255,255,255,0.16); }
+.lock { position: absolute; inset: -18px; pointer-events: none; }
+.lock .c { position: absolute; width: 34px; height: 34px; border: 3px solid var(--orange); }
+.lock .tl { left: 0; top: 0; border-right: 0; border-bottom: 0; }
+.lock .tr { right: 0; top: 0; border-left: 0; border-bottom: 0; }
+.lock .bl { left: 0; bottom: 0; border-right: 0; border-top: 0; }
+.lock .br { right: 0; bottom: 0; border-left: 0; border-top: 0; }
+.lk-tag { position: absolute; left: 50%; top: -2px; transform: translateX(-50%); font-family: var(--num); font-weight: 800; font-size: 15px; letter-spacing: .3em; color: var(--orange); }
+.film-label { position: absolute; left: 0; top: 480px; display: flex; align-items: center; gap: 16px; white-space: nowrap; }
+.film-label .chip { padding: 4px 14px; border-radius: 6px; background: var(--c); color: #0a0a0a; font-family: var(--num); font-weight: 800; font-size: 20px; letter-spacing: .14em; }
+.film-label b { font-family: var(--serif); font-weight: 900; font-size: 44px; }
+.film-label .ft { font-family: var(--sans); font-weight: 700; font-size: 22px; color: var(--dim); }
+#stats { position: absolute; left: 0; top: 880px; width: 1920px; display: flex; justify-content: center; gap: 120px; }
+.stat { display: flex; align-items: baseline; gap: 14px; opacity: 0; }
+.stat .sn { font-family: var(--num); font-weight: 900; font-size: 84px; color: var(--ink); }
+.stat .sl2 { font-family: var(--sans); font-weight: 700; font-size: 26px; color: var(--dim); white-space: nowrap; }
+#at-tail { position: absolute; left: 0; top: 990px; width: 1920px; text-align: center; font-family: var(--mono); font-size: 24px; color: var(--kimi); letter-spacing: .14em; opacity: 0; }
+
+/* ── 马拉松：28 部 × 半拍海报带 ────────────────────────────────────────── */
+#mar-strip { position: absolute; left: 0; top: 330px; height: 420px; }
+.mtile { position: absolute; left: 0; top: 0; width: 640px; height: 360px; border-radius: 10px; overflow: hidden;
+  outline: 2px solid var(--c); box-shadow: 0 24px 80px rgba(0,0,0,.6); }
+.mtile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mtile .ml { position: absolute; left: 0; bottom: 0; width: 100%; padding: 40px 18px 12px; background: linear-gradient(transparent, rgba(0,0,0,.85));
+  font-family: var(--serif); font-weight: 900; font-size: 30px; white-space: nowrap; }
+.mtile .ml i { font-style: normal; font-family: var(--num); font-weight: 800; font-size: 20px; color: var(--c); margin-right: 10px; letter-spacing: .1em; }
+#mar-count { position: absolute; left: 0; top: 130px; width: 1920px; text-align: center; font-family: var(--num); font-weight: 900; }
+#mar-count b { font-size: 130px; color: var(--orange); }
+#mar-count span { font-size: 52px; color: var(--dim); }
+#mar-title { position: absolute; left: 0; top: 880px; width: 1920px; text-align: center; font-family: var(--serif); font-weight: 900; font-size: 64px; letter-spacing: .1em; }
+
+/* ── 通通开源 · 切片爆发式排版 ────────────────────────────────────────── */
+.rv-ch { position: relative; }
+.rv-ch .sl { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+.rv-ch .sl-t { clip-path: inset(0 0 62% 0); }
+.rv-ch .sl-m { clip-path: inset(38% 0 30% 0); }
+.rv-ch .sl-b { clip-path: inset(70% 0 0 0); }
+
+/* ── 尾声 · 自指行 ────────────────────────────────────────────────────── */
+#out-self { position: absolute; left: 0; top: 412px; width: 1920px; text-align: center; font-family: var(--mono); font-size: 26px; color: var(--kimi); letter-spacing: .1em; opacity: 0; }
+
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="62.400000000000006" data-width="1920" data-height="1080" data-fps="60" data-layout-allow-overflow>
+<div id="root" data-composition-id="main" data-start="0" data-duration="120" data-width="1920" data-height="1080" data-fps="60" data-layout-allow-overflow>
   <div id="bg" class="fill"></div>
-  <canvas id="fxback" class="fx" width="1920" height="1080"></canvas>
+  <canvas id="fxback" class="fx" width="3840" height="2160"></canvas>
   <div id="stage" class="fill">
 
 <div id="cold" class="layer">
+  <div id="cold-boot"><div class="ln" id="bt0">&gt; mount AI-Coding-SuperVideos</div><div class="ln" id="bt1">&gt; 28 modules · 2.39 GB</div><div class="ln" id="bt2">&gt; ok</div></div>
   <div id="cold-term"><span class="prompt">$</span><span id="cold-cmd"></span><span class="cursor" id="cold-cursor"></span></div>
   <div class="cold-no" id="no0"><span class="txt">没有 AE<span class="strike"></span></span></div>
   <div class="cold-no" id="no1"><span class="txt">没有 PR<span class="strike"></span></span></div>
@@ -361,79 +442,99 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
 <div id="stack" class="layer"><div id="stack-cam">
   <div class="win" id="win-w01" style="--c:#3CF0C8">
     <div class="win-bar"><i></i><i></i><i></i><div class="win-title" data-layout-allow-overlap><b>KIMI</b> · kimi-ai-beat-sync/ai-beat-sync.mp4 — 1080p · 30fps · 51s</div></div>
-    <div class="win-body"><video id="v-w01" src="assets/clips/w01.mp4" data-start="7.6" data-duration="9.2" data-track-index="1" muted playsinline></video></div>
+    <div class="win-body"><video id="v-w01" src="assets/clips/w01.mp4" data-start="9.2" data-duration="14" data-track-index="1" muted playsinline></video></div>
     <div class="win-shade"></div>
   </div>
   <div class="win" id="win-w02" style="--c:#3CF0C8">
     <div class="win-bar"><i></i><i></i><i></i><div class="win-title" data-layout-allow-overlap><b>KIMI</b> · kimi-ai-beat-sync/ai-beat-sync.mp4 — 1080p · 30fps · 51s</div></div>
-    <div class="win-body"><video id="v-w02" src="assets/clips/w02.mp4" data-start="8.4" data-duration="8.4" data-track-index="2" muted playsinline></video></div>
+    <div class="win-body"><video id="v-w02" src="assets/clips/w02.mp4" data-start="10" data-duration="13.2" data-track-index="2" muted playsinline></video></div>
     <div class="win-shade"></div>
   </div>
   <div class="win" id="win-w03" style="--c:#3CF0C8">
     <div class="win-bar"><i></i><i></i><i></i><div class="win-title" data-layout-allow-overlap><b>KIMI</b> · kimi-ai-beat-sync/ai-beat-sync.mp4 — 1080p · 30fps · 51s</div></div>
-    <div class="win-body"><video id="v-w03" src="assets/clips/w03.mp4" data-start="9.2" data-duration="7.6" data-track-index="3" muted playsinline></video></div>
+    <div class="win-body"><video id="v-w03" src="assets/clips/w03.mp4" data-start="10.8" data-duration="12.4" data-track-index="3" muted playsinline></video></div>
     <div class="win-shade"></div>
   </div>
   <div class="win" id="win-w04" style="--c:#3CF0C8">
     <div class="win-bar"><i></i><i></i><i></i><div class="win-title" data-layout-allow-overlap><b>KIMI</b> · kimi-ai-beat-sync/ai-beat-sync.mp4 — 1080p · 30fps · 51s</div></div>
-    <div class="win-body"><video id="v-w04" src="assets/clips/w04.mp4" data-start="10" data-duration="6.8" data-track-index="4" muted playsinline></video></div>
+    <div class="win-body"><video id="v-w04" src="assets/clips/w04.mp4" data-start="11.6" data-duration="11.6" data-track-index="4" muted playsinline></video></div>
     <div class="win-shade"></div>
   </div>
-  <div class="win" id="win-w05" style="--c:#7CC4FF">
-    <div class="win-bar"><i></i><i></i><i></i><div class="win-title" data-layout-allow-overlap><b>SWE</b> · swe-ai-rise/kimi_ai_rise_v2.mp4 — 1080p · 30fps · 40s</div></div>
-    <div class="win-body"><video id="v-w05" src="assets/clips/w05.mp4" data-start="12" data-duration="4.8" data-track-index="5" muted playsinline></video></div>
+  <div class="win" id="win-w05" style="--c:#3CF0C8">
+    <div class="win-bar"><i></i><i></i><i></i><div class="win-title" data-layout-allow-overlap><b>KIMI</b> · kimi-ai-beat-sync/ai-beat-sync.mp4 — 1080p · 30fps · 51s</div></div>
+    <div class="win-body"><video id="v-w05" src="assets/clips/w05.mp4" data-start="12.4" data-duration="10.8" data-track-index="5" muted playsinline></video></div>
     <div class="win-shade"></div>
   </div>
-  <div class="win" id="win-w06" style="--c:#7CC4FF">
-    <div class="win-bar"><i></i><i></i><i></i><div class="win-title" data-layout-allow-overlap><b>SWE</b> · swe-ai-rise/kimi_ai_rise_v2.mp4 — 1080p · 30fps · 40s</div></div>
-    <div class="win-body"><video id="v-w06" src="assets/clips/w06.mp4" data-start="12.8" data-duration="4" data-track-index="6" muted playsinline></video></div>
+  <div class="win" id="win-w06" style="--c:#3CF0C8">
+    <div class="win-bar"><i></i><i></i><i></i><div class="win-title" data-layout-allow-overlap><b>KIMI</b> · kimi-ai-beat-sync/ai-beat-sync.mp4 — 1080p · 30fps · 51s</div></div>
+    <div class="win-body"><video id="v-w06" src="assets/clips/w06.mp4" data-start="13.2" data-duration="10" data-track-index="6" muted playsinline></video></div>
     <div class="win-shade"></div>
   </div>
   <div class="win" id="win-w07" style="--c:#7CC4FF">
-    <div class="win-bar"><i></i><i></i><i></i><div class="win-title" data-layout-allow-overlap><b>SWE</b> · swe-kimi-source-intro/kimi_film_1080p.mp4 — 1080p · 30fps · 56s</div></div>
-    <div class="win-body"><video id="v-w07" src="assets/clips/w07.mp4" data-start="13.6" data-duration="3.2" data-track-index="7" muted playsinline></video></div>
+    <div class="win-bar"><i></i><i></i><i></i><div class="win-title" data-layout-allow-overlap><b>SWE</b> · swe-ai-rise/kimi_ai_rise_v2.mp4 — 1080p · 30fps · 40s</div></div>
+    <div class="win-body"><video id="v-w07" src="assets/clips/w07.mp4" data-start="14.8" data-duration="8.4" data-track-index="7" muted playsinline></video></div>
     <div class="win-shade"></div>
   </div>
   <div class="win" id="win-w08" style="--c:#7CC4FF">
-    <div class="win-bar"><i></i><i></i><i></i><div class="win-title" data-layout-allow-overlap><b>SWE</b> · swe-kimi-source-intro/kimi_film_1080p.mp4 — 1080p · 30fps · 56s</div></div>
-    <div class="win-body"><video id="v-w08" src="assets/clips/w08.mp4" data-start="14.4" data-duration="2.4" data-track-index="8" muted playsinline></video></div>
+    <div class="win-bar"><i></i><i></i><i></i><div class="win-title" data-layout-allow-overlap><b>SWE</b> · swe-ai-rise/kimi_ai_rise_v2.mp4 — 1080p · 30fps · 40s</div></div>
+    <div class="win-body"><video id="v-w08" src="assets/clips/w08.mp4" data-start="15.6" data-duration="7.6" data-track-index="8" muted playsinline></video></div>
     <div class="win-shade"></div>
   </div>
   <div class="win" id="win-w09" style="--c:#7CC4FF">
-    <div class="win-bar"><i></i><i></i><i></i><div class="win-title" data-layout-allow-overlap><b>SWE</b> · swe-ai-rise/kimi_ai_rise_v2.mp4 — 1080p · 30fps · 40s</div></div>
-    <div class="win-body"><video id="v-w09" src="assets/clips/w09.mp4" data-start="15.2" data-duration="1.6" data-track-index="9" muted playsinline></video></div>
+    <div class="win-bar"><i></i><i></i><i></i><div class="win-title" data-layout-allow-overlap><b>SWE</b> · swe-kimi-source-intro/kimi_film_1080p.mp4 — 1080p · 30fps · 56s</div></div>
+    <div class="win-body"><video id="v-w09" src="assets/clips/w09.mp4" data-start="16.4" data-duration="6.8" data-track-index="9" muted playsinline></video></div>
     <div class="win-shade"></div>
   </div>
   <div class="win" id="win-w10" style="--c:#7CC4FF">
     <div class="win-bar"><i></i><i></i><i></i><div class="win-title" data-layout-allow-overlap><b>SWE</b> · swe-kimi-source-intro/kimi_film_1080p.mp4 — 1080p · 30fps · 56s</div></div>
-    <div class="win-body"><video id="v-w10" src="assets/clips/w10.mp4" data-start="16" data-duration="0.8" data-track-index="10" muted playsinline></video></div>
+    <div class="win-body"><video id="v-w10" src="assets/clips/w10.mp4" data-start="17.2" data-duration="6" data-track-index="10" muted playsinline></video></div>
+    <div class="win-shade"></div>
+  </div>
+  <div class="win" id="win-w11" style="--c:#7CC4FF">
+    <div class="win-bar"><i></i><i></i><i></i><div class="win-title" data-layout-allow-overlap><b>SWE</b> · swe-ai-rise/kimi_ai_rise_v2.mp4 — 1080p · 30fps · 40s</div></div>
+    <div class="win-body"><video id="v-w11" src="assets/clips/w11.mp4" data-start="18" data-duration="5.2" data-track-index="11" muted playsinline></video></div>
+    <div class="win-shade"></div>
+  </div>
+  <div class="win" id="win-w12" style="--c:#7CC4FF">
+    <div class="win-bar"><i></i><i></i><i></i><div class="win-title" data-layout-allow-overlap><b>SWE</b> · swe-kimi-source-intro/kimi_film_1080p.mp4 — 1080p · 30fps · 56s</div></div>
+    <div class="win-body"><video id="v-w12" src="assets/clips/w12.mp4" data-start="18.8" data-duration="4.4" data-track-index="12" muted playsinline></video></div>
+    <div class="win-shade"></div>
+  </div>
+  <div class="win" id="win-w13" style="--c:#7CC4FF">
+    <div class="win-bar"><i></i><i></i><i></i><div class="win-title" data-layout-allow-overlap><b>SWE</b> · swe-ai-rise/kimi_ai_rise_v2.mp4 — 1080p · 30fps · 40s</div></div>
+    <div class="win-body"><video id="v-w13" src="assets/clips/w13.mp4" data-start="19.6" data-duration="3.6" data-track-index="13" muted playsinline></video></div>
+    <div class="win-shade"></div>
+  </div>
+  <div class="win" id="win-w14" style="--c:#7CC4FF">
+    <div class="win-bar"><i></i><i></i><i></i><div class="win-title" data-layout-allow-overlap><b>SWE</b> · swe-kimi-source-intro/kimi_film_1080p.mp4 — 1080p · 30fps · 56s</div></div>
+    <div class="win-body"><video id="v-w14" src="assets/clips/w14.mp4" data-start="20.4" data-duration="2.8" data-track-index="14" muted playsinline></video></div>
     <div class="win-shade"></div>
   </div>
 </div></div>
 
 <div id="grid" class="layer">
-  <div class="gtile" id="gt0"><video id="v-g0" src="assets/clips/grid-00.mp4" data-start="18" data-duration="2.4" data-track-index="11" muted playsinline></video></div>
-  <div class="gtile" id="gt1"><video id="v-g1" src="assets/clips/grid-01.mp4" data-start="18" data-duration="2.4" data-track-index="12" muted playsinline></video></div>
-  <div class="gtile" id="gt2"><video id="v-g2" src="assets/clips/grid-02.mp4" data-start="18" data-duration="2.4" data-track-index="13" muted playsinline></video></div>
-  <div class="gtile" id="gt3"><video id="v-g3" src="assets/clips/grid-03.mp4" data-start="18" data-duration="2.4" data-track-index="14" muted playsinline></video></div>
-  <div class="gtile" id="gt4"><video id="v-g4" src="assets/clips/grid-04.mp4" data-start="18" data-duration="2.4" data-track-index="15" muted playsinline></video></div>
-  <div class="gtile" id="gt5"><video id="v-g5" src="assets/clips/grid-05.mp4" data-start="18" data-duration="2.4" data-track-index="16" muted playsinline></video></div>
-  <div class="gtile" id="gt6"><video id="v-g6" src="assets/clips/grid-06.mp4" data-start="18" data-duration="2.4" data-track-index="17" muted playsinline></video></div>
-  <div class="gtile" id="gt7"><video id="v-g7" src="assets/clips/grid-07.mp4" data-start="18" data-duration="2.4" data-track-index="18" muted playsinline></video></div>
-  <div class="gtile" id="gt8"><video id="v-g8" src="assets/clips/grid-08.mp4" data-start="18" data-duration="2.4" data-track-index="19" muted playsinline></video></div>
-  <div class="gtile" id="gt9"><video id="v-g9" src="assets/clips/grid-09.mp4" data-start="18" data-duration="2.4" data-track-index="20" muted playsinline></video></div>
-  <div class="gtile" id="gt10"><video id="v-g10" src="assets/clips/grid-10.mp4" data-start="18" data-duration="2.4" data-track-index="21" muted playsinline></video></div>
-  <div class="gtile" id="gt11"><video id="v-g11" src="assets/clips/grid-11.mp4" data-start="18" data-duration="2.4" data-track-index="22" muted playsinline></video></div>
-  <div class="gtile" id="gt12"><video id="v-g12" src="assets/clips/grid-12.mp4" data-start="18" data-duration="2.4" data-track-index="23" muted playsinline></video></div>
-  <div class="gtile" id="gt13"><video id="v-g13" src="assets/clips/grid-13.mp4" data-start="18" data-duration="2.4" data-track-index="24" muted playsinline></video></div>
-  <div class="gtile" id="gt14"><video id="v-g14" src="assets/clips/grid-14.mp4" data-start="18" data-duration="2.4" data-track-index="25" muted playsinline></video></div>
-  <div class="gtile" id="gt15"><video id="v-g15" src="assets/clips/grid-15.mp4" data-start="18" data-duration="2.4" data-track-index="26" muted playsinline></video></div>
+  <div class="gtile" id="gt0"><video id="v-g0" src="assets/clips/grid-00.mp4" data-start="24.4" data-duration="2.4" data-track-index="15" muted playsinline></video></div>
+  <div class="gtile" id="gt1"><video id="v-g1" src="assets/clips/grid-01.mp4" data-start="24.4" data-duration="2.4" data-track-index="16" muted playsinline></video></div>
+  <div class="gtile" id="gt2"><video id="v-g2" src="assets/clips/grid-02.mp4" data-start="24.4" data-duration="2.4" data-track-index="17" muted playsinline></video></div>
+  <div class="gtile" id="gt3"><video id="v-g3" src="assets/clips/grid-03.mp4" data-start="24.4" data-duration="2.4" data-track-index="18" muted playsinline></video></div>
+  <div class="gtile" id="gt4"><video id="v-g4" src="assets/clips/grid-04.mp4" data-start="24.4" data-duration="2.4" data-track-index="19" muted playsinline></video></div>
+  <div class="gtile" id="gt5"><video id="v-g5" src="assets/clips/grid-05.mp4" data-start="24.4" data-duration="2.4" data-track-index="20" muted playsinline></video></div>
+  <div class="gtile" id="gt6"><video id="v-g6" src="assets/clips/grid-06.mp4" data-start="24.4" data-duration="2.4" data-track-index="21" muted playsinline></video></div>
+  <div class="gtile" id="gt7"><video id="v-g7" src="assets/clips/grid-07.mp4" data-start="24.4" data-duration="2.4" data-track-index="22" muted playsinline></video></div>
+  <div class="gtile" id="gt8"><video id="v-g8" src="assets/clips/grid-08.mp4" data-start="24.4" data-duration="2.4" data-track-index="23" muted playsinline></video></div>
+  <div class="gtile" id="gt9"><video id="v-g9" src="assets/clips/grid-09.mp4" data-start="24.4" data-duration="2.4" data-track-index="24" muted playsinline></video></div>
+  <div class="gtile" id="gt10"><video id="v-g10" src="assets/clips/grid-10.mp4" data-start="24.4" data-duration="2.4" data-track-index="25" muted playsinline></video></div>
+  <div class="gtile" id="gt11"><video id="v-g11" src="assets/clips/grid-11.mp4" data-start="24.4" data-duration="2.4" data-track-index="26" muted playsinline></video></div>
+  <div class="gtile" id="gt12"><video id="v-g12" src="assets/clips/grid-12.mp4" data-start="24.4" data-duration="2.4" data-track-index="27" muted playsinline></video></div>
+  <div class="gtile" id="gt13"><video id="v-g13" src="assets/clips/grid-13.mp4" data-start="24.4" data-duration="2.4" data-track-index="28" muted playsinline></video></div>
+  <div class="gtile" id="gt14"><video id="v-g14" src="assets/clips/grid-14.mp4" data-start="24.4" data-duration="2.4" data-track-index="29" muted playsinline></video></div>
+  <div class="gtile" id="gt15"><video id="v-g15" src="assets/clips/grid-15.mp4" data-start="24.4" data-duration="2.4" data-track-index="30" muted playsinline></video></div>
   <div id="grid-label"><span class="big">×30</span><span class="small">种画风，一支片</span></div>
 </div>
 
 <div id="full" class="layer" style="opacity:1">
-  <div class="shot" id="shot-g01">
-    <div class="shot-media"><video id="v-g01" src="assets/clips/g01.mp4" data-start="20.4" data-duration="0.4" data-track-index="27" muted playsinline></video></div>
+  <div class="shot" id="shot-f01">
+    <div class="shot-media"><video id="v-f01" src="assets/clips/f01.mp4" data-start="26.8" data-duration="0.4" data-track-index="31" muted playsinline></video></div>
     <div class="label" style="--c:#A98BFF">
       <div class="row1"><span class="chip">GPT</span><span class="spec">gpt-15-style-ai-beyond-generation</span></div>
       <span class="title">AI · Beyond Generation</span>
@@ -441,8 +542,8 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
       <span class="spec">1080p · 30fps · 120s</span>
     </div>
   </div>
-  <div class="shot" id="shot-g02">
-    <div class="shot-media"><video id="v-g02" src="assets/clips/g02.mp4" data-start="20.8" data-duration="0.4" data-track-index="28" muted playsinline></video></div>
+  <div class="shot" id="shot-f02">
+    <div class="shot-media"><video id="v-f02" src="assets/clips/f02.mp4" data-start="27.2" data-duration="0.4" data-track-index="32" muted playsinline></video></div>
     <div class="label" style="--c:#A98BFF">
       <div class="row1"><span class="chip">GPT</span><span class="spec">gpt-15-style-ai-beyond-generation</span></div>
       <span class="title">AI · Beyond Generation</span>
@@ -450,8 +551,17 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
       <span class="spec">1080p · 30fps · 120s</span>
     </div>
   </div>
-  <div class="shot" id="shot-g03">
-    <div class="shot-media"><video id="v-g03" src="assets/clips/g03.mp4" data-start="21.2" data-duration="0.4" data-track-index="29" muted playsinline></video></div>
+  <div class="shot" id="shot-f03">
+    <div class="shot-media"><video id="v-f03" src="assets/clips/f03.mp4" data-start="27.6" data-duration="0.4" data-track-index="33" muted playsinline></video></div>
+    <div class="label" style="--c:#A98BFF">
+      <div class="row1"><span class="chip">GPT</span><span class="spec">gpt-15-style-ai-beyond-generation</span></div>
+      <span class="title">AI · Beyond Generation</span>
+      <span class="tech">15 个世界 · 发条城</span>
+      <span class="spec">1080p · 30fps · 120s</span>
+    </div>
+  </div>
+  <div class="shot" id="shot-f04">
+    <div class="shot-media"><video id="v-f04" src="assets/clips/f04.mp4" data-start="28" data-duration="0.4" data-track-index="34" muted playsinline></video></div>
     <div class="label" style="--c:#A98BFF">
       <div class="row1"><span class="chip">GPT</span><span class="spec">gpt-15-style-ai-beyond-generation</span></div>
       <span class="title">AI · Beyond Generation</span>
@@ -459,8 +569,17 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
       <span class="spec">1080p · 30fps · 120s</span>
     </div>
   </div>
-  <div class="shot" id="shot-g04">
-    <div class="shot-media"><video id="v-g04" src="assets/clips/g04.mp4" data-start="21.6" data-duration="0.4" data-track-index="30" muted playsinline></video></div>
+  <div class="shot" id="shot-f05">
+    <div class="shot-media"><video id="v-f05" src="assets/clips/f05.mp4" data-start="28.4" data-duration="0.4" data-track-index="35" muted playsinline></video></div>
+    <div class="label" style="--c:#A98BFF">
+      <div class="row1"><span class="chip">GPT</span><span class="spec">gpt-15-style-ai-beyond-generation</span></div>
+      <span class="title">AI · Beyond Generation</span>
+      <span class="tech">15 个世界 · 浮世绘</span>
+      <span class="spec">1080p · 30fps · 120s</span>
+    </div>
+  </div>
+  <div class="shot" id="shot-f06">
+    <div class="shot-media"><video id="v-f06" src="assets/clips/f06.mp4" data-start="28.8" data-duration="0.4" data-track-index="36" muted playsinline></video></div>
     <div class="label" style="--c:#A98BFF">
       <div class="row1"><span class="chip">GPT</span><span class="spec">gpt-15-style-ai-beyond-generation</span></div>
       <span class="title">AI · Beyond Generation</span>
@@ -468,8 +587,8 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
       <span class="spec">1080p · 30fps · 120s</span>
     </div>
   </div>
-  <div class="shot" id="shot-g05">
-    <div class="shot-media"><video id="v-g05" src="assets/clips/g05.mp4" data-start="22" data-duration="0.4" data-track-index="31" muted playsinline></video></div>
+  <div class="shot" id="shot-f07">
+    <div class="shot-media"><video id="v-f07" src="assets/clips/f07.mp4" data-start="29.2" data-duration="0.4" data-track-index="37" muted playsinline></video></div>
     <div class="label" style="--c:#A98BFF">
       <div class="row1"><span class="chip">GPT</span><span class="spec">gpt-15-style-ai-beyond-generation</span></div>
       <span class="title">AI · Beyond Generation</span>
@@ -477,8 +596,8 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
       <span class="spec">1080p · 30fps · 120s</span>
     </div>
   </div>
-  <div class="shot" id="shot-g06">
-    <div class="shot-media"><video id="v-g06" src="assets/clips/g06.mp4" data-start="22.4" data-duration="0.4" data-track-index="32" muted playsinline></video></div>
+  <div class="shot" id="shot-f08">
+    <div class="shot-media"><video id="v-f08" src="assets/clips/f08.mp4" data-start="29.6" data-duration="0.4" data-track-index="38" muted playsinline></video></div>
     <div class="label" style="--c:#A98BFF">
       <div class="row1"><span class="chip">GPT</span><span class="spec">gpt-15-style-ai-beyond-generation</span></div>
       <span class="title">AI · Beyond Generation</span>
@@ -486,8 +605,8 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
       <span class="spec">1080p · 30fps · 120s</span>
     </div>
   </div>
-  <div class="shot" id="shot-g07">
-    <div class="shot-media"><video id="v-g07" src="assets/clips/g07.mp4" data-start="22.8" data-duration="0.8" data-track-index="33" muted playsinline></video></div>
+  <div class="shot" id="shot-f09">
+    <div class="shot-media"><video id="v-f09" src="assets/clips/f09.mp4" data-start="30" data-duration="0.8" data-track-index="39" muted playsinline></video></div>
     <div class="label" style="--c:#A98BFF">
       <div class="row1"><span class="chip">GPT</span><span class="spec">gpt-mid-autumn-general-video</span></div>
       <span class="title">把日子，慢慢过圆</span>
@@ -495,98 +614,8 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
       <span class="spec">1080p · 60fps · 60s</span>
     </div>
   </div>
-  <div class="shot" id="shot-h01">
-    <div class="shot-media"><video id="v-h01" src="assets/clips/h01.mp4" data-start="25.6" data-duration="0.8" data-track-index="34" muted playsinline></video></div>
-    <div class="label" style="--c:#FF7A3D">
-      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-broken-reround</span></div>
-      <span class="title">碎月重圆</span>
-      <span class="tech">自写 3D 合成器 · Voronoi 碎裂</span>
-      <span class="spec">1080p · 30fps · 30s</span>
-    </div>
-  </div>
-  <div class="shot" id="shot-h02">
-    <div class="shot-media"><video id="v-h02" src="assets/clips/h02.mp4" data-start="26.4" data-duration="0.4" data-track-index="35" muted playsinline></video></div>
-    <div class="label" style="--c:#FF7A3D">
-      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-oneink</span></div>
-      <span class="title">一畫</span>
-      <span class="tech">逆锋压笔 · 泼墨一笔</span>
-      <span class="spec">1080p · 30fps · 60s</span>
-    </div>
-  </div>
-  <div class="shot" id="shot-h03">
-    <div class="shot-media"><video id="v-h03" src="assets/clips/h03.mp4" data-start="26.8" data-duration="0.4" data-track-index="36" muted playsinline></video></div>
-    <div class="label" style="--c:#FF7A3D">
-      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-factory-safety-videos</span></div>
-      <span class="title">定格</span>
-      <span class="tech">Three.js 定格 · 慢动作坠落</span>
-      <span class="spec">1440p · 60fps · 87s</span>
-    </div>
-  </div>
-  <div class="shot" id="shot-h04">
-    <div class="shot-media"><video id="v-h04" src="assets/clips/h04.mp4" data-start="27.2" data-duration="0.4" data-track-index="37" muted playsinline></video></div>
-    <div class="label" style="--c:#FF7A3D">
-      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-claude-intro-with-15-way</span></div>
-      <span class="title">Claude 自我介绍 · 15 种画风</span>
-      <span class="tech">15 种画风 · 体素</span>
-      <span class="spec">1080p · 30fps · 114s</span>
-    </div>
-  </div>
-  <div class="shot" id="shot-h05">
-    <div class="shot-media"><video id="v-h05" src="assets/clips/h05.mp4" data-start="27.6" data-duration="0.4" data-track-index="38" muted playsinline></video></div>
-    <div class="label" style="--c:#FF7A3D">
-      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-production-video-protocom-intro</span></div>
-      <span class="title">protocom</span>
-      <span class="tech">4K 60fps 定版</span>
-      <span class="spec">4K · 60fps · 80s</span>
-    </div>
-  </div>
-  <div class="shot" id="shot-h06">
-    <div class="shot-media"><video id="v-h06" src="assets/clips/h06.mp4" data-start="28" data-duration="0.4" data-track-index="39" muted playsinline></video></div>
-    <div class="label" style="--c:#FF7A3D">
-      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-universe-history-video</span></div>
-      <span class="title">代码宇宙</span>
-      <span class="tech">4D 超立方体</span>
-      <span class="spec">1080p · 24fps · 68s</span>
-    </div>
-  </div>
-  <div class="shot" id="shot-h07">
-    <div class="shot-media"><video id="v-h07" src="assets/clips/h07.mp4" data-start="28.4" data-duration="0.4" data-track-index="40" muted playsinline></video></div>
-    <div class="label" style="--c:#FF7A3D">
-      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-broken-reround</span></div>
-      <span class="title">碎月重圆</span>
-      <span class="tech">MoGraph 魔方墙 · 336 立方体</span>
-      <span class="spec">1080p · 30fps · 30s</span>
-    </div>
-  </div>
-  <div class="shot" id="shot-h08">
-    <div class="shot-media"><video id="v-h08" src="assets/clips/h08.mp4" data-start="28.8" data-duration="0.4" data-track-index="41" muted playsinline></video></div>
-    <div class="label" style="--c:#FF7A3D">
-      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-production-video-ai-phase-skill</span></div>
-      <span class="title">Phase-Gate 升维</span>
-      <span class="tech">升维 · 曲速</span>
-      <span class="spec">1080p · 60fps · 30s</span>
-    </div>
-  </div>
-  <div class="shot" id="shot-h09">
-    <div class="shot-media"><video id="v-h09" src="assets/clips/h09.mp4" data-start="29.2" data-duration="0.4" data-track-index="42" muted playsinline></video></div>
-    <div class="label" style="--c:#FF7A3D">
-      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-age-of-intelligence</span></div>
-      <span class="title">智能时代</span>
-      <span class="tech">注意力机制 · 3D</span>
-      <span class="spec">60fps · 92s · 108 镜</span>
-    </div>
-  </div>
-  <div class="shot" id="shot-h10">
-    <div class="shot-media"><video id="v-h10" src="assets/clips/h10.mp4" data-start="29.6" data-duration="0.4" data-track-index="43" muted playsinline></video></div>
-    <div class="label" style="--c:#FF7A3D">
-      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-production-video-skill-hub</span></div>
-      <span class="title">Skills Hub</span>
-      <span class="tech">Logo 冲击出场</span>
-      <span class="spec">1080p · 60fps · 57s</span>
-    </div>
-  </div>
-  <div class="shot" id="shot-h11">
-    <div class="shot-media"><video id="v-h11" src="assets/clips/h11.mp4" data-start="30" data-duration="0.4" data-track-index="44" muted playsinline></video></div>
+  <div class="shot" id="shot-d01">
+    <div class="shot-media"><video id="v-d01" src="assets/clips/d01.mp4" data-start="35.2" data-duration="0.4" data-track-index="40" muted playsinline></video></div>
     <div class="label" style="--c:#FF7A3D">
       <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-F12-teaching</span></div>
       <span class="title">DevTools in 60 Seconds</span>
@@ -594,26 +623,89 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
       <span class="spec">1080p · 30fps · 60s</span>
     </div>
   </div>
-  <div class="shot" id="shot-h12">
-    <div class="shot-media"><video id="v-h12" src="assets/clips/h12.mp4" data-start="30.4" data-duration="0.4" data-track-index="45" muted playsinline></video></div>
+  <div class="shot" id="shot-d02">
+    <div class="shot-media"><video id="v-d02" src="assets/clips/d02.mp4" data-start="35.6" data-duration="0.4" data-track-index="41" muted playsinline></video></div>
     <div class="label" style="--c:#FF7A3D">
-      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-claude-intro-with-15-way</span></div>
-      <span class="title">Claude 自我介绍 · 15 种画风</span>
-      <span class="tech">15 种画风 · 瑞士主义</span>
-      <span class="spec">1080p · 30fps · 114s</span>
+      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-production-video-ai-phase-skill</span></div>
+      <span class="title">Phase-Gate 升维</span>
+      <span class="tech">升维 · 曲速</span>
+      <span class="spec">1080p · 60fps · 30s</span>
     </div>
   </div>
-  <div class="shot" id="shot-h13">
-    <div class="shot-media"><video id="v-h13" src="assets/clips/h13.mp4" data-start="30.8" data-duration="0.4" data-track-index="46" muted playsinline></video></div>
+  <div class="shot" id="shot-d03">
+    <div class="shot-media"><video id="v-d03" src="assets/clips/d03.mp4" data-start="36" data-duration="0.4" data-track-index="42" muted playsinline></video></div>
     <div class="label" style="--c:#FF7A3D">
-      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-factory-safety-videos</span></div>
-      <span class="title">定格</span>
-      <span class="tech">2560×1440 · 60fps</span>
-      <span class="spec">1440p · 60fps · 87s</span>
+      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-production-video-ys-blog</span></div>
+      <span class="title">羽升集</span>
+      <span class="tech">每一拍一个动作</span>
+      <span class="spec">1080p · 60fps · 30s</span>
     </div>
   </div>
-  <div class="shot" id="shot-h14">
-    <div class="shot-media"><video id="v-h14" src="assets/clips/h14.mp4" data-start="31.2" data-duration="0.4" data-track-index="47" muted playsinline></video></div>
+  <div class="shot" id="shot-d04">
+    <div class="shot-media"><video id="v-d04" src="assets/clips/d04.mp4" data-start="36.4" data-duration="0.4" data-track-index="43" muted playsinline></video></div>
+    <div class="label" style="--c:#FF7A3D">
+      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-introduction-video-xuanlan</span></div>
+      <span class="title">玄览 PocketWebShell</span>
+      <span class="tech">浏览器三十年</span>
+      <span class="spec">1080p · 60fps · 55s</span>
+    </div>
+  </div>
+  <div class="shot" id="shot-d05">
+    <div class="shot-media"><video id="v-d05" src="assets/clips/d05.mp4" data-start="36.8" data-duration="0.4" data-track-index="44" muted playsinline></video></div>
+    <div class="label" style="--c:#FF7A3D">
+      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-shuchenglin-into</span></div>
+      <span class="title">树成林</span>
+      <span class="tech">去色信息流</span>
+      <span class="spec">1080p · 30fps · 60s</span>
+    </div>
+  </div>
+  <div class="shot" id="shot-d06">
+    <div class="shot-media"><video id="v-d06" src="assets/clips/d06.mp4" data-start="37.2" data-duration="0.4" data-track-index="45" muted playsinline></video></div>
+    <div class="label" style="--c:#FF7A3D">
+      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-production-video-studysolo</span></div>
+      <span class="title">StudySolo</span>
+      <span class="tech">过去|现在 分屏</span>
+      <span class="spec">1080p · 60fps · 60s</span>
+    </div>
+  </div>
+  <div class="shot" id="shot-d07">
+    <div class="shot-media"><video id="v-d07" src="assets/clips/d07.mp4" data-start="37.6" data-duration="0.4" data-track-index="46" muted playsinline></video></div>
+    <div class="label" style="--c:#FF7A3D">
+      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-mid-autumn-genergal-videos</span></div>
+      <span class="title">同一个月亮</span>
+      <span class="tech">单文件 854 行</span>
+      <span class="spec">1080p · 30fps · 120s</span>
+    </div>
+  </div>
+  <div class="shot" id="shot-d08">
+    <div class="shot-media"><video id="v-d08" src="assets/clips/d08.mp4" data-start="38" data-duration="0.4" data-track-index="47" muted playsinline></video></div>
+    <div class="label" style="--c:#FFD166">
+      <div class="row1"><span class="chip">SKILL</span><span class="spec">skill-方块系列定格动画</span></div>
+      <span class="title">方块定格 Skill</span>
+      <span class="tech">定格动画 Skill</span>
+      <span class="spec">720p · 24fps · 60s</span>
+    </div>
+  </div>
+  <div class="shot" id="shot-d09">
+    <div class="shot-media"><video id="v-d09" src="assets/clips/d09.mp4" data-start="38.4" data-duration="0.4" data-track-index="48" muted playsinline></video></div>
+    <div class="label" style="--c:#FF7A3D">
+      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-mid-autumn-highschool-videos</span></div>
+      <span class="title">共此时</span>
+      <span class="tech">217 份真实素材</span>
+      <span class="spec">180s · 217 份真实素材</span>
+    </div>
+  </div>
+  <div class="shot" id="shot-d10">
+    <div class="shot-media"><video id="v-d10" src="assets/clips/d10.mp4" data-start="38.8" data-duration="0.4" data-track-index="49" muted playsinline></video></div>
+    <div class="label" style="--c:#FF7A3D">
+      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-universe-history-video</span></div>
+      <span class="title">代码宇宙</span>
+      <span class="tech">4D 超立方体</span>
+      <span class="spec">1080p · 24fps · 68s</span>
+    </div>
+  </div>
+  <div class="shot" id="shot-d11">
+    <div class="shot-media"><video id="v-d11" src="assets/clips/d11.mp4" data-start="39.2" data-duration="0.4" data-track-index="50" muted playsinline></video></div>
     <div class="label" style="--c:#FF7A3D">
       <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-1037-hust-story</span></div>
       <span class="title">1037</span>
@@ -621,8 +713,53 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
       <span class="spec">1080p · 30fps · 110s</span>
     </div>
   </div>
-  <div class="shot" id="shot-h15">
-    <div class="shot-media"><video id="v-h15" src="assets/clips/h15.mp4" data-start="31.6" data-duration="0.4" data-track-index="48" muted playsinline></video></div>
+  <div class="shot" id="shot-d12">
+    <div class="shot-media"><video id="v-d12" src="assets/clips/d12.mp4" data-start="39.6" data-duration="0.4" data-track-index="51" muted playsinline></video></div>
+    <div class="label" style="--c:#FF7A3D">
+      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-claude-intro-with-15-way</span></div>
+      <span class="title">Claude 自我介绍 · 15 种画风</span>
+      <span class="tech">15 种画风 · 体素</span>
+      <span class="spec">1080p · 30fps · 114s</span>
+    </div>
+  </div>
+  <div class="shot" id="shot-d13">
+    <div class="shot-media"><video id="v-d13" src="assets/clips/d13.mp4" data-start="40" data-duration="0.4" data-track-index="52" muted playsinline></video></div>
+    <div class="label" style="--c:#FF7A3D">
+      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-age-of-intelligence</span></div>
+      <span class="title">智能时代</span>
+      <span class="tech">注意力机制 · 3D</span>
+      <span class="spec">60fps · 92s · 108 镜</span>
+    </div>
+  </div>
+  <div class="shot" id="shot-d14">
+    <div class="shot-media"><video id="v-d14" src="assets/clips/d14.mp4" data-start="40.4" data-duration="0.4" data-track-index="53" muted playsinline></video></div>
+    <div class="label" style="--c:#FF7A3D">
+      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-production-video-skill-hub</span></div>
+      <span class="title">Skills Hub</span>
+      <span class="tech">Logo 冲击出场</span>
+      <span class="spec">1080p · 60fps · 57s</span>
+    </div>
+  </div>
+  <div class="shot" id="shot-d15">
+    <div class="shot-media"><video id="v-d15" src="assets/clips/d15.mp4" data-start="40.8" data-duration="0.4" data-track-index="54" muted playsinline></video></div>
+    <div class="label" style="--c:#FF7A3D">
+      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-factory-safety-videos</span></div>
+      <span class="title">定格</span>
+      <span class="tech">Three.js 定格 · 慢动作坠落</span>
+      <span class="spec">1440p · 60fps · 87s</span>
+    </div>
+  </div>
+  <div class="shot" id="shot-d16">
+    <div class="shot-media"><video id="v-d16" src="assets/clips/d16.mp4" data-start="41.2" data-duration="0.4" data-track-index="55" muted playsinline></video></div>
+    <div class="label" style="--c:#FF7A3D">
+      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-broken-reround</span></div>
+      <span class="title">碎月重圆</span>
+      <span class="tech">自写 3D 合成器 · Voronoi 碎裂</span>
+      <span class="spec">1080p · 30fps · 30s</span>
+    </div>
+  </div>
+  <div class="shot" id="shot-d17">
+    <div class="shot-media"><video id="v-d17" src="assets/clips/d17.mp4" data-start="41.6" data-duration="0.4" data-track-index="56" muted playsinline></video></div>
     <div class="label" style="--c:#FF7A3D">
       <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-oneink</span></div>
       <span class="title">一畫</span>
@@ -630,18 +767,99 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
       <span class="spec">1080p · 30fps · 60s</span>
     </div>
   </div>
+  <div class="shot" id="shot-d18">
+    <div class="shot-media"><video id="v-d18" src="assets/clips/d18.mp4" data-start="42" data-duration="0.4" data-track-index="57" muted playsinline></video></div>
+    <div class="label" style="--c:#FF7A3D">
+      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-production-video-protocom-intro</span></div>
+      <span class="title">protocom</span>
+      <span class="tech">4K 60fps 定版</span>
+      <span class="spec">4K · 60fps · 80s</span>
+    </div>
+  </div>
+  <div class="shot" id="shot-d19">
+    <div class="shot-media"><video id="v-d19" src="assets/clips/d19.mp4" data-start="42.4" data-duration="0.4" data-track-index="58" muted playsinline></video></div>
+    <div class="label" style="--c:#FF7A3D">
+      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-broken-reround</span></div>
+      <span class="title">碎月重圆</span>
+      <span class="tech">MoGraph 魔方墙 · 336 立方体</span>
+      <span class="spec">1080p · 30fps · 30s</span>
+    </div>
+  </div>
+  <div class="shot" id="shot-d20">
+    <div class="shot-media"><video id="v-d20" src="assets/clips/d20.mp4" data-start="42.8" data-duration="0.4" data-track-index="59" muted playsinline></video></div>
+    <div class="label" style="--c:#FF7A3D">
+      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-universe-history-video</span></div>
+      <span class="title">代码宇宙</span>
+      <span class="tech">一拍二 · 定格语法</span>
+      <span class="spec">1080p · 24fps · 68s</span>
+    </div>
+  </div>
+  <div class="shot" id="shot-d21">
+    <div class="shot-media"><video id="v-d21" src="assets/clips/d21.mp4" data-start="43.2" data-duration="0.4" data-track-index="60" muted playsinline></video></div>
+    <div class="label" style="--c:#FF7A3D">
+      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-oneink</span></div>
+      <span class="title">一畫</span>
+      <span class="tech">逆锋压笔 · 泼墨一笔</span>
+      <span class="spec">1080p · 30fps · 60s</span>
+    </div>
+  </div>
+  <div class="shot" id="shot-d22">
+    <div class="shot-media"><video id="v-d22" src="assets/clips/d22.mp4" data-start="43.6" data-duration="0.4" data-track-index="61" muted playsinline></video></div>
+    <div class="label" style="--c:#FF7A3D">
+      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-production-video-protocom-intro</span></div>
+      <span class="title">protocom</span>
+      <span class="tech">升维 · 字面意义</span>
+      <span class="spec">4K · 60fps · 80s</span>
+    </div>
+  </div>
+  <div class="shot" id="shot-d23">
+    <div class="shot-media"><video id="v-d23" src="assets/clips/d23.mp4" data-start="44" data-duration="0.4" data-track-index="62" muted playsinline></video></div>
+    <div class="label" style="--c:#FF7A3D">
+      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-factory-safety-videos</span></div>
+      <span class="title">定格</span>
+      <span class="tech">2560×1440 · 60fps</span>
+      <span class="spec">1440p · 60fps · 87s</span>
+    </div>
+  </div>
+  <div class="shot" id="shot-d24">
+    <div class="shot-media"><video id="v-d24" src="assets/clips/d24.mp4" data-start="44.4" data-duration="0.4" data-track-index="63" muted playsinline></video></div>
+    <div class="label" style="--c:#FF7A3D">
+      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-age-of-intelligence</span></div>
+      <span class="title">智能时代</span>
+      <span class="tech">4170 行 Python</span>
+      <span class="spec">60fps · 92s · 108 镜</span>
+    </div>
+  </div>
+  <div class="shot" id="shot-d25">
+    <div class="shot-media"><video id="v-d25" src="assets/clips/d25.mp4" data-start="44.8" data-duration="0.4" data-track-index="64" muted playsinline></video></div>
+    <div class="label" style="--c:#FF7A3D">
+      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-production-video-ai-phase-skill</span></div>
+      <span class="title">Phase-Gate 升维</span>
+      <span class="tech">静默门 · 确认↵</span>
+      <span class="spec">1080p · 60fps · 30s</span>
+    </div>
+  </div>
+  <div class="shot" id="shot-d26">
+    <div class="shot-media"><video id="v-d26" src="assets/clips/d26.mp4" data-start="45.2" data-duration="0.4" data-track-index="65" muted playsinline></video></div>
+    <div class="label" style="--c:#FF7A3D">
+      <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-production-video-skill-hub</span></div>
+      <span class="title">Skills Hub</span>
+      <span class="tech">顺手写了套前端</span>
+      <span class="spec">1080p · 60fps · 57s</span>
+    </div>
+  </div>
 </div>
 
 <div id="duo" class="layer">
-  <div id="duo-left"><video id="v-g08" src="assets/clips/g08.mp4" data-start="23.6" data-duration="1.2" data-track-index="49" muted playsinline></video></div>
-  <div class="phone" id="duo-phone"><div class="screen"><div class="notch"></div><video id="v-g09" src="assets/clips/g09.mp4" data-start="23.6" data-duration="1.2" data-track-index="50" muted playsinline></video></div></div>
+  <div id="duo-left"><video id="v-duoA" src="assets/clips/duoA.mp4" data-start="30.8" data-duration="1.6" data-track-index="66" muted playsinline></video></div>
+  <div class="phone" id="duo-phone"><div class="screen"><div class="notch"></div><video id="v-duoB" src="assets/clips/duoB.mp4" data-start="30.8" data-duration="1.6" data-track-index="67" muted playsinline></video></div></div>
   <div id="duo-label"><b>GPT</b>《把日子，慢慢过圆》 横屏 · 《月光信笺》 竖屏 —— 同一个模型，两种画幅</div>
 </div>
 <div id="drop-ov" class="layer"><span class="n">04</span><span class="w">电影</span></div>
 
 <div id="split" class="layer">
   <div class="panel" id="pn-s1a" data-n="2" data-panel="0">
-    <div class="panel-media"><video id="v-s1a" src="assets/clips/s1a.mp4" data-start="32" data-duration="0.8" data-track-index="51" muted playsinline></video></div>
+    <div class="panel-media"><video id="v-s1a" src="assets/clips/s1a.mp4" data-start="45.6" data-duration="0.8" data-track-index="68" muted playsinline></video></div>
     <div class="label" style="--c:#FF7A3D">
       <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-introduction-video-xuanlan</span></div>
       <span class="title">玄览 PocketWebShell</span>
@@ -650,7 +868,7 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     </div>
   </div>
   <div class="panel" id="pn-s1b" data-n="2" data-panel="1">
-    <div class="panel-media"><video id="v-s1b" src="assets/clips/s1b.mp4" data-start="32" data-duration="0.8" data-track-index="52" muted playsinline></video></div>
+    <div class="panel-media"><video id="v-s1b" src="assets/clips/s1b.mp4" data-start="45.6" data-duration="0.8" data-track-index="69" muted playsinline></video></div>
     <div class="label" style="--c:#FF7A3D">
       <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-production-video-studysolo</span></div>
       <span class="title">StudySolo</span>
@@ -659,7 +877,7 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     </div>
   </div>
   <div class="panel" id="pn-s2a" data-n="3" data-panel="0">
-    <div class="panel-media"><video id="v-s2a" src="assets/clips/s2a.mp4" data-start="32.8" data-duration="0.8" data-track-index="53" muted playsinline></video></div>
+    <div class="panel-media"><video id="v-s2a" src="assets/clips/s2a.mp4" data-start="46.4" data-duration="0.8" data-track-index="70" muted playsinline></video></div>
     <div class="label" style="--c:#FF7A3D">
       <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-production-video-ys-blog</span></div>
       <span class="title">羽升集</span>
@@ -668,7 +886,7 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     </div>
   </div>
   <div class="panel" id="pn-s2b" data-n="3" data-panel="1">
-    <div class="panel-media"><video id="v-s2b" src="assets/clips/s2b.mp4" data-start="32.8" data-duration="0.8" data-track-index="54" muted playsinline></video></div>
+    <div class="panel-media"><video id="v-s2b" src="assets/clips/s2b.mp4" data-start="46.4" data-duration="0.8" data-track-index="71" muted playsinline></video></div>
     <div class="label" style="--c:#FF7A3D">
       <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-shuchenglin-into</span></div>
       <span class="title">树成林</span>
@@ -677,7 +895,7 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     </div>
   </div>
   <div class="panel" id="pn-s2c" data-n="3" data-panel="2">
-    <div class="panel-media"><video id="v-s2c" src="assets/clips/s2c.mp4" data-start="32.8" data-duration="0.8" data-track-index="55" muted playsinline></video></div>
+    <div class="panel-media"><video id="v-s2c" src="assets/clips/s2c.mp4" data-start="46.4" data-duration="0.8" data-track-index="72" muted playsinline></video></div>
     <div class="label" style="--c:#FF7A3D">
       <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-production-video-protocom-intro</span></div>
       <span class="title">protocom</span>
@@ -686,7 +904,7 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     </div>
   </div>
   <div class="panel" id="pn-s3a" data-n="4" data-panel="0">
-    <div class="panel-media"><video id="v-s3a" src="assets/clips/s3a.mp4" data-start="33.6" data-duration="0.8" data-track-index="56" muted playsinline></video></div>
+    <div class="panel-media"><video id="v-s3a" src="assets/clips/s3a.mp4" data-start="47.2" data-duration="0.8" data-track-index="73" muted playsinline></video></div>
     <div class="label" style="--c:#FFD166">
       <div class="row1"><span class="chip">SKILL</span><span class="spec">skill-方块系列定格动画</span></div>
       <span class="title">方块定格 Skill</span>
@@ -695,7 +913,7 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     </div>
   </div>
   <div class="panel" id="pn-s3b" data-n="4" data-panel="1">
-    <div class="panel-media"><video id="v-s3b" src="assets/clips/s3b.mp4" data-start="33.6" data-duration="0.8" data-track-index="57" muted playsinline></video></div>
+    <div class="panel-media"><video id="v-s3b" src="assets/clips/s3b.mp4" data-start="47.2" data-duration="0.8" data-track-index="74" muted playsinline></video></div>
     <div class="label" style="--c:#FF7A3D">
       <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-universe-history-video</span></div>
       <span class="title">代码宇宙</span>
@@ -704,7 +922,7 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     </div>
   </div>
   <div class="panel" id="pn-s3c" data-n="4" data-panel="2">
-    <div class="panel-media"><video id="v-s3c" src="assets/clips/s3c.mp4" data-start="33.6" data-duration="0.8" data-track-index="58" muted playsinline></video></div>
+    <div class="panel-media"><video id="v-s3c" src="assets/clips/s3c.mp4" data-start="47.2" data-duration="0.8" data-track-index="75" muted playsinline></video></div>
     <div class="label" style="--c:#FF7A3D">
       <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-mid-autumn-highschool-videos</span></div>
       <span class="title">共此时</span>
@@ -713,7 +931,7 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     </div>
   </div>
   <div class="panel" id="pn-s3d" data-n="4" data-panel="3">
-    <div class="panel-media"><video id="v-s3d" src="assets/clips/s3d.mp4" data-start="33.6" data-duration="0.8" data-track-index="59" muted playsinline></video></div>
+    <div class="panel-media"><video id="v-s3d" src="assets/clips/s3d.mp4" data-start="47.2" data-duration="0.8" data-track-index="76" muted playsinline></video></div>
     <div class="label" style="--c:#FF7A3D">
       <div class="row1"><span class="chip">CLAUDE OPUS</span><span class="spec">opus-mid-autumn-genergal-videos</span></div>
       <span class="title">同一个月亮</span>
@@ -725,15 +943,15 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
 
 <div id="phones" class="layer">
   <div class="phone" id="ph-p1" style="left:330px">
-    <div class="screen"><div class="notch"></div><video id="v-p1" src="assets/clips/p1.mp4" data-start="34.4" data-duration="0.8" data-track-index="60" muted playsinline></video></div>
+    <div class="screen"><div class="notch"></div><video id="v-p1" src="assets/clips/p1.mp4" data-start="48" data-duration="1.6" data-track-index="77" muted playsinline></video></div>
     <div class="ph-label">慢下来<span>竖屏 1080×1920 · 37s</span></div>
   </div>
   <div class="phone" id="ph-p2" style="left:760px">
-    <div class="screen"><div class="notch"></div><video id="v-p2" src="assets/clips/p2.mp4" data-start="34.4" data-duration="0.8" data-track-index="61" muted playsinline></video></div>
+    <div class="screen"><div class="notch"></div><video id="v-p2" src="assets/clips/p2.mp4" data-start="48" data-duration="1.6" data-track-index="78" muted playsinline></video></div>
     <div class="ph-label">中秋 · 给学姐<span>竖屏 1080×1920 · 29s</span></div>
   </div>
   <div class="phone" id="ph-p3" style="left:1190px">
-    <div class="screen"><div class="notch"></div><video id="v-p3" src="assets/clips/p3.mp4" data-start="34.4" data-duration="0.8" data-track-index="62" muted playsinline></video></div>
+    <div class="screen"><div class="notch"></div><video id="v-p3" src="assets/clips/p3.mp4" data-start="48" data-duration="1.6" data-track-index="79" muted playsinline></video></div>
     <div class="ph-label">月光替你亮着灯<span>1080p · 24fps · 28s</span></div>
   </div>
 </div>
@@ -776,169 +994,169 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
   <div id="wall-cam">
     <div class="wtile" id="wt-kimi-beat" style="--c:#3CF0C8;left:34px;top:237px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/kimi-beat-end.jpg" alt="">
-      <video id="v-wall-kimi-beat" src="assets/clips/wall-kimi-beat.mp4" data-start="38.4" data-duration="3.2" data-track-index="63" muted playsinline></video>
+      <video id="v-wall-kimi-beat" src="assets/clips/wall-kimi-beat.mp4" data-start="55.2" data-duration="4.8" data-track-index="80" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>KIMI</i>AI 觉醒</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-ai-rise" style="--c:#7CC4FF;left:300px;top:237px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/ai-rise-end.jpg" alt="">
-      <video id="v-wall-ai-rise" src="assets/clips/wall-ai-rise.mp4" data-start="38.4" data-duration="3.2" data-track-index="64" muted playsinline></video>
+      <video id="v-wall-ai-rise" src="assets/clips/wall-ai-rise.mp4" data-start="55.2" data-duration="4.8" data-track-index="81" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>SWE</i>AI:RISE</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-kimi-film" style="--c:#7CC4FF;left:566px;top:237px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/kimi-film-end.jpg" alt="">
-      <video id="v-wall-kimi-film" src="assets/clips/wall-kimi-film.mp4" data-start="38.4" data-duration="3.2" data-track-index="65" muted playsinline></video>
+      <video id="v-wall-kimi-film" src="assets/clips/wall-kimi-film.mp4" data-start="55.2" data-duration="4.8" data-track-index="82" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>SWE</i>月之暗面 · KIMI</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-cosmos30" style="--c:#A98BFF;left:832px;top:237px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/cosmos30-end.jpg" alt="">
-      <video id="v-wall-cosmos30" src="assets/clips/wall-cosmos30.mp4" data-start="38.4" data-duration="3.2" data-track-index="66" muted playsinline></video>
+      <video id="v-wall-cosmos30" src="assets/clips/wall-cosmos30.mp4" data-start="55.2" data-duration="4.8" data-track-index="83" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>GPT</i>COSMOS · 从未知到寂静</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-beyond" style="--c:#A98BFF;left:1098px;top:237px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/beyond-end.jpg" alt="">
-      <video id="v-wall-beyond" src="assets/clips/wall-beyond.mp4" data-start="38.4" data-duration="3.2" data-track-index="67" muted playsinline></video>
+      <video id="v-wall-beyond" src="assets/clips/wall-beyond.mp4" data-start="55.2" data-duration="4.8" data-track-index="84" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>GPT</i>AI · Beyond Generation</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-gpt-autumn" style="--c:#A98BFF;left:1364px;top:237px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/gpt-autumn-end.jpg" alt="">
-      <video id="v-wall-gpt-autumn" src="assets/clips/wall-gpt-autumn.mp4" data-start="38.4" data-duration="3.2" data-track-index="68" muted playsinline></video>
+      <video id="v-wall-gpt-autumn" src="assets/clips/wall-gpt-autumn.mp4" data-start="55.2" data-duration="4.8" data-track-index="85" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>GPT</i>把日子，慢慢过圆</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-moon-letter" style="--c:#A98BFF;left:1630px;top:237px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/moon-letter-end.jpg" alt="">
-      <video id="v-wall-moon-letter" src="assets/clips/wall-moon-letter.mp4" data-start="38.4" data-duration="3.2" data-track-index="69" muted playsinline></video>
+      <video id="v-wall-moon-letter" src="assets/clips/wall-moon-letter.mp4" data-start="55.2" data-duration="4.8" data-track-index="86" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>GPT</i>月光信笺</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-shatter" style="--c:#FF7A3D;left:34px;top:391px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/shatter-end.jpg" alt="">
-      <video id="v-wall-shatter" src="assets/clips/wall-shatter.mp4" data-start="38.4" data-duration="3.2" data-track-index="70" muted playsinline></video>
+      <video id="v-wall-shatter" src="assets/clips/wall-shatter.mp4" data-start="55.2" data-duration="4.8" data-track-index="87" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>CLAUDE OPUS</i>碎月重圆</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-oneink" style="--c:#FF7A3D;left:300px;top:391px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/oneink-end.jpg" alt="">
-      <video id="v-wall-oneink" src="assets/clips/wall-oneink.mp4" data-start="38.4" data-duration="3.2" data-track-index="71" muted playsinline></video>
+      <video id="v-wall-oneink" src="assets/clips/wall-oneink.mp4" data-start="55.2" data-duration="4.8" data-track-index="88" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>CLAUDE OPUS</i>一畫</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-dingge" style="--c:#FF7A3D;left:566px;top:391px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/dingge-end.jpg" alt="">
-      <video id="v-wall-dingge" src="assets/clips/wall-dingge.mp4" data-start="38.4" data-duration="3.2" data-track-index="72" muted playsinline></video>
+      <video id="v-wall-dingge" src="assets/clips/wall-dingge.mp4" data-start="55.2" data-duration="4.8" data-track-index="89" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>CLAUDE OPUS</i>定格</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-claude15" style="--c:#FF7A3D;left:832px;top:391px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/claude15-end.jpg" alt="">
-      <video id="v-wall-claude15" src="assets/clips/wall-claude15.mp4" data-start="38.4" data-duration="3.2" data-track-index="73" muted playsinline></video>
+      <video id="v-wall-claude15" src="assets/clips/wall-claude15.mp4" data-start="55.2" data-duration="4.8" data-track-index="90" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>CLAUDE OPUS</i>Claude 自我介绍 · 15 种画风</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-protocom" style="--c:#FF7A3D;left:1098px;top:391px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/protocom-end.jpg" alt="">
-      <video id="v-wall-protocom" src="assets/clips/wall-protocom.mp4" data-start="38.4" data-duration="3.2" data-track-index="74" muted playsinline></video>
+      <video id="v-wall-protocom" src="assets/clips/wall-protocom.mp4" data-start="55.2" data-duration="4.8" data-track-index="91" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>CLAUDE OPUS</i>protocom</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-codecosmos" style="--c:#FF7A3D;left:1364px;top:391px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/codecosmos-end.jpg" alt="">
-      <video id="v-wall-codecosmos" src="assets/clips/wall-codecosmos.mp4" data-start="38.4" data-duration="3.2" data-track-index="75" muted playsinline></video>
+      <video id="v-wall-codecosmos" src="assets/clips/wall-codecosmos.mp4" data-start="55.2" data-duration="4.8" data-track-index="92" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>CLAUDE OPUS</i>代码宇宙</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-phasegate" style="--c:#FF7A3D;left:1630px;top:391px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/phasegate-end.jpg" alt="">
-      <video id="v-wall-phasegate" src="assets/clips/wall-phasegate.mp4" data-start="38.4" data-duration="3.2" data-track-index="76" muted playsinline></video>
+      <video id="v-wall-phasegate" src="assets/clips/wall-phasegate.mp4" data-start="55.2" data-duration="4.8" data-track-index="93" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>CLAUDE OPUS</i>Phase-Gate 升维</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-ageint" style="--c:#FF7A3D;left:34px;top:545px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/ageint-end.jpg" alt="">
-      <video id="v-wall-ageint" src="assets/clips/wall-ageint.mp4" data-start="38.4" data-duration="3.2" data-track-index="77" muted playsinline></video>
+      <video id="v-wall-ageint" src="assets/clips/wall-ageint.mp4" data-start="55.2" data-duration="4.8" data-track-index="94" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>CLAUDE OPUS</i>智能时代</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-skillshub" style="--c:#FF7A3D;left:300px;top:545px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/skillshub-end.jpg" alt="">
-      <video id="v-wall-skillshub" src="assets/clips/wall-skillshub.mp4" data-start="38.4" data-duration="3.2" data-track-index="78" muted playsinline></video>
+      <video id="v-wall-skillshub" src="assets/clips/wall-skillshub.mp4" data-start="55.2" data-duration="4.8" data-track-index="95" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>CLAUDE OPUS</i>Skills Hub</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-f12" style="--c:#FF7A3D;left:566px;top:545px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/f12-end.jpg" alt="">
-      <video id="v-wall-f12" src="assets/clips/wall-f12.mp4" data-start="38.4" data-duration="3.2" data-track-index="79" muted playsinline></video>
+      <video id="v-wall-f12" src="assets/clips/wall-f12.mp4" data-start="55.2" data-duration="4.8" data-track-index="96" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>CLAUDE OPUS</i>DevTools in 60 Seconds</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-hust1037" style="--c:#FF7A3D;left:832px;top:545px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/hust1037-end.jpg" alt="">
-      <video id="v-wall-hust1037" src="assets/clips/wall-hust1037.mp4" data-start="38.4" data-duration="3.2" data-track-index="80" muted playsinline></video>
+      <video id="v-wall-hust1037" src="assets/clips/wall-hust1037.mp4" data-start="55.2" data-duration="4.8" data-track-index="97" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>CLAUDE OPUS</i>1037</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-xuanlan" style="--c:#FF7A3D;left:1098px;top:545px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/xuanlan-end.jpg" alt="">
-      <video id="v-wall-xuanlan" src="assets/clips/wall-xuanlan.mp4" data-start="38.4" data-duration="3.2" data-track-index="81" muted playsinline></video>
+      <video id="v-wall-xuanlan" src="assets/clips/wall-xuanlan.mp4" data-start="55.2" data-duration="4.8" data-track-index="98" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>CLAUDE OPUS</i>玄览 PocketWebShell</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-studysolo" style="--c:#FF7A3D;left:1364px;top:545px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/studysolo-end.jpg" alt="">
-      <video id="v-wall-studysolo" src="assets/clips/wall-studysolo.mp4" data-start="38.4" data-duration="3.2" data-track-index="82" muted playsinline></video>
+      <video id="v-wall-studysolo" src="assets/clips/wall-studysolo.mp4" data-start="55.2" data-duration="4.8" data-track-index="99" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>CLAUDE OPUS</i>StudySolo</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-yusheng" style="--c:#FF7A3D;left:1630px;top:545px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/yusheng-end.jpg" alt="">
-      <video id="v-wall-yusheng" src="assets/clips/wall-yusheng.mp4" data-start="38.4" data-duration="3.2" data-track-index="83" muted playsinline></video>
+      <video id="v-wall-yusheng" src="assets/clips/wall-yusheng.mp4" data-start="55.2" data-duration="4.8" data-track-index="100" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>CLAUDE OPUS</i>羽升集</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-shuchenglin" style="--c:#FF7A3D;left:34px;top:699px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/shuchenglin-end.jpg" alt="">
-      <video id="v-wall-shuchenglin" src="assets/clips/wall-shuchenglin.mp4" data-start="38.4" data-duration="3.2" data-track-index="84" muted playsinline></video>
+      <video id="v-wall-shuchenglin" src="assets/clips/wall-shuchenglin.mp4" data-start="55.2" data-duration="4.8" data-track-index="101" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>CLAUDE OPUS</i>树成林</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-stopmotion" style="--c:#FFD166;left:300px;top:699px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/stopmotion-end.jpg" alt="">
-      <video id="v-wall-stopmotion" src="assets/clips/wall-stopmotion.mp4" data-start="38.4" data-duration="3.2" data-track-index="85" muted playsinline></video>
+      <video id="v-wall-stopmotion" src="assets/clips/wall-stopmotion.mp4" data-start="55.2" data-duration="4.8" data-track-index="102" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>SKILL</i>方块定格 Skill</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-samemoon" style="--c:#FF7A3D;left:566px;top:699px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/samemoon-end.jpg" alt="">
-      <video id="v-wall-samemoon" src="assets/clips/wall-samemoon.mp4" data-start="38.4" data-duration="3.2" data-track-index="86" muted playsinline></video>
+      <video id="v-wall-samemoon" src="assets/clips/wall-samemoon.mp4" data-start="55.2" data-duration="4.8" data-track-index="103" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>CLAUDE OPUS</i>同一个月亮</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-gongcishi" style="--c:#FF7A3D;left:832px;top:699px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/gongcishi-end.jpg" alt="">
-      <video id="v-wall-gongcishi" src="assets/clips/wall-gongcishi.mp4" data-start="38.4" data-duration="3.2" data-track-index="87" muted playsinline></video>
+      <video id="v-wall-gongcishi" src="assets/clips/wall-gongcishi.mp4" data-start="55.2" data-duration="4.8" data-track-index="104" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>CLAUDE OPUS</i>共此时</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-moonlamp" style="--c:#FF7A3D;left:1098px;top:699px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/moonlamp-end.jpg" alt="">
-      <video id="v-wall-moonlamp" src="assets/clips/wall-moonlamp.mp4" data-start="38.4" data-duration="3.2" data-track-index="88" muted playsinline></video>
+      <video id="v-wall-moonlamp" src="assets/clips/wall-moonlamp.mp4" data-start="55.2" data-duration="4.8" data-track-index="105" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>CLAUDE OPUS</i>月光替你亮着灯</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-readclub" style="--c:#FF7A3D;left:1364px;top:699px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/readclub-end.jpg" alt="">
-      <video id="v-wall-readclub" src="assets/clips/wall-readclub.mp4" data-start="38.4" data-duration="3.2" data-track-index="89" muted playsinline></video>
+      <video id="v-wall-readclub" src="assets/clips/wall-readclub.mp4" data-start="55.2" data-duration="4.8" data-track-index="106" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>CLAUDE OPUS</i>慢下来</div>
       <div class="flash"></div>
     </div>
     <div class="wtile" id="wt-senpai" style="--c:#FF7A3D;left:1630px;top:699px" data-layout-allow-overlap>
       <img class="freeze" src="assets/posters/senpai-end.jpg" alt="">
-      <video id="v-wall-senpai" src="assets/clips/wall-senpai.mp4" data-start="38.4" data-duration="3.2" data-track-index="90" muted playsinline></video>
+      <video id="v-wall-senpai" src="assets/clips/wall-senpai.mp4" data-start="55.2" data-duration="4.8" data-track-index="107" muted playsinline></video>
       <div class="wl" data-layout-allow-overlap><i data-layout-allow-overlap>CLAUDE OPUS</i>中秋 · 给学姐</div>
       <div class="flash"></div>
     </div>
@@ -984,8 +1202,76 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
   <div class="flyer" id="fl-senpai" style="--c:#FF7A3D"><img src="assets/posters/senpai.jpg" alt=""></div>
 </div>
 
+<div id="autopsy" class="layer">
+  <div id="at-head" data-layout-allow-overlap><div id="at-title">拆给你看</div><div id="at-sub">左边 = 真实源码行 · 右边 = 它的输出</div></div>
+  <div class="pair" id="pair-0" data-layout-allow-overlap>
+    <div class="code-pane">
+      <div class="cp-head"><i></i><i></i><i></i><span class="cp-file" data-layout-allow-overlap>opus-oneink/main.js</span><span class="cp-live" data-layout-allow-overlap>● LIVE</span></div>
+      <div class="cp-body"><div class="cl" id="cl-0-0" data-layout-allow-overlap><span class="ln">1</span><span class="lc">const W = 1920, H = 1080, FPS = 30;</span></div><div class="cl" id="cl-0-1" data-layout-allow-overlap><span class="ln">2</span><span class="lc">let rnd = mulberry32(20260926);</span></div><div class="cl" id="cl-0-2" data-layout-allow-overlap><span class="ln">3</span><span class="lc">const easeIO = t =&gt; t &lt;= 0 ? 0 : t &gt;= 1 ? 1 : 0.5 - 0.5 * Math.cos(Math.PI * t);</span></div><div class="cl" id="cl-0-3" data-layout-allow-overlap><span class="ln">4</span><span class="lc">const url = await p.evaluate(f =&gt; { window.renderFrame(f); return document.getElementById('gl').toDataURL('image/jpeg', 0.95); }, f);</span></div></div>
+      <div class="cp-foot">▸ render(t) → frame</div>
+    </div>
+    <div class="beam" id="beam-0"><i></i><i></i><i></i></div>
+    <div class="film-pane">
+      <div class="film-media"><video id="v-a0" src="assets/clips/a0.mp4" data-start="68" data-duration="2.2" data-track-index="108" muted playsinline></video></div>
+      <div class="lock"><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i><span class="lk-tag">TRACKING</span></div>
+      <div class="film-label"><span class="chip" style="--c:#FF7A3D">CLAUDE OPUS</span><b>一畫</b><span class="ft">水墨书法 · 手卷一镜到底</span></div>
+    </div>
+  </div>
+  <div class="pair" id="pair-1" data-layout-allow-overlap>
+    <div class="code-pane">
+      <div class="cp-head"><i></i><i></i><i></i><span class="cp-file" data-layout-allow-overlap>opus-universe-history-video/web/engine.js</span><span class="cp-live" data-layout-allow-overlap>● LIVE</span></div>
+      <div class="cp-body"><div class="cl" id="cl-1-0" data-layout-allow-overlap><span class="ln">1</span><span class="lc">export const ACC = { '2D': '#00E5FF', '2.5D': '#FFD600', '3D': '#FF3D7F', '4D': '#B388FF' };</span></div><div class="cl" id="cl-1-1" data-layout-allow-overlap><span class="ln">2</span><span class="lc">const renderer = new THREE.WebGLRenderer({ canvas: glCanvas, antialias: true, preserveDrawingBuffer: true, alpha: false });</span></div><div class="cl" id="cl-1-2" data-layout-allow-overlap><span class="ln">3</span><span class="lc">SR = 44100; BPM = 120; BEAT = 60 / BPM; DUR = 68.0</span></div></div>
+      <div class="cp-foot">▸ render(t) → frame</div>
+    </div>
+    <div class="beam" id="beam-1"><i></i><i></i><i></i></div>
+    <div class="film-pane">
+      <div class="film-media"><video id="v-a1" src="assets/clips/a1.mp4" data-start="70.2" data-duration="2.2" data-track-index="109" muted playsinline></video></div>
+      <div class="lock"><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i><span class="lk-tag">TRACKING</span></div>
+      <div class="film-label"><span class="chip" style="--c:#FF7A3D">CLAUDE OPUS</span><b>代码宇宙</b><span class="ft">27 种代码风格 · 2D→4D</span></div>
+    </div>
+  </div>
+  <div class="pair" id="pair-2" data-layout-allow-overlap>
+    <div class="code-pane">
+      <div class="cp-head"><i></i><i></i><i></i><span class="cp-file" data-layout-allow-overlap>opus-age-of-intelligence/src/timeline.py</span><span class="cp-live" data-layout-allow-overlap>● LIVE</span></div>
+      <div class="cp-body"><div class="cl" id="cl-2-0" data-layout-allow-overlap><span class="ln">1</span><span class="lc">BPM = 60.0 * FPS / FPB        # 128.5714</span></div><div class="cl" id="cl-2-1" data-layout-allow-overlap><span class="ln">2</span><span class="lc">N_FRAMES = END_BEAT * FPB     # 5544 frames = 92.4 s</span></div><div class="cl" id="cl-2-2" data-layout-allow-overlap><span class="ln">3</span><span class="lc">shot(184, END_BEAT, 'end_card')</span></div></div>
+      <div class="cp-foot">▸ render(t) → frame</div>
+    </div>
+    <div class="beam" id="beam-2"><i></i><i></i><i></i></div>
+    <div class="film-pane">
+      <div class="film-media"><video id="v-a2" src="assets/clips/a2.mp4" data-start="72.4" data-duration="2.2" data-track-index="110" muted playsinline></video></div>
+      <div class="lock"><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i><span class="lk-tag">TRACKING</span></div>
+      <div class="film-label"><span class="chip" style="--c:#FF7A3D">CLAUDE OPUS</span><b>智能时代</b><span class="ft">108 镜 · 4170 行 Python</span></div>
+    </div>
+  </div>
+  <div class="pair" id="pair-3" data-layout-allow-overlap>
+    <div class="code-pane">
+      <div class="cp-head"><i></i><i></i><i></i><span class="cp-file" data-layout-allow-overlap>opus-production-video-skill-hub/src/js/engine.js</span><span class="cp-live" data-layout-allow-overlap>● LIVE</span></div>
+      <div class="cp-body"><div class="cl" id="cl-3-0" data-layout-allow-overlap><span class="ln">1</span><span class="lc">export const prog = (b, b0, b1, ease = E.linear) =&gt; ease(clamp((b - b0) / (b1 - b0)));</span></div><div class="cl" id="cl-3-1" data-layout-allow-overlap><span class="ln">2</span><span class="lc">export function hit(b, at, decay = 0.35) {</span></div><div class="cl" id="cl-3-2" data-layout-allow-overlap><span class="ln">3</span><span class="lc">&quot;-f&quot;, &quot;image2pipe&quot;, &quot;-framerate&quot;, String(fps), &quot;-i&quot;, &quot;-&quot;,</span></div></div>
+      <div class="cp-foot">▸ render(t) → frame</div>
+    </div>
+    <div class="beam" id="beam-3"><i></i><i></i><i></i></div>
+    <div class="film-pane">
+      <div class="film-media"><video id="v-a3" src="assets/clips/a3.mp4" data-start="74.6" data-duration="2.2" data-track-index="111" muted playsinline></video></div>
+      <div class="lock"><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i><span class="lk-tag">TRACKING</span></div>
+      <div class="film-label"><span class="chip" style="--c:#FF7A3D">CLAUDE OPUS</span><b>Skills Hub</b><span class="ft">顺手从零写一套前端来拍</span></div>
+    </div>
+  </div>
+  <div id="stats">
+    <div class="stat" id="st0"><b class="sn" id="sn0" data-to="69000">0</b><span class="sl2">帧 · 全部算出来+</span></div>
+    <div class="stat" id="st1"><b class="sn" id="sn1" data-to="515858">0</b><span class="sl2">字复盘文档</span></div>
+    <div class="stat" id="st2"><b class="sn" id="sn2" data-to="28">0</b><span class="sl2">部成片</span></div>
+  </div>
+  <div id="at-tail">每一帧 = render(t) 的输出</div>
+</div>
+
+<div id="marathon" class="layer">
+  <div id="mar-strip"><div class="mtile" id="mt-kimi-beat" style="--c:#3CF0C8"><img src="assets/posters/kimi-beat.jpg" alt=""><div class="ml"><i>01</i>AI 觉醒</div></div><div class="mtile" id="mt-ai-rise" style="--c:#7CC4FF"><img src="assets/posters/ai-rise.jpg" alt=""><div class="ml"><i>02</i>AI:RISE</div></div><div class="mtile" id="mt-kimi-film" style="--c:#7CC4FF"><img src="assets/posters/kimi-film.jpg" alt=""><div class="ml"><i>03</i>月之暗面 · KIMI</div></div><div class="mtile" id="mt-cosmos30" style="--c:#A98BFF"><img src="assets/posters/cosmos30.jpg" alt=""><div class="ml"><i>04</i>COSMOS · 从未知到寂静</div></div><div class="mtile" id="mt-beyond" style="--c:#A98BFF"><img src="assets/posters/beyond.jpg" alt=""><div class="ml"><i>05</i>AI · Beyond Generation</div></div><div class="mtile" id="mt-gpt-autumn" style="--c:#A98BFF"><img src="assets/posters/gpt-autumn.jpg" alt=""><div class="ml"><i>06</i>把日子，慢慢过圆</div></div><div class="mtile" id="mt-moon-letter" style="--c:#A98BFF"><img src="assets/posters/moon-letter.jpg" alt=""><div class="ml"><i>07</i>月光信笺</div></div><div class="mtile" id="mt-shatter" style="--c:#FF7A3D"><img src="assets/posters/shatter.jpg" alt=""><div class="ml"><i>08</i>碎月重圆</div></div><div class="mtile" id="mt-oneink" style="--c:#FF7A3D"><img src="assets/posters/oneink.jpg" alt=""><div class="ml"><i>09</i>一畫</div></div><div class="mtile" id="mt-dingge" style="--c:#FF7A3D"><img src="assets/posters/dingge.jpg" alt=""><div class="ml"><i>10</i>定格</div></div><div class="mtile" id="mt-claude15" style="--c:#FF7A3D"><img src="assets/posters/claude15.jpg" alt=""><div class="ml"><i>11</i>Claude 自我介绍 · 15 种画风</div></div><div class="mtile" id="mt-protocom" style="--c:#FF7A3D"><img src="assets/posters/protocom.jpg" alt=""><div class="ml"><i>12</i>protocom</div></div><div class="mtile" id="mt-codecosmos" style="--c:#FF7A3D"><img src="assets/posters/codecosmos.jpg" alt=""><div class="ml"><i>13</i>代码宇宙</div></div><div class="mtile" id="mt-phasegate" style="--c:#FF7A3D"><img src="assets/posters/phasegate.jpg" alt=""><div class="ml"><i>14</i>Phase-Gate 升维</div></div><div class="mtile" id="mt-ageint" style="--c:#FF7A3D"><img src="assets/posters/ageint.jpg" alt=""><div class="ml"><i>15</i>智能时代</div></div><div class="mtile" id="mt-skillshub" style="--c:#FF7A3D"><img src="assets/posters/skillshub.jpg" alt=""><div class="ml"><i>16</i>Skills Hub</div></div><div class="mtile" id="mt-f12" style="--c:#FF7A3D"><img src="assets/posters/f12.jpg" alt=""><div class="ml"><i>17</i>DevTools in 60 Seconds</div></div><div class="mtile" id="mt-hust1037" style="--c:#FF7A3D"><img src="assets/posters/hust1037.jpg" alt=""><div class="ml"><i>18</i>1037</div></div><div class="mtile" id="mt-xuanlan" style="--c:#FF7A3D"><img src="assets/posters/xuanlan.jpg" alt=""><div class="ml"><i>19</i>玄览 PocketWebShell</div></div><div class="mtile" id="mt-studysolo" style="--c:#FF7A3D"><img src="assets/posters/studysolo.jpg" alt=""><div class="ml"><i>20</i>StudySolo</div></div><div class="mtile" id="mt-yusheng" style="--c:#FF7A3D"><img src="assets/posters/yusheng.jpg" alt=""><div class="ml"><i>21</i>羽升集</div></div><div class="mtile" id="mt-shuchenglin" style="--c:#FF7A3D"><img src="assets/posters/shuchenglin.jpg" alt=""><div class="ml"><i>22</i>树成林</div></div><div class="mtile" id="mt-stopmotion" style="--c:#FFD166"><img src="assets/posters/stopmotion.jpg" alt=""><div class="ml"><i>23</i>方块定格 Skill</div></div><div class="mtile" id="mt-samemoon" style="--c:#FF7A3D"><img src="assets/posters/samemoon.jpg" alt=""><div class="ml"><i>24</i>同一个月亮</div></div><div class="mtile" id="mt-gongcishi" style="--c:#FF7A3D"><img src="assets/posters/gongcishi.jpg" alt=""><div class="ml"><i>25</i>共此时</div></div><div class="mtile" id="mt-moonlamp" style="--c:#FF7A3D"><img src="assets/posters/moonlamp.jpg" alt=""><div class="ml"><i>26</i>月光替你亮着灯</div></div><div class="mtile" id="mt-readclub" style="--c:#FF7A3D"><img src="assets/posters/readclub.jpg" alt=""><div class="ml"><i>27</i>慢下来</div></div><div class="mtile" id="mt-senpai" style="--c:#FF7A3D"><img src="assets/posters/senpai.jpg" alt=""><div class="ml"><i>28</i>中秋 · 给学姐</div></div></div>
+  <div id="mar-count"><b id="mar-n">01</b><span>/ 28</span></div>
+  <div id="mar-title">28 部 · 一部都不能少</div>
+</div>
+
 <div id="reveal" class="layer">
-  <div id="rv-row"><div class="rv-ch" id="rc0">通</div><div class="rv-ch" id="rc1">通</div><div class="rv-ch" id="rc2">开</div><div class="rv-ch" id="rc3">源</div></div>
+  <div id="rv-row"><div class="rv-ch" id="rc0"><span class="sl sl-t" data-layout-allow-overlap>通</span><span class="sl sl-m" data-layout-allow-overlap>通</span><span class="sl sl-b" data-layout-allow-overlap>通</span></div><div class="rv-ch" id="rc1"><span class="sl sl-t" data-layout-allow-overlap>通</span><span class="sl sl-m" data-layout-allow-overlap>通</span><span class="sl sl-b" data-layout-allow-overlap>通</span></div><div class="rv-ch" id="rc2"><span class="sl sl-t" data-layout-allow-overlap>开</span><span class="sl sl-m" data-layout-allow-overlap>开</span><span class="sl sl-b" data-layout-allow-overlap>开</span></div><div class="rv-ch" id="rc3"><span class="sl sl-t" data-layout-allow-overlap>源</span><span class="sl sl-m" data-layout-allow-overlap>源</span><span class="sl sl-b" data-layout-allow-overlap>源</span></div></div>
   <div id="rv-en">OPEN SOURCE · ALL OF IT</div>
   <div id="rv-sweep"></div>
 </div>
@@ -1033,6 +1319,7 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
 
 <div id="outro" class="layer">
   <div id="out-term"><span class="prompt">$</span><span id="out-cmd"></span><span class="cursor" id="out-cursor"></span></div>
+  <div id="out-self">&gt; rendering self · 14400/14400</div>
   <div id="out-answer"><span class="arrow">▸</span>下一部，由你来写。</div>
   <div class="credit" id="cr0">本片同样 100% 由代码生成</div>
   <div class="credit" id="cr1">画面 HTML + GSAP · render(t) 纯函数 ｜ 配乐 numpy 逐样本合成</div>
@@ -1040,7 +1327,7 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
 </div>
 <div id="mini"><div class="mt"><b>源码 · 复盘 · 成片 · 通通开源</b><span>QQ 闪传 · qfile.qq.com/q/P2tSnByK4K</span><span>2.39 GB</span></div><img src="assets/img/qr.png" alt=""></div>
   </div>
-  <canvas id="fxfront" class="fx" width="1920" height="1080" data-layout-allow-occlusion></canvas>
+  <canvas id="fxfront" class="fx" width="3840" height="2160" data-layout-allow-occlusion></canvas>
   <div id="vignette"></div>
   <div id="scanlines"></div>
   <div id="lbx-top" class="lbx"></div>
@@ -1082,9 +1369,9 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
   </div>
   <div id="hud-count"><b id="hud-count-n">0</b> / 28 部</div>
 </div>
-  <audio id="score" src="assets/score.wav" data-start="0" data-duration="62.400000000000006" data-track-index="90" data-volume="1"></audio>
+  <audio id="score" src="assets/score.wav" data-start="0" data-duration="120" data-track-index="90" data-volume="1"></audio>
 </div>
-<script>window.__EDL = {"BEAT":0.4,"FPS":30,"DURATION":62.400000000000006,"TOTAL_BEATS":156,"SECTIONS":[{"id":"cold","b0":0,"b1":16,"energy":0.15},{"id":"era1","b0":16,"b1":27,"energy":0.55},{"id":"era2","b0":27,"b1":42,"energy":0.65},{"id":"era3","b0":42,"b1":62,"energy":0.8},{"id":"era4card","b0":62,"b1":64,"energy":0.9},{"id":"drop","b0":64,"b1":88,"energy":1},{"id":"tunnel","b0":88,"b1":96,"energy":0.95},{"id":"wall","b0":96,"b1":104,"energy":1},{"id":"breath","b0":104,"b1":116,"energy":0.05},{"id":"reveal","b0":116,"b1":128,"energy":1},{"id":"card","b0":128,"b1":140,"energy":0.7},{"id":"outro","b0":140,"b1":156,"energy":0.2}],"ERAS":[{"n":"01","model":"KIMI","title":"觉醒","sub":"让每一个字，都砸在鼓点上","b0":16,"b1":19,"node":0},{"n":"02","model":"SWE","title":"像素","sub":"不开浏览器，逐像素算出每一帧","b0":27,"b1":30,"node":1},{"n":"03","model":"GPT","title":"世界","sub":"一个模型，三十个世界","b0":42,"b1":45,"node":2},{"n":"04","model":"OPUS","title":"电影","sub":"AE 级合成 · 水墨 · 3D · 4K","b0":62,"b1":64,"node":3}],"SHOTS":[{"id":"w01","type":"win","work":"kimi-beat","in":1.9,"b0":19,"b1":21},{"id":"w02","type":"win","work":"kimi-beat","in":4.9,"b0":21,"b1":23},{"id":"w03","type":"win","work":"kimi-beat","in":23.62,"b0":23,"b1":25},{"id":"w04","type":"win","work":"kimi-beat","in":45.8,"b0":25,"b1":27},{"id":"w05","type":"win","work":"ai-rise","in":3.62,"b0":30,"b1":32},{"id":"w06","type":"win","work":"ai-rise","in":6.1,"b0":32,"b1":34},{"id":"w07","type":"win","work":"kimi-film","in":4.6,"b0":34,"b1":36},{"id":"w08","type":"win","work":"kimi-film","in":13.6,"b0":36,"b1":38},{"id":"w09","type":"win","work":"ai-rise","in":26.9,"b0":38,"b1":40},{"id":"w10","type":"win","work":"kimi-film","in":33.2,"b0":40,"b1":42},{"id":"g01","type":"full","work":"beyond","in":12,"b0":51,"b1":52,"label":"15 个世界 · 体素岛"},{"id":"g02","type":"full","work":"beyond","in":18,"b0":52,"b1":53,"label":"15 个世界 · 黏土机器人"},{"id":"g03","type":"full","work":"beyond","in":48,"b0":53,"b1":54,"label":"15 个世界 · 波普网点"},{"id":"g04","type":"full","work":"beyond","in":84,"b0":54,"b1":55,"label":"15 个世界 · 霓虹"},{"id":"g05","type":"full","work":"beyond","in":96,"b0":55,"b1":56,"label":"15 个世界 · 铬金属"},{"id":"g06","type":"full","work":"beyond","in":102,"b0":56,"b1":57,"label":"15 个世界 · 粒子"},{"id":"g07","type":"full","work":"gpt-autumn","in":6,"b0":57,"b1":59,"label":"铅笔线描 → 水墨 → 雕刻"},{"id":"g08","type":"duoL","work":"gpt-autumn","in":20.5,"b0":59,"b1":62},{"id":"g09","type":"phoneR","work":"moon-letter","in":15,"b0":59,"b1":62},{"id":"h01","type":"full","work":"shatter","in":3,"b0":64,"b1":66,"label":"自写 3D 合成器 · Voronoi 碎裂"},{"id":"h02","type":"full","work":"oneink","in":50,"b0":66,"b1":67,"label":"逆锋压笔 · 泼墨一笔"},{"id":"h03","type":"full","work":"dingge","in":34.6,"b0":67,"b1":68,"label":"Three.js 定格 · 慢动作坠落"},{"id":"h04","type":"full","work":"claude15","in":50.5,"b0":68,"b1":69,"label":"15 种画风 · 体素"},{"id":"h05","type":"full","work":"protocom","in":75.4,"b0":69,"b1":70,"label":"4K 60fps 定版"},{"id":"h06","type":"full","work":"codecosmos","in":10,"b0":70,"b1":71,"label":"4D 超立方体"},{"id":"h07","type":"full","work":"shatter","in":12,"b0":71,"b1":72,"label":"MoGraph 魔方墙 · 336 立方体"},{"id":"h08","type":"full","work":"phasegate","in":19.4,"b0":72,"b1":73,"label":"升维 · 曲速"},{"id":"h09","type":"full","work":"ageint","in":36.6,"b0":73,"b1":74,"label":"注意力机制 · 3D"},{"id":"h10","type":"full","work":"skillshub","in":19.8,"b0":74,"b1":75,"label":"Logo 冲击出场"},{"id":"h11","type":"full","work":"f12","in":20.8,"b0":75,"b1":76,"label":"Console · 故障字"},{"id":"h12","type":"full","work":"claude15","in":74,"b0":76,"b1":77,"label":"15 种画风 · 瑞士主义"},{"id":"h13","type":"full","work":"dingge","in":77.4,"b0":77,"b1":78,"label":"2560×1440 · 60fps"},{"id":"h14","type":"full","work":"hust1037","in":104.2,"b0":78,"b1":79,"label":"几百只小手连成山脊"},{"id":"h15","type":"full","work":"oneink","in":4.6,"b0":79,"b1":80,"label":"「永」字八法 · 按笔顺书写"},{"id":"s1a","type":"split","n":2,"panel":0,"work":"xuanlan","in":24,"b0":80,"b1":82},{"id":"s1b","type":"split","n":2,"panel":1,"work":"studysolo","in":15.5,"b0":80,"b1":82},{"id":"s2a","type":"split","n":3,"panel":0,"work":"yusheng","in":6.5,"b0":82,"b1":84},{"id":"s2b","type":"split","n":3,"panel":1,"work":"shuchenglin","in":38,"b0":82,"b1":84},{"id":"s2c","type":"split","n":3,"panel":2,"work":"protocom","in":47,"b0":82,"b1":84},{"id":"s3a","type":"split","n":4,"panel":0,"work":"stopmotion","in":53,"b0":84,"b1":86},{"id":"s3b","type":"split","n":4,"panel":1,"work":"codecosmos","in":33,"b0":84,"b1":86},{"id":"s3c","type":"split","n":4,"panel":2,"work":"gongcishi","in":160,"b0":84,"b1":86},{"id":"s3d","type":"split","n":4,"panel":3,"work":"samemoon","in":64,"b0":84,"b1":86},{"id":"p1","type":"phone","panel":0,"work":"readclub","in":25,"b0":86,"b1":88},{"id":"p2","type":"phone","panel":1,"work":"senpai","in":21.5,"b0":86,"b1":88},{"id":"p3","type":"phone","panel":2,"work":"moonlamp","in":8.6,"b0":86,"b1":88}],"GRID":{"work":"cosmos30","b0":45,"b1":51,"steps":[{"b":45,"n":1},{"b":46,"n":4},{"b":47,"n":9},{"b":48,"n":16}],"shots":[9,1,7,19,3,12,15,26,5,22,10,17,28,2,13,24],"shotLen":2.4},"WALL":{"b0":96,"b1":104,"cols":7,"rows":4,"clipLen":3.4},"TUNNEL":{"b0":88,"b1":96},"TEXT":{"cold":{"prompt":"$ ","command":"render(t)","typeB0":2,"typeB1":4.6,"nos":[{"text":"没有 AE","b":6},{"text":"没有 PR","b":7},{"text":"没有剪辑软件","b":8}],"nosOut":10,"thesis":"每一帧，都是时间的函数","formula":"frame = render(t)","thesisB0":10,"thesisB1":15.5,"codeWallB0":12.5,"codeWallB1":15.9},"grid":{"big":"×30","small":"种画风，一支片","b0":48,"b1":51},"drop":{"n":"04","word":"电影","b0":64,"b1":66},"tunnel":{"line":"从一行字，到一整个宇宙","b0":89,"b1":95.5},"wall":{"title":"AI-CODING · SUPERVIDEOS","sub":"28 部 · 全部由代码生成","b0":97,"b1":104},"breath":[{"big":"28 部片子。","small":"31 分钟 · 6.9 万帧","b0":104.5,"b1":107.5},{"big":"没有一帧，是手动剪出来的。","small":"每一帧都由 render(t) 算出","b0":107.5,"b1":110.5},{"big":"它们，是怎么做出来的？","small":"","b0":110.5,"b1":114.5}],"reveal":{"chars":["通","通","开","源"],"b":[116,117,118,119],"en":"OPEN SOURCE · ALL OF IT","enB":120,"out":124},"pillars":{"b0":124,"b1":128.6,"items":[{"head":"源码","en":"SOURCE","num":20,"unit":"个工程包","sub":"+ 5 个可交互网页"},{"head":"复盘","en":"CoExp","num":24,"unit":"份经验文档","sub":"51 万字 · 每一个坑都写进去了"},{"head":"成片","en":"FILM","num":28,"unit":"部代码视频","sub":"2.39 GB · 31 分钟"}]},"card":{"b0":128,"b1":140,"cta":"扫码，全部带走","note":"源码 · 复盘 · 成片 · 一个不留"},"outro":{"b0":140,"b1":156,"typeB0":141,"typeB1":142.6,"answerB":143,"answer":"下一部，由你来写。","creditsB":146.5,"credits":["本片同样 100% 由代码生成","画面 HTML + GSAP · render(t) 纯函数 ｜ 配乐 numpy 逐样本合成","Claude Opus 5.5 · 2026 秋"],"fadeB0":153}},"STACK_END":42,"WORKS":[{"key":"kimi-beat","model":"KIMI","color":"#3CF0C8","title":"AI 觉醒","slot":0},{"key":"ai-rise","model":"SWE","color":"#7CC4FF","title":"AI:RISE","slot":1},{"key":"kimi-film","model":"SWE","color":"#7CC4FF","title":"月之暗面 · KIMI","slot":2},{"key":"cosmos30","model":"GPT","color":"#A98BFF","title":"COSMOS · 从未知到寂静","slot":3},{"key":"beyond","model":"GPT","color":"#A98BFF","title":"AI · Beyond Generation","slot":4},{"key":"gpt-autumn","model":"GPT","color":"#A98BFF","title":"把日子，慢慢过圆","slot":5},{"key":"moon-letter","model":"GPT","color":"#A98BFF","title":"月光信笺","slot":6},{"key":"shatter","model":"OPUS","color":"#FF7A3D","title":"碎月重圆","slot":7},{"key":"oneink","model":"OPUS","color":"#FF7A3D","title":"一畫","slot":8},{"key":"dingge","model":"OPUS","color":"#FF7A3D","title":"定格","slot":9},{"key":"claude15","model":"OPUS","color":"#FF7A3D","title":"Claude 自我介绍 · 15 种画风","slot":10},{"key":"protocom","model":"OPUS","color":"#FF7A3D","title":"protocom","slot":11},{"key":"codecosmos","model":"OPUS","color":"#FF7A3D","title":"代码宇宙","slot":12},{"key":"phasegate","model":"OPUS","color":"#FF7A3D","title":"Phase-Gate 升维","slot":13},{"key":"ageint","model":"OPUS","color":"#FF7A3D","title":"智能时代","slot":14},{"key":"skillshub","model":"OPUS","color":"#FF7A3D","title":"Skills Hub","slot":15},{"key":"f12","model":"OPUS","color":"#FF7A3D","title":"DevTools in 60 Seconds","slot":16},{"key":"hust1037","model":"OPUS","color":"#FF7A3D","title":"1037","slot":17},{"key":"xuanlan","model":"OPUS","color":"#FF7A3D","title":"玄览 PocketWebShell","slot":18},{"key":"studysolo","model":"OPUS","color":"#FF7A3D","title":"StudySolo","slot":19},{"key":"yusheng","model":"OPUS","color":"#FF7A3D","title":"羽升集","slot":20},{"key":"shuchenglin","model":"OPUS","color":"#FF7A3D","title":"树成林","slot":21},{"key":"stopmotion","model":"SKILL","color":"#FFD166","title":"方块定格 Skill","slot":22},{"key":"samemoon","model":"OPUS","color":"#FF7A3D","title":"同一个月亮","slot":23},{"key":"gongcishi","model":"OPUS","color":"#FF7A3D","title":"共此时","slot":24},{"key":"moonlamp","model":"OPUS","color":"#FF7A3D","title":"月光替你亮着灯","slot":25},{"key":"readclub","model":"OPUS","color":"#FF7A3D","title":"慢下来","slot":26},{"key":"senpai","model":"OPUS","color":"#FF7A3D","title":"中秋 · 给学姐","slot":27}],"MODELS":{"KIMI":{"label":"KIMI","color":"#3CF0C8","era":1},"SWE":{"label":"SWE","color":"#7CC4FF","era":2},"GPT":{"label":"GPT","color":"#A98BFF","era":3},"OPUS":{"label":"CLAUDE OPUS","color":"#FF7A3D","era":4},"SKILL":{"label":"SKILL","color":"#FFD166","era":4}},"firstSeen":{"kimi-beat":19,"ai-rise":30,"kimi-film":34,"beyond":51,"gpt-autumn":57,"moon-letter":59,"shatter":64,"oneink":66,"dingge":67,"claude15":68,"protocom":69,"codecosmos":70,"phasegate":72,"ageint":73,"skillshub":74,"f12":75,"hust1037":78,"xuanlan":80,"studysolo":80,"yusheng":82,"shuchenglin":82,"stopmotion":84,"gongcishi":84,"samemoon":84,"readclub":86,"senpai":86,"moonlamp":86,"cosmos30":45},"CODE_LINES":[{"src":"opus-oneink/main.js","line":"const W = 1920, H = 1080, FPS = 30;"},{"src":"opus-oneink/main.js","line":"let rnd = mulberry32(20260926);"},{"src":"opus-oneink/main.js","line":"const sstep = (a, b, x) => { const t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };"},{"src":"opus-oneink/main.js","line":"const easeIO = t => t <= 0 ? 0 : t >= 1 ? 1 : 0.5 - 0.5 * Math.cos(Math.PI * t);"},{"src":"opus-oneink/render.js","line":"const url = await p.evaluate(f => { window.renderFrame(f); return document.getElementById('gl').toDataURL('image/jpeg', 0.95); }, f);"},{"src":"opus-universe-history-video/web/engine.js","line":"export const ACC = { '2D': '#00E5FF', '2.5D': '#FFD600', '3D': '#FF3D7F', '4D': '#B388FF' };"},{"src":"opus-universe-history-video/web/engine.js","line":"const renderer = new THREE\u002eWebGLRenderer({ canvas: glCanvas, antialias: true, preserveDrawingBuffer: true, alpha: false });"},{"src":"opus-universe-history-video/music.py","line":"SR = 44100; BPM = 120; BEAT = 60 / BPM; DUR = 68.0"},{"src":"opus-universe-history-video/music.py","line":"f = 45 + 110 * np.exp(-t / 0.03) + (30 * np.exp(-t / 0.2) if big else 0)"},{"src":"opus-universe-history-video/music.py","line":"return np.tanh(s * 1.6) * g"},{"src":"opus-claude-intro-with-15-way/claude_intro/core.py","line":"def seg(x, a, b): return clamp((x - a) / (b - a)) if b != a else float(x >= a)"},{"src":"opus-claude-intro-with-15-way/claude_intro/core.py","line":"def e_outexp(t): t = clamp(t); return 1 if t >= 1 else 1 - 2 ** (-10 * t)"},{"src":"gpt-universe-30-change/COSMOS/score.py","line":"SR=48000;N=72*SR;B=.3;BASE=Path(__file__).resolve().parent"},{"src":"gpt-universe-30-change/COSMOS/score.py","line":"def filt(x,c,kind='lowpass'):return sosfilt(butter(2,c,btype=kind,fs=SR,output='sos'),x).astype(np.float32)"},{"src":"gpt-universe-30-change/COSMOS/score.py","line":"def env(t,a=.004,d=.15):return (1-np.exp(-t/a))*np.exp(-t/d)"},{"src":"gpt-universe-30-change/COSMOS/glrender.py","line":"def render(self,scene,t,beat=0.):"},{"src":"opus-age-of-intelligence/src/timeline.py","line":"BPM = 60.0 * FPS / FPB        # 128.5714"},{"src":"opus-age-of-intelligence/src/timeline.py","line":"N_FRAMES = END_BEAT * FPB     # 5544 frames = 92.4 s"},{"src":"opus-age-of-intelligence/src/timeline.py","line":"shot(184, END_BEAT, 'end_card')"},{"src":"opus-shuchenglin-into/comp/timeline.js","line":"function stamp(word, lt, { size = 380, dur = .34, color = '#fff', solid = false } = {}) {"},{"src":"opus-shuchenglin-into/render.py","line":"d=await pg.evaluate(f'renderFrame({round(t*30)})')"},{"src":"opus-production-video-skill-hub/src/js/engine.js","line":"export const prog = (b, b0, b1, ease = E.linear) => ease(clamp((b - b0) / (b1 - b0)));"},{"src":"opus-production-video-skill-hub/src/js/engine.js","line":"export function hit(b, at, decay = 0.35) {"},{"src":"opus-production-video-skill-hub/render.mjs","line":"\"-f\", \"image2pipe\", \"-framerate\", String(fps), \"-i\", \"-\","},{"src":"opus-F12-teaching/music.py","line":"def supersaw(freqs, d, cutoff=2400):"},{"src":"swe-ai-rise/main_v2.js","line":"window.renderAt=function(t){"},{"src":"swe-kimi-source-intro/scenes.py","line":"draw_stars(img, _SF0, t, amp=ss(seg(t, 3.2, 5.5)) * 0.9)"},{"src":"swe-kimi-source-intro/film_par.py","line":"[\"ffmpeg\", \"-y\", \"-f\", \"rawvideo\", \"-pix_fmt\", \"rgb24\","},{"src":"swe-kimi-source-intro/kit.py","line":"def eo_back(x, s=1.70158):"},{"src":"opus-mid-autumn-for-my-dg01/CoExp.md","line":"const seg = (t,a,b) => clamp((t-a)/(b-a));"},{"src":"opus-mid-autumn-for-my-dg01/CoExp.md","line":"const eio = x => x<.5 ? 4*x*x*x : 1-Math.pow(-2*x+2,3)/2;"},{"src":"opus-mid-autumn-for-my-dg01/CoExp.md","line":"await page.evaluate(t => render(t), i / FPS);"}],"SHARE":{"name":"AI-Coding-SuperVideos","size":"2.39 GB","service":"QQ 闪传","url":"qfile.qq.com/q/P2tSnByK4K","expire":"2026/10/10 05:25 到期","qr":"assets/img/qr.png"},"STATS":{"films":28,"coexp":24,"coexpChars":515858,"packages":20,"htmls":5,"minutes":31,"frames":69000,"sizeGB":"2.39"},"wall":{"TW":256,"TH":144,"GAP":10,"x0":34,"y0":237}};</script>
+<script>window.__EDL = {"BEAT":0.4,"FPS":30,"DURATION":120,"TOTAL_BEATS":300,"SECTIONS":[{"id":"cold","b0":0,"b1":20,"energy":0.12},{"id":"era1","b0":20,"b1":34,"energy":0.5},{"id":"era2","b0":34,"b1":58,"energy":0.62},{"id":"era3","b0":58,"b1":81,"energy":0.78},{"id":"era4card","b0":81,"b1":88,"energy":0.9},{"id":"drop","b0":88,"b1":114,"energy":1},{"id":"splits","b0":114,"b1":120,"energy":0.95},{"id":"phones","b0":120,"b1":124,"energy":0.9},{"id":"tunnel","b0":124,"b1":138,"energy":0.95},{"id":"wall","b0":138,"b1":150,"energy":1},{"id":"breath","b0":150,"b1":166,"energy":0.05},{"id":"autopsy","b0":166,"b1":196,"energy":0.55},{"id":"marathon","b0":196,"b1":206,"energy":0.92},{"id":"reveal","b0":206,"b1":222,"energy":1},{"id":"pillars","b0":222,"b1":232,"energy":0.7},{"id":"card","b0":232,"b1":256,"energy":0.6},{"id":"outro","b0":256,"b1":300,"energy":0.2}],"ERAS":[{"n":"01","model":"KIMI","title":"觉醒","sub":"让每一个字，都砸在鼓点上","b0":20,"b1":23,"node":0},{"n":"02","model":"SWE","title":"像素","sub":"不开浏览器，逐像素算出每一帧","b0":34,"b1":37,"node":1},{"n":"03","model":"GPT","title":"世界","sub":"一个模型，三十个世界","b0":58,"b1":61,"node":2},{"n":"04","model":"OPUS","title":"电影","sub":"AE 级合成 · 水墨 · 3D · 4K","b0":84,"b1":87.5,"node":3}],"SHOTS":[{"id":"w01","type":"win","work":"kimi-beat","in":1.9,"b0":23,"b1":25},{"id":"w02","type":"win","work":"kimi-beat","in":4.9,"b0":25,"b1":27},{"id":"w03","type":"win","work":"kimi-beat","in":23.62,"b0":27,"b1":29},{"id":"w04","type":"win","work":"kimi-beat","in":45.8,"b0":29,"b1":31},{"id":"w05","type":"win","work":"kimi-beat","in":12,"b0":31,"b1":33},{"id":"w06","type":"win","work":"kimi-beat","in":35,"b0":33,"b1":35},{"id":"w07","type":"win","work":"ai-rise","in":3.62,"b0":37,"b1":39},{"id":"w08","type":"win","work":"ai-rise","in":6.1,"b0":39,"b1":41},{"id":"w09","type":"win","work":"kimi-film","in":4.6,"b0":41,"b1":43},{"id":"w10","type":"win","work":"kimi-film","in":13.6,"b0":43,"b1":45},{"id":"w11","type":"win","work":"ai-rise","in":26.9,"b0":45,"b1":47},{"id":"w12","type":"win","work":"kimi-film","in":33.2,"b0":47,"b1":49},{"id":"w13","type":"win","work":"ai-rise","in":15,"b0":49,"b1":51},{"id":"w14","type":"win","work":"kimi-film","in":48,"b0":51,"b1":53},{"id":"f01","type":"full","work":"beyond","in":12,"b0":67,"b1":68,"label":"15 个世界 · 体素岛"},{"id":"f02","type":"full","work":"beyond","in":18,"b0":68,"b1":69,"label":"15 个世界 · 黏土机器人"},{"id":"f03","type":"full","work":"beyond","in":30,"b0":69,"b1":70,"label":"15 个世界 · 发条城"},{"id":"f04","type":"full","work":"beyond","in":48,"b0":70,"b1":71,"label":"15 个世界 · 波普网点"},{"id":"f05","type":"full","work":"beyond","in":60,"b0":71,"b1":72,"label":"15 个世界 · 浮世绘"},{"id":"f06","type":"full","work":"beyond","in":84,"b0":72,"b1":73,"label":"15 个世界 · 霓虹"},{"id":"f07","type":"full","work":"beyond","in":96,"b0":73,"b1":74,"label":"15 个世界 · 铬金属"},{"id":"f08","type":"full","work":"beyond","in":102,"b0":74,"b1":75,"label":"15 个世界 · 粒子"},{"id":"f09","type":"full","work":"gpt-autumn","in":6,"b0":75,"b1":77,"label":"铅笔线描 → 水墨 → 雕刻"},{"id":"duoA","type":"duoL","work":"gpt-autumn","in":20.5,"b0":77,"b1":81},{"id":"duoB","type":"phoneR","work":"moon-letter","in":15,"b0":77,"b1":81},{"id":"d01","type":"full","work":"f12","in":20.8,"b0":88,"b1":89,"label":"Console · 故障字"},{"id":"d02","type":"full","work":"phasegate","in":13,"b0":89,"b1":90,"label":"升维 · 曲速"},{"id":"d03","type":"full","work":"yusheng","in":6.5,"b0":90,"b1":91,"label":"每一拍一个动作"},{"id":"d04","type":"full","work":"xuanlan","in":24,"b0":91,"b1":92,"label":"浏览器三十年"},{"id":"d05","type":"full","work":"shuchenglin","in":38,"b0":92,"b1":93,"label":"去色信息流"},{"id":"d06","type":"full","work":"studysolo","in":15.5,"b0":93,"b1":94,"label":"过去|现在 分屏"},{"id":"d07","type":"full","work":"samemoon","in":64,"b0":94,"b1":95,"label":"单文件 854 行"},{"id":"d08","type":"full","work":"stopmotion","in":53,"b0":95,"b1":96,"label":"定格动画 Skill"},{"id":"d09","type":"full","work":"gongcishi","in":160,"b0":96,"b1":97,"label":"217 份真实素材"},{"id":"d10","type":"full","work":"codecosmos","in":10,"b0":97,"b1":98,"label":"4D 超立方体"},{"id":"d11","type":"full","work":"hust1037","in":104,"b0":98,"b1":99,"label":"几百只小手连成山脊"},{"id":"d12","type":"full","work":"claude15","in":50.5,"b0":99,"b1":100,"label":"15 种画风 · 体素"},{"id":"d13","type":"full","work":"ageint","in":36.6,"b0":100,"b1":101,"label":"注意力机制 · 3D"},{"id":"d14","type":"full","work":"skillshub","in":19.8,"b0":101,"b1":102,"label":"Logo 冲击出场"},{"id":"d15","type":"full","work":"dingge","in":34.6,"b0":102,"b1":103,"label":"Three.js 定格 · 慢动作坠落"},{"id":"d16","type":"full","work":"shatter","in":3,"b0":103,"b1":104,"label":"自写 3D 合成器 · Voronoi 碎裂"},{"id":"d17","type":"full","work":"oneink","in":4.6,"b0":104,"b1":105,"label":"「永」字八法 · 按笔顺书写"},{"id":"d18","type":"full","work":"protocom","in":47,"b0":105,"b1":106,"label":"4K 60fps 定版"},{"id":"d19","type":"full","work":"shatter","in":12,"b0":106,"b1":107,"label":"MoGraph 魔方墙 · 336 立方体"},{"id":"d20","type":"full","work":"codecosmos","in":33,"b0":107,"b1":108,"label":"一拍二 · 定格语法"},{"id":"d21","type":"full","work":"oneink","in":50,"b0":108,"b1":109,"label":"逆锋压笔 · 泼墨一笔"},{"id":"d22","type":"full","work":"protocom","in":75.4,"b0":109,"b1":110,"label":"升维 · 字面意义"},{"id":"d23","type":"full","work":"dingge","in":77.4,"b0":110,"b1":111,"label":"2560×1440 · 60fps"},{"id":"d24","type":"full","work":"ageint","in":60,"b0":111,"b1":112,"label":"4170 行 Python"},{"id":"d25","type":"full","work":"phasegate","in":26.5,"b0":112,"b1":113,"label":"静默门 · 确认↵"},{"id":"d26","type":"full","work":"skillshub","in":47.5,"b0":113,"b1":114,"label":"顺手写了套前端"},{"id":"s1a","type":"split","n":2,"panel":0,"work":"xuanlan","in":24,"b0":114,"b1":116},{"id":"s1b","type":"split","n":2,"panel":1,"work":"studysolo","in":15.5,"b0":114,"b1":116},{"id":"s2a","type":"split","n":3,"panel":0,"work":"yusheng","in":6.5,"b0":116,"b1":118},{"id":"s2b","type":"split","n":3,"panel":1,"work":"shuchenglin","in":38,"b0":116,"b1":118},{"id":"s2c","type":"split","n":3,"panel":2,"work":"protocom","in":47,"b0":116,"b1":118},{"id":"s3a","type":"split","n":4,"panel":0,"work":"stopmotion","in":53,"b0":118,"b1":120},{"id":"s3b","type":"split","n":4,"panel":1,"work":"codecosmos","in":33,"b0":118,"b1":120},{"id":"s3c","type":"split","n":4,"panel":2,"work":"gongcishi","in":160,"b0":118,"b1":120},{"id":"s3d","type":"split","n":4,"panel":3,"work":"samemoon","in":64,"b0":118,"b1":120},{"id":"p1","type":"phone","panel":0,"work":"readclub","in":25,"b0":120,"b1":124},{"id":"p2","type":"phone","panel":1,"work":"senpai","in":21.5,"b0":120,"b1":124},{"id":"p3","type":"phone","panel":2,"work":"moonlamp","in":8.6,"b0":120,"b1":124},{"id":"a0","type":"pair","work":"oneink","in":49.8,"b0":170,"b1":175.5},{"id":"a1","type":"pair","work":"codecosmos","in":10,"b0":175.5,"b1":181},{"id":"a2","type":"pair","work":"ageint","in":36.6,"b0":181,"b1":186.5},{"id":"a3","type":"pair","work":"skillshub","in":19.8,"b0":186.5,"b1":192}],"GRID":{"work":"cosmos30","b0":61,"b1":67,"steps":[{"b":61,"n":1},{"b":62,"n":4},{"b":63,"n":9},{"b":64,"n":16}],"shots":[9,1,7,19,3,12,15,26,5,22,10,17,28,2,13,24],"shotLen":2.4},"WALL":{"b0":138,"b1":150,"cols":7,"rows":4,"clipLen":4.4,"freezeAt":148},"TUNNEL":{"b0":124,"b1":138},"TEXT":{"cold":{"prompt":"$ ","command":"render(t)","boot":["> mount AI-Coding-SuperVideos","> 28 modules · 2.39 GB","> ok"],"bootB0":0.3,"typeB0":2.6,"typeB1":5,"nos":[{"text":"没有 AE","b":7},{"text":"没有 PR","b":8},{"text":"没有剪辑软件","b":9}],"nosOut":11,"thesis":"每一帧，都是时间的函数","formula":"frame = render(t)","thesisB0":11,"thesisB1":18.5,"blueprintB0":13.5,"blueprintB1":18,"codeWallB0":14.5,"codeWallB1":19.9},"grid":{"big":"×30","small":"种画风，一支片","b0":64,"b1":67},"drop":{"n":"04","word":"电影","b0":88,"b1":90},"tunnel":{"line":"从一行字，到一整个宇宙","b0":126,"b1":137},"wall":{"title":"AI-CODING · SUPERVIDEOS","sub":"28 部 · 全部由代码生成","b0":140,"b1":150},"breath":[{"big":"28 部片子。","small":"31 分钟 · 6.9 万帧","b0":151,"b1":155.5},{"big":"没有一帧，是手动剪出来的。","small":"每一帧都由 render(t) 算出","b0":155.5,"b1":160},{"big":"它们，是怎么做出来的？","small":"","b0":160,"b1":164.5}],"autopsy":{"title":"拆给你看","sub":"左边 = 真实源码行 · 右边 = 它的输出","b0":166,"b1":170,"statsB0":190,"statsB1":196,"stats":[{"num":69000,"label":"帧 · 全部算出来","suffix":"+"},{"num":515858,"label":"字复盘文档","suffix":""},{"num":28,"label":"部成片","suffix":""}],"tail":"每一帧 = render(t) 的输出"},"marathon":{"title":"28 部 · 一部都不能少","b0":196,"b1":206},"reveal":{"chars":["通","通","开","源"],"b":[206,207,208,209],"en":"OPEN SOURCE · ALL OF IT","enB":210,"out":216},"pillars":{"b0":222,"b1":231.5,"items":[{"head":"源码","en":"SOURCE","num":20,"unit":"个工程包","sub":"+ 5 个可交互网页"},{"head":"复盘","en":"CoExp","num":24,"unit":"份经验文档","sub":"51 万字 · 每一个坑都写进去了"},{"head":"成片","en":"FILM","num":28,"unit":"部代码视频","sub":"2.39 GB · 31 分钟"}]},"card":{"b0":232,"b1":256,"cta":"扫码，全部带走","note":"源码 · 复盘 · 成片 · 一个不留"},"outro":{"b0":256,"b1":300,"typeB0":258,"typeB1":259.6,"self":"> rendering self · 14400/14400","selfB":260.4,"answerB":263,"answer":"下一部，由你来写。","creditsB":266,"credits":["本片同样 100% 由代码生成","画面 HTML + GSAP · render(t) 纯函数 ｜ 配乐 numpy 逐样本合成","Claude Opus 5.5 · 2026 秋"],"crtB0":295,"fadeB0":293}},"STACK_END":58,"PAIRS":[{"shot":"a0","work":"oneink","title":"一畫","tech":"水墨书法 · 手卷一镜到底","lines":[{"src":"opus-oneink/main.js","line":"const W = 1920, H = 1080, FPS = 30;"},{"src":"opus-oneink/main.js","line":"let rnd = mulberry32(20260926);"},{"src":"opus-oneink/main.js","line":"const easeIO = t => t <= 0 ? 0 : t >= 1 ? 1 : 0.5 - 0.5 * Math.cos(Math.PI * t);"},{"src":"opus-oneink/render.js","line":"const url = await p.evaluate(f => { window.renderFrame(f); return document.getElementById('gl').toDataURL('image/jpeg', 0.95); }, f);"}]},{"shot":"a1","work":"codecosmos","title":"代码宇宙","tech":"27 种代码风格 · 2D→4D","lines":[{"src":"opus-universe-history-video/web/engine.js","line":"export const ACC = { '2D': '#00E5FF', '2.5D': '#FFD600', '3D': '#FF3D7F', '4D': '#B388FF' };"},{"src":"opus-universe-history-video/web/engine.js","line":"const renderer = new THREE\u002eWebGLRenderer({ canvas: glCanvas, antialias: true, preserveDrawingBuffer: true, alpha: false });"},{"src":"opus-universe-history-video/music.py","line":"SR = 44100; BPM = 120; BEAT = 60 / BPM; DUR = 68.0"}]},{"shot":"a2","work":"ageint","title":"智能时代","tech":"108 镜 · 4170 行 Python","lines":[{"src":"opus-age-of-intelligence/src/timeline.py","line":"BPM = 60.0 * FPS / FPB        # 128.5714"},{"src":"opus-age-of-intelligence/src/timeline.py","line":"N_FRAMES = END_BEAT * FPB     # 5544 frames = 92.4 s"},{"src":"opus-age-of-intelligence/src/timeline.py","line":"shot(184, END_BEAT, 'end_card')"}]},{"shot":"a3","work":"skillshub","title":"Skills Hub","tech":"顺手从零写一套前端来拍","lines":[{"src":"opus-production-video-skill-hub/src/js/engine.js","line":"export const prog = (b, b0, b1, ease = E.linear) => ease(clamp((b - b0) / (b1 - b0)));"},{"src":"opus-production-video-skill-hub/src/js/engine.js","line":"export function hit(b, at, decay = 0.35) {"},{"src":"opus-production-video-skill-hub/render.mjs","line":"\"-f\", \"image2pipe\", \"-framerate\", String(fps), \"-i\", \"-\","}]}],"MARATHON":{"b0":196,"b1":206,"per":0.5},"WORKS":[{"key":"kimi-beat","model":"KIMI","color":"#3CF0C8","title":"AI 觉醒","slot":0},{"key":"ai-rise","model":"SWE","color":"#7CC4FF","title":"AI:RISE","slot":1},{"key":"kimi-film","model":"SWE","color":"#7CC4FF","title":"月之暗面 · KIMI","slot":2},{"key":"cosmos30","model":"GPT","color":"#A98BFF","title":"COSMOS · 从未知到寂静","slot":3},{"key":"beyond","model":"GPT","color":"#A98BFF","title":"AI · Beyond Generation","slot":4},{"key":"gpt-autumn","model":"GPT","color":"#A98BFF","title":"把日子，慢慢过圆","slot":5},{"key":"moon-letter","model":"GPT","color":"#A98BFF","title":"月光信笺","slot":6},{"key":"shatter","model":"OPUS","color":"#FF7A3D","title":"碎月重圆","slot":7},{"key":"oneink","model":"OPUS","color":"#FF7A3D","title":"一畫","slot":8},{"key":"dingge","model":"OPUS","color":"#FF7A3D","title":"定格","slot":9},{"key":"claude15","model":"OPUS","color":"#FF7A3D","title":"Claude 自我介绍 · 15 种画风","slot":10},{"key":"protocom","model":"OPUS","color":"#FF7A3D","title":"protocom","slot":11},{"key":"codecosmos","model":"OPUS","color":"#FF7A3D","title":"代码宇宙","slot":12},{"key":"phasegate","model":"OPUS","color":"#FF7A3D","title":"Phase-Gate 升维","slot":13},{"key":"ageint","model":"OPUS","color":"#FF7A3D","title":"智能时代","slot":14},{"key":"skillshub","model":"OPUS","color":"#FF7A3D","title":"Skills Hub","slot":15},{"key":"f12","model":"OPUS","color":"#FF7A3D","title":"DevTools in 60 Seconds","slot":16},{"key":"hust1037","model":"OPUS","color":"#FF7A3D","title":"1037","slot":17},{"key":"xuanlan","model":"OPUS","color":"#FF7A3D","title":"玄览 PocketWebShell","slot":18},{"key":"studysolo","model":"OPUS","color":"#FF7A3D","title":"StudySolo","slot":19},{"key":"yusheng","model":"OPUS","color":"#FF7A3D","title":"羽升集","slot":20},{"key":"shuchenglin","model":"OPUS","color":"#FF7A3D","title":"树成林","slot":21},{"key":"stopmotion","model":"SKILL","color":"#FFD166","title":"方块定格 Skill","slot":22},{"key":"samemoon","model":"OPUS","color":"#FF7A3D","title":"同一个月亮","slot":23},{"key":"gongcishi","model":"OPUS","color":"#FF7A3D","title":"共此时","slot":24},{"key":"moonlamp","model":"OPUS","color":"#FF7A3D","title":"月光替你亮着灯","slot":25},{"key":"readclub","model":"OPUS","color":"#FF7A3D","title":"慢下来","slot":26},{"key":"senpai","model":"OPUS","color":"#FF7A3D","title":"中秋 · 给学姐","slot":27}],"MODELS":{"KIMI":{"label":"KIMI","color":"#3CF0C8","era":1},"SWE":{"label":"SWE","color":"#7CC4FF","era":2},"GPT":{"label":"GPT","color":"#A98BFF","era":3},"OPUS":{"label":"CLAUDE OPUS","color":"#FF7A3D","era":4},"SKILL":{"label":"SKILL","color":"#FFD166","era":4}},"firstSeen":{"kimi-beat":23,"ai-rise":37,"kimi-film":41,"beyond":67,"gpt-autumn":75,"moon-letter":77,"f12":88,"phasegate":89,"yusheng":90,"xuanlan":91,"shuchenglin":92,"studysolo":93,"samemoon":94,"stopmotion":95,"gongcishi":96,"codecosmos":97,"hust1037":98,"claude15":99,"ageint":100,"skillshub":101,"dingge":102,"shatter":103,"oneink":104,"protocom":105,"readclub":120,"senpai":120,"moonlamp":120,"cosmos30":61},"CODE_LINES":[{"src":"opus-oneink/main.js","line":"const W = 1920, H = 1080, FPS = 30;"},{"src":"opus-oneink/main.js","line":"let rnd = mulberry32(20260926);"},{"src":"opus-oneink/main.js","line":"const sstep = (a, b, x) => { const t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };"},{"src":"opus-oneink/main.js","line":"const easeIO = t => t <= 0 ? 0 : t >= 1 ? 1 : 0.5 - 0.5 * Math.cos(Math.PI * t);"},{"src":"opus-oneink/render.js","line":"const url = await p.evaluate(f => { window.renderFrame(f); return document.getElementById('gl').toDataURL('image/jpeg', 0.95); }, f);"},{"src":"opus-universe-history-video/web/engine.js","line":"export const ACC = { '2D': '#00E5FF', '2.5D': '#FFD600', '3D': '#FF3D7F', '4D': '#B388FF' };"},{"src":"opus-universe-history-video/web/engine.js","line":"const renderer = new THREE\u002eWebGLRenderer({ canvas: glCanvas, antialias: true, preserveDrawingBuffer: true, alpha: false });"},{"src":"opus-universe-history-video/music.py","line":"SR = 44100; BPM = 120; BEAT = 60 / BPM; DUR = 68.0"},{"src":"opus-universe-history-video/music.py","line":"f = 45 + 110 * np.exp(-t / 0.03) + (30 * np.exp(-t / 0.2) if big else 0)"},{"src":"opus-universe-history-video/music.py","line":"return np.tanh(s * 1.6) * g"},{"src":"opus-claude-intro-with-15-way/claude_intro/core.py","line":"def seg(x, a, b): return clamp((x - a) / (b - a)) if b != a else float(x >= a)"},{"src":"opus-claude-intro-with-15-way/claude_intro/core.py","line":"def e_outexp(t): t = clamp(t); return 1 if t >= 1 else 1 - 2 ** (-10 * t)"},{"src":"gpt-universe-30-change/COSMOS/score.py","line":"SR=48000;N=72*SR;B=.3;BASE=Path(__file__).resolve().parent"},{"src":"gpt-universe-30-change/COSMOS/score.py","line":"def filt(x,c,kind='lowpass'):return sosfilt(butter(2,c,btype=kind,fs=SR,output='sos'),x).astype(np.float32)"},{"src":"gpt-universe-30-change/COSMOS/score.py","line":"def env(t,a=.004,d=.15):return (1-np.exp(-t/a))*np.exp(-t/d)"},{"src":"gpt-universe-30-change/COSMOS/glrender.py","line":"def render(self,scene,t,beat=0.):"},{"src":"opus-age-of-intelligence/src/timeline.py","line":"BPM = 60.0 * FPS / FPB        # 128.5714"},{"src":"opus-age-of-intelligence/src/timeline.py","line":"N_FRAMES = END_BEAT * FPB     # 5544 frames = 92.4 s"},{"src":"opus-age-of-intelligence/src/timeline.py","line":"shot(184, END_BEAT, 'end_card')"},{"src":"opus-shuchenglin-into/comp/timeline.js","line":"function stamp(word, lt, { size = 380, dur = .34, color = '#fff', solid = false } = {}) {"},{"src":"opus-shuchenglin-into/render.py","line":"d=await pg.evaluate(f'renderFrame({round(t*30)})')"},{"src":"opus-production-video-skill-hub/src/js/engine.js","line":"export const prog = (b, b0, b1, ease = E.linear) => ease(clamp((b - b0) / (b1 - b0)));"},{"src":"opus-production-video-skill-hub/src/js/engine.js","line":"export function hit(b, at, decay = 0.35) {"},{"src":"opus-production-video-skill-hub/render.mjs","line":"\"-f\", \"image2pipe\", \"-framerate\", String(fps), \"-i\", \"-\","},{"src":"opus-F12-teaching/music.py","line":"def supersaw(freqs, d, cutoff=2400):"},{"src":"swe-ai-rise/main_v2.js","line":"window.renderAt=function(t){"},{"src":"swe-kimi-source-intro/scenes.py","line":"draw_stars(img, _SF0, t, amp=ss(seg(t, 3.2, 5.5)) * 0.9)"},{"src":"swe-kimi-source-intro/film_par.py","line":"[\"ffmpeg\", \"-y\", \"-f\", \"rawvideo\", \"-pix_fmt\", \"rgb24\","},{"src":"swe-kimi-source-intro/kit.py","line":"def eo_back(x, s=1.70158):"},{"src":"opus-mid-autumn-for-my-dg01/CoExp.md","line":"const seg = (t,a,b) => clamp((t-a)/(b-a));"},{"src":"opus-mid-autumn-for-my-dg01/CoExp.md","line":"const eio = x => x<.5 ? 4*x*x*x : 1-Math.pow(-2*x+2,3)/2;"},{"src":"opus-mid-autumn-for-my-dg01/CoExp.md","line":"await page.evaluate(t => render(t), i / FPS);"}],"SHARE":{"name":"AI-Coding-SuperVideos","size":"2.39 GB","service":"QQ 闪传","url":"qfile.qq.com/q/P2tSnByK4K","expire":"2026/10/10 05:25 到期","qr":"assets/img/qr.png"},"STATS":{"films":28,"coexp":24,"coexpChars":515858,"packages":20,"htmls":5,"minutes":31,"frames":69000,"sizeGB":"2.39"},"wall":{"TW":256,"TH":144,"GAP":10,"x0":34,"y0":237}};</script>
 <!-- 注：EDL 里的真实代码行含 "THREE.WebGLRenderer"，会把静态检查器的 three.js 检测误触发。
      这里把 '.' 转义成 ，JSON.parse 解码回原文，显示与源码完全一致，但不再误报 missing_three_script。-->
 <script>
@@ -1167,6 +1454,7 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
   const SHOTS = D.SHOTS;
   const wins = SHOTS.filter((s) => s.type === 'win');
   const fulls = SHOTS.filter((s) => s.type === 'full');
+  const pairShots = SHOTS.filter((s) => s.type === 'pair');
   const splits = SHOTS.filter((s) => s.type === 'split');
   const phones = SHOTS.filter((s) => s.type === 'phone');
 
@@ -1176,8 +1464,10 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
       'full', 'duo', 'duo-left', 'duo-phone', 'duo-label', 'drop-ov', 'split', 'phones', 'tunnel', 'tunnel-cam', 'tunnel-line',
       'wall', 'wall-cam', 'wall-title', 'wall-sub', 'breath', 'flyers', 'reveal', 'rv-row', 'rv-en', 'rv-sweep', 'pillars', 'card', 'share',
       'folder', 'sh-count', 'sh-link-t', 'sh-link-u', 'qrbox', 'qr-scan', 'card-cta', 'card-note', 'outro', 'out-term', 'out-cmd', 'out-cursor',
-      'out-answer', 'mini', 'hud-tl', 'hud-rec', 'hud-time', 'hud-frame', 'hud-era', 'hud-era-k', 'hud-era-v', 'ruler', 'ruler-base', 'playhead',
+      'out-answer', 'out-self', 'mini', 'hud-tl', 'hud-rec', 'hud-time', 'hud-frame', 'hud-era', 'hud-era-k', 'hud-era-v', 'ruler', 'ruler-base', 'playhead',
+      'autopsy', 'at-head', 'at-tail', 'marathon', 'mar-strip', 'mar-count', 'mar-n', 'mar-title',
       'hud-count', 'hud-count-n', 'lbx-top', 'lbx-bot', 'fxback', 'fxfront'].forEach((id) => (el[id] = $(id)));
+    el.boot = TX.cold.boot.map((_, i) => $('bt' + i));
     el.nos = TX.cold.nos.map((_, i) => $('no' + i));
     el.strikes = el.nos.map((n) => n.querySelector('.strike'));
     el.formulaT = el['cold-formula'].querySelector('.t');
@@ -1193,7 +1483,16 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     el.phones = phones.map((s) => { const r = $('ph-' + s.id); return { r, label: r.querySelector('.ph-label') }; });
     el.phonesLayer = $('phones'); // el.phones 是数组，层的 id 单独存
     el.tplanes = D.WORKS.map((w) => $('tp-' + w.key));
-    el.wtiles = D.WORKS.map((w) => { const r = $('wt-' + w.key); return { r, flash: r.querySelector('.flash') }; });
+    el.wtiles = D.WORKS.map((w) => { const r = $('wt-' + w.key); return { r, flash: r.querySelector('.flash'), freeze: r.querySelector('img.freeze'), wl: r.querySelector('.wl') }; });
+    el.pairs = D.PAIRS.map((pr, i) => {
+      const r = $('pair-' + i);
+      return { r, code: r.querySelector('.code-pane'), film: r.querySelector('.film-pane'), media: r.querySelector('.film-media'),
+        beam: r.querySelector('.beam'), lock: r.querySelector('.lock'), label: r.querySelector('.film-label'),
+        lines: pr.lines.map((_, j) => $('cl-' + i + '-' + j)) };
+    });
+    el.stats = TX.autopsy.stats.map((_, i) => ({ r: $('st' + i), n: $('sn' + i) }));
+    el.mtiles = D.WORKS.map((w) => $('mt-' + w.key));
+    el.rslices = TX.reveal.chars.map((_, i) => { const c = $('rc' + i); return { t: c.querySelector('.sl-t'), m: c.querySelector('.sl-m'), b: c.querySelector('.sl-b') }; });
     el.blines = TX.breath.map((_, i) => { const r = $('bl' + i); return { r, big: r.querySelector('.big'), small: r.querySelector('.small') }; });
     el.flyers = D.WORKS.map((w) => $('fl-' + w.key));
     el.flyersLayer = $('flyers'); // el.flyers 是数组，层的 id 单独存
@@ -1214,22 +1513,24 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     const ring = (b, x, y, c, r = 900, d = 1.2, w = 10) => RING.push({ b, x, y, c, r, d, w });
     TX.cold.nos.forEach((n) => sh(n.b, 7, 0.25));
     D.ERAS.forEach((e, i) => { if (i < 3) { fl(e.b0, 0.55, 0.35); sh(e.b0, 12, 0.35); ring(e.b0, CX, CY, D.MODELS[e.model].color, 1100, 1.4, 14); } });
-    fulls.forEach((s) => fl(s.b0, s.b0 === 64 ? 1 : 0.2, s.b0 === 64 ? 0.7 : 0.18));
+    fulls.forEach((s) => fl(s.b0, s.b0 === 88 ? 1 : 0.2, s.b0 === 88 ? 0.7 : 0.18));
     D.GRID.steps.forEach((st) => fl(st.b, 0.22, 0.2));
-    fl(48, 0.4, 0.3, '169,139,255');
-    sh(64, 30, 0.55); ring(64, CX, CY, '#FF7A3D', 1500, 1.6, 22); ring(64.25, CX, CY, '#FFFFFF', 1200, 1.2, 6);
-    for (let b = 66; b < 80; b++) sh(b, 5, 0.18);
-    [80, 82, 84, 86].forEach((b) => { fl(b, 0.3, 0.22); sh(b, 8, 0.25); });
-    fl(96, 0.65, 0.4); sh(96, 16, 0.4); ring(96, CX, CY, '#FFFFFF', 1400, 1.2, 8);
+    fl(62, 0.4, 0.3, '169,139,255');
+    sh(88, 30, 0.55); ring(88, CX, CY, '#FF7A3D', 1500, 1.6, 22); ring(88.25, CX, CY, '#FFFFFF', 1200, 1.2, 6);
+    for (let b = 90; b < 112; b++) sh(b, 5, 0.18);
+    [114, 116, 118, 120].forEach((b) => { fl(b, 0.3, 0.22); sh(b, 8, 0.25); });
+    fl(124, 0.5, 0.35); // 隧道冲入
+    fl(138, 0.65, 0.4); sh(138, 16, 0.4); ring(138, CX, CY, '#FFFFFF', 1400, 1.2, 8); // 巨墙砸定
+    fl(148, 0.55, 0.3); sh(148, 8, 0.3); // 28 格定格卡·齐拍快门
     TX.reveal.b.forEach((b, i) => {
       const x = 160 + i * 400 + 200, y = 500;
       fl(b, 0.5 + i * 0.06, 0.25); sh(b, 18 + i * 5, 0.35);
       ring(b, x, y, '#FF7A3D', 900 + i * 150, 1.3, 16); ring(b + 0.12, x, y, '#FFFFFF', 600, 0.9, 5);
     });
-    fl(120, 0.75, 0.45); sh(120, 24, 0.5); ring(120, CX, 500, '#FFD166', 1800, 1.8, 26);
-    fl(128, 0.35, 0.3); fl(131, 0.25, 0.25, '61,139,255');
-    fl(143, 0.3, 0.5);
-    [[15.55, 0.35], [41.7, 0.3], [63.1, 0.35], [86, 0.4], [103.55, 0.45], [127.6, 0.3]].forEach(([b, len]) => GLITCH.push({ b, len }));
+    fl(210, 0.75, 0.45); sh(210, 24, 0.5); ring(210, CX, 500, '#FFD166', 1800, 1.8, 26); // OPEN SOURCE
+    fl(222, 0.35, 0.3); fl(232, 0.35, 0.3); fl(235, 0.3, 0.3, '61,139,255'); // 三柱 / 闪传卡
+    fl(263, 0.3, 0.5); // 「由你来写」
+    [[15.55, 0.35], [55.7, 0.3], [87.1, 0.35], [120, 0.4], [149.55, 0.45], [205.5, 0.3], [216.6, 0.3]].forEach(([b, len]) => GLITCH.push({ b, len }));
   }
   const sumPulse = (list, b) => {
     let a = 0;
@@ -1237,12 +1538,16 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     return a;
   };
 
-  // ═══ §4 冷开场 b0–16 ══════════════════════════════════════════════════════
+  // ═══ §4 冷开场 b0–20 ══════════════════════════════════════════════════════
   function sceneCold(b, t) {
     const C = TX.cold;
-    const vis = b < 15.9;
+    const vis = b < 19.9;
     op(el.cold, vis ? seg(b, 0, 0.8) : 0);
     if (!vis) return;
+    // boot 日志逐行点亮，打字开始后退场
+    el.boot.forEach((node, i) => {
+      op(node, seg(b, C.bootB0 + i * 0.75, C.bootB0 + i * 0.75 + 0.3) * (1 - seg(b, C.typeB0 - 0.2, C.typeB0 + 0.4)));
+    });
     // 终端打字
     const n = Math.floor(seg(b, C.typeB0, C.typeB1) * C.command.length + 1e-6);
     txt(el['cold-cmd'], C.command.slice(0, n));
@@ -1349,7 +1654,7 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
   function sceneEras(b, ctxB) {
     D.ERAS.forEach((e, i) => {
       const E4 = i === 3;
-      const end = E4 ? 63.5 : e.b1;
+      const end = e.b1;
       const R = el.eras[i];
       const vis = inR(b, e.b0, end);
       op(R.root, vis ? 1 : 0);
@@ -1385,19 +1690,21 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     });
   }
 
-  // ─── 窗口堆叠 b19–42 ───────────────────────────────────────────────────────
+  // ─── 窗口堆叠 b23–58（ERA02 的窗口入场做 4 步/拍的像素量化停顿）───────────
   function sceneStack(b) {
-    const vis = (inR(b, 19, 27) || inR(b, 30, D.STACK_END));
+    const vis = (inR(b, 23, 34) || inR(b, 37, D.STACK_END));
     op(el.stack, vis ? 1 : 0);
     if (!vis) return;
     const drift = Math.sin(b * 0.35) * 3;
-    tf(el['stack-cam'], `translateZ(${f3(lerp(0, -260, seg(b, 19, 42)))}px) rotateY(${f3(drift)}deg) rotateX(${f3(Math.cos(b * 0.27) * 1.5)}deg)`);
+    tf(el['stack-cam'], `translateZ(${f3(lerp(0, -260, seg(b, 23, 58)))}px) rotateY(${f3(drift)}deg) rotateX(${f3(Math.cos(b * 0.27) * 1.5)}deg)`);
     wins.forEach((s, i) => {
       const W_ = el.wins[i];
       if (b < s.b0) { op(W_.r, 0); return; }
       let d = 0;
       for (let j = i + 1; j < wins.length; j++) d += Ez.oE(seg(b, wins[j].b0, wins[j].b0 + 0.4));
-      const e = spring(seg(b, s.b0, s.b0 + 0.9) * 1.6, 1.6, 5.2);
+      // ERA02「像素」时代的窗口：入场运动量化成一拍 4 步 —— 抽帧顿挫感
+      const bt = s.b0 >= 37 ? Math.floor(b * 4) / 4 : b;
+      const e = spring(seg(bt, s.b0, s.b0 + 0.9) * 1.6, 1.6, 5.2);
       const pose = { x: -150 * d, y: -64 * d, z: -300 * d, ry: -12 - 3 * d, rx: 4 };
       const from = { x: 950, y: 140, z: 520, ry: -42, rx: 8 };
       const p = (a, bb) => lerp(from[a], pose[a], clamp(e, 0, 1.2)) + (bb || 0);
@@ -1469,15 +1776,17 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     }
   }
 
+  const DUO0 = SHOTS.find((s) => s.type === 'duoL').b0;
+  const DUO1 = SHOTS.find((s) => s.type === 'duoL').b1;
   function sceneDuo(b) {
-    const vis = inR(b, 59, 62);
+    const vis = inR(b, DUO0, DUO1);
     op(el.duo, vis ? 1 : 0);
     if (!vis) return;
-    const l = Ez.oE(seg(b, 59, 59.5));
-    tf(el['duo-left'], `translateX(${f3(lerp(-420, 0, l))}px) scale(${f3(1 + 0.025 * (b - 59))})`);
-    const p = seg(b, 59.25, 60.05);
+    const l = Ez.oE(seg(b, DUO0, DUO0 + 0.5));
+    tf(el['duo-left'], `translateX(${f3(lerp(-420, 0, l))}px) scale(${f3(1 + 0.025 * (b - DUO0))})`);
+    const p = seg(b, DUO0 + 0.25, DUO0 + 1.05);
     tf(el['duo-phone'], `translateY(${f3(lerp(900, 0, Ez.oB(p, 1.3)))}px) rotate(${f3(lerp(14, -3, Ez.oC(p)))}deg)`);
-    op(el['duo-label'], seg(b, 59.7, 60.1));
+    op(el['duo-label'], seg(b, DUO0 + 0.7, DUO0 + 1.1));
   }
 
   // ═══ §7 OPUS ══════════════════════════════════════════════════════════════
@@ -1487,8 +1796,9 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     const x0 = (i * W) / n, x1 = ((i + 1) * W) / n;
     return { x0, x1, cx: (x0 + x1) / 2, L: i === 0 ? -300 : x0, R: i === n - 1 ? W + 300 : x1 };
   }
+  const SP0 = splits[0].b0, SP1 = splits[splits.length - 1].b1;
   function sceneSplit(b, ctxF) {
-    const vis = inR(b, 80, 86);
+    const vis = inR(b, SP0, SP1);
     op(el.split, vis ? 1 : 0);
     if (!vis) return;
     splits.forEach((s, k) => {
@@ -1522,16 +1832,17 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     }
   }
 
+  const PH0 = phones[0].b0, PH1 = phones[0].b1;
   function scenePhones(b) {
-    const vis = inR(b, 86, 88);
+    const vis = inR(b, PH0, PH1);
     op(el.phonesLayer, vis ? 1 : 0);
     if (!vis) return;
     el.phones.forEach((P_, i) => {
       const d = i * 0.16;
-      const p = seg(b, 86 + d, 86.62 + d);
+      const p = seg(b, PH0 + d, PH0 + 0.62 + d);
       const rest = [-6, 0, 6][i];
       tf(P_.r, `translateY(${f3(lerp(1000, i === 1 ? -18 : 0, Ez.oB(p, 1.25)))}px) rotate(${f3(lerp(rest * 3, rest, Ez.oC(p)))}deg)`);
-      op(P_.label, seg(b, 86.5 + d, 86.8 + d));
+      op(P_.label, seg(b, PH0 + 0.5 + d, PH0 + 0.8 + d));
     });
   }
 
@@ -1541,7 +1852,7 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     op(el.tunnel, vis ? 1 : 0);
     if (!vis) return;
     const p = seg(b, T_.b0, T_.b1);
-    const zc = lerp(0, 6200, Math.pow(p, 1.55));
+    const zc = lerp(0, 6200, Math.pow(p, 1.7));
     const roll = Math.sin(b * 0.55) * 5 + p * 24;
     tf(el['tunnel-cam'], `translateZ(${f3(zc)}px) rotateZ(${f3(roll)}deg)`);
     D.WORKS.forEach((w, i) => {
@@ -1585,33 +1896,112 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
   }
   function sceneWall(b) {
     const Wl = D.WALL;
-    const vis = inR(b, Wl.b0, 111.6);
-    op(el.wall, vis ? 1 - seg(b, 104.2, 106) * 0.62 - seg(b, 109.5, 111.5) * 0.38 : 0);
+    const FRZ = Wl.freezeAt; // 148：28 格齐拍定格成照片卡
+    const vis = inR(b, Wl.b0, 165.6);
+    op(el.wall, vis ? 1 - seg(b, 150, 151.4) * 0.55 - seg(b, 160, 165.6) * 0.45 : 0);
     if (!vis) return;
     const fc = wallCenter(WALL_FOCUS);
     const p = Ez.ioC(seg(b, Wl.b0, Wl.b0 + 3.6));
-    let s = lerp(3.3, 0.94, p) + 0.06 * seg(b, 99.6, 104);
+    let s = lerp(3.3, 0.94, p) + 0.06 * seg(b, Wl.b0 + 3.6, FRZ);
     let tx = -(fc.x - CX) * s * (1 - p), ty = -(fc.y - CY) * s * (1 - p);
     const rx = lerp(20, 0, p), rz = lerp(-7, 0, p);
     // 骤停后：缓慢后退、去色
-    const br = seg(b, 104, 112);
+    const br = seg(b, 150, 160);
     s *= lerp(1, 0.84, Ez.oC(br));
-    const stop = pulse(b, 104, 0.35);
+    const stop = pulse(b, 150, 0.35);
     ty += stop * 26;
     tf(el['wall-cam'], `perspective(1500px) translate(${f3(tx)}px,${f3(ty)}px) scale(${f3(s)}) rotateX(${f3(rx)}deg) rotateZ(${f3(rz)}deg)`);
-    const gray = seg(b, 104, 105.2);
+    const gray = seg(b, 150, 151.2);
     css(el['wall-cam'], 'filter', gray > 0 ? `grayscale(${f3(gray)}) brightness(${f3(1 - 0.45 * gray - 0.5 * stop)})` : 'none');
+    const frz = seg(b, FRZ, FRZ + 0.15);
+    const fzPulse = pulse(b, FRZ, 0.28);
     el.wtiles.forEach((T_, i) => {
       const c = wallCenter(i);
       const dist = Math.hypot(c.c - fc.c, c.r - fc.r);
       const a = Ez.oB(seg(b, Wl.b0 + dist * 0.07, Wl.b0 + 0.45 + dist * 0.07), 1.5);
-      tf(T_.r, `scale(${f3(lerp(0.5, 1, a))})`);
+      // 定格瞬间：整体轻轻一压 + 白边照片卡
+      tf(T_.r, `scale(${f3(lerp(0.5, 1, a) * (1 - 0.035 * fzPulse))})`);
       op(T_.r, clamp(a * 2));
-      op(T_.flash, 0.85 * pulse(b, 102 + (c.c + c.r) * 0.13, 0.22));
+      op(T_.flash, 0.85 * pulse(b, 144 + (c.c + c.r) * 0.13, 0.22));
+      op(T_.freeze, frz);
+      op(T_.wl, 1 - seg(b, 150, 150.8)); // 骤停后格内标签整体退场（巨墙变成纯照片墙）
+      css(T_.r, 'outline', frz > 0.02 ? `3px solid rgba(255,255,255,${f3(0.9 * frz)})` : '');
     });
-    op(el['wall-title'], env(b, 97.4, 98, 104, 104.4));
-    css(el['wall-title'], 'letterSpacing', `${f3(lerp(0.7, 0.32, Ez.oC(seg(b, 97.4, 98.6))))}em`);
-    op(el['wall-sub'], env(b, 98.6, 99.2, 104, 104.4));
+    op(el['wall-title'], env(b, 140.4, 141, 148, 148.4));
+    css(el['wall-title'], 'letterSpacing', `${f3(lerp(0.7, 0.32, Ez.oC(seg(b, 140.4, 141.6))))}em`);
+    op(el['wall-sub'], env(b, 141.6, 142.2, 148, 148.4));
+  }
+
+  // ═══ §7b 解剖：左真实源码 / 右成片输出 b166–196 ═══════════════════════════
+  function sceneAutopsy(b) {
+    const A = TX.autopsy;
+    // A.b0/b1 是标题窗口；段落本体 = A.b0 → A.statsB1
+    const secEnd = A.statsB1;
+    const vis = inR(b, A.b0, secEnd + 0.6);
+    op(el.autopsy, vis ? env(b, A.b0, A.b0 + 0.4, secEnd, secEnd + 0.5) : 0);
+    if (!vis) return;
+    const hp = Ez.oC(seg(b, A.b0, A.b0 + 0.7)) * (1 - seg(b, secEnd - 0.6, secEnd - 0.1));
+    op(el['at-head'], hp);
+    tf(el['at-head'], `translateY(${f3((1 - hp) * 26)}px)`);
+    el.pairs.forEach((P_, i) => {
+      const sh = pairShots[i];
+      if (!inR(b, sh.b0, sh.b1 + 0.4)) { op(P_.r, 0); return; }
+      const ein = Ez.oE(seg(b, sh.b0, sh.b0 + 0.6));
+      const fadeOut = 1 - seg(b, sh.b1, sh.b1 + 0.35);
+      op(P_.r, clamp(ein * 1.5) * fadeOut);
+      tf(P_.code, `translateX(${f3(lerp(-140, 0, ein))}px)`);
+      tf(P_.film, `translateX(${f3(lerp(140, 0, ein))}px)`);
+      // 真实代码行逐行点亮（≈1.05 拍一行），beam 同步脉冲
+      const lit = Math.floor((b - sh.b0 - 0.7) / 1.05);
+      P_.lines.forEach((ln, j) => ln.classList.toggle('hot', j === lit && lit >= 0 && b < sh.b1));
+      const bp = lit >= 0 ? pulse(b, sh.b0 + 0.7 + lit * 1.05, 0.22) : 0;
+      op(P_.beam, clamp(bp * 1.4));
+      // 追踪括号线收紧
+      const lp = Ez.oE(seg(b, sh.b0 + 0.3, sh.b0 + 1.1));
+      op(P_.lock, seg(b, sh.b0 + 0.3, sh.b0 + 0.5));
+      tf(P_.lock, `scale(${f3(lerp(1.12, 1, lp))})`);
+      css(P_.media, 'transform', `scale(${f3(1 + 0.02 * (b - sh.b0))})`);
+      const lbp = Ez.oC(seg(b, sh.b0 + 0.8, sh.b0 + 1.3));
+      op(P_.label, lbp);
+      tf(P_.label, `translateY(${f3((1 - lbp) * 14)}px)`);
+    });
+    // 统计数字滚动
+    el.stats.forEach((S, i) => {
+      const d = A.statsB0 + i * 1.15;
+      const e2 = Ez.oE(seg(b, d, d + 0.5));
+      op(S.r, e2);
+      tf(S.r, `translateY(${f3((1 - e2) * 40)}px)`);
+      const to = +S.n.dataset.to;
+      txt(S.n, Math.round(to * Ez.oC(seg(b, d + 0.2, d + 2.8))).toLocaleString('en-US'));
+    });
+    op(el['at-tail'], seg(b, A.statsB0 + 3.6, A.statsB0 + 4.4));
+  }
+
+  // ═══ §7c 马拉松：28 部 × 半拍海报带 b196–206 ══════════════════════════════
+  const TILE_W = 660;
+  function sceneMarathon(b) {
+    const M = D.MARATHON;
+    const vis = inR(b, M.b0, M.b1 + 0.5);
+    op(el.marathon, vis ? env(b, M.b0, M.b0 + 0.3, M.b1 - 0.1, M.b1 + 0.4) : 0);
+    if (!vis) return;
+    const cont = clamp((b - M.b0) / M.per, 0, 27.999);
+    const i0 = Math.floor(cont);
+    const fr = cont - i0;
+    const sm = Math.min(27, i0 + Ez.oC(Math.min(1, fr * 1.7)));
+    tf(el['mar-strip'], `translateX(${f3(CX - 320 - sm * TILE_W)}px)`);
+    el.mtiles.forEach((m, i) => {
+      const d = Math.abs(i - sm);
+      op(m, i > cont + 4 ? 0 : clamp(1.7 - d * 0.5));
+      const s = lerp(0.8, 1, clamp(1.6 - d));
+      const brt = lerp(0.3, 1, clamp(1.5 - d));
+      css(m, 'filter', `brightness(${f3(brt)}) saturate(${f3(lerp(0.4, 1.15, clamp(1.5 - d)))})`);
+      tf(m, `translateX(${f3(i * TILE_W)}px) scale(${f3(s)})`);
+    });
+    const pk = Math.pow(1 - fr, 2);
+    txt(el['mar-n'], String(Math.min(28, i0 + 1)).padStart(2, '0'));
+    tf(el['mar-count'], `scale(${f3(1 + 0.15 * pk)})`);
+    op(el['mar-count'], env(b, M.b0, M.b0 + 0.3, M.b1 - 0.4, M.b1));
+    op(el['mar-title'], env(b, M.b0 + 0.5, M.b0 + 1, M.b1 - 0.4, M.b1));
   }
 
   // ═══ §8 凝视 / 通通开源 / 卡片 / 尾声 ═════════════════════════════════════
@@ -1634,10 +2024,11 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     return { ang: r() * Math.PI * 2, spin: (r() - 0.5) * 540, tilt: (r() - 0.5) * 120, R: 900 + r() * 700, delay: r() * 0.35,
       sx: r() < 0.5 ? -200 - r() * 300 : W + 200 + r() * 300, sy: r() * H, cx: CX + (r() - 0.5) * 900, cy: -200 + r() * 400 };
   });
-  const arrivals = D.WORKS.map((_, i) => 128.25 + i * 0.085 + 0.95);
+  const FLY_B0 = TX.card.b0; // 232：飞进闪传文件夹的起点
+  const arrivals = D.WORKS.map((_, i) => FLY_B0 + 0.25 + i * 0.085 + 0.95);
   function sceneFlyers(b) {
     // 爆散阶段在「通通开源」大字之后（下层）；吸入阶段必须压在分享卡片之上
-    css(el.flyersLayer, 'zIndex', b >= 128 ? '5' : '0');
+    css(el.flyersLayer, 'zIndex', b >= FLY_B0 ? '5' : '0');
     el.flyers.forEach((f, i) => {
       const R = flyRnd[i];
       // A · 爆散：跟着「通通开源」四拍，从纵深中心冲向镜头
@@ -1652,7 +2043,7 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
         return;
       }
       // B · 吸入：28 部片子飞进 QQ 闪传文件夹
-      const s0 = 128.25 + i * 0.085;
+      const s0 = FLY_B0 + 0.25 + i * 0.085;
       if (inR(b, s0, s0 + 0.95)) {
         const q = Ez.iC(seg(b, s0, s0 + 0.95));
         const u = 1 - q;
@@ -1668,8 +2059,8 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
 
   function sceneReveal(b) {
     const Rv = TX.reveal;
-    const vis = inR(b, Rv.b[0], 128.4);
-    op(el.reveal, vis ? 1 - seg(b, 127.8, 128.4) : 0);
+    const vis = inR(b, Rv.b[0], 222.4);
+    op(el.reveal, vis ? 1 - seg(b, 221.8, 222.4) : 0);
     if (!vis) return;
     el.rchars.forEach((c, i) => {
       const bi = Rv.b[i];
@@ -1677,16 +2068,22 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
       const k = pulse(b, bi, 0.32);
       op(c, seg(b, bi, bi + 0.04));
       tf(c, `scale(${f3(lerp(2.8, 1, Ez.oE(s)) + 0.05 * Math.sin(clamp((b - bi) / 0.5) * Math.PI) * (1 - clamp(b - bi - 0.5)))})`);
-      css(c, 'textShadow', `${f3(-16 * k)}px 0 rgba(255,40,60,${f3(0.85 * k)}), ${f3(16 * k)}px 0 rgba(40,220,255,${f3(0.85 * k)}), 0 0 ${f3(40 + 80 * k + 40 * pulse(b, 120, 0.6))}px rgba(255,122,61,${f3(0.35 + 0.45 * k + 0.3 * pulse(b, 120, 0.6))})`);
+      css(c, 'textShadow', `${f3(-16 * k)}px 0 rgba(255,40,60,${f3(0.85 * k)}), ${f3(16 * k)}px 0 rgba(40,220,255,${f3(0.85 * k)}), 0 0 ${f3(40 + 80 * k + 40 * pulse(b, Rv.enB, 0.6))}px rgba(255,122,61,${f3(0.35 + 0.45 * k + 0.3 * pulse(b, Rv.enB, 0.6))})`);
       css(c, 'filter', s < 1 ? `blur(${f3((1 - Ez.oE(s)) * 18)}px)` : 'none');
+      // 切片爆发式排版：上/下两片横向错位撕开再合拢
+      const sl = el.rslices[i];
+      const k2 = pulse(b, bi, 0.22);
+      tf(sl.t, `translateX(${f3(-30 * k2)}px)`);
+      tf(sl.m, `translateX(${f3(12 * k2)}px)`);
+      tf(sl.b, `translateX(${f3(30 * k2)}px)`);
     });
     const up = Ez.ioC(seg(b, Rv.out, Rv.out + 0.7));
-    tf(el['rv-row'], `translateY(${f3(lerp(0, -232, up))}px) scale(${f3((1 + 0.09 * pulse(b, 120, 0.35)) * lerp(1, 0.42, up))})`);
+    tf(el['rv-row'], `translateY(${f3(lerp(0, -232, up))}px) scale(${f3((1 + 0.09 * pulse(b, Rv.enB, 0.35)) * lerp(1, 0.42, up))})`);
     const en = seg(b, Rv.enB + 0.2, Rv.enB + 0.8);
     op(el['rv-en'], Ez.oC(en) * (1 - seg(b, Rv.out, Rv.out + 0.3)));
     css(el['rv-en'], 'letterSpacing', `${f3(lerp(1.1, 0.5, Ez.oE(en)))}em`);
-    const sw = seg(b, 121, 123);
-    op(el['rv-sweep'], env(b, 121, 121.2, 122.8, 123));
+    const sw = seg(b, 211, 213);
+    op(el['rv-sweep'], env(b, 211, 211.2, 212.8, 213));
     css(el['rv-sweep'], 'backgroundPosition', `${f3(lerp(100, 0, Ez.ioS(sw)))}% 0`);
   }
 
@@ -1695,9 +2092,9 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     const vis = inR(b, Pl.b0, Pl.b1);
     op(el.pillarsLayer, vis ? 1 : 0);
     if (!vis) return;
-    const out = Ez.iC(seg(b, 128.1, 128.6));
+    const out = Ez.iC(seg(b, Pl.b1 - 0.5, Pl.b1));
     el.pillars.forEach((P_, i) => {
-      const d = 124.3 + i * 0.25;
+      const d = Pl.b0 + 0.3 + i * 0.25;
       const e = Ez.oE(seg(b, d, d + 0.5));
       op(P_.r, e * (1 - out));
       tf(P_.r, `translateY(${f3((1 - e) * 70)}px) scale(${f3(1 - out * 0.25)})`);
@@ -1710,12 +2107,12 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
 
   function sceneCard(b) {
     const C = TX.card;
-    const vis = inR(b, C.b0, 141.2);
-    op(el.card, vis ? 1 - seg(b, 140.2, 141.2) : 0);
+    const vis = inR(b, C.b0, 257.2);
+    op(el.card, vis ? 1 - seg(b, 255.2, 256.4) : 0);
     if (!vis) return;
     const e = Ez.oE(seg(b, C.b0, C.b0 + 0.75));
-    const push = seg(b, 132, 140);
-    const toMini = Ez.ioC(seg(b, 140, 141.2));
+    const push = seg(b, 244, 255);
+    const toMini = Ez.ioC(seg(b, 255, 256.4));
     tf(el.card, `translate(${f3(toMini * 520)}px,${f3(toMini * 300)}px) scale(${f3((1 + 0.03 * push) * lerp(1, 0.35, toMini))})`);
     let bounce = 0;
     let arrived = 0;
@@ -1725,33 +2122,35 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     tf(el.folder, `scale(${f3(1 + Math.min(0.35, bounce))})`);
     txt(el['sh-count'], `${arrived} / 28`);
     const url = D.SHARE.url;
-    const n = Math.floor(seg(b, 131, 132.4) * url.length + 1e-6);
+    const n = Math.floor(seg(b, 239, 240.4) * url.length + 1e-6);
     txt(el['sh-link-t'], url.slice(0, n));
-    tf(el['sh-link-u'], `scaleX(${f3(Ez.oC(seg(b, 132.4, 133)))})`);
-    const q = seg(b, 129, 129.7);
+    tf(el['sh-link-u'], `scaleX(${f3(Ez.oC(seg(b, 240.4, 241)))})`);
+    const q = seg(b, 236, 236.7);
     tf(el.qrbox, `scale(${f3(lerp(0.6, 1, Ez.oB(q, 1.5)))})`);
-    op(el.qrbox, seg(b, 129, 129.2));
-    const sc = ((b - 129.5) % 2.5) / 2.5;
+    op(el.qrbox, seg(b, 236, 236.2));
+    const sc = ((b - 236.5) % 2.5) / 2.5;
     tf(el['qr-scan'], `translateY(${f3(lerp(-90, 520, sc))}px)`);
-    op(el['qr-scan'], b > 129.5 ? 1 : 0);
+    op(el['qr-scan'], b > 236.5 ? 1 : 0);
     const bar = pulse(b % 4, 0, 0.5);
     css(el.qrbox, 'boxShadow', `0 40px 120px rgba(0,0,0,.6), 0 0 ${f3(20 + 50 * bar)}px rgba(61,139,255,${f3(0.3 + 0.4 * bar)})`);
-    op(el['card-cta'], seg(b, 131.5, 132));
-    tf(el['card-cta'], `translateY(${f3((1 - Ez.oC(seg(b, 131.5, 132.1))) * 30)}px)`);
-    op(el['card-note'], seg(b, 132.2, 132.8));
+    op(el['card-cta'], seg(b, 239.5, 240));
+    tf(el['card-cta'], `translateY(${f3((1 - Ez.oC(seg(b, 239.5, 240.1))) * 30)}px)`);
+    op(el['card-note'], seg(b, 240.2, 240.8));
   }
 
   function sceneOutro(b, t) {
     const O = TX.outro;
-    const vis = inR(b, O.b0, 157);
-    const fade = 1 - seg(b, O.fadeB0, 155.4);
+    const vis = inR(b, O.b0, 301);
+    const fade = 1 - seg(b, O.fadeB0, 295.2);
     op(el.outro, vis ? seg(b, O.b0 + 0.3, O.b0 + 0.9) * fade : 0);
-    op(el.mini, vis ? seg(b, 140.6, 141.4) * (1 - seg(b, 154.2, 155.6)) : 0);
+    op(el.mini, vis ? seg(b, 255.6, 256.4) * (1 - seg(b, 293, 294.5)) : 0);
     if (!vis) return;
     const cmd = TX.cold.command;
     const n = Math.floor(seg(b, O.typeB0, O.typeB1) * cmd.length + 1e-6);
     txt(el['out-cmd'], cmd.slice(0, n));
     op(el['out-cursor'], b < O.typeB1 + 0.3 ? 1 : Math.floor(t * 2.4) % 2 === 0 ? 1 : 0);
+    // 自指：本片也是 render(t) 的输出
+    op(el['out-self'], env(b, O.selfB, O.selfB + 0.4, O.selfB + 2.2, O.selfB + 2.8));
     const a = Ez.oC(seg(b, O.answerB, O.answerB + 1.1));
     op(el['out-answer'], a);
     css(el['out-answer'], 'clipPath', `inset(-30% ${f3((1 - a) * 100)}% -30% 0)`);
@@ -1765,8 +2164,8 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
 
   // ═══ §9 HUD ═══════════════════════════════════════════════════════════════
   function hud(b, t, f) {
-    const breathDim = 1 - 0.8 * env(b, 104, 104.6, 115.6, 116);
-    const endFade = 1 - seg(b, 153, 155.4);
+    const breathDim = 1 - 0.8 * env(b, 150, 150.6, 165.6, 166);
+    const endFade = 1 - seg(b, 293, 295.4);
     const base = seg(b, 5.2, 6) * breathDim * endFade;
     op(el['hud-tl'], base);
     txt(el['hud-time'], `t = ${t.toFixed(3).padStart(6, '0')}s`);
@@ -1774,8 +2173,8 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     op(el['hud-rec'], Math.floor(t * 2) % 2 === 0 ? 1 : 0.35);
     let era = null;
     D.ERAS.forEach((e) => { if (b >= e.b0) era = e; });
-    const allMode = b >= 104;
-    op(el['hud-era'], (b >= 16 ? 1 : 0) * breathDim * endFade);
+    const allMode = b >= 150;
+    op(el['hud-era'], (b >= 20 ? 1 : 0) * breathDim * endFade);
     if (era) {
       txt(el['hud-era-k'], allMode ? 'ALL ERAS' : `ERA ${era.n}`);
       txt(el['hud-era-v'], allMode ? '28 部 · 通通开源' : D.MODELS[era.model].label);
@@ -1793,8 +2192,8 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
       tf(el.slots[i].r, `scaleY(${f3(1 + 1.6 * pulse(b, fs, 0.25) * (b >= fs ? 1 : 0))})`);
     });
     txt(el['hud-count-n'], String(seen));
-    op(el['hud-count'], seg(b, 16, 16.5) * breathDim * endFade);
-    const lb = Math.max(env(b, 104, 104.7, 115.8, 116), seg(b, 140, 141));
+    op(el['hud-count'], seg(b, 20, 20.5) * breathDim * endFade);
+    const lb = Math.max(env(b, 150, 150.7, 165.8, 166), seg(b, 256, 257));
     tf(el['lbx-top'], `translateY(${f3(-100 * (1 - Ez.ioC(lb)))}%)`);
     tf(el['lbx-bot'], `translateY(${f3(100 * (1 - Ez.ioC(lb)))}%)`);
   }
@@ -1818,12 +2217,44 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     }
   }
 
+  // 冷开场蓝图自绘：把 frame = render(t) 当工程图画出来
+  function blueprint(ctx, b) {
+    const C = TX.cold;
+    if (!inR(b, C.blueprintB0, C.codeWallB1)) return;
+    const p = Ez.ioC(seg(b, C.blueprintB0, C.blueprintB1));
+    const a = env(b, C.blueprintB0, C.blueprintB0 + 0.5, 19.4, 19.9) * 0.85;
+    ctx.save();
+    ctx.globalAlpha = a;
+    ctx.strokeStyle = 'rgba(96,220,255,0.8)';
+    ctx.fillStyle = 'rgba(96,220,255,0.9)';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([14, 10]);
+    const n = p * 6;
+    if (n > 0) ctx.strokeRect(420, 260, 1080, 560);
+    if (n > 1) { ctx.beginPath(); ctx.moveTo(920, 540); ctx.lineTo(1000, 540); ctx.moveTo(960, 500); ctx.lineTo(960, 580); ctx.stroke(); }
+    if (n > 2) { ctx.beginPath(); ctx.moveTo(420, 260); ctx.lineTo(1500, 820); ctx.stroke(); }
+    if (n > 3) for (let i = 0; i <= 12; i++) { const x = 420 + i * 90; ctx.beginPath(); ctx.moveTo(x, 830); ctx.lineTo(x, 848); ctx.stroke(); }
+    if (n > 4) { ctx.beginPath(); ctx.arc(960, 540, 130, 0, Math.PI * 2); ctx.stroke(); }
+    if (n > 4.6) {
+      ctx.font = '500 22px Plex'; ctx.setLineDash([]);
+      ctx.fillText('FIG.01 · frame = render(t)', 420, 244);
+      ctx.fillText('1920', 938, 862);
+      ctx.fillText('1 beat = 48 frames @120fps', 420, 900);
+    }
+    if (p < 1) {
+      const sx = 420 + 1080 * ((p * 3) % 1);
+      ctx.setLineDash([]);
+      ctx.fillRect(sx, 250, 2, 600);
+    }
+    ctx.restore();
+  }
+
   // 冷开场代码墙：真实源码行，从下往上加速滚动
   function codeWall(ctx, b) {
     const C = TX.cold;
     if (!inR(b, C.codeWallB0, C.codeWallB1)) return;
     const p = seg(b, C.codeWallB0, C.codeWallB1);
-    const a = lerp(0.05, 0.38, Ez.iC(seg(b, C.codeWallB0, C.codeWallB0 + 1.5))) + 0.55 * Ez.iE(seg(b, 15.1, 15.85));
+    const a = lerp(0.05, 0.38, Ez.iC(seg(b, C.codeWallB0, C.codeWallB0 + 1.5))) + 0.55 * Ez.iE(seg(b, C.codeWallB1 - 0.8, C.codeWallB1 - 0.05));
     const off = Math.pow(b - C.codeWallB0, 2.1) * 120;
     const L = D.CODE_LINES;
     ctx.save();
@@ -1857,11 +2288,12 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
   // 通通开源背景：缓慢漂移的余烬
   const embers = Array.from({ length: 140 }, (_, i) => { const r = mulberry32(5150 + i); return { x: r() * W, y: r() * H, z: 0.3 + r() * 0.7, s: r() }; });
   function drawEmbers(ctx, b) {
-    if (!inR(b, 116, 141)) return;
-    const a = env(b, 116, 116.5, 140, 141);
+    const B0 = TX.reveal.b[0]; // 206
+    if (!inR(b, B0, 257)) return;
+    const a = env(b, B0, B0 + 0.5, 255.5, 257);
     ctx.save();
     embers.forEach((e, i) => {
-      const y = ((e.y - (b - 116) * 22 * e.z) % H + H) % H;
+      const y = ((e.y - (b - B0) * 22 * e.z) % H + H) % H;
       const x = e.x + Math.sin(b * 0.6 + i) * 14 * e.z;
       const r = 1 + e.z * 2.4;
       ctx.globalAlpha = a * (0.25 + 0.55 * e.s) * (0.6 + 0.4 * Math.sin(b * 2 + i));
@@ -1871,10 +2303,10 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     ctx.restore();
   }
 
-  // DROP 段：每拍一次橙色漏光
+  // DROP → 分屏 段：每拍一次橙色漏光
   function lightLeak(ctx, b) {
-    if (!inR(b, 64, 88)) return;
-    const k = pulse(b - Math.floor(b), 0, 0.28) * (inR(b, 64, 80) ? 1 : 0.5);
+    if (!inR(b, 88, 124)) return;
+    const k = pulse(b - Math.floor(b), 0, 0.28) * (inR(b, 88, 112) ? 1 : 0.5);
     const side = Math.floor(b) % 2 ? 0 : W;
     const g = ctx.createRadialGradient(side, CY, 0, side, CY, 1100);
     g.addColorStop(0, `rgba(255,122,61,${f3(0.32 * k)})`); g.addColorStop(1, 'rgba(255,122,61,0)');
@@ -1906,33 +2338,61 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
       ctx.restore();
     });
     // 隧道尽头白化
-    const whiteout = Ez.iC(seg(b, 95.2, 96));
-    const flash = Math.max(sumPulse(FLASH, b), b < 96 ? whiteout : 0);
+    const whiteout = Ez.iC(seg(b, 137.2, 138));
+    const flash = Math.max(sumPulse(FLASH, b), b < 138 ? whiteout : 0);
     if (flash > 0.003) {
       ctx.save(); ctx.globalAlpha = Math.min(1, flash); ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, W, H); ctx.restore();
     }
-    // 真空：DROP 前半拍全黑
-    if (inR(b, 63.5, 64) || inR(b, 15.9, 16) || inR(b, 115.75, 116)) { ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H); }
+    // 真空：DROP 前半拍 / 冷开场进正片 / 骤停 全黑
+    if (inR(b, 87.5, 88) || inR(b, 19.9, 20) || inR(b, 165.75, 166)) { ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H); }
     // 胶片颗粒（按帧号换图块 → 确定性）
     const tile = grainTiles[f % grainTiles.length];
     if (tile) {
       ctx.save();
-      ctx.globalAlpha = 0.055 + 0.04 * env(b, 104, 105, 115, 116);
+      ctx.globalAlpha = 0.055 + 0.04 * env(b, 150, 151, 165, 166);
       ctx.globalCompositeOperation = 'overlay';
       const ox = (hash(f) * 256) | 0, oy = (hash(f + 0.5) * 256) | 0;
       for (let y = -oy; y < H; y += 256) for (let x = -ox; x < W; x += 256) ctx.drawImage(tile, x, y);
       ctx.restore();
     }
-    // 结尾黑场
-    const endBlack = seg(b, 155, 156);
-    if (endBlack > 0) { ctx.save(); ctx.globalAlpha = endBlack; ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H); ctx.restore(); }
+    // CRT 关机收尾：画面垂直塌缩成线 → 线缩成亮点 → 熄灭
+    crtOff(ctx, b);
+  }
+
+  function crtOff(ctx, b) {
+    if (b < TX.outro.crtB0) return;
+    const p1 = Ez.iC(seg(b, TX.outro.crtB0, 297.2)); // 垂直塌缩
+    const p2 = Ez.iC(seg(b, 297.2, 299));            // 水平塌缩
+    const p3 = seg(b, 299.3, 300);                    // 熄灭
+    ctx.fillStyle = '#000';
+    const band = lerp(H, 0, p1);
+    const cutY = (H - band) / 2;
+    ctx.fillRect(0, 0, W, cutY);
+    ctx.fillRect(0, H - cutY, W, cutY);
+    if (p1 >= 1) {
+      const lw = lerp(W, 0, p2);
+      const cutX = (W - lw) / 2;
+      ctx.fillRect(0, 0, cutX, H);
+      ctx.fillRect(W - cutX, 0, cutX, H);
+      if (lw > 0.5 && p2 < 1) {
+        ctx.fillStyle = 'rgba(255,255,255,0.95)';
+        ctx.fillRect(cutX, CY - 2, lw, 4);
+      }
+      if (p2 >= 1 && p3 < 1) {
+        ctx.fillStyle = `rgba(255,255,255,${f3(1 - p3)})`;
+        ctx.beginPath(); ctx.arc(CX, CY, 4, 0, Math.PI * 2); ctx.fill();
+      }
+    } else {
+      ctx.fillStyle = `rgba(255,255,255,${f3(0.12 + 0.8 * p1)})`;
+      ctx.fillRect(0, CY - 1, W, 2);
+    }
   }
 
   // 震屏（按帧号取伪随机 → 确定性）
   function shake(b, f) {
     let amp = 0;
     SHAKE.forEach((s) => { if (b >= s.b && b < s.b + s.d * 6) amp += s.amp * pulse(b, s.b, s.d); });
-    amp += 12 * Ez.iC(seg(b, 62.3, 63.5)) * (b < 63.5 ? 1 : 0);
+    amp += 12 * Ez.iC(seg(b, 86.3, 87.5)) * (b < 87.5 ? 1 : 0);
     if (amp < 0.05) { tf(el.stage, 'none'); return; }
     const x = (hash(f * 1.37) - 0.5) * 2 * amp, y = (hash(f * 2.11 + 3) - 0.5) * 2 * amp, r = (hash(f * 0.73 + 9) - 0.5) * amp * 0.06;
     tf(el.stage, `translate(${f3(x)}px,${f3(y)}px) rotate(${f3(r)}deg)`);
@@ -1944,10 +2404,12 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     const b = t / BEAT;
     const f = Math.round(t * FPS);
     const cb = el.cb, cf = el.cf;
-    cb.setTransform(1, 0, 0, 1, 0, 0); cb.clearRect(0, 0, W, H);
-    cf.setTransform(1, 0, 0, 1, 0, 0); cf.clearRect(0, 0, W, H);
+    const DPR = el.fxback.width / W; // 4K 后备画布 → 全部 FX 以 1920 坐标绘制、硬件放大
+    cb.setTransform(DPR, 0, 0, DPR, 0, 0); cb.clearRect(0, 0, W, H);
+    cf.setTransform(DPR, 0, 0, DPR, 0, 0); cf.clearRect(0, 0, W, H);
     shake(b, f);
     codeWall(cb, b);
+    blueprint(cb, b);
     drawEmbers(cb, b);
     sceneCold(b, t);
     sceneEras(b, cb);
@@ -1960,6 +2422,8 @@ video, .media img { display: block; width: 100%; height: 100%; object-fit: cover
     sceneTunnel(b, cf, cb);
     sceneWall(b);
     sceneBreath(b);
+    sceneAutopsy(b);
+    sceneMarathon(b);
     sceneFlyers(b);
     sceneReveal(b);
     scenePillars(b);
