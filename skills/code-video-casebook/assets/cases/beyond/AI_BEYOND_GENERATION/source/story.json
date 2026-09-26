@@ -1,0 +1,127 @@
+{
+  "title": "超越生成",
+  "subtitle": "让 AI 不止回答，更把事情做对。",
+  "ending": "不止生成，更要可靠。",
+  "scenes": [
+    {
+      "style": "纯线条手绘",
+      "en": "ASK BETTER.",
+      "title": "先定义问题",
+      "caption": "目标、约束、验收标准，先于提示词。",
+      "key": "目标 / 约束 / 验收",
+      "tag": "HAND-DRAWN / 01"
+    },
+    {
+      "style": "3D MC 方块世界",
+      "en": "BREAK IT DOWN.",
+      "title": "把任务拆开",
+      "caption": "能用清晰工作流，就先别堆复杂 Agent。",
+      "key": "规划 / 构建 / 检查",
+      "tag": "BLOCK WORLD / 02"
+    },
+    {
+      "style": "粘土定格",
+      "en": "CONTEXT MATTERS.",
+      "title": "给足上下文",
+      "caption": "给任务相关材料，不是无限堆字数。",
+      "key": "相关 / 清晰 / 够用",
+      "tag": "CLAYMATION / 03"
+    },
+    {
+      "style": "Vox 式解释拼贴",
+      "en": "SHOW YOUR SOURCES.",
+      "title": "让答案有出处",
+      "caption": "外部事实要检索，关键结论要回源。",
+      "key": "检索 / 引用 / 核验",
+      "tag": "EDITORIAL COLLAGE / 04"
+    },
+    {
+      "style": "SVG 几何矢量",
+      "en": "CONNECT TO REALITY.",
+      "title": "用工具接入现实",
+      "caption": "工具负责执行；调用结果仍然要验证。",
+      "key": "输入 / 工具 / 结果",
+      "tag": "PURE VECTOR / 05"
+    },
+    {
+      "style": "8-BIT 像素街机",
+      "en": "MEMORY IS A CHOICE.",
+      "title": "记忆要可控",
+      "caption": "区分临时上下文与长期保存的信息。",
+      "key": "临时 / 保存 / 删除",
+      "tag": "PIXEL ARCADE / 06"
+    },
+    {
+      "style": "半调漫画",
+      "en": "FLUENT IS NOT TRUE.",
+      "title": "流畅 ≠ 正确",
+      "caption": "听起来合理，不等于有事实依据。",
+      "key": "别被自信语气说服",
+      "tag": "HALFTONE COMIC / 07"
+    },
+    {
+      "style": "蓝晒工程制图",
+      "en": "TEST. DON'T GUESS.",
+      "title": "让结果可测试",
+      "caption": "把“做得不错”变成明确的验收条件。",
+      "key": "条件 / 执行 / 验收",
+      "tag": "BLUEPRINT / 08"
+    },
+    {
+      "style": "瑞士动态字体",
+      "en": "LESS ACCESS. MORE CONTROL.",
+      "title": "最小权限",
+      "caption": "只开放必要工具；高风险动作需确认。",
+      "key": "必要才开放",
+      "tag": "KINETIC TYPE / 09"
+    },
+    {
+      "style": "立体剪纸剧场",
+      "en": "KEEP HUMANS IN CONTROL.",
+      "title": "让人保留决定权",
+      "caption": "重要节点可以暂停、复核、撤回。",
+      "key": "暂停 / 复核 / 撤回",
+      "tag": "PAPER THEATRE / 10"
+    },
+    {
+      "style": "东方水墨",
+      "en": "UNKNOWN IS AN ANSWER.",
+      "title": "不确定，就说明",
+      "caption": "缺证据时，标注未知，不填补想象。",
+      "key": "未知，不是空白",
+      "tag": "INK & SILENCE / 11"
+    },
+    {
+      "style": "霓虹赛博线框",
+      "en": "ACT. CHECK. ADAPT.",
+      "title": "反馈驱动改进",
+      "caption": "执行、检查、修正，并设置停止条件。",
+      "key": "行动 / 检查 / 修正",
+      "tag": "NEON SYSTEM / 12"
+    },
+    {
+      "style": "液态铬金属",
+      "en": "MORE IS NOT BETTER.",
+      "title": "算清成本与延迟",
+      "caption": "更长推理，不自动等于更大价值。",
+      "key": "质量 / 成本 / 延迟",
+      "tag": "LIQUID CHROME / 13"
+    },
+    {
+      "style": "粒子数据宇宙",
+      "en": "TEST THE WHOLE SYSTEM.",
+      "title": "先做小规模验证",
+      "caption": "用真实任务与失败样本，测试整体系统。",
+      "key": "任务 / 轨迹 / 结果",
+      "tag": "PARTICLE COSMOS / 14"
+    },
+    {
+      "style": "棱镜玻璃光学",
+      "en": "THE FUTURE IS YOURS.",
+      "title": "把创造力还给人",
+      "caption": "AI 提供更多可能；目标与责任仍由人承担。",
+      "key": "可能性，交给 AI；决定权，留给人。",
+      "tag": "PRISMATIC GLASS / 15"
+    }
+  ]
+}

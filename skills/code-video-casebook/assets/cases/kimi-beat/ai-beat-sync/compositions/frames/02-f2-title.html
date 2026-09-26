@@ -1,0 +1,428 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-400.ttf") format("truetype"); font-weight: 400; font-display: block; }
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-600.ttf") format("truetype"); font-weight: 600; font-display: block; }
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-700.ttf") format("truetype"); font-weight: 700; font-display: block; }
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-800.ttf") format("truetype"); font-weight: 800; font-display: block; }
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-900.ttf") format("truetype"); font-weight: 900; font-display: block; }
+        @font-face { font-family: "IBM Plex Mono"; src: url("assets/fonts/IBMPlexMono-500.ttf") format("truetype"); font-weight: 500; font-display: block; }
+        @font-face { font-family: "Noto Sans SC"; src: url("assets/fonts/NotoSansSC-700.ttf") format("truetype"); font-weight: 700; font-display: block; }
+        @font-face { font-family: "Noto Sans SC"; src: url("assets/fonts/NotoSansSC-900.ttf") format("truetype"); font-weight: 900; font-display: block; }
+        @font-face { font-family: "Microsoft YaHei"; src: local("Microsoft YaHei"); font-weight: 400 900; font-display: block; }
+
+        *,
+        *::before,
+        *::after {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        #stage {
+          position: absolute;
+          inset: 0;
+          width: 1920px;
+          height: 1080px;
+          overflow: hidden;
+          background: #111111;
+          color: #f0ece5;
+          font-family: "Barlow", "Noto Sans SC", sans-serif;
+          container-type: size;
+        }
+        #g1 {
+          position: absolute;
+          inset: 0;
+        }
+
+        /* ── chrome (IBM Plex Mono, uppercase, 0.14em) ── */
+        .g1_mono {
+          font-family: "IBM Plex Mono", "Noto Sans SC", monospace;
+          font-weight: 500;
+          font-size: 26px;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #888880;
+        }
+        #g1_kicker {
+          position: absolute;
+          top: 70px;
+          left: 106px;
+          color: #e85d26;
+        }
+        #g1_tempo {
+          position: absolute;
+          top: 70px;
+          right: 106px;
+        }
+        #g1_botrule {
+          position: absolute;
+          left: 106px;
+          right: 106px;
+          bottom: 96px;
+          height: 1px;
+          background: #282826;
+        }
+        #g1_index {
+          position: absolute;
+          left: 106px;
+          bottom: 112px;
+        }
+        #g1_frametag {
+          position: absolute;
+          right: 106px;
+          bottom: 112px;
+        }
+        #g1_ticks {
+          position: absolute;
+          left: 460px;
+          right: 460px;
+          bottom: 108px;
+          height: 16px;
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+        }
+        .g1_tick {
+          width: 22px;
+          height: 6px;
+          background: #282826;
+        }
+
+        /* ── ghost catalogue numeral (1px hairline stroke, flat) ── */
+        #g1_ghost {
+          position: absolute;
+          right: 30px;
+          bottom: -140px;
+          font-weight: 900;
+          font-size: 720px;
+          line-height: 0.8;
+          letter-spacing: -0.04em;
+          color: #111111;
+          -webkit-text-stroke: 1px #282826;
+          user-select: none;
+        }
+
+        /* ── surge bar (the door kicking open at local 0.032) ── */
+        #g1_surge {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 6px;
+          background: #e85d26;
+          transform-origin: 0 50%;
+          transform: scaleX(0);
+        }
+
+        /* ── phrases: one massive CJK word, hard-cut between anchors ── */
+        .g1_phrase {
+          position: absolute;
+          left: 106px;
+          top: 50%;
+          transform: translateY(-50%);
+          font-weight: 900;
+          line-height: 0.9;
+          letter-spacing: -0.02em;
+          white-space: nowrap;
+          opacity: 0;
+          visibility: hidden;
+          transform-origin: 0 50%;
+          will-change: transform, opacity;
+        }
+        #g1_p1 { font-size: 460px; }
+        #g1_p2 { font-size: 400px; }
+        #g1_p3 { font-size: 460px; }
+        .g1_ch {
+          display: inline-block;
+          color: #f0ece5;
+          will-change: transform, opacity;
+        }
+        .g1_ch.g1_hero {
+          color: #e85d26;
+        }
+
+        /* ── climax: "ai 觉醒" slides in on the 9.59 kick, sparkle pops at 10.17 ── */
+        #g1_climax {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 42px;
+          white-space: nowrap;
+          opacity: 0;
+          visibility: hidden;
+          will-change: transform, opacity;
+        }
+        #g1_ckicker {
+          font-family: "IBM Plex Mono", "Noto Sans SC", monospace;
+          font-weight: 500;
+          font-size: 30px;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #e85d26;
+        }
+        #g1_crow {
+          display: flex;
+          align-items: center;
+          gap: 0.32em;
+          font-weight: 900;
+          font-size: 230px;
+          line-height: 1;
+          letter-spacing: -0.035em;
+        }
+        #g1_cw1 {
+          color: #f0ece5;
+        }
+        #g1_cw2 {
+          color: #e85d26;
+        }
+        #g1_icon {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          flex-shrink: 0;
+          width: 265px;
+          height: 265px;
+          color: #e85d26;
+          opacity: 0;
+          visibility: hidden;
+        }
+        #g1_glyph {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 265px;
+          height: 265px;
+          transform-origin: 50% 50%;
+        }
+        #g1_glyph svg {
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+        .g1_ring {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          width: 345px;
+          height: 345px;
+          border: 3px solid rgba(232, 93, 38, 0.5);
+          opacity: 0;
+        }
+        .g1_ring.g1_ring2 {
+          border-color: rgba(232, 93, 38, 0.22);
+        }
+      </style>
+
+      <div
+        id="stage"
+        data-composition-id="02-f2-title"
+        data-width="1920"
+        data-height="1080"
+        data-duration="6.269"
+        data-root="true"
+        data-layout-allow-overflow
+      >
+        <div id="g1">
+          <div id="g1_ghost" data-layout-allow-overflow data-layout-allow-overlap>02</div>
+          <div id="g1_surge"></div>
+
+          <div id="g1_kicker" class="g1_mono">// 02 — surge</div>
+          <div id="g1_tempo" class="g1_mono">152 bpm · 4/4</div>
+          <div id="g1_index" class="g1_mono">w.00/03</div>
+          <div id="g1_frametag" class="g1_mono">f2 · title</div>
+          <div id="g1_ticks"></div>
+          <div id="g1_botrule"></div>
+
+          <div class="g1_phrase" id="g1_p1"
+            ><span class="g1_ch g1_hero">机</span><span class="g1_ch g1_hero">器</span></div
+          >
+          <div class="g1_phrase" id="g1_p2"
+            ><span class="g1_ch g1_hero">学</span><span class="g1_ch g1_hero">会</span><span class="g1_ch">了</span></div
+          >
+          <div class="g1_phrase" id="g1_p3"
+            ><span class="g1_ch g1_hero">思</span><span class="g1_ch g1_hero">考</span></div
+          >
+
+          <div id="g1_climax">
+            <div id="g1_ckicker">the awakening · 智能觉醒</div>
+            <div id="g1_crow">
+              <span id="g1_cw1">ai</span>
+              <span id="g1_cw2">觉醒</span>
+              <span id="g1_icon">
+                <span class="g1_ring"></span>
+                <span class="g1_ring g1_ring2"></span>
+                <span id="g1_glyph">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="100%" height="100%">
+                    <path d="M12 1.8l2.1 6.9 6.9 2.1-6.9 2.1L12 19.8l-2.1-6.9L3 10.8l6.9-2.1z" />
+                  </svg>
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          // Frame 2 — f2-title · intro-kinetic-cascade fork, Broadside palette.
+          // Frame-local time = track time − 4.644. Span 0 … 6.269.
+          var SPAN = 6.269;
+          var ORANGE = "#E85D26";
+
+          // 152 BPM beats inside [4.644, 10.913), shifted to frame-local.
+          var BEATS = [
+            0, 0.395, 0.789, 1.184, 1.579, 1.95, 2.322, 2.717, 3.111, 3.506, 3.901, 4.272, 4.644,
+            5.039, 5.433, 5.851,
+          ];
+
+          // role_bindings (track → local): phrase.times [4.97, 6.55, 7.85] → [0.326, 1.906, 3.206];
+          // climax.in 9.59 → 4.946; climax.iconAt 10.17 → 5.526.
+          var PHRASES = [
+            { id: "g1_p1", at: 0.326, out: 1.906 },
+            { id: "g1_p2", at: 1.906, out: 3.206 },
+            { id: "g1_p3", at: 3.206, out: 4.946 },
+          ];
+          var CLIMAX_IN = 4.946;
+          var ICON_AT = 5.526;
+          var SURGE_AT = 0.032; // SURGE key moment 4.676, e=0.93
+
+          var stage = document.getElementById("stage");
+          var ticksEl = document.getElementById("g1_ticks");
+          var indexEl = document.getElementById("g1_index");
+
+          // Beat ticks — one per beat, accumulate orange as the frame plays out.
+          var ticks = BEATS.map(function (_, i) {
+            var t = document.createElement("div");
+            t.className = "g1_tick";
+            t.id = "g1_tick" + i;
+            ticksEl.appendChild(t);
+            return t;
+          });
+
+          var tl = gsap.timeline({ paused: true });
+
+          // ── initial states ──
+          gsap.set("#g1", { autoAlpha: 1 });
+          gsap.set(".g1_phrase", { autoAlpha: 0 });
+          gsap.set(".g1_ch", { autoAlpha: 0, y: 46 });
+          gsap.set("#g1_climax", { xPercent: -50, yPercent: -50, x: 1200, autoAlpha: 0 });
+          gsap.set("#g1_icon", { autoAlpha: 0 });
+          gsap.set("#g1_glyph", { scale: 0.4, rotation: -8, autoAlpha: 0 });
+          gsap.set(".g1_ring", { autoAlpha: 0, scale: 0.4, xPercent: -50, yPercent: -50 });
+
+          // ── group span: g1 covers the whole frame (0 … 6.269) ──
+          tl.set("#g1", { autoAlpha: 1 }, 0);
+          tl.set("#g1", { autoAlpha: 0 }, SPAN);
+
+          // ── SURGE: the door kicks open ──
+          tl.fromTo(
+            "#g1_surge",
+            { scaleX: 0 },
+            { scaleX: 1, duration: 0.28, ease: "power3.out" },
+            SURGE_AT,
+          );
+          tl.to("#g1_surge", { autoAlpha: 0, duration: 0.2, ease: "power1.out" }, SURGE_AT + 0.42);
+
+          // ── beat ticks accumulate, one per beat ──
+          ticks.forEach(function (t, i) {
+            tl.set(t, { backgroundColor: ORANGE }, BEATS[i]);
+          });
+
+          // ── phrases: char-staggered slam on each snare anchor, 0ms cut-out ──
+          var INDEX_LABELS = ["w.01/03", "w.02/03", "w.03/03"];
+          PHRASES.forEach(function (p, pi) {
+            var el = document.getElementById(p.id);
+            var chars = el.querySelectorAll(".g1_ch");
+            tl.set(el, { autoAlpha: 1 }, p.at);
+            tl.fromTo(
+              el,
+              { scale: 1.06 },
+              { scale: 1, duration: 0.3, ease: "power2.out" },
+              p.at,
+            );
+            for (var i = 0; i < chars.length; i++) {
+              tl.fromTo(
+                chars[i],
+                { autoAlpha: 0, y: 46 },
+                { autoAlpha: 1, y: 0, duration: 0.16, ease: "power2.out" },
+                p.at + i * 0.07,
+              );
+            }
+            tl.set(indexEl, { textContent: INDEX_LABELS[pi] }, p.at);
+            // beat-locked pulses while the phrase is up
+            BEATS.forEach(function (b) {
+              if (b >= p.at + 0.3 && b < p.out) {
+                tl.fromTo(el, { scale: 1.045 }, { scale: 1, duration: 0.13, ease: "power2.out" }, b);
+              }
+            });
+            // hard cut to the next phrase
+            tl.set(el, { autoAlpha: 0 }, p.out);
+          });
+
+          // ── climax: slide in on the 9.59 kick ──
+          tl.set(indexEl, { textContent: "the awakening" }, CLIMAX_IN);
+          tl.to(
+            "#g1_climax",
+            { x: 0, autoAlpha: 1, duration: 0.42, ease: "power3.out" },
+            CLIMAX_IN,
+          );
+          tl.fromTo(
+            "#g1_ckicker",
+            { y: -18, autoAlpha: 0 },
+            { y: 0, autoAlpha: 1, duration: 0.3, ease: "power2.out" },
+            CLIMAX_IN + 0.1,
+          );
+
+          // ── sparkle pop + square ring pings at 10.17 ──
+          tl.to("#g1_icon", { autoAlpha: 1, duration: 0.2, ease: "power3.out" }, ICON_AT);
+          tl.fromTo(
+            "#g1_glyph",
+            { scale: 0.4, rotation: -8, autoAlpha: 0 },
+            { scale: 1, rotation: 0, autoAlpha: 1, duration: 0.35, ease: "back.out(2.4)" },
+            ICON_AT + 0.05,
+          );
+          tl.to("#g1_glyph", { rotation: 13, duration: 0.1, ease: "power2.out" }, ICON_AT + 0.4);
+          tl.to(
+            "#g1_glyph",
+            { rotation: 0, duration: 0.85, ease: "elastic.out(1, 0.25)" },
+            ICON_AT + 0.5,
+          );
+          [0, 0.28].forEach(function (off) {
+            tl.fromTo(
+              ".g1_ring",
+              { scale: 0.4, autoAlpha: 0.55, xPercent: -50, yPercent: -50 },
+              { scale: 1.5, autoAlpha: 0, xPercent: -50, yPercent: -50, duration: 0.8, ease: "power2.out", stagger: 0.08 },
+              ICON_AT + 0.42 + off,
+            );
+          });
+
+          // ── climax beat pulses (5.851 kick stream tail) ──
+          [5.851].forEach(function (b) {
+            tl.fromTo(
+              "#g1_climax",
+              { scale: 1.03 },
+              { scale: 1, duration: 0.14, ease: "power2.out" },
+              b,
+            );
+          });
+
+          // hold the climax to the frame edge
+          tl.to({}, { duration: SPAN }, 0);
+          tl.seek(0);
+
+          window.__timelines["02-f2-title"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

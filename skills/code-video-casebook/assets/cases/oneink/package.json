@@ -1,0 +1,20 @@
+{
+  "name": "shufa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fontsource/liu-jian-mao-cao": "^5.3.0",
+    "@fontsource/long-cang": "^5.3.0",
+    "@fontsource/ma-shan-zheng": "^5.3.1",
+    "@fontsource/zhi-mang-xing": "^5.3.0",
+    "hanzi-writer-data": "^2.0.1",
+    "playwright": "^1.63.0"
+  }
+}

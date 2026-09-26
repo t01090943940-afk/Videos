@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>01-f1-boot — typewriter phrase / keyword shuffle</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-400.ttf") format("truetype"); font-weight: 400; font-display: block; }
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-600.ttf") format("truetype"); font-weight: 600; font-display: block; }
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-700.ttf") format("truetype"); font-weight: 700; font-display: block; }
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-800.ttf") format("truetype"); font-weight: 800; font-display: block; }
+        @font-face { font-family: "Barlow"; src: url("assets/fonts/Barlow-900.ttf") format("truetype"); font-weight: 900; font-display: block; }
+        @font-face { font-family: "IBM Plex Mono"; src: url("assets/fonts/IBMPlexMono-500.ttf") format("truetype"); font-weight: 500; font-display: block; }
+        @font-face { font-family: "Noto Sans SC"; src: url("assets/fonts/NotoSansSC-700.ttf") format("truetype"); font-weight: 700; font-display: block; }
+        @font-face { font-family: "Noto Sans SC"; src: url("assets/fonts/NotoSansSC-900.ttf") format("truetype"); font-weight: 900; font-display: block; }
+        @font-face { font-family: "Microsoft YaHei"; src: local("Microsoft YaHei"); font-weight: 400 900; font-display: block; }
+
+        *,
+        *::before,
+        *::after {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        #stage {
+          position: relative;
+          width: 1920px;
+          height: 1080px;
+          overflow: hidden;
+          background: #111111;
+          font-family: Barlow, "Noto Sans SC", "Helvetica Neue", Arial, sans-serif;
+        }
+        /* subtle terminal scanline texture (static; opacity pulsed on kicks) */
+        #g1_scan {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          opacity: 0.45;
+          background: repeating-linear-gradient(
+            0deg,
+            rgba(240, 236, 229, 0.045) 0 1px,
+            transparent 1px 4px
+          );
+        }
+        .g1-chrome {
+          position: absolute;
+          left: 106px;
+          right: 106px;
+          height: 34px;
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          padding-bottom: 10px;
+          font-family: "IBM Plex Mono", "Courier New", monospace;
+          font-size: 14px;
+          font-weight: 500;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #888880;
+        }
+        #g1_chrome_top {
+          top: 44px;
+          border-bottom: 1px solid #282826;
+        }
+        #g1_chrome_bot {
+          bottom: 44px;
+          border-top: 1px solid #282826;
+          align-items: flex-start;
+          padding-bottom: 0;
+          padding-top: 10px;
+        }
+        #g1 {
+          position: absolute;
+          inset: 0;
+          padding: 106px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+        .g1-mono {
+          font-family: "IBM Plex Mono", "Courier New", monospace;
+          font-size: 30px;
+          font-weight: 500;
+          letter-spacing: 0.08em;
+          line-height: 1.2;
+        }
+        #g1_lead1 {
+          display: flex;
+          align-items: center;
+          color: #f0ece5;
+        }
+        #g1_block {
+          display: inline-block;
+          width: 18px;
+          height: 30px;
+          margin-right: 14px;
+          background: #e85d26;
+        }
+        #g1_prompt {
+          color: #e85d26;
+        }
+        #g1_lead2 {
+          margin-top: 16px;
+          color: #888880;
+        }
+        #g1_phrase {
+          margin-top: 84px;
+          display: flex;
+          gap: 0.22em;
+          color: #f0ece5;
+          font-size: 108px;
+          font-weight: 900;
+          letter-spacing: -0.03em;
+          line-height: 1;
+        }
+        .g1-w {
+          display: inline-block;
+        }
+        #g1_keyrow {
+          margin-top: 28px;
+          display: flex;
+          align-items: baseline;
+          line-height: 0.9;
+        }
+        #g1_key {
+          display: inline-block;
+          color: #e85d26;
+          font-size: 200px;
+          font-weight: 900;
+          letter-spacing: -0.04em;
+        }
+        #g1_cursor {
+          display: inline-block;
+          margin-left: 0.05em;
+          color: #f0ece5;
+          font-size: 200px;
+          font-weight: 900;
+          letter-spacing: -0.04em;
+        }
+        #g1_status {
+          margin-top: 76px;
+          display: flex;
+          align-items: center;
+          gap: 20px;
+        }
+        #g1_stub {
+          width: 36px;
+          height: 2px;
+          background: #e85d26;
+        }
+        #g1_status_text {
+          font-family: "IBM Plex Mono", "Courier New", monospace;
+          font-size: 22px;
+          font-weight: 500;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #888880;
+        }
+      </style>
+
+      <div
+        id="stage"
+        data-composition-id="01-f1-boot"
+        data-width="1920"
+        data-height="1080"
+        data-duration="4.644"
+        data-root="true"
+      >
+        <div id="g1_scan"></div>
+        <div class="g1-chrome" id="g1_chrome_top">
+          <span>tty1 · ai_boot</span>
+          <span>f1 / 06</span>
+        </div>
+        <div class="g1-chrome" id="g1_chrome_bot">
+          <span>audio · 152 bpm</span>
+          <span>seq 01 · cold open</span>
+        </div>
+
+        <div id="g1">
+          <div class="g1-mono" id="g1_lead1"><span id="g1_block"></span><span id="g1_prompt">$</span>&nbsp;boot --year 2017</div>
+          <div class="g1-mono" id="g1_lead2">// the paper that changed everything</div>
+          <div id="g1_phrase">
+            <span class="g1-w" id="g1_w0">attention</span>
+            <span class="g1-w" id="g1_w1">is</span>
+            <span class="g1-w" id="g1_w2">all</span>
+            <span class="g1-w" id="g1_w3">you</span>
+            <span class="g1-w" id="g1_w4">need</span>
+          </div>
+          <div id="g1_keyrow">
+            <span id="g1_key">transformer</span>
+            <span id="g1_cursor">_</span>
+          </div>
+          <div id="g1_status">
+            <span id="g1_stub"></span>
+            <span id="g1_status_text">status: ok — session live</span>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          var ID = "01-f1-boot";
+          var DUR = 4.644;
+
+          // keyword font-shuffle faces (0 = base Barlow 900, shared brand face)
+          var FONTS = [
+            {
+              fontFamily: 'Barlow, "Noto Sans SC", "Helvetica Neue", Arial, sans-serif',
+              fontWeight: 900,
+              fontStyle: "normal",
+              letterSpacing: "-0.04em",
+            },
+            {
+              fontFamily: 'Georgia, "Times New Roman", serif',
+              fontWeight: 700,
+              fontStyle: "normal",
+              letterSpacing: "-0.02em",
+            },
+            {
+              fontFamily: '"Courier New", Courier, monospace',
+              fontWeight: 700,
+              fontStyle: "normal",
+              letterSpacing: "-0.06em",
+            },
+          ];
+          function fontProps(i) {
+            var f = FONTS[((i % FONTS.length) + FONTS.length) % FONTS.length];
+            return {
+              fontFamily: f.fontFamily,
+              fontWeight: f.fontWeight,
+              fontStyle: f.fontStyle,
+              letterSpacing: f.letterSpacing,
+            };
+          }
+
+          // role_bindings → frame-local seconds (frame starts at 0.0)
+          var SHUFFLE = [
+            { t: 3.81, font: 1 },
+            { t: 4.23, font: 2 },
+            { t: 4.57, font: 0 },
+          ];
+          var KICKS = [2.42, 2.81];
+          var BLINKS = [3.111, 3.483, 3.854, 4.272]; // beat-grid cursor blinks
+
+          window.__timelines = window.__timelines || {};
+          var tl = gsap.timeline({ paused: true });
+
+          var keyed = [
+            "#g1_lead1",
+            "#g1_lead2",
+            "#g1_w0",
+            "#g1_w1",
+            "#g1_w2",
+            "#g1_w3",
+            "#g1_w4",
+            "#g1_key",
+            "#g1_cursor",
+            "#g1_status",
+          ];
+          gsap.set(keyed, { autoAlpha: 0 });
+          gsap.set("#g1_key", fontProps(0));
+
+          var POP_IN = { autoAlpha: 0, scale: 0.92, y: 6 };
+          var POP_OUT = { autoAlpha: 1, scale: 1, y: 0, duration: 0.1, ease: "back.out(2)" };
+
+          // group visibility across its frame-local span (0ms cut at the tail)
+          tl.set("#g1", { autoAlpha: 1 }, 0);
+
+          // 0.14 — the command types over the block cursor
+          tl.set("#g1_block", { autoAlpha: 0 }, 0.14);
+          tl.fromTo("#g1_lead1", POP_IN, POP_OUT, 0.14);
+          // 0.53 — the comment line
+          tl.fromTo("#g1_lead2", POP_IN, POP_OUT, 0.53);
+          // 1.11 → 2.23 — the phrase, one word per onset
+          ["#g1_w0", "#g1_w1", "#g1_w2", "#g1_w3", "#g1_w4"].forEach(function (sel, i) {
+            tl.fromTo(sel, POP_IN, POP_OUT, [1.11, 1.51, 1.86, 2.09, 2.23][i]);
+          });
+          // 2.42 (kick) — the keyword slams in
+          tl.fromTo(
+            "#g1_key",
+            { autoAlpha: 0, scale: 0.8, y: 14 },
+            { autoAlpha: 1, scale: 1, y: 0, duration: 0.16, ease: "back.out(2.2)" },
+            2.42
+          );
+          // 2.81 (kick) — the trailing cursor punches in
+          tl.fromTo(
+            "#g1_cursor",
+            { autoAlpha: 0, scale: 0.3 },
+            { autoAlpha: 1, scale: 1, duration: 0.09, ease: "back.out(3)" },
+            2.81
+          );
+          // 3.23 — status row slides in
+          tl.fromTo(
+            "#g1_status",
+            { autoAlpha: 0, x: -16 },
+            { autoAlpha: 1, x: 0, duration: 0.14, ease: "power2.out" },
+            3.23
+          );
+
+          // kick feedback — micro screen-shake + scanline pulse
+          KICKS.forEach(function (t, i) {
+            tl.fromTo(
+              "#g1",
+              { x: i % 2 === 0 ? 8 : -7, y: i % 2 === 0 ? -5 : 4 },
+              { x: 0, y: 0, duration: 0.18, ease: "power3.out", immediateRender: false },
+              t
+            );
+          });
+          KICKS.concat([3.81, 4.23, 4.57]).forEach(function (t) {
+            tl.fromTo(
+              "#g1_scan",
+              { opacity: 0.85 },
+              {
+                opacity: 0.45,
+                duration: Math.min(0.22, DUR - 0.014 - t),
+                ease: "power1.out",
+                immediateRender: false,
+              },
+              t
+            );
+          });
+
+          // beat-grid cursor blinks (after the punch-in settles)
+          BLINKS.forEach(function (t, i) {
+            tl.set("#g1_cursor", { autoAlpha: i % 2 === 0 ? 0 : 1 }, t);
+          });
+
+          // the three tail hits — keyword shuffles face on each hit
+          SHUFFLE.forEach(function (s) {
+            tl.set("#g1_key", fontProps(s.font), s.t);
+            tl.fromTo(
+              "#g1_key",
+              { x: -7 },
+              { x: 0, duration: 0.1, ease: "power2.out", immediateRender: false },
+              s.t
+            );
+          });
+
+          tl.set("#g1", { autoAlpha: 0 }, DUR);
+
+          tl.seek(0);
+          window.__timelines[ID] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

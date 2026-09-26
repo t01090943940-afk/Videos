@@ -1,0 +1,287 @@
+{
+ "title": "午夜上线 · a single-look short",
+ "world": "studio",
+ "fps": 24,
+ "width": 1280,
+ "height": 720,
+ "screens": {
+  "1": "comic",
+  "2": "comic",
+  "3": "comic",
+  "4": "comic",
+  "5": "comic",
+  "6": "comic"
+ },
+ "shots": [
+  {
+   "id": "S01",
+   "beat": "world",
+   "story_function": "夜里的工作室，只有霓虹和显示器亮着；全片只有一个人还没走。",
+   "duration": 5,
+   "camera": "CAM_EST",
+   "look": "comic",
+   "mg": [
+    {
+     "kind": "title",
+     "from": 0.6,
+     "to": 4.6,
+     "text": "23:58",
+     "sub": "距离上线还有 2 分钟",
+     "size": 96
+    },
+    {
+     "kind": "mark",
+     "from": 0,
+     "to": 5,
+     "text": "午夜上线 · stop-motion-3d"
+    }
+   ]
+  },
+  {
+   "id": "S02",
+   "beat": "character",
+   "story_function": "诺娃在敲键盘，耳机里是自己的节奏。",
+   "duration": 5,
+   "camera": "CAM_NOVA_FRONT",
+   "look": "comic",
+   "acting": [
+    {
+     "actor": "nova",
+     "loop": "typing",
+     "from": 0,
+     "to": 3.2,
+     "rate": 3
+    },
+    {
+     "actor": "nova",
+     "at": 3.6,
+     "pose": "look_screen",
+     "ease": "inOut"
+    }
+   ],
+   "mg": [
+    {
+     "kind": "note",
+     "from": 0.6,
+     "to": 4.6,
+     "text": "诺娃",
+     "sub": "还差最后一个测试"
+    },
+    {
+     "kind": "mark",
+     "from": 0,
+     "to": 5,
+     "text": "午夜上线 · stop-motion-3d"
+    }
+   ]
+  },
+  {
+   "id": "S03",
+   "beat": "problem",
+   "story_function": "过肩看到屏幕：一个红色失败。她往后一靠。",
+   "duration": 4,
+   "camera": "CAM_NOVA_OTS",
+   "look": "comic",
+   "acting": [
+    {
+     "actor": "nova",
+     "at": 0.4,
+     "pose": "point_screen",
+     "ease": "inOut"
+    },
+    {
+     "actor": "nova",
+     "at": 1.8,
+     "pose": "point_screen",
+     "ease": "hold"
+    },
+    {
+     "actor": "nova",
+     "at": 2.3,
+     "pose": "lean_back",
+     "ease": "inOut"
+    }
+   ],
+   "mg": [
+    {
+     "kind": "chip",
+     "from": 0.3,
+     "to": 4,
+     "text": "127 / 128",
+     "color": "#ff3fa4"
+    },
+    {
+     "kind": "note",
+     "from": 0.5,
+     "to": 3.8,
+     "text": "1 个测试失败",
+     "sub": "只剩 90 秒"
+    },
+    {
+     "kind": "mark",
+     "from": 0,
+     "to": 4,
+     "text": "午夜上线 · stop-motion-3d"
+    }
+   ]
+  },
+  {
+   "id": "S04",
+   "beat": "decision",
+   "story_function": "她点头，决定不回滚，直接修。",
+   "duration": 4,
+   "camera": "CAM_NOVA_FRONT",
+   "look": "comic",
+   "acting": [
+    {
+     "actor": "nova",
+     "loop": "nod",
+     "from": 0,
+     "to": 1.4
+    },
+    {
+     "actor": "nova",
+     "loop": "typing",
+     "from": 1.6,
+     "to": 4,
+     "rate": 4
+    }
+   ],
+   "mg": [
+    {
+     "kind": "note",
+     "from": 0.4,
+     "to": 3.8,
+     "text": "不回滚",
+     "sub": "修掉它"
+    },
+    {
+     "kind": "mark",
+     "from": 0,
+     "to": 4,
+     "text": "午夜上线 · stop-motion-3d"
+    }
+   ]
+  },
+  {
+   "id": "S05",
+   "beat": "work",
+   "story_function": "过肩：飞快地打字，屏幕在变。",
+   "duration": 4,
+   "camera": "CAM_NOVA_OTS",
+   "look": "comic",
+   "acting": [
+    {
+     "actor": "nova",
+     "loop": "typing",
+     "from": 0,
+     "to": 4,
+     "rate": 4.5
+    }
+   ],
+   "mg": [
+    {
+     "kind": "mark",
+     "from": 0,
+     "to": 4,
+     "text": "午夜上线 · stop-motion-3d"
+    }
+   ]
+  },
+  {
+   "id": "S06",
+   "beat": "turn",
+   "story_function": "预备——按下回车。",
+   "duration": 3,
+   "camera": "CAM_NOVA_FRONT",
+   "look": "comic",
+   "acting": [
+    {
+     "actor": "nova",
+     "at": 0.2,
+     "pose": "look_screen",
+     "ease": "inOut"
+    },
+    {
+     "actor": "nova",
+     "at": 1.0,
+     "pose": "anticipate_enter",
+     "ease": "inOut"
+    },
+    {
+     "actor": "nova",
+     "at": 1.6,
+     "pose": "anticipate_enter",
+     "ease": "hold"
+    },
+    {
+     "actor": "nova",
+     "at": 1.85,
+     "pose": "hit_enter",
+     "ease": "in"
+    },
+    {
+     "actor": "nova",
+     "at": 2.6,
+     "pose": "hit_enter",
+     "ease": "hold"
+    }
+   ],
+   "mg": [
+    {
+     "kind": "mark",
+     "from": 0,
+     "to": 3,
+     "text": "午夜上线 · stop-motion-3d"
+    }
+   ]
+  },
+  {
+   "id": "S07",
+   "beat": "result",
+   "story_function": "全部通过。她握拳，工作室还是那么安静。",
+   "duration": 5,
+   "camera": "CAM_NOVA_FRONT",
+   "look": "comic",
+   "acting": [
+    {
+     "actor": "nova",
+     "at": 0.5,
+     "pose": "fist_pump",
+     "ease": "out"
+    },
+    {
+     "actor": "nova",
+     "at": 1.6,
+     "pose": "fist_pump",
+     "ease": "hold"
+    },
+    {
+     "actor": "nova",
+     "at": 2.2,
+     "pose": "lean_back",
+     "ease": "inOut"
+    }
+   ],
+   "mg": [
+    {
+     "kind": "title",
+     "from": 1.0,
+     "to": 5.0,
+     "text": "128 / 128",
+     "sub": "00:00 · 上线",
+     "size": 96,
+     "color": "#27e3ff",
+     "panel": true,
+     "y": 0.3
+    },
+    {
+     "kind": "mark",
+     "from": 0,
+     "to": 5,
+     "text": "午夜上线 · stop-motion-3d"
+    }
+   ]
+  }
+ ]
+}

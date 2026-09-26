@@ -1,0 +1,840 @@
+{
+  "output": "/mnt/data/COSMOS_30_STYLES_72s_1080p.mp4",
+  "bytes": 20212569,
+  "sha256": "a09a203ec3ce5705ea5568b4a0cf55de38ed60ee9968add6626083bb0bc7cd09",
+  "dimensions": [
+    1920,
+    1080
+  ],
+  "display_fps": 30,
+  "pose_fps": 10,
+  "shots": 30,
+  "shot_seconds": 2.4,
+  "music_bpm": 200,
+  "beats_per_shot": 8,
+  "probe": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+        "profile": "High",
+        "codec_type": "video",
+        "codec_tag_string": "avc1",
+        "codec_tag": "0x31637661",
+        "width": 1920,
+        "height": 1080,
+        "coded_width": 1920,
+        "coded_height": 1080,
+        "closed_captions": 0,
+        "film_grain": 0,
+        "has_b_frames": 2,
+        "pix_fmt": "yuv420p",
+        "level": 40,
+        "chroma_location": "left",
+        "field_order": "progressive",
+        "refs": 1,
+        "is_avc": "true",
+        "nal_length_size": "4",
+        "id": "0x1",
+        "r_frame_rate": "30/1",
+        "avg_frame_rate": "30/1",
+        "time_base": "1/15360",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 1105920,
+        "duration": "72.000000",
+        "bit_rate": "1965606",
+        "bits_per_raw_sample": "8",
+        "nb_frames": "2160",
+        "extradata_size": 47,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "VideoHandler",
+          "vendor_id": "[0][0][0][0]",
+          "encoder": "Lavc61.19.101 libx264"
+        }
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_long_name": "AAC (Advanced Audio Coding)",
+        "profile": "LC",
+        "codec_type": "audio",
+        "codec_tag_string": "mp4a",
+        "codec_tag": "0x6134706d",
+        "sample_fmt": "fltp",
+        "sample_rate": "48000",
+        "channels": 2,
+        "channel_layout": "stereo",
+        "bits_per_sample": 0,
+        "initial_padding": 0,
+        "id": "0x2",
+        "r_frame_rate": "0/0",
+        "avg_frame_rate": "0/0",
+        "time_base": "1/48000",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 3456000,
+        "duration": "72.000000",
+        "bit_rate": "270721",
+        "nb_frames": "3376",
+        "extradata_size": 5,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "SoundHandler",
+          "vendor_id": "[0][0][0][0]"
+        }
+      },
+      {
+        "index": 2,
+        "codec_name": "bin_data",
+        "codec_long_name": "binary data",
+        "codec_type": "data",
+        "codec_tag_string": "text",
+        "codec_tag": "0x74786574",
+        "id": "0x3",
+        "r_frame_rate": "0/0",
+        "avg_frame_rate": "0/0",
+        "time_base": "1/1000",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 72000,
+        "duration": "72.000000",
+        "bit_rate": "201",
+        "nb_frames": "30",
+        "extradata_size": 63,
+        "disposition": {
+          "default": 0,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "eng",
+          "handler_name": "SubtitleHandler"
+        }
+      }
+    ],
+    "chapters": [
+      {
+        "id": 0,
+        "time_base": "1/1000",
+        "start": 0,
+        "start_time": "0.000000",
+        "end": 2400,
+        "end_time": "2.400000",
+        "tags": {
+          "title": "01 - 极简动态字体 - 宇宙之前"
+        }
+      },
+      {
+        "id": 1,
+        "time_base": "1/1000",
+        "start": 2400,
+        "start_time": "2.400000",
+        "end": 4800,
+        "end_time": "4.800000",
+        "tags": {
+          "title": "02 - 四维超立方体投影 - 时间的边界"
+        }
+      },
+      {
+        "id": 2,
+        "time_base": "1/1000",
+        "start": 4800,
+        "start_time": "4.800000",
+        "end": 7200,
+        "end_time": "7.200000",
+        "tags": {
+          "title": "03 - 故障艺术与扫描线 - 抵达理论边界"
+        }
+      },
+      {
+        "id": 3,
+        "time_base": "1/1000",
+        "start": 7200,
+        "start_time": "7.200000",
+        "end": 9600,
+        "end_time": "9.600000",
+        "tags": {
+          "title": "04 - 参数线条与欧普隧道 - 空间急剧拉伸"
+        }
+      },
+      {
+        "id": 4,
+        "time_base": "1/1000",
+        "start": 9600,
+        "start_time": "9.600000",
+        "end": 12000,
+        "end_time": "12.000000",
+        "tags": {
+          "title": "05 - 体积光与热辐射 - 热大爆炸"
+        }
+      },
+      {
+        "id": 5,
+        "time_base": "1/1000",
+        "start": 12000,
+        "start_time": "12.000000",
+        "end": 14400,
+        "end_time": "14.400000",
+        "tags": {
+          "title": "06 - 反应扩散与液态场 - 粒子的海洋"
+        }
+      },
+      {
+        "id": 6,
+        "time_base": "1/1000",
+        "start": 14400,
+        "start_time": "14.400000",
+        "end": 16800,
+        "end_time": "16.800000",
+        "tags": {
+          "title": "07 - 黏土微缩定格 - 物质开始成形"
+        }
+      },
+      {
+        "id": 7,
+        "time_base": "1/1000",
+        "start": 16800,
+        "start_time": "16.800000",
+        "end": 19200,
+        "end_time": "19.200000",
+        "tags": {
+          "title": "08 - 矢量工程蓝图 - 最初的元素核"
+        }
+      },
+      {
+        "id": 8,
+        "time_base": "1/1000",
+        "start": 19200,
+        "start_time": "19.200000",
+        "end": 21600,
+        "end_time": "21.600000",
+        "tags": {
+          "title": "09 - 层叠剪纸与视差 - 宇宙变得透明"
+        }
+      },
+      {
+        "id": 9,
+        "time_base": "1/1000",
+        "start": 21600,
+        "start_time": "21.600000",
+        "end": 24000,
+        "end_time": "24.000000",
+        "tags": {
+          "title": "10 - 孔版印刷与半调 - 最古老的光"
+        }
+      },
+      {
+        "id": 10,
+        "time_base": "1/1000",
+        "start": 24000,
+        "start_time": "24.000000",
+        "end": 26400,
+        "end_time": "26.400000",
+        "tags": {
+          "title": "11 - 多平面剪影舞台 - 宇宙的黑暗时代"
+        }
+      },
+      {
+        "id": 11,
+        "time_base": "1/1000",
+        "start": 26400,
+        "start_time": "26.400000",
+        "end": 28800,
+        "end_time": "28.800000",
+        "tags": {
+          "title": "12 - 体素积木定格 - 第一批恒星"
+        }
+      },
+      {
+        "id": 12,
+        "time_base": "1/1000",
+        "start": 28800,
+        "start_time": "28.800000",
+        "end": 31200,
+        "end_time": "31.200000",
+        "tags": {
+          "title": "13 - 赛璐璐与漫画描边 - 星光亮起"
+        }
+      },
+      {
+        "id": 13,
+        "time_base": "1/1000",
+        "start": 31200,
+        "start_time": "31.200000",
+        "end": 33600,
+        "end_time": "33.600000",
+        "tags": {
+          "title": "14 - 全息点云 - 光改变了宇宙"
+        }
+      },
+      {
+        "id": 14,
+        "time_base": "1/1000",
+        "start": 33600,
+        "start_time": "33.600000",
+        "end": 36000,
+        "end_time": "36.000000",
+        "tags": {
+          "title": "15 - 生成式拓扑线框 - 引力编织宇宙网"
+        }
+      },
+      {
+        "id": 15,
+        "time_base": "1/1000",
+        "start": 36000,
+        "start_time": "36.000000",
+        "end": 38400,
+        "end_time": "38.400000",
+        "tags": {
+          "title": "16 - 粒子银河摄影 - 亿万星辰成河"
+        }
+      },
+      {
+        "id": 16,
+        "time_base": "1/1000",
+        "start": 38400,
+        "start_time": "38.400000",
+        "end": 40800,
+        "end_time": "40.800000",
+        "tags": {
+          "title": "17 - 漫画网点与冲击帧 - 恒星锻造元素"
+        }
+      },
+      {
+        "id": 17,
+        "time_base": "1/1000",
+        "start": 40800,
+        "start_time": "40.800000",
+        "end": 43200,
+        "end_time": "43.200000",
+        "tags": {
+          "title": "18 - 拼贴与活字印刷 - 我们来自星尘"
+        }
+      },
+      {
+        "id": 18,
+        "time_base": "1/1000",
+        "start": 43200,
+        "start_time": "43.200000",
+        "end": 45600,
+        "end_time": "45.600000",
+        "tags": {
+          "title": "19 - 低多边形纸模 - 太阳系诞生"
+        }
+      },
+      {
+        "id": 19,
+        "time_base": "1/1000",
+        "start": 45600,
+        "start_time": "45.600000",
+        "end": 48000,
+        "end_time": "48.000000",
+        "tags": {
+          "title": "20 - 程序材质与电影星球 - 一颗蓝色星球"
+        }
+      },
+      {
+        "id": 20,
+        "time_base": "1/1000",
+        "start": 48000,
+        "start_time": "48.000000",
+        "end": 50400,
+        "end_time": "50.400000",
+        "tags": {
+          "title": "21 - 像素生命与细胞自动机 - 生命展开"
+        }
+      },
+      {
+        "id": 21,
+        "time_base": "1/1000",
+        "start": 50400,
+        "start_time": "50.400000",
+        "end": 52800,
+        "end_time": "52.800000",
+        "tags": {
+          "title": "22 - 等距微缩机械 - 宇宙开始被追问"
+        }
+      },
+      {
+        "id": 22,
+        "time_base": "1/1000",
+        "start": 52800,
+        "start_time": "52.800000",
+        "end": 55200,
+        "end_time": "55.200000",
+        "tags": {
+          "title": "23 - 时空世界线 - 走到此刻"
+        }
+      },
+      {
+        "id": 23,
+        "time_base": "1/1000",
+        "start": 55200,
+        "start_time": "55.200000",
+        "end": 57600,
+        "end_time": "57.600000",
+        "tags": {
+          "title": "24 - 数据叙事与科学图解 - 远方渐不可及"
+        }
+      },
+      {
+        "id": 24,
+        "time_base": "1/1000",
+        "start": 57600,
+        "start_time": "57.600000",
+        "end": 60000,
+        "end_time": "60.000000",
+        "tags": {
+          "title": "25 - 水墨流体与晕染 - 太阳也会老去"
+        }
+      },
+      {
+        "id": 25,
+        "time_base": "1/1000",
+        "start": 60000,
+        "start_time": "60.000000",
+        "end": 62400,
+        "end_time": "62.400000",
+        "tags": {
+          "title": "26 - 动力雕塑与装置定格 - 最后的星光"
+        }
+      },
+      {
+        "id": 26,
+        "time_base": "1/1000",
+        "start": 62400,
+        "start_time": "62.400000",
+        "end": 64800,
+        "end_time": "64.800000",
+        "tags": {
+          "title": "27 - 金属材质与粗粝微缩 - 残骸的漫长时代"
+        }
+      },
+      {
+        "id": 27,
+        "time_base": "1/1000",
+        "start": 64800,
+        "start_time": "64.800000",
+        "end": 67200,
+        "end_time": "67.200000",
+        "tags": {
+          "title": "28 - 引力透镜与光线偏折 - 黑洞也非永恒"
+        }
+      },
+      {
+        "id": 28,
+        "time_base": "1/1000",
+        "start": 67200,
+        "start_time": "67.200000",
+        "end": 69600,
+        "end_time": "69.600000",
+        "tags": {
+          "title": "29 - 四维超球切片 - 差异逐渐消散"
+        }
+      },
+      {
+        "id": 29,
+        "time_base": "1/1000",
+        "start": 69600,
+        "start_time": "69.600000",
+        "end": 72000,
+        "end_time": "72.000000",
+        "tags": {
+          "title": "30 - 光绘与负空间 - 从未知，到寂静"
+        }
+      }
+    ],
+    "format": {
+      "filename": "/mnt/data/COSMOS_30_STYLES_72s_1080p.mp4",
+      "nb_streams": 3,
+      "nb_programs": 0,
+      "nb_stream_groups": 0,
+      "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+      "format_long_name": "QuickTime / MOV",
+      "start_time": "0.000000",
+      "duration": "72.000000",
+      "size": "20212569",
+      "bit_rate": "2245841",
+      "probe_score": 100,
+      "tags": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "title": "COSMOS - Thirty Coded Worlds",
+        "artist": "Original procedural film and score",
+        "encoder": "Lavf61.7.103",
+        "comment": "30 styles / 72 seconds / 200 BPM / 10 Hz stop-motion poses / scientific scenarios are labelled"
+      }
+    }
+  },
+  "full_decode_check": "PASS",
+  "boundary_frame_checks": [
+    {
+      "frame": 0,
+      "mean_luma": 15.184024884259259,
+      "std_luma": 48.94121560090995
+    },
+    {
+      "frame": 71,
+      "mean_luma": 15.217564139660494,
+      "std_luma": 48.940513930575015
+    },
+    {
+      "frame": 72,
+      "mean_luma": 11.46570842978395,
+      "std_luma": 25.239313508643512
+    },
+    {
+      "frame": 143,
+      "mean_luma": 11.574114101080246,
+      "std_luma": 25.602429309281362
+    },
+    {
+      "frame": 144,
+      "mean_luma": 11.479412133487655,
+      "std_luma": 35.41967674493049
+    },
+    {
+      "frame": 215,
+      "mean_luma": 10.984291087962964,
+      "std_luma": 35.52000435044596
+    },
+    {
+      "frame": 216,
+      "mean_luma": 12.48514805169753,
+      "std_luma": 30.848283042165733
+    },
+    {
+      "frame": 287,
+      "mean_luma": 12.2579296875,
+      "std_luma": 30.880463331735058
+    },
+    {
+      "frame": 288,
+      "mean_luma": 95.20349971064815,
+      "std_luma": 55.97768671114031
+    },
+    {
+      "frame": 359,
+      "mean_luma": 98.2636323302469,
+      "std_luma": 54.910439965172664
+    },
+    {
+      "frame": 360,
+      "mean_luma": 52.73861448688272,
+      "std_luma": 66.73673116437664
+    },
+    {
+      "frame": 431,
+      "mean_luma": 64.08634403935186,
+      "std_luma": 72.98934682575418
+    },
+    {
+      "frame": 432,
+      "mean_luma": 168.56475983796295,
+      "std_luma": 44.848930351299025
+    },
+    {
+      "frame": 503,
+      "mean_luma": 168.49884500385804,
+      "std_luma": 44.727046114676284
+    },
+    {
+      "frame": 504,
+      "mean_luma": 21.14518614969136,
+      "std_luma": 32.58590142257938
+    },
+    {
+      "frame": 575,
+      "mean_luma": 20.56261574074074,
+      "std_luma": 31.35081729658851
+    },
+    {
+      "frame": 576,
+      "mean_luma": 173.85811824845678,
+      "std_luma": 59.204888767259575
+    },
+    {
+      "frame": 647,
+      "mean_luma": 173.92478009259258,
+      "std_luma": 59.179529311862176
+    },
+    {
+      "frame": 648,
+      "mean_luma": 183.21882185570988,
+      "std_luma": 70.18939949251377
+    },
+    {
+      "frame": 719,
+      "mean_luma": 183.18248697916667,
+      "std_luma": 70.24058528437223
+    },
+    {
+      "frame": 720,
+      "mean_luma": 19.334390432098765,
+      "std_luma": 32.889636686417475
+    },
+    {
+      "frame": 791,
+      "mean_luma": 19.36934124228395,
+      "std_luma": 32.95063542707926
+    },
+    {
+      "frame": 792,
+      "mean_luma": 19.048548418209876,
+      "std_luma": 34.45090836407266
+    },
+    {
+      "frame": 863,
+      "mean_luma": 15.765258005401234,
+      "std_luma": 32.49011917812998
+    },
+    {
+      "frame": 864,
+      "mean_luma": 42.037583912037036,
+      "std_luma": 46.5213045607706
+    },
+    {
+      "frame": 935,
+      "mean_luma": 41.9207388117284,
+      "std_luma": 46.3664570730461
+    },
+    {
+      "frame": 936,
+      "mean_luma": 12.488497299382717,
+      "std_luma": 27.022105270378805
+    },
+    {
+      "frame": 1007,
+      "mean_luma": 15.151585165895062,
+      "std_luma": 33.70289369257582
+    },
+    {
+      "frame": 1008,
+      "mean_luma": 11.64562355324074,
+      "std_luma": 27.929343694216882
+    },
+    {
+      "frame": 1079,
+      "mean_luma": 11.71676456404321,
+      "std_luma": 28.046440007145158
+    },
+    {
+      "frame": 1080,
+      "mean_luma": 14.741615547839507,
+      "std_luma": 35.208902589825485
+    },
+    {
+      "frame": 1151,
+      "mean_luma": 14.765866608796296,
+      "std_luma": 35.27177994365833
+    },
+    {
+      "frame": 1152,
+      "mean_luma": 103.47758680555556,
+      "std_luma": 68.30733990825303
+    },
+    {
+      "frame": 1223,
+      "mean_luma": 102.6440658757716,
+      "std_luma": 67.2772734810578
+    },
+    {
+      "frame": 1224,
+      "mean_luma": 189.4346098572531,
+      "std_luma": 43.733390308012204
+    },
+    {
+      "frame": 1295,
+      "mean_luma": 189.4077054398148,
+      "std_luma": 43.85706406194917
+    },
+    {
+      "frame": 1296,
+      "mean_luma": 205.89850308641977,
+      "std_luma": 23.104340648177505
+    },
+    {
+      "frame": 1367,
+      "mean_luma": 205.87309558256172,
+      "std_luma": 23.20795816229459
+    },
+    {
+      "frame": 1368,
+      "mean_luma": 18.49254050925926,
+      "std_luma": 35.13388050753909
+    },
+    {
+      "frame": 1439,
+      "mean_luma": 18.420804880401235,
+      "std_luma": 35.47663500526244
+    },
+    {
+      "frame": 1440,
+      "mean_luma": 42.26997492283951,
+      "std_luma": 60.32616597652166
+    },
+    {
+      "frame": 1511,
+      "mean_luma": 30.160027970679014,
+      "std_luma": 49.768598965000336
+    },
+    {
+      "frame": 1512,
+      "mean_luma": 210.4500323109568,
+      "std_luma": 37.285866199375974
+    },
+    {
+      "frame": 1583,
+      "mean_luma": 210.4114626736111,
+      "std_luma": 37.42354145619195
+    },
+    {
+      "frame": 1584,
+      "mean_luma": 11.168882619598765,
+      "std_luma": 30.18238557650866
+    },
+    {
+      "frame": 1655,
+      "mean_luma": 11.210395929783951,
+      "std_luma": 30.241406050300988
+    },
+    {
+      "frame": 1656,
+      "mean_luma": 227.30256655092592,
+      "std_luma": 29.17348636492425
+    },
+    {
+      "frame": 1727,
+      "mean_luma": 227.15906491126543,
+      "std_luma": 29.554369718167045
+    },
+    {
+      "frame": 1728,
+      "mean_luma": 211.72488040123457,
+      "std_luma": 38.68624287164982
+    },
+    {
+      "frame": 1799,
+      "mean_luma": 190.00137104552468,
+      "std_luma": 65.08240813107275
+    },
+    {
+      "frame": 1800,
+      "mean_luma": 16.25636429398148,
+      "std_luma": 43.01864185135725
+    },
+    {
+      "frame": 1871,
+      "mean_luma": 9.226703317901235,
+      "std_luma": 27.295308321710852
+    },
+    {
+      "frame": 1872,
+      "mean_luma": 12.928308256172839,
+      "std_luma": 31.43662766247737
+    },
+    {
+      "frame": 1943,
+      "mean_luma": 12.59217785493827,
+      "std_luma": 31.37067029914647
+    },
+    {
+      "frame": 1944,
+      "mean_luma": 19.632155671296296,
+      "std_luma": 40.767477543650685
+    },
+    {
+      "frame": 2015,
+      "mean_luma": 16.18016300154321,
+      "std_luma": 37.51237237787463
+    },
+    {
+      "frame": 2016,
+      "mean_luma": 10.485483699845679,
+      "std_luma": 31.43487343484928
+    },
+    {
+      "frame": 2087,
+      "mean_luma": 10.630334201388889,
+      "std_luma": 31.67208853246489
+    },
+    {
+      "frame": 2088,
+      "mean_luma": 13.78640335648148,
+      "std_luma": 45.51760164738527
+    },
+    {
+      "frame": 2159,
+      "mean_luma": 13.732613329475308,
+      "std_luma": 45.504786834301804
+    }
+  ],
+  "audio_measurements": {
+    "linear_trim_db": -0.7599999999999998,
+    "measured_lufs": -14.0,
+    "measured_true_peak_dbtp": -2.01,
+    "measured_lra": 4.7
+  }
+}

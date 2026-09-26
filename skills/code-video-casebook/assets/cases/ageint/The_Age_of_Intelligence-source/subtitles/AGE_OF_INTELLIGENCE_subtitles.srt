@@ -1,0 +1,139 @@
+1
+00:00:00,233 --> 00:00:07,467
+1950 — Alan Turing asks: “Can machines think?”
+1950年，艾伦·图灵提问：“机器能思考吗？”
+
+2
+00:00:07,467 --> 00:00:09,333
+1956 — Dartmouth: AI becomes a field.
+1956年，达特茅斯会议：AI成为一门学科。
+
+3
+00:00:09,333 --> 00:00:11,200
+1958 — The Perceptron learns from examples.
+1958年，感知机学会从样本中学习。
+
+4
+00:00:11,200 --> 00:00:13,067
+1986 — Backprop: networks learn from mistakes.
+1986年，反向传播：网络从错误中学习。
+
+5
+00:00:13,067 --> 00:00:14,933
+1997 — Deep Blue beats Kasparov at chess.
+1997年，“深蓝”击败国际象棋冠军卡斯帕罗夫。
+
+6
+00:00:14,933 --> 00:00:16,800
+2012 — AlexNet: ImageNet error 26% → 15%.
+2012年，AlexNet：ImageNet错误率26%→15%。
+
+7
+00:00:16,800 --> 00:00:18,667
+2016 — AlphaGo beats Lee Sedol 4–1.
+2016年，AlphaGo以4:1战胜李世石。
+
+8
+00:00:18,667 --> 00:00:20,533
+2017 — The Transformer is born.
+2017年，Transformer诞生。
+
+9
+00:00:20,533 --> 00:00:22,400
+2020 — GPT-3: 175 billion parameters.
+2020年，GPT-3：1750亿参数。
+
+10
+00:00:22,400 --> 00:00:24,267
+2022 — ChatGPT: ~100M users in 2 months (est.)
+2022年，ChatGPT两个月用户约1亿（估算）。
+
+11
+00:00:24,267 --> 00:00:28,000
+It reads. It writes. It sees. It codes.
+它会读、会写、会看、会编程。
+
+12
+00:00:28,000 --> 00:00:29,867
+But how does it actually think?
+但它究竟是怎么“思考”的？
+
+13
+00:00:30,800 --> 00:00:33,600
+① Text is chopped into tokens — numbers the model can read.
+① 文本被切成token——模型能读懂的数字。
+
+14
+00:00:33,600 --> 00:00:37,333
+② Each token becomes a vector. Meaning becomes geometry.
+② 每个token都变成一个向量，意义变成了几何。
+
+15
+00:00:37,333 --> 00:00:41,067
+③ Attention: every word looks at every other word for context.
+③ 注意力：每个词都会关注其他所有词，寻找上下文。
+
+16
+00:00:41,067 --> 00:00:44,800
+④ Predict the next token. Then the next. Again and again.
+④ 预测下一个token，再下一个，周而复始。
+
+17
+00:00:44,800 --> 00:00:48,533
+More data. More compute. New abilities emerge.
+更多数据，更多算力，新的能力不断涌现。
+
+18
+00:00:48,533 --> 00:00:52,267
+Frontier training compute has grown about 4–5× per year.
+前沿模型的训练算力，大约每年增长4到5倍。
+
+19
+00:00:52,267 --> 00:00:56,000
+So the question has changed.
+于是，问题变了。
+
+20
+00:00:56,000 --> 00:00:59,733
+Not “Can it think?” — but “What can it do?”
+不再是“它能思考吗？”，而是“它能做什么？”
+
+21
+00:00:59,733 --> 00:01:03,467
+It writes and tests code. It sees. It listens and speaks.
+它能写代码、跑测试，能看，能听，也能说。
+
+22
+00:01:03,467 --> 00:01:05,333
+AlphaFold: 200M+ protein structures predicted.
+AlphaFold：已预测超过2亿种蛋白质结构。
+
+23
+00:01:05,333 --> 00:01:07,200
+2024 — Two Nobel Prizes honor AI breakthroughs.
+2024年，两项诺贝尔奖授予AI相关突破。
+
+24
+00:01:07,200 --> 00:01:09,067
+Diffusion models turn pure noise into images.
+扩散模型能把纯噪声变成图像。
+
+25
+00:01:09,067 --> 00:01:10,933
+Agents plan, use tools, and finish multi-step tasks.
+智能体会规划、调用工具，完成多步骤任务。
+
+26
+00:01:10,933 --> 00:01:14,667
+In labs, classrooms, hospitals and studios — everywhere.
+在实验室、课堂、医院和工作室——无处不在。
+
+27
+00:01:14,667 --> 00:01:22,133
+AI amplifies whoever uses it.
+AI会放大每一个使用它的人。
+
+28
+00:01:22,133 --> 00:01:25,867
+The question is no longer “Can machines think?”
+问题不再是“机器能思考吗？”

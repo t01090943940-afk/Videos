@@ -1,0 +1,982 @@
+{
+ "id": "studio",
+ "title": "Loft studio — six developers, one sandbox",
+ "variants": [
+  "day",
+  "night"
+ ],
+ "state": {
+  "hold.mug": "home",
+  "hold.sheet": "home",
+  "hold.stylus": "yu.R",
+  "hold.can": "home",
+  "rin.pour": false,
+  "plant.watered": false
+ },
+ "holdables": {
+  "mug": {
+   "desk": "desk2",
+   "home": "mug_home"
+  },
+  "sheet": {
+   "desk": "desk3",
+   "home": "sheet_home"
+  },
+  "stylus": {
+   "desk": "desk4",
+   "home": "tablet"
+  },
+  "can": {
+   "desk": "desk6",
+   "home": "can_home"
+  }
+ },
+ "desks": {
+  "desk1": {
+   "x": -5.5,
+   "z": 0.4,
+   "actor": "kai",
+   "chair": "#2f5d62",
+   "items": [
+    {
+     "type": "desk",
+     "at": [
+      0,
+      0
+     ]
+    },
+    {
+     "type": "monitor",
+     "at": [
+      0,
+      0.18
+     ],
+     "params": {
+      "screen": 1
+     }
+    },
+    {
+     "type": "keyboard",
+     "at": [
+      0,
+      -0.23
+     ]
+    },
+    {
+     "type": "lamp",
+     "at": [
+      -0.64,
+      0.26
+     ]
+    },
+    {
+     "type": "cubeToy",
+     "at": [
+      0.6,
+      0.05
+     ]
+    },
+    {
+     "type": "speaker",
+     "at": [
+      -0.5,
+      0.25
+     ]
+    },
+    {
+     "type": "mug",
+     "at": [
+      -0.46,
+      -0.18
+     ],
+     "params": {
+      "color": "#57b36a"
+     }
+    },
+    {
+     "type": "mouse",
+     "at": [
+      0.4,
+      -0.2
+     ]
+    }
+   ]
+  },
+  "desk2": {
+   "x": -3.3,
+   "z": 0.4,
+   "actor": "mia",
+   "chair": "#b5652b",
+   "items": [
+    {
+     "type": "desk",
+     "at": [
+      0,
+      0
+     ]
+    },
+    {
+     "type": "monitor",
+     "at": [
+      0,
+      0.18
+     ],
+     "params": {
+      "screen": 2
+     }
+    },
+    {
+     "type": "keyboard",
+     "at": [
+      0,
+      -0.23
+     ]
+    },
+    {
+     "type": "lamp",
+     "at": [
+      -0.64,
+      0.26
+     ]
+    },
+    {
+     "type": "mug",
+     "at": [
+      0.42,
+      -0.14
+     ],
+     "params": {
+      "color": "#e0663f",
+      "holdable": true
+     }
+    },
+    {
+     "type": "plant",
+     "at": [
+      -0.6,
+      0.05
+     ],
+     "params": {
+      "size": 0.9,
+      "seed": 5
+     },
+     "y": 0.75
+    },
+    {
+     "type": "mouse",
+     "at": [
+      0.66,
+      -0.2
+     ]
+    }
+   ]
+  },
+  "desk3": {
+   "x": -1.1,
+   "z": 0.4,
+   "actor": "leo",
+   "chair": "#8a2f2a",
+   "items": [
+    {
+     "type": "desk",
+     "at": [
+      0,
+      0
+     ]
+    },
+    {
+     "type": "monitor",
+     "at": [
+      0,
+      0.18
+     ],
+     "params": {
+      "screen": 3
+     }
+    },
+    {
+     "type": "keyboard",
+     "at": [
+      0,
+      -0.23
+     ]
+    },
+    {
+     "type": "lamp",
+     "at": [
+      -0.64,
+      0.26
+     ]
+    },
+    {
+     "type": "paperStack",
+     "at": [
+      0.52,
+      -0.08
+     ],
+     "params": {
+      "holdable": true
+     }
+    },
+    {
+     "type": "mug",
+     "at": [
+      -0.5,
+      -0.18
+     ],
+     "params": {
+      "color": "#3f9ad6"
+     }
+    },
+    {
+     "type": "stickyNotes",
+     "at": [
+      -0.62,
+      0.3
+     ]
+    }
+   ]
+  },
+  "desk4": {
+   "x": 1.1,
+   "z": 0.4,
+   "actor": "yu",
+   "chair": "#50535c",
+   "items": [
+    {
+     "type": "desk",
+     "at": [
+      0,
+      0
+     ]
+    },
+    {
+     "type": "monitor",
+     "at": [
+      0,
+      0.18
+     ],
+     "params": {
+      "screen": 4
+     }
+    },
+    {
+     "type": "keyboard",
+     "at": [
+      -0.28,
+      -0.2
+     ]
+    },
+    {
+     "type": "lamp",
+     "at": [
+      -0.64,
+      0.26
+     ]
+    },
+    {
+     "type": "tablet",
+     "at": [
+      0.3,
+      -0.2
+     ]
+    },
+    {
+     "type": "brushJar",
+     "at": [
+      -0.6,
+      0.15
+     ]
+    }
+   ]
+  },
+  "desk5": {
+   "x": 3.3,
+   "z": 0.4,
+   "actor": "nova",
+   "chair": "#3a2f5a",
+   "items": [
+    {
+     "type": "desk",
+     "at": [
+      0,
+      0
+     ]
+    },
+    {
+     "type": "monitor",
+     "at": [
+      0,
+      0.18
+     ],
+     "params": {
+      "screen": 5
+     }
+    },
+    {
+     "type": "keyboard",
+     "at": [
+      0,
+      -0.23
+     ]
+    },
+    {
+     "type": "lamp",
+     "at": [
+      -0.64,
+      0.26
+     ]
+    },
+    {
+     "type": "neonSign",
+     "at": [
+      -0.5,
+      0.22
+     ]
+    },
+    {
+     "type": "can",
+     "at": [
+      0.55,
+      0.05
+     ]
+    },
+    {
+     "type": "mouse",
+     "at": [
+      0.42,
+      -0.2
+     ]
+    }
+   ]
+  },
+  "desk6": {
+   "x": 5.5,
+   "z": 0.4,
+   "actor": "rin",
+   "chair": "#6b8f7d",
+   "items": [
+    {
+     "type": "desk",
+     "at": [
+      0,
+      0
+     ]
+    },
+    {
+     "type": "monitor",
+     "at": [
+      0,
+      0.18
+     ],
+     "params": {
+      "screen": 6
+     }
+    },
+    {
+     "type": "keyboard",
+     "at": [
+      -0.2,
+      -0.23
+     ]
+    },
+    {
+     "type": "lamp",
+     "at": [
+      -0.64,
+      0.26
+     ]
+    },
+    {
+     "type": "plant",
+     "at": [
+      0.46,
+      -0.08
+     ],
+     "params": {
+      "size": 1.35,
+      "seed": 9
+     },
+     "y": 0.75
+    },
+    {
+     "type": "wateringCan",
+     "at": [
+      0.66,
+      -0.3
+     ]
+    },
+    {
+     "type": "brushJar",
+     "at": [
+      -0.58,
+      0.12
+     ]
+    }
+   ]
+  }
+ },
+ "marks": {
+  "desk1.seat": {
+   "pos": [
+    -5.5,
+    0,
+    -0.16
+   ],
+   "yaw": 0
+  },
+  "desk2.seat": {
+   "pos": [
+    -3.3,
+    0,
+    -0.16
+   ],
+   "yaw": 0
+  },
+  "desk3.seat": {
+   "pos": [
+    -1.1,
+    0,
+    -0.16
+   ],
+   "yaw": 0
+  },
+  "desk4.seat": {
+   "pos": [
+    1.1,
+    0,
+    -0.16
+   ],
+   "yaw": 0
+  },
+  "desk5.seat": {
+   "pos": [
+    3.3,
+    0,
+    -0.16
+   ],
+   "yaw": 0
+  },
+  "desk6.seat": {
+   "pos": [
+    5.5,
+    0,
+    -0.16
+   ],
+   "yaw": 0
+  }
+ },
+ "cameras": [
+  {
+   "id": "CAM_EST",
+   "role": "establishing",
+   "fov": 42,
+   "from": {
+    "pos": [
+     7.4,
+     3.6,
+     -4.4
+    ],
+    "target": [
+     -1.6,
+     0.9,
+     0.6
+    ]
+   },
+   "to": {
+    "pos": [
+     5.6,
+     2.8,
+     -3.4
+    ],
+    "target": [
+     -1.2,
+     1.0,
+     0.6
+    ]
+   }
+  },
+  {
+   "id": "CAM_END",
+   "role": "ending",
+   "fov": 40,
+   "from": {
+    "pos": [
+     0.2,
+     2.6,
+     7.8
+    ],
+    "target": [
+     0,
+     1.2,
+     0
+    ]
+   },
+   "to": {
+    "pos": [
+     0,
+     4.6,
+     12.5
+    ],
+    "target": [
+     0,
+     1.0,
+     -0.5
+    ]
+   }
+  },
+  {
+   "id": "CAM_THUMB",
+   "role": "monitor-content",
+   "fov": 46,
+   "from": {
+    "pos": [
+     3.6,
+     2.1,
+     4.2
+    ],
+    "target": [
+     -1.2,
+     1.0,
+     -0.8
+    ]
+   }
+  },
+  {
+   "id": "CAM_KAI_FRONT",
+   "role": "character",
+   "fov": 38,
+   "from": {
+    "pos": [
+     -3.35,
+     1.72,
+     1.55
+    ],
+    "target": [
+     -5.58,
+     1.12,
+     -0.12
+    ]
+   },
+   "to": {
+    "pos": [
+     -3.7,
+     1.62,
+     1.28
+    ],
+    "target": [
+     -5.55,
+     1.12,
+     -0.12
+    ]
+   }
+  },
+  {
+   "id": "CAM_KAI_OTS",
+   "role": "over-shoulder",
+   "fov": 40,
+   "from": {
+    "pos": [
+     -4.1,
+     1.78,
+     -1.7
+    ],
+    "target": [
+     -5.3,
+     1.0,
+     0.58
+    ]
+   },
+   "to": {
+    "pos": [
+     -4.28,
+     1.7,
+     -1.45
+    ],
+    "target": [
+     -5.32,
+     1.0,
+     0.58
+    ]
+   }
+  },
+  {
+   "id": "CAM_MIA_FRONT",
+   "role": "character",
+   "fov": 38,
+   "from": {
+    "pos": [
+     -1.15,
+     1.72,
+     1.55
+    ],
+    "target": [
+     -3.38,
+     1.12,
+     -0.12
+    ]
+   },
+   "to": {
+    "pos": [
+     -1.5,
+     1.62,
+     1.28
+    ],
+    "target": [
+     -3.35,
+     1.12,
+     -0.12
+    ]
+   }
+  },
+  {
+   "id": "CAM_MIA_OTS",
+   "role": "over-shoulder",
+   "fov": 40,
+   "from": {
+    "pos": [
+     -1.9,
+     1.78,
+     -1.7
+    ],
+    "target": [
+     -3.1,
+     1.0,
+     0.58
+    ]
+   },
+   "to": {
+    "pos": [
+     -2.08,
+     1.7,
+     -1.45
+    ],
+    "target": [
+     -3.12,
+     1.0,
+     0.58
+    ]
+   }
+  },
+  {
+   "id": "CAM_LEO_FRONT",
+   "role": "character",
+   "fov": 38,
+   "from": {
+    "pos": [
+     1.05,
+     1.72,
+     1.55
+    ],
+    "target": [
+     -1.18,
+     1.12,
+     -0.12
+    ]
+   },
+   "to": {
+    "pos": [
+     0.7,
+     1.62,
+     1.28
+    ],
+    "target": [
+     -1.15,
+     1.12,
+     -0.12
+    ]
+   }
+  },
+  {
+   "id": "CAM_LEO_OTS",
+   "role": "over-shoulder",
+   "fov": 40,
+   "from": {
+    "pos": [
+     0.3,
+     1.78,
+     -1.7
+    ],
+    "target": [
+     -0.9,
+     1.0,
+     0.58
+    ]
+   },
+   "to": {
+    "pos": [
+     0.12,
+     1.7,
+     -1.45
+    ],
+    "target": [
+     -0.92,
+     1.0,
+     0.58
+    ]
+   }
+  },
+  {
+   "id": "CAM_YU_FRONT",
+   "role": "character",
+   "fov": 38,
+   "from": {
+    "pos": [
+     3.25,
+     1.72,
+     1.55
+    ],
+    "target": [
+     1.02,
+     1.12,
+     -0.12
+    ]
+   },
+   "to": {
+    "pos": [
+     2.9,
+     1.62,
+     1.28
+    ],
+    "target": [
+     1.05,
+     1.12,
+     -0.12
+    ]
+   }
+  },
+  {
+   "id": "CAM_YU_OTS",
+   "role": "over-shoulder",
+   "fov": 40,
+   "from": {
+    "pos": [
+     2.5,
+     1.78,
+     -1.7
+    ],
+    "target": [
+     1.3,
+     1.0,
+     0.58
+    ]
+   },
+   "to": {
+    "pos": [
+     2.32,
+     1.7,
+     -1.45
+    ],
+    "target": [
+     1.28,
+     1.0,
+     0.58
+    ]
+   }
+  },
+  {
+   "id": "CAM_NOVA_FRONT",
+   "role": "character",
+   "fov": 38,
+   "from": {
+    "pos": [
+     5.45,
+     1.72,
+     1.55
+    ],
+    "target": [
+     3.22,
+     1.12,
+     -0.12
+    ]
+   },
+   "to": {
+    "pos": [
+     5.1,
+     1.62,
+     1.28
+    ],
+    "target": [
+     3.25,
+     1.12,
+     -0.12
+    ]
+   }
+  },
+  {
+   "id": "CAM_NOVA_OTS",
+   "role": "over-shoulder",
+   "fov": 40,
+   "from": {
+    "pos": [
+     4.7,
+     1.78,
+     -1.7
+    ],
+    "target": [
+     3.5,
+     1.0,
+     0.58
+    ]
+   },
+   "to": {
+    "pos": [
+     4.52,
+     1.7,
+     -1.45
+    ],
+    "target": [
+     3.48,
+     1.0,
+     0.58
+    ]
+   }
+  },
+  {
+   "id": "CAM_RIN_FRONT",
+   "role": "character",
+   "fov": 38,
+   "from": {
+    "pos": [
+     7.65,
+     1.72,
+     1.55
+    ],
+    "target": [
+     5.42,
+     1.12,
+     -0.12
+    ]
+   },
+   "to": {
+    "pos": [
+     7.3,
+     1.62,
+     1.28
+    ],
+    "target": [
+     5.45,
+     1.12,
+     -0.12
+    ]
+   }
+  },
+  {
+   "id": "CAM_RIN_OTS",
+   "role": "over-shoulder",
+   "fov": 40,
+   "from": {
+    "pos": [
+     6.9,
+     1.78,
+     -1.7
+    ],
+    "target": [
+     5.7,
+     1.0,
+     0.58
+    ]
+   },
+   "to": {
+    "pos": [
+     6.72,
+     1.7,
+     -1.45
+    ],
+    "target": [
+     5.68,
+     1.0,
+     0.58
+    ]
+   }
+  }
+ ],
+ "actors": {
+  "kai": {
+   "name": "阿凯 Kai",
+   "costume": {
+    "skin": "#e2b08a",
+    "hair": "#1d1a17",
+    "top": "#2f8f83",
+    "bottom": "#3b3f4a",
+    "hairStyle": "beanie"
+   },
+   "mark": "desk1.seat",
+   "desk": "desk1",
+   "seated": true,
+   "ambient": "typing"
+  },
+  "mia": {
+   "name": "米娅 Mia",
+   "costume": {
+    "skin": "#f0c09a",
+    "hair": "#6b3b25",
+    "top": "#e3a33a",
+    "bottom": "#4f6d8a",
+    "hairStyle": "bun"
+   },
+   "mark": "desk2.seat",
+   "desk": "desk2",
+   "seated": true,
+   "ambient": "typing"
+  },
+  "leo": {
+   "name": "李奥 Leo",
+   "costume": {
+    "skin": "#d49a74",
+    "hair": "#2a1e18",
+    "top": "#c8423a",
+    "bottom": "#2d3340",
+    "hairStyle": "short",
+    "glasses": true
+   },
+   "mark": "desk3.seat",
+   "desk": "desk3",
+   "seated": true,
+   "ambient": "typing"
+  },
+  "yu": {
+   "name": "小雨 Yu",
+   "costume": {
+    "skin": "#f2cdb0",
+    "hair": "#121212",
+    "top": "#eeece6",
+    "bottom": "#3a3a3a",
+    "hairStyle": "long"
+   },
+   "mark": "desk4.seat",
+   "desk": "desk4",
+   "seated": true,
+   "ambient": "typing"
+  },
+  "nova": {
+   "name": "诺娃 Nova",
+   "costume": {
+    "skin": "#c98e6c",
+    "hair": "#ff5fb0",
+    "top": "#232033",
+    "bottom": "#262234",
+    "hairStyle": "spiky",
+    "headphones": true
+   },
+   "mark": "desk5.seat",
+   "desk": "desk5",
+   "seated": true,
+   "ambient": "typing"
+  },
+  "rin": {
+   "name": "琳 Rin",
+   "costume": {
+    "skin": "#f3d0b5",
+    "hair": "#3a2a22",
+    "top": "#8fc4ae",
+    "bottom": "#6f6488",
+    "hairStyle": "short"
+   },
+   "mark": "desk6.seat",
+   "desk": "desk6",
+   "seated": true,
+   "ambient": "typing"
+  }
+ }
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: 'Anton'; src: url('fonts/Anton.ttf'); }
+@font-face { font-family: 'ArchivoBlack'; src: url('fonts/ArchivoBlack.ttf'); }
+@font-face { font-family: 'SpaceGrotesk'; src: url('fonts/SpaceGrotesk.ttf'); }
+@font-face { font-family: 'NotoBlack'; src: url('file:///usr/share/fonts/opentype/noto/NotoSansCJK-Black.ttc'); }
+@font-face { font-family: 'NotoSerifBlack'; src: url('file:///usr/share/fonts/opentype/noto/NotoSerifCJK-Black.ttc'); }
+@font-face { font-family: 'JetMono'; src: url('file:///usr/share/fonts/truetype/jetbrains-mono/JetBrainsMono-ExtraBold.ttf'); }
+@font-face { font-family: 'JetMonoReg'; src: url('file:///usr/share/fonts/truetype/jetbrains-mono/JetBrainsMono-Regular.ttf'); }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1920px; height:1080px; overflow:hidden; background:#000;
+  font-family:'SpaceGrotesk',sans-serif; }
+#bg { position:absolute; inset:0; z-index:0; }
+#stageA,#stageB { position:absolute; inset:0; z-index:1; }
+#stageB { z-index:0; }
+#fx { position:absolute; inset:0; z-index:3; pointer-events:none; }
+#scan { position:absolute; inset:0; z-index:4; pointer-events:none;
+  background:repeating-linear-gradient(0deg, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,.16) 3px, rgba(0,0,0,0) 4px); }
+#grain { position:absolute; inset:0; width:1920px; height:1080px; z-index:5; pointer-events:none; image-rendering:pixelated; }
+#vig { position:absolute; inset:0; z-index:6; pointer-events:none;
+  background:radial-gradient(ellipse 130% 110% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%); }
+#hud { position:absolute; inset:0; z-index:7; pointer-events:none; font-family:'JetMonoReg',monospace; }
+#lb { position:absolute; inset:0; z-index:8; pointer-events:none; }
+#lb .bar { position:absolute; left:0; right:0; height:56px; background:#000; }
+#lb .top { top:0; } #lb .bot { bottom:0; }
+#flash { position:absolute; inset:0; z-index:9; pointer-events:none; background:#fff; opacity:0; }
+hud-el { position:absolute; font-family:'JetMonoReg'; }
+</style>
+</head>
+<body>
+<canvas id="bg" width="1920" height="1080"></canvas>
+<div id="stageB"></div>
+<div id="stageA"></div>
+<canvas id="fx" width="1920" height="1080"></canvas>
+<div id="scan"></div>
+<canvas id="grain" width="960" height="540"></canvas>
+<div id="vig"></div>
+<div id="hud"></div>
+<div id="lb"><div class="bar top"></div><div class="bar bot"></div></div>
+<div id="flash"></div>
+<script src="timeline.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

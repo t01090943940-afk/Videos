@@ -1,0 +1,31 @@
+[aist#0:0/pcm_s24le @ 0x5603793c5f80] Guessed Channel Layout: stereo
+Input #0, wav, from '/mnt/data/moon60/final_project/assets/score60_raw.wav':
+  Duration: 00:01:00.00, bitrate: 2116 kb/s
+  Stream #0:0: Audio: pcm_s24le ([1][0][0][0] / 0x0001), 44100 Hz, stereo, s32 (24 bit), 2116 kb/s
+Stream mapping:
+  Stream #0:0 -> #0:0 (pcm_s24le (native) -> pcm_s24le (native))
+Press [q] to stop, [?] for help
+Output #0, wav, to '/mnt/data/moon60/final_project/assets/score60_master_tmp.wav':
+  Metadata:
+    ISFT            : Lavf61.7.103
+  Stream #0:0: Audio: pcm_s24le ([1][0][0][0] / 0x0001), 48000 Hz, stereo, s32 (24 bit), 2304 kb/s
+      Metadata:
+        encoder         : Lavc61.19.101 pcm_s24le
+size=    4864KiB time=00:00:17.89 bitrate=2226.1kbits/s speed=35.8x    
+size=   10240KiB time=00:00:36.79 bitrate=2279.5kbits/s speed=36.8x    
+size=   15360KiB time=00:00:55.59 bitrate=2263.1kbits/s speed=37.1x    
+[Parsed_loudnorm_0 @ 0x7fdd4c002ec0] 
+{
+	"input_i" : "-31.44",
+	"input_tp" : "-15.58",
+	"input_lra" : "5.70",
+	"input_thresh" : "-41.59",
+	"output_i" : "-15.99",
+	"output_tp" : "-1.30",
+	"output_lra" : "4.30",
+	"output_thresh" : "-26.11",
+	"normalization_type" : "dynamic",
+	"target_offset" : "-0.01"
+}
+[out#0/wav @ 0x5603793c6140] video:0KiB audio:16875KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.000590%
+size=   16875KiB time=00:01:00.00 bitrate=2304.0kbits/s speed=37.5x    

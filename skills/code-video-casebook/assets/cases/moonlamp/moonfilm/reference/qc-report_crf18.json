@@ -1,0 +1,81 @@
+{
+  "status": "pass",
+  "started": "2026-09-25 04:26:08",
+  "checks": {
+    "preflight.frames": {
+      "ok": true,
+      "total": 672,
+      "missing": 0,
+      "first_missing": []
+    },
+    "preflight.audio": {
+      "ok": true,
+      "audio_s": 28.0,
+      "picture_s": 28.0
+    },
+    "assemble": {
+      "ok": true,
+      "seconds": 91.8,
+      "bytes": 29183634
+    },
+    "probe": {
+      "ok": true,
+      "vcodec": "h264",
+      "pix_fmt": "yuv420p",
+      "size": "1920x1080",
+      "fps": 24.0,
+      "frames": 672,
+      "range": "tv",
+      "matrix": "bt709",
+      "primaries": "bt709",
+      "trc": "bt709",
+      "acodec": "aac",
+      "ar": "48000",
+      "duration": 28.0
+    },
+    "faststart": {
+      "ok": true
+    },
+    "decode": {
+      "ok": true,
+      "stderr": ""
+    },
+    "freeze": {
+      "ok": true,
+      "threshold_s": 0.4,
+      "found": []
+    },
+    "black": {
+      "ok": true,
+      "found": []
+    },
+    "loudness": {
+      "ok": true,
+      "integrated_lufs": -16.08,
+      "true_peak_dbtp": -2.6,
+      "lra": 4.9
+    },
+    "acting.penetration": {
+      "ok": true,
+      "frames_with_penetration": 0,
+      "first": []
+    },
+    "acting.surface_contacts": {
+      "ok": true,
+      "n": 1247,
+      "deepest_m": 0.0025
+    },
+    "acting.exact_reach": {
+      "ok": true,
+      "n": 154,
+      "worst_gap_m": 0.0159
+    },
+    "stepping": {
+      "ok": true,
+      "runs": 663,
+      "irregular_runs": 0
+    }
+  },
+  "failed": [],
+  "finished": "2026-09-25 04:27:55"
+}
