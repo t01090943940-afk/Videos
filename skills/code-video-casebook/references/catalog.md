@@ -29,7 +29,6 @@
 | [beyond](cases/beyond/CARD.md) | AI · Beyond Generation | GPT | 1080p30 · 120s | Python + pycairo + 原生 GL | ✅ | 15 个世界 = 15 条原则 × 15 种风格 |
 | [gpt-autumn](cases/gpt-autumn/CARD.md) | 把日子，慢慢过圆 | GPT | 1080p60 · 60s | pycairo + MIDI/FluidSynth | ✅ | 21 镜，每个时代换一种材质 |
 | [moon-letter](cases/moon-letter/CARD.md) | 月光信笺 | GPT | 竖屏 1080×1920 · 29s | 单文件 HTML Canvas | ✅ | 可交互 HTML 与成片同源 |
-| [shatter](cases/shatter/CARD.md) | 碎月重圆 | Opus | 1080p30 · 30s | numpy + OpenCV + MediaPipe | 📄 | 自写 3D 合成器、抠像拆层、23 万粒子 |
 | [oneink](cases/oneink/CARD.md) | 一畫 | Opus | 1080p30 · 60.5s | Canvas2D + WebGL2 + hanzi-writer | ✅ | 按笔顺写书法，手卷一镜到底 |
 | [dingge](cases/dingge/CARD.md) | 定格 · 工地安全 | Opus | 1080p24 · 87s | TypeScript + Three.js r186 | ✅ | 写实定格动画，瑞士奶酪模型叙事 |
 | [claude15](cases/claude15/CARD.md) | Claude 自我介绍 · 15 种画风 | Opus | 1080p30 · 114s | skia-python | ✅ | 拉片表驱动，15 画风一条叙事线 |
@@ -46,7 +45,6 @@
 | [shuchenglin](cases/shuchenglin/CARD.md) | 树成林 | Opus | 1080p30 · 60s | librosa + 虚拟时间录屏 + Canvas | ✅ | 卡点靠坐标，只在同一小节位置剪歌 |
 | [stopmotion](cases/stopmotion/CARD.md) | stop-motion-3d Skill | Opus | 720p24 · 60s | TS + Three.js，7 条画风管线 | 🧰✅ | 搭一次世界，拍任何画风 |
 | [samemoon](cases/samemoon/CARD.md) | 同一个月亮 | Opus | 1080p30 · 120s | 单文件 Canvas + Web Audio | 📄 | 854 行 HTML，两个半月拼成满月 |
-| [gongcishi](cases/gongcishi/CARD.md) | 共此时 | Opus | 1080p30 · 180s | Python 14 文件 + 真实素材 | 📄 | 217 份真实照片视频，机器看片 + 人工看片 |
 | [moonlamp](cases/moonlamp/CARD.md) | 月光替你亮着灯 | Opus | 1080p24 · 28s | Three.js + 水彩 GLSL | ✅ | 真 3D 一镜到底，月夜水彩 |
 | [readclub](cases/readclub/CARD.md) | 慢下来（读书会） | Opus | 竖屏 1080×1920 · 37s | 单 HTML Canvas + Web Audio | ✅ | 一个 HTML 同时生成画面和音乐 |
 | [senpai](cases/senpai/CARD.md) | 中秋 · 给学姐 | Opus | 竖屏 1080×1920 · 29s | Canvas2D + numpy | 📄 | render(t) 纯函数，局部重渲 |
@@ -63,7 +61,7 @@
 | **AI 产品，要展示流式回答** | `studysolo` | `skillshub` | 页面内伪造 SSE 流逐 chunk 截图 |
 | **协议 / 方法论 / skill 介绍（抽象概念）** | `phasegate` | `beyond`、`codecosmos` | 形式承载内容：阶段 = 画风升维 |
 | **社团 / 组织 / 社群宣传、招新** | `protocom`、`shuchenglin` | `readclub`、`hust1037` | 母题 + 真实成员与数据 + 行动号召 |
-| **学校 / 机构 / 群像** | `hust1037` | `protocom`、`gongcishi` | 一个符号替代真人 |
+| **学校 / 机构 / 群像** | `hust1037` | `protocom`| 一个符号替代真人 |
 | **公司 / 品牌发展史** | `kimi-film` | `ageint`、`xuanlan` | 编年 + 视觉母题 + 听觉母题 |
 | **自我介绍 / 品牌人格** | `claude15` | `yusheng` | 一条叙事线 + 多画风 |
 | **个人博客 / 作品集 / 个人品牌** | `yusheng` | `supercut` | 前段讲人，后段每拍一件作品 |
@@ -73,10 +71,8 @@
 | **软件教学 / 工具讲解** | `f12` | `town-camera-lab` | 仿真 UI + 信息栏 + 按拍要点 |
 | **摄影 / 运镜教学、分镜预演** | `town-camera-lab` | `dingge` | 13 种运镜参数化 + 物理相机 |
 | **安全教育 / 公益 / 剧情短片** | `dingge` | `stopmotion` | 写实定格、表演 Take、镜头即数据 |
-| **节日片（面向大众）** | `samemoon`、`gpt-autumn` | `oneink`、`gongcishi` | 快-停-慢、历史穿越、祝福 |
+| **节日片（面向大众）** | `samemoon`、`gpt-autumn` | `oneink`| 快-停-慢、历史穿越、祝福 |
 | **送给某个人的祝福（中秋等）** | `moonlamp`、`senpai` | `moon-letter`、`readclub` | 情绪句先行、让对方成为画面主角 |
-| **班级 / 毕业 / 回忆（真实照片视频）** | `gongcishi` | `shatter` | 先看完全部素材、线索表、原声接管 |
-| **照片素材做 AE 级特效** | `shatter` | `gongcishi` | 自写 3D 合成器、抠像 2.5D |
 | **中国传统文化 / 书法 / 古诗** | `oneink` | `gpt-autumn`、`samemoon` | 按笔顺写字、着色器墨、古琴合成 |
 | **风格合集 / "N 种画风"** | `cosmos30`、`codecosmos`、`claude15` | `beyond`、`protocom`、`stopmotion` | 统一外壳、多变内核 |
 | **动画系列 / 漫剧（同一世界多集）** | `stopmotion` | `dingge`、`moonlamp` | World/Episode/Look/Delivery 四层 |
@@ -88,10 +84,10 @@
 |---|---|
 | **竖屏 9:16** | `readclub`（37s）、`moon-letter`（29s）、`senpai`（29s） |
 | **宽银幕 / 遮幅叙事** | `kimi-film`（2.35:1 全片）、`skillshub`（2.39:1 → 满幅）、`xuanlan`（2.39 ↔ 16:9 开合）、`yusheng`（2.35 开合）、`supercut`（凝视段黑边） |
-| **≤ 30 秒** | `moonlamp` 28、`senpai` 29、`moon-letter` 29、`yusheng` 30、`phasegate` 30、`shatter` 30 |
+| **≤ 30 秒** | `moonlamp` 28、`senpai` 29、`moon-letter` 29、`yusheng` 30、`phasegate` 30|
 | **40–60 秒** | `ai-rise` 40、`kimi-beat` 51、`xuanlan` 55、`kimi-film` 56、`skillshub` 57、`studysolo` 57、`gpt-autumn` 60、`f12` 60、`oneink` 60.5、`shuchenglin` 60、`stopmotion` 60、`supercut` 62.4 |
 | **60–100 秒** | `codecosmos` 68、`cosmos30` 72、`protocom` 80、`dingge` 87、`ageint` 92 |
-| **≥ 100 秒** | `hust1037` 110、`claude15` 114、`beyond` 120、`samemoon` 120、`gongcishi` 180 |
+| **≥ 100 秒** | `hust1037` 110、`claude15` 114、`beyond` 120、`samemoon` 120|
 | **60fps 交付** | `gpt-autumn`、`skillshub`、`studysolo`、`yusheng`、`xuanlan`、`ageint`、`protocom`、`phasegate`、`supercut` |
 | **24fps / 定格节奏** | `dingge`（on twos）、`moonlamp`、`codecosmos`（12→24）、`stopmotion`（8/12 步进）、`cosmos30`（30fps 输出、10Hz 姿态） |
 
@@ -102,7 +98,7 @@
 | 栈 | 案例 | 适合 |
 |---|---|---|
 | **纯 Python：numpy / Pillow 逐像素** | `kimi-film`、`senpai`（音频） | 零依赖、可多进程、完全可控 |
-| **Python + OpenCV（抗锯齿、仿射、透视）** | `ageint`、`shatter`、`gongcishi` | 大量镜头、照片素材、3D 投影点云 |
+| **Python + OpenCV（抗锯齿、仿射、透视）** | `ageint`| 大量镜头、照片素材、3D 投影点云 |
 | **Python + pycairo** | `gpt-autumn`、`beyond`（2D 部分） | 矢量插画、2.5D |
 | **Python + skia-python** | `claude15` | 高质量 2D、离屏 surface 做转场 |
 | **Python + 原生 OpenGL / EGL 无头** | `cosmos30`（单 fragment shader）、`beyond`（网格 + 阴影贴图） | 着色器画风、3D，无浏览器 |
@@ -131,10 +127,10 @@
 | **写实 3D / PBR** | `dingge`、`phasegate`（P5 钛金属霓虹）、`town-camera-lab`、`moonlamp` |
 | **着色器抽象（等离子、反应扩散、光线步进、体积）** | `cosmos30`、`codecosmos`、`beyond`（液态铬、棱镜） |
 | **4D / 超立方体** | `protocom`（act4）、`codecosmos`（暴胀）、`cosmos30` |
-| **粒子 / 点云 / 星空** | `shatter`（23 万粒子）、`codecosmos`（7 万点云）、`ageint`（柔光点云 splat）、`oneink`（诗云星河）、`skillshub`（点阵星球）、`protocom`（星座） |
+| **粒子 / 点云 / 星空** |`codecosmos`（7 万点云）、`ageint`（柔光点云 splat）、`oneink`（诗云星河）、`skillshub`（点阵星球）、`protocom`（星座） |
 | **故障 / RGB 分离 / 频闪** | `kimi-beat`、`ai-rise`、`skillshub`、`codecosmos`、`claude15`、`shuchenglin`、`readclub`（B 段） |
 | **真实产品 UI / 仿真界面** | `skillshub`、`f12`、`studysolo`、`xuanlan`、`protocom`（act3） |
-| **照片 / 视频素材** | `gongcishi`、`shatter`、`supercut`、`shuchenglin` |
+| **照片 / 视频素材** |`supercut`、`shuchenglin` |
 | **风格即年代（每个时代换材质）** | `gpt-autumn`、`samemoon`、`xuanlan`（浏览器年代）、`studysolo`（手绘 vs 真实界面） |
 
 ## 6. 按素材来源
@@ -142,7 +138,6 @@
 | 素材 | 案例 | 关键方法 |
 |---|---|---|
 | **零素材，全部代码生成** | 大多数（`kimi-film`、`cosmos30`、`codecosmos`、`oneink`、`claude15`、`ageint`、`hust1037`…） | 程序化纹理、合成配乐 |
-| **真实照片 / 手机视频** | `gongcishi`、`shatter` | 素材普查、MD5 去重、机器看片、抠像拆层 |
 | **真实网页 / 真实应用** | `shuchenglin`、`studysolo`、`supercut`（成片代理） | 虚拟时间录屏、伪造 SSE 流、代理切片 |
 | **真实文档 / 数据** | `skillshub`（扫描报告）、`protocom`（data.js）、`studysolo`（教材 grep）、`yusheng`（博客 frontmatter）、`dingge`（事故统计） | 数字必须可溯源，写下统计命令 |
 | **授权歌曲** | `shuchenglin`、`kimi-beat` | librosa 解剖 → 只在同一小节位置下刀 |
@@ -151,12 +146,11 @@
 
 | 做法 | 案例 |
 |---|---|
-| **numpy/scipy 逐样本合成（无采样）** | 几乎所有 Python/浏览器案例：`kimi-film`、`ageint`、`cosmos30`、`skillshub`、`protocom`、`studysolo`、`yusheng`、`xuanlan`、`oneink`（古琴）、`gongcishi`（古筝/笛）、`codecosmos`、`stopmotion` |
+| **numpy/scipy 逐样本合成（无采样）** | 几乎所有 Python/浏览器案例：`kimi-film`、`ageint`、`cosmos30`、`skillshub`、`protocom`、`studysolo`、`yusheng`、`xuanlan`、`oneink`（古琴）、`codecosmos`、`stopmotion` |
 | **Web Audio（页面内合成，OfflineAudioContext 导出）** | `samemoon`、`readclub`、`dingge` |
 | **程序化 MIDI + FluidSynth** | `gpt-autumn` |
 | **现成歌曲 + 节拍分析** | `kimi-beat`（audiomap）、`shuchenglin`（librosa 重构）、`ai-rise`（按拍剪 BGM） |
 | **声音从画面数据派生（events.json / cues / inspect）** | `oneink`、`studysolo`、`stopmotion`、`moonlamp`、`supercut`、`codecosmos` |
-| **原声接管（真实视频里的声音）** | `gongcishi` |
 | **TTS 旁白** | `ai-rise` |
 
 ## 8. 按约束快速挑选

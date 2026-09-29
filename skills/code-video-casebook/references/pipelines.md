@@ -24,7 +24,7 @@
 几乎每一篇 CoExp 都独立得出了同样的结论，这是整个仓库的"地基"：
 
 1. **画面是时间（或帧号）的纯函数**：`render(t)` / `renderAt(t)` / `renderFrame(F)` / `window.film.frame(f)`。不用 `Date.now()`、不用未设种子的 `Math.random()`、不用 CSS transition/animation、不依赖上一帧状态。好处：任意帧可单独重渲、可分段并行、可断点续渲、联系表抽帧稳定可复现、定格可以"重画"而不是缓存。有状态的东西（粒子、元胞自动机、物理）→ 在 init 里预计算成查表，或写成 `lerp(起点, 终点, ease(p))`。判断标准（`codecosmos` CoExp L414）："直接调 `renderFrame(500)` 不经过 0–499，画面对不对？"
-2. **一份时间表是唯一真相源**，画面和声音都读它：`timeline.py`（ageint）、`timeline.json`（xuanlan、yusheng 建议）、`cues.json`（skillshub）、`shots.js`（codecosmos）、`plan.py`（claude15）、`score.py`（gongcishi）、`edl.mjs`（supercut）、`episode.json`（stopmotion）、`timeline.ts`（moonlamp）。镜头起点由拍数**累加算出**，不手写。
+2. **一份时间表是唯一真相源**，画面和声音都读它：`timeline.py`（ageint）、`timeline.json`（xuanlan、yusheng 建议）、`cues.json`（skillshub）、`shots.js`（codecosmos）、`plan.py`（claude15）、`edl.mjs`（supercut）、`episode.json`（stopmotion）、`timeline.ts`（moonlamp）。镜头起点由拍数**累加算出**，不手写。
 3. **BPM × FPS 让每拍是整数帧**：120 BPM × 30/60 fps（15/30 帧）、150 BPM × 30 fps（12 帧）、128.571 BPM × 60 fps（28 帧，ageint）、200 BPM × 30 fps（9 帧，cosmos30）、96 BPM 让 7.5 s 段落落在小节线（stopmotion）。表见 `codecosmos` CoExp L49。
 4. **声音从同一份数据派生**：画面代码导出事件（`ev()` → `events.json`，studysolo / oneink），或配乐直接读时间表；whoosh 提前 0.12–0.33 s 起、峰值落在切点。
 5. **先看全貌再抠细节**：占位跑通全片 → 联系表（每镜中间帧 / 最后有效帧 / 转场前后）→ 逐镜打磨 → 全量渲染（后台、分段、可续跑）。
@@ -56,10 +56,8 @@ def render_range(f0, f1, path):
 | OpenCV 亚像素抗锯齿（`LINE_AA` + `shift=4`）、3D 相机、柔光点云 `bincount` splat | `ageint` CoExp L122 起 6 段关键代码 |
 | skia-python：拉片表 + 转场表 + 离屏 surface 回调蒙太奇 | `claude15/claude_intro/{plan,core,scenes_a,scenes_b,render}.py` |
 | pycairo 矢量 + 2.5D `cam()` + 月饼扇形 clip | `gpt-autumn/MidAutumn_60s_Final/src/{film60,artwork}.py`；并行与组装 `build.py` |
-| 真实照片：图层 Shot、`place()` 焦点夹紧、时间窗解码、分块可续跑 | `gongcishi` CoExp L195 起（原工程未入库，代码在 CoExp） |
-| 自写 3D 合成器（相机、单应贴图、画家算法、景深、运动模糊） | `shatter` CoExp L59 起 |
 
-**坑**：`Pillow` 懒加载坏图（`load()` 才报错）；中文字体缺字 → fontTools 读 cmap 逐字回退（ageint、gongcishi）；OpenCV 5 移除 `CascadeClassifier` → `opencv-python-headless<5`；3D 相机 `cross(up,f)` 手性搞反画面镜像（ageint）。
+**坑**：`Pillow` 懒加载坏图（`load()` 才报错）；中文字体缺字 → fontTools 读 cmap 逐字回退（ageint）；OpenCV 5 移除 `CascadeClassifier` → `opencv-python-headless<5`；3D 相机 `cross(up,f)` 手性搞反画面镜像（ageint）。
 
 ## 2. Python + 无头 OpenGL（EGL，ctypes 直调）
 
@@ -199,9 +197,6 @@ window.FILM = { ready, render(t), renderWav() /* OfflineAudioContext → WAV */,
 
 | 环节 | 案例与位置 |
 |---|---|
-| 素材普查：去重（MD5）、验坏（`load()`）、rotation、联系表、机器看片（运动/亮度/清晰度/响度/人脸）、线索表 | `gongcishi` CoExp L36 |
-| 图层化镜头、Ken Burns、焦点夹紧不露边、视频按时间窗解码缓存、分块渲染可续跑 | `gongcishi` CoExp L195 |
-| 抠像拆层 2.5D（MediaPipe + 导向滤波）、补背景、等比缩放补偿、出框 | `shatter` CoExp L91 |
 | 大量成片混剪的代理切片、高光入点 `wallIn` | `supercut/tools/prep_media.mjs`、`src/catalog.mjs` |
 
 ## 10. 程序化配乐与音效

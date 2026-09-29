@@ -24,8 +24,8 @@
 | 技法 | 案例 | 位置 |
 |---|---|---|
 | 一句话主线 + 情绪曲线 → 段落表 | 几乎全部；最完整：`gpt-autumn`、`xuanlan`、`skillshub` | `gpt-autumn` CoExp L13；`xuanlan` CoExp L25；`skillshub` CoExp L11 |
-| 需求原话逐条变成硬约束表 | `yusheng`、`readclub`、`shatter`（"AE 级"拆成可检验标准） | `yusheng` CoExp L12；`readclub` CoExp L11；`shatter` CoExp L13 |
-| 先找母题再定结构（一个想法 / 一个问题 / 一个符号 / 圆） | `protocom`（灯泡五次）、`studysolo`（烂苹果味）、`hust1037`（金弧）、`gongcishi`（圆/月亮） | `protocom` CoExp L53；`studysolo` CoExp L12；`hust1037` CoExp L26、L293；`gongcishi` CoExp L36 |
+| 需求原话逐条变成硬约束表 | `yusheng`、`readclub` | `yusheng` CoExp L12；`readclub` CoExp L11|
+| 先找母题再定结构（一个想法 / 一个问题 / 一个符号 / 圆） | `protocom`（灯泡五次）、`studysolo`（烂苹果味）、`hust1037`（金弧） | `protocom` CoExp L53；`studysolo` CoExp L12；`hust1037` CoExp L26、L293|
 | 一条线贯穿全片（形状延续） | `studysolo`（心电→书桌→分割线→光线→心跳）、`readclub`（红线） | `studysolo` CoExp L46 |
 | 用一个符号替代真人 | `hust1037` | `hust1037` CoExp L26、L293 |
 | 风格变化 = 戏剧结构（建立/冲突/转折/证据/升华） | `protocom`、`phasegate`（形式承载内容） | `protocom` CoExp L53；`phasegate` CoExp L36 |
@@ -36,7 +36,6 @@
 | 60 秒高燃宣传片骨架（钩子/证据/断拍/方法/观点/高潮/展开/号召/落版） | `shuchenglin` | `shuchenglin` CoExp L312 |
 | 8 节拍模板（world → character → … → echo） | `stopmotion` | `stopmotion/stop-motion-3d/references/directing.md` |
 | 倒叙钩子 + 定格 + 倒带 + 对照（瑞士奶酪模型） | `dingge` | `dingge` CoExp L13；`dingge/dingge-source/docs/DIRECTOR.md` |
-| 先看素材再定主题（线索表） | `gongcishi` | `gongcishi` CoExp L36 |
 | 可信度要论证：引用飞回原文、真实数字、真实源码行 | `studysolo`、`skillshub`、`xuanlan`、`supercut` | `studysolo` CoExp L46；`supercut/src/code-lines.mjs` |
 | 给观众留位置（"下一个是你"、空座位、`join --as @你`） | `protocom`、`shuchenglin`、`supercut` | `protocom/promo/src/act3.js`、`act4.js` |
 | 首尾呼应 / 闭环可循环 | `codecosmos`（终端→终端）、`oneink`、`yusheng`、`gpt-autumn` | `codecosmos` CoExp L183 |
@@ -61,19 +60,18 @@
 | 四层节奏（小节/拍/十六分/镜头内呼吸）+ 相邻段变速 | `shuchenglin`、`skillshub` | `shuchenglin` CoExp L326；`skillshub` CoExp L48 |
 | 多通道确认卡点（≥4 通道）+ 风声提前 0.2 s | `shuchenglin` | `shuchenglin` CoExp L347 |
 | 动作落点对拍（拍前 0.5 拍起步，拍上撞击） | `skillshub` | `skillshub/promo/src/js/scenes/extend.js` |
-| drop 前静默（半拍黑场 / 1/4 拍 / 1 秒全黑） | `skillshub`、`yusheng`、`phasegate`、`gongcishi`、`ageint`、`supercut` | `skillshub/promo/src/cues.json`（silences） |
+| drop 前静默（半拍黑场 / 1/4 拍 / 1 秒全黑） | `skillshub`、`yusheng`、`phasegate`、`ageint`、`supercut` | `skillshub/promo/src/cues.json`（silences） |
 | 由人输入"确认 ↵"引爆 drop（卖点 = 转折 = drop） | `phasegate` | `phasegate` CoExp L36 |
 | 固定小节模式（每 Phase 一小节，第 4 拍确认叮） | `phasegate` | `phasegate` CoExp L186 |
 | 一拍二定格语法（N−1 拍有效 + 1 拍照片卡） | `codecosmos` | `codecosmos` CoExp L99、L239 |
 | 停留时长表（纯画面 1 拍、字幕 2 拍、观点 4 拍） | `shuchenglin` | `shuchenglin` CoExp L337 |
 | 同构章节（收/链/看/享 每章 8 拍）再在关键段打破 | `skillshub` | `skillshub/promo/src/js/scenes/chapter.js` |
-| 结构卡点检查：ffmpeg scene 检测对 1/16 拍网格 | `gongcishi` | `gongcishi` CoExp L359 |
 
 ## 3. 转场与剪辑
 
 | 技法 | 案例 | 位置 |
 |---|---|---|
-| 匹配剪辑：终点对准下一镜头第 0 帧实际位置 | `protocom`、`studysolo`、`gongcishi`（月亮→挂钟 zoom=2.35） | `protocom` CoExp L735（坑）；`studysolo` CoExp L352（#15、#16） |
+| 匹配剪辑：终点对准下一镜头第 0 帧实际位置 | `protocom`、`studysolo` | `protocom` CoExp L735（坑）；`studysolo` CoExp L352（#15、#16） |
 | 圆形母题 match cut | `gpt-autumn`、`samemoon` | `gpt-autumn` CoExp L135 |
 | 光标块放大成纸 / 窗口形变成手机 | `protocom`、`xuanlan` | `protocom/promo/src/act1.js`；`xuanlan` CoExp L271 |
 | 文字像素粒子形变（一个词变另一个词） | `yusheng` | `yusheng` CoExp L118（sampleText） |
@@ -87,9 +85,7 @@
 | 拉片 / 倒带（真实过去画面缩略图倒飞） | `protocom`、`readclub`（miniScene 画中画） | `protocom/promo/src/act2.js`、`main.js`（drawRaw） |
 | 闪回蒙太奇 `sceneTime(t)` 映射回历史时刻 | `phasegate` | `phasegate` CoExp L276 |
 | 故障回调蒙太奇（前 12 种画风） | `claude15` | `claude15/claude_intro/scenes_b.py` |
-| 距离场蒙版 hero shard 转场 | `shatter` | `shatter` CoExp L137 |
 | 满白 → 硬切暗场（不要交叉淡化） | `studysolo` | `studysolo` CoExp L352（#22） |
-| 进入转场自动延长上一镜头垫底 | `gongcishi` | `gongcishi` CoExp L195 |
 | Murch 六法则、J-cut/L-cut、cut on action、轴线 | `dingge` | `dingge` CoExp L54 |
 | J-cut 先声后画（riser 早 1.5–2.5 s） | `yusheng` | `yusheng` CoExp L70 |
 
@@ -106,7 +102,7 @@
 | 数据驱动双语字幕 CAPS | `samemoon` | `samemoon` CoExp L191 |
 | 字幕统一骨架（底部带、2 色语义） | `senpai`、`hust1037` | `hust1037` CoExp L155 |
 | 书法：按笔顺写字、行书化、牵丝、飞白 | `oneink` | `oneink/main.js`；`oneink` CoExp L94 |
-| 中文字体：@fontsource 本地化、unicode-range 预加载、fontTools 裁字内嵌、cmap 逐字回退 | `readclub`、`protocom`、`ageint`、`gongcishi`、`skillshub` | `readclub/hust-reading-club-video/build.py`；`ageint/…/scripts/build_fonts.py` |
+| 中文字体：@fontsource 本地化、unicode-range 预加载、fontTools 裁字内嵌、cmap 逐字回退 | `readclub`、`protocom`、`ageint`、`skillshub` | `readclub/hust-reading-club-video/build.py`；`ageint/…/scripts/build_fonts.py` |
 | 先 measure 再排版；按最宽情况测数字 | `protocom`、`studysolo`、`yusheng` | `yusheng` CoExp L417（#14） |
 | 阅读带：背景元素进入阅读带自动变暗 | `samemoon` | `samemoon` CoExp L9 |
 
@@ -132,9 +128,8 @@
 | 柔光点云 `np.bincount` splat | `ageint` | `ageint` CoExp L122 |
 | Gray-Scott 反应扩散（预计算 24 个姿态） | `cosmos30` | `cosmos30/COSMOS/render.py`（scipy `laplace`）；`cosmos30` CoExp L307 |
 | 元胞自动机（init 预计算点亮步数） | `codecosmos` | `codecosmos/web/scenes_b.js` |
-| 解析轨迹粒子（无仿真，23 万粒子） | `shatter` | `shatter` CoExp L168 |
 | 诗云星河（角动量守恒坍缩）、墨烟 curl noise | `oneink` | `oneink/main.js` |
-| 180° 快门子帧运动模糊 | `shatter`、`town-camera-lab` | `shatter` CoExp L189；`town-camera-lab/town-camera-lab.html` L1320 |
+| 180° 快门子帧运动模糊 |`town-camera-lab` |`town-camera-lab/town-camera-lab.html` L1320 |
 
 ## 6. 画风实现
 
@@ -171,7 +166,6 @@
 | 命名机位，无自由飞行；轴线 | `stopmotion`、`dingge` | `stopmotion/stop-motion-3d/references/directing.md` |
 | 3D 相机路径避开穿过物体（抬升弧线） | `studysolo` | `studysolo` CoExp L352（#18） |
 | 数码推拉（截图窗内放大对准焦点） | `studysolo`、`skillshub`（see.js 焦点镜头） | `skillshub/promo/src/js/scenes/see.js` |
-| 自写 3D 合成器（AE 3D 图层最小实现） | `shatter` | `shatter` CoExp L59 |
 | 静态几何按材质合批 | `dingge`、`town-camera-lab` | `dingge` CoExp L92 |
 
 ## 8. 角色与表演
@@ -192,7 +186,7 @@
 | 技法 | 案例 | 位置 |
 |---|---|---|
 | 合成器配方表（kick/snare/clap/hat/pad/pluck/reese/stab/riser/whoosh…） | `skillshub`、`studysolo`、`yusheng`、`xuanlan`、`codecosmos` | `skillshub` CoExp L223；`xuanlan` CoExp L300 |
-| 中国乐器：古琴加法合成、古筝（Karplus-Strong / 15 泛音）、笛、箫 | `oneink`、`samemoon`、`gongcishi`、`moonlamp` | `oneink/audio.py`；`gongcishi` CoExp L359；`moonlamp/moonfilm/audio/score.py` |
+| 中国乐器：古琴加法合成、古筝（Karplus-Strong / 15 泛音）、笛、箫 | `oneink`、`samemoon`、`moonlamp` | `oneink/audio.py`；`moonlamp/moonfilm/audio/score.py` |
 | 侧链泵感 | 大多数 | `skillshub/promo/audio/make-track.py` |
 | 声音事件由画面代码导出（ev → events.json） | `studysolo`、`oneink` | `studysolo` CoExp L99 核心 4；`oneink/main.js` |
 | 由 inspect 姿态到位帧派生 Foley | `stopmotion` | `stopmotion/stop-motion-3d/scripts/audio.py` |
@@ -202,7 +196,6 @@
 | 每幕独立 BPM 与配器 + 贯穿动机 | `kimi-film` | `kimi-film/score.py` |
 | 编曲跟着升维叠层、滤波器逐段打开 | `phasegate` | `phasegate` CoExp L500 |
 | 同一旋律快版 / 慢版点题 | `readclub` | `readclub` CoExp L211 |
-| 原声接管（编曲撤出 + 闪避 −12 dB） | `gongcishi` | `gongcishi` CoExp L359 |
 | 歌曲重构 + 包络限幅（不用 tanh 硬压） | `shuchenglin` | `shuchenglin/…/audio.py` |
 | 程序化 MIDI + FluidSynth | `gpt-autumn` | `gpt-autumn/MidAutumn_60s_Final/src/music60.py` |
 | TTS 旁白处理链 | `ai-rise` | `ai-rise/tts_gen.py` |
@@ -214,10 +207,8 @@
 
 | 技法 | 案例 | 位置 |
 |---|---|---|
-| 素材普查 + 机器看片 + 线索表 | `gongcishi`、`shuchenglin` | `gongcishi` CoExp L36；`shuchenglin` CoExp L35 |
-| 抠像 2.5D 拆层 + 补背景 | `shatter` | `shatter` CoExp L91 |
-| 照片瓦片拼满月（落定后预合成） | `gongcishi` | `gongcishi` CoExp L323 |
-| 低分辨率素材变风格（拍立得、网点、窗口外框 + 同图模糊背景） | `gongcishi`、`protocom`、`shuchenglin` | `shuchenglin` CoExp L379 |
+| 素材普查 + 机器看片 + 线索表 |`shuchenglin` |`shuchenglin` CoExp L35 |
+| 低分辨率素材变风格（拍立得、网点、窗口外框 + 同图模糊背景） |`protocom`、`shuchenglin` | `shuchenglin` CoExp L379 |
 | 虚拟时间录真实网页 | `shuchenglin` | `shuchenglin/…/vtime.js`、`capture.py` |
 | 伪造 AI 流式回答录真实应用 | `studysolo` | `studysolo` CoExp L99 |
 | 从截图逐列采样柱状图 | `protocom` | `protocom/promo/src/act3.js` |
@@ -229,7 +220,7 @@
 | 技法 | 案例 | 位置 |
 |---|---|---|
 | 分段并行 + concat -c copy | `kimi-film`、`protocom`、`gpt-autumn`、`claude15`、`beyond` | `kimi-film/film_par.py` |
-| 断点续渲（帧已存在就跳过） | `studysolo`、`stopmotion`、`gongcishi` | `stopmotion/…/assets/template/scripts/capture.mjs` |
+| 断点续渲（帧已存在就跳过） | `studysolo`、`stopmotion`| `stopmotion/…/assets/template/scripts/capture.mjs` |
 | 局部重渲（只渲帧号列表/区间） | `codecosmos`、`ai-rise`、`senpai` | `codecosmos/render.mjs` |
 | 无 GPU：`--disable-accelerated-2d-canvas`（41 s → 0.35 s/帧） | `protocom`、`oneink` | `protocom` CoExp L565 |
 | 着色器半分辨率 / 静态光照烘焙 / 计时用 readPixels(1px) | `codecosmos`、`oneink` | `oneink` CoExp L276 |
@@ -245,7 +236,7 @@
 |---|---|---|
 | 联系表（每镜中间帧/最后有效帧/转场前后） | 全部；`codecosmos`、`yusheng` 讲得最清楚 | `codecosmos` CoExp L325；`stopmotion/…/scripts/contact_sheet.py` |
 | 黑帧扫描找漏镜头 | `shuchenglin`、`ageint`（qa_frames 空白帧） | `shuchenglin` CoExp L293；`ageint/…/src/qa_frames.py` |
-| 起音对齐验证（画面领先 1 帧可接受） | `shuchenglin`、`shatter` | `shuchenglin` CoExp L293 |
+| 起音对齐验证（画面领先 1 帧可接受） | `shuchenglin`| `shuchenglin` CoExp L293 |
 | 9–13 项 QC finalize（帧齐、等长、BT.709、faststart、全解码、freeze、black、响度、穿插） | `stopmotion`、`moonlamp` | `stopmotion/…/scripts/finalize.py`；`moonlamp/moonfilm/scripts/kit/finalize.py` |
 | 数据先校验再渲染（validate --timeline 文字版成片） | `stopmotion`、`beyond`、`ageint`（timeline validate） | `stopmotion/…/scripts/validate.py`；`beyond/…/source/validate.py` |
 | 确定性验收：同一 t 渲染两次逐像素一致 / CDP 连拍两次一致 | `supercut`、`phasegate` | `supercut/README.md` |
@@ -253,4 +244,4 @@
 | 光敏安全（WCAG 闪烁限制） | `ageint` | `ageint` CoExp L399 |
 | 交付三版（母版 / 仓库交付 < 50 MB / 聊天预览 < 30 MB） | `skillshub`、`protocom`、`codecosmos` | `skillshub` CoExp L237 |
 | 章节元数据、字幕 SRT、manifest + sha256 | `cosmos30`、`beyond`、`gpt-autumn` | `cosmos30/COSMOS/{chapters.ffmeta, delivery_manifest.json}` |
-| 如实说明：脚本化内容、未试听、存疑事实 | `studysolo`、`yusheng`、`gongcishi`、`stopmotion` | `studysolo` CoExp L352（末尾） |
+| 如实说明：脚本化内容、未试听、存疑事实 | `studysolo`、`yusheng`、`stopmotion` | `studysolo` CoExp L352（末尾） |

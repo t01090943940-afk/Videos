@@ -869,13 +869,6 @@
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
     {
-     "path": "assets/clips/wall-gongcishi.mp4",
-     "bytes": 761163,
-     "sha256": "165d4aff76c661b8037e43c6edec2294bab6d77b5c4bcfe318239376cd2f1a44",
-     "kind": "video",
-     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
-    },
-    {
      "path": "assets/clips/wall-gpt-autumn.mp4",
      "bytes": 209381,
      "sha256": "7273b5dfd26d81e3ced673608351b3afaebe139f795f778d29b26ef663551280",
@@ -956,13 +949,6 @@
      "path": "assets/clips/wall-senpai.mp4",
      "bytes": 97331,
      "sha256": "f85b19f98fe4f6b166389922de2f64831044adef086d5eb8f03fc0eef8186b91",
-     "kind": "video",
-     "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
-    },
-    {
-     "path": "assets/clips/wall-shatter.mp4",
-     "bytes": 474723,
-     "sha256": "d1815484af9fc028c080f5f77fe0d392d76523fc8a8185bf7c32431a79686453",
      "kind": "video",
      "note": "镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录）"
     },
@@ -1149,20 +1135,6 @@
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
     {
-     "path": "assets/posters/gongcishi-end.jpg",
-     "bytes": 43415,
-     "sha256": "69bd5cf6a1ec1159407bc094aeb297335784b9a354ec72662fc465477f82d879",
-     "kind": "image",
-     "note": "海报帧：tools/prep_media.mjs 从成片生成"
-    },
-    {
-     "path": "assets/posters/gongcishi.jpg",
-     "bytes": 29048,
-     "sha256": "3a2119d5b9e978faab94b61f7d96fa8cbe716963ac8019fa5df65d28888e366d",
-     "kind": "image",
-     "note": "海报帧：tools/prep_media.mjs 从成片生成"
-    },
-    {
      "path": "assets/posters/gpt-autumn-end.jpg",
      "bytes": 26588,
      "sha256": "11fffccdc5a947114cea44fc711e1e03a45780eac2b9e5ca3a403adbb35c242c",
@@ -1327,20 +1299,6 @@
      "path": "assets/posters/senpai.jpg",
      "bytes": 7166,
      "sha256": "a3c4aaf32f0879adac056edb9985f503d129c6d67c06f52b6ff910b14c474266",
-     "kind": "image",
-     "note": "海报帧：tools/prep_media.mjs 从成片生成"
-    },
-    {
-     "path": "assets/posters/shatter-end.jpg",
-     "bytes": 37129,
-     "sha256": "30e5a9ecd34c6fbec0dba06b14e3428c342a6627b5f7493534624eff4d406f7f",
-     "kind": "image",
-     "note": "海报帧：tools/prep_media.mjs 从成片生成"
-    },
-    {
-     "path": "assets/posters/shatter.jpg",
-     "bytes": 20764,
-     "sha256": "a81be89f2d596b69a86d1ada6415254648b2eca310278219b22e91046598107f",
      "kind": "image",
      "note": "海报帧：tools/prep_media.mjs 从成片生成"
     },
@@ -3502,21 +3460,6 @@
    "preview": true
   },
   {
-   "id": "shatter",
-   "title": "碎月重圆（AE 级特效 MG）",
-   "folder": "opus-broken-reround",
-   "coexp": {
-    "original": "opus-broken-reround/碎月重圆_AE级特效_CoExp.md",
-    "bytes": 37636,
-    "sha256": "c4d08a1dd969e6601a038d1e5a58f80127bb509a7bba610d94340a78d94576d3",
-    "lines": 566
-   },
-   "origins": [],
-   "files": [],
-   "omitted": [],
-   "preview": true
-  },
-  {
    "id": "claude15",
    "title": "Claude 自我介绍 · 15 种画风",
    "folder": "opus-claude-intro-with-15-way",
@@ -4519,21 +4462,6 @@
     "bytes": 36794,
     "sha256": "1e8234c98395c5d1c51baefaa5a05fb81406ff2c085c06e385c02766190ead50",
     "lines": 426
-   },
-   "origins": [],
-   "files": [],
-   "omitted": [],
-   "preview": true
-  },
-  {
-   "id": "gongcishi",
-   "title": "共此时（180s，217 份真实素材的高中纪念片）",
-   "folder": "opus-mid-autumn-highschool-videos",
-   "coexp": {
-    "original": "opus-mid-autumn-highschool-videos/共此时代码视频-CoExp.md",
-    "bytes": 57637,
-    "sha256": "2483059f70fa9808eba40da522b37810495acd0de7e8bbadbfd5532771a0c914",
-    "lines": 784
    },
    "origins": [],
    "files": [],

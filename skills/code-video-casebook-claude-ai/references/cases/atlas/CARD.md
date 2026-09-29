@@ -67,9 +67,9 @@ python3 scripts/casebook.py search "seekable" --case atlas # 也可以用本 cas
 | three / r3f / postprocessing | `phasegate`、`studysolo`、`moonlamp`、`dingge`、`stopmotion`、`codecosmos`、`f12` |
 | playwright / puppeteer（逐帧截图） | 几乎所有浏览器管线案例（见 `references/pipelines.md`） |
 | web-audio / tone | `samemoon`、`readclub`、`moon-letter` |
-| webgl（原生着色器） | `beyond`、`cosmos30`、`oneink`、`protocom`（post.js）、`shatter` |
+| webgl（原生着色器） | `beyond`、`cosmos30`、`oneink`、`protocom`（post.js）|
 | ffmpeg | 全部案例 |
-| matplotlib / numpy 逐像素 | `kimi-film`、`ageint`、`gongcishi` |
+| matplotlib / numpy 逐像素 | `kimi-film`、`ageint`|
 
 ## 注意
 

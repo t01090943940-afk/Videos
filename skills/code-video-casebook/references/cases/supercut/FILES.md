@@ -195,7 +195,6 @@
 | `assets/clips/wall-cosmos30.mp4` | video | 373.5 KB | `91cc9d1d5b49` | 镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录） |
 | `assets/clips/wall-dingge.mp4` | video | 821.1 KB | `242d8d4e6339` | 镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录） |
 | `assets/clips/wall-f12.mp4` | video | 327.1 KB | `2e78a600226d` | 镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录） |
-| `assets/clips/wall-gongcishi.mp4` | video | 910.4 KB | `9b91c990aa0a` | 镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录） |
 | `assets/clips/wall-gpt-autumn.mp4` | video | 271.7 KB | `53204868519e` | 镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录） |
 | `assets/clips/wall-hust1037.mp4` | video | 105.6 KB | `94f59ba2b94e` | 镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录） |
 | `assets/clips/wall-kimi-beat.mp4` | video | 268.7 KB | `04b7c7b1a7ba` | 镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录） |
@@ -208,7 +207,6 @@
 | `assets/clips/wall-readclub.mp4` | video | 66.9 KB | `60615a3528dd` | 镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录） |
 | `assets/clips/wall-samemoon.mp4` | video | 174.6 KB | `19bff425b01d` | 镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录） |
 | `assets/clips/wall-senpai.mp4` | video | 122.1 KB | `192da6c4a3f4` | 镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录） |
-| `assets/clips/wall-shatter.mp4` | video | 629.9 KB | `349fe3851bcb` | 镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录） |
 | `assets/clips/wall-shuchenglin.mp4` | video | 201.9 KB | `1fdd05a4be80` | 镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录） |
 | `assets/clips/wall-skillshub.mp4` | video | 505.2 KB | `d32e9daf58da` | 镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录） |
 | `assets/clips/wall-stopmotion.mp4` | video | 644.1 KB | `7655b59c1693` | 镜头代理：tools/prep_media.mjs 从 28 部成片切出（原视频不收录） |
@@ -235,8 +233,6 @@
 | `assets/posters/dingge.jpg` | image | 53.7 KB | `dcd1a6b09179` | 海报帧：tools/prep_media.mjs 从成片生成 |
 | `assets/posters/f12-end.jpg` | image | 23.5 KB | `b560226cfc22` | 海报帧：tools/prep_media.mjs 从成片生成 |
 | `assets/posters/f12.jpg` | image | 36.8 KB | `2ab593ae0666` | 海报帧：tools/prep_media.mjs 从成片生成 |
-| `assets/posters/gongcishi-end.jpg` | image | 41.1 KB | `2cacd2a26c8d` | 海报帧：tools/prep_media.mjs 从成片生成 |
-| `assets/posters/gongcishi.jpg` | image | 28.4 KB | `3a2119d5b9e9` | 海报帧：tools/prep_media.mjs 从成片生成 |
 | `assets/posters/gpt-autumn-end.jpg` | image | 26.7 KB | `64a3883ec888` | 海报帧：tools/prep_media.mjs 从成片生成 |
 | `assets/posters/gpt-autumn.jpg` | image | 24.6 KB | `241d9800879c` | 海报帧：tools/prep_media.mjs 从成片生成 |
 | `assets/posters/hust1037-end.jpg` | image | 14.6 KB | `dd66ff0f663c` | 海报帧：tools/prep_media.mjs 从成片生成 |
@@ -261,8 +257,6 @@
 | `assets/posters/samemoon.jpg` | image | 16.3 KB | `e681847d2d42` | 海报帧：tools/prep_media.mjs 从成片生成 |
 | `assets/posters/senpai-end.jpg` | image | 12.5 KB | `21ed3cfcb7b1` | 海报帧：tools/prep_media.mjs 从成片生成 |
 | `assets/posters/senpai.jpg` | image | 7.0 KB | `a3c4aaf32f08` | 海报帧：tools/prep_media.mjs 从成片生成 |
-| `assets/posters/shatter-end.jpg` | image | 37.5 KB | `1a691543ad0a` | 海报帧：tools/prep_media.mjs 从成片生成 |
-| `assets/posters/shatter.jpg` | image | 20.3 KB | `a81be89f2d59` | 海报帧：tools/prep_media.mjs 从成片生成 |
 | `assets/posters/shuchenglin-end.jpg` | image | 16.5 KB | `4c50ce6ec2d0` | 海报帧：tools/prep_media.mjs 从成片生成 |
 | `assets/posters/shuchenglin.jpg` | image | 11.8 KB | `41b2e2835969` | 海报帧：tools/prep_media.mjs 从成片生成 |
 | `assets/posters/skillshub-end.jpg` | image | 21.0 KB | `cc2147ff1d15` | 海报帧：tools/prep_media.mjs 从成片生成 |

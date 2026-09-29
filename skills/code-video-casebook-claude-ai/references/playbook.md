@@ -54,14 +54,14 @@
 - **画幅**（横 16:9 / 竖 9:16）——事后改要重排全部版式（`codecosmos` L325 流程坑）。
 - **交付渠道与体积上限**：聊天附件常见 30 MB、GitHub 50 MB 警告 / 100 MB 拒收（`skillshub`、`studysolo`、`protocom`）。有上限就从一开始用固定码率。
 - **画风**（多画风片要让用户从选项里选，`stopmotion` SKILL.md §0）。
-- **事实**：社团名、歌名、"第几个中秋"、口径（"264 次分享"不是"264 个网站"）——推断的要列出来请用户确认（`protocom`、`gongcishi`、`shuchenglin`）。
+- **事实**：社团名、歌名、"第几个中秋"、口径（"264 次分享"不是"264 个网站"）——推断的要列出来请用户确认（`protocom`、`shuchenglin`）。
 - **素材是否真的在磁盘上**：聊天里发的图不一定在文件系统（`protocom` 坑）；先 `ls`。
 - **环境**：`ffmpeg -encoders | grep -E "264|aac"`（Playwright 自带 ffmpeg 只有 vp8；用 `pip install imageio-ffmpeg`）、`ffmpeg -filters | grep drawtext`、`fc-list :lang=zh`、Chromium 路径与 playwright 版本匹配、`nproc`、外网（字体 CDN、GitHub raw 常被拦 → npm `@fontsource`）。
 
 ## 4. 创作原则（叙事、节奏、画面、声音）
 
 **叙事**
-- 先找**母题**（一个想法 / 一个问题 / 一个符号 / 圆），全片围绕它；首尾呼应（`protocom`、`studysolo`、`hust1037`、`gpt-autumn`、`gongcishi`）。
+- 先找**母题**（一个想法 / 一个问题 / 一个符号 / 圆），全片围绕它；首尾呼应（`protocom`、`studysolo`、`hust1037`、`gpt-autumn`）。
 - **形式承载内容**：风格变化对应戏剧功能或内容本质（`phasegate`、`protocom`、`codecosmos`、`beyond`）。
 - **真实 > 精美**：数字、原话、源码行、截图都要可溯源；不确定的不上屏（`skillshub`、`studysolo`、`shuchenglin`、`yusheng`）。
 - **可信度要论证而不是宣称**（引用回到原文、真实数据、真实运行的页面）。
@@ -113,7 +113,7 @@
 | 5 | 字体 CDN / GitHub raw 被拦，下到错误页 | yusheng、studysolo | npm `@fontsource`；curl 加 `-f` 并检查文件大小 |
 | 6 | 颗粒 + 低 CRF 让体积爆炸（88–775 MB） | protocom、codecosmos、yusheng、studysolo、skillshub | 颗粒 ≤ 10%；有上限用两遍固定码率 |
 | 7 | 单遍 loudnorm 对短片不准；AAC 抬高真峰值 | yusheng、stopmotion、cosmos30 | ebur128 测 + 静态增益，或两遍 loudnorm；母带留余量 |
-| 8 | 配乐全段一样响（tanh 压扁） | yusheng、skillshub、gongcishi | 分段总线自动化；按秒量 RMS |
+| 8 | 配乐全段一样响（tanh 压扁） | yusheng、skillshub| 分段总线自动化；按秒量 RMS |
 | 9 | 转场叠画只在成片里才发现 | yusheng、studysolo | 静帧覆盖每个转场的起点、中点、终点 |
 | 10 | 形状匹配转场错位 / DOM↔WebGL 交接跳一下 | studysolo、protocom | 先算两边屏幕坐标；交接帧滤镜/透明度两边一致 |
 | 11 | 分层叠加导致的布局冲突（HUD 压内容、文字重叠） | codecosmos、skillshub、yusheng | 定义安全区常量；联系表按最终合成检查 |
@@ -188,7 +188,6 @@
 | cosmos30 | CoExp L622 | CoExp L783 |
 | dingge | CoExp L374 | CoExp L405 |
 | f12 | CoExp L361 | CoExp L381 |
-| gongcishi | CoExp L680 | CoExp L738 |
 | gpt-autumn | CoExp L884 | CoExp L1023 |
 | hust1037 | CoExp L119（以本片为模板的经验）、L340（附录代码） | — |
 | kimi-beat | CoExp L387 | CoExp L421 |
@@ -200,7 +199,6 @@
 | readclub | CoExp L427 | CoExp L489 |
 | samemoon | CoExp L357 | CoExp L394 |
 | senpai | CoExp L89（V2 结构可直接套） | — |
-| shatter | CoExp L487 | CoExp L534 |
 | shuchenglin | CoExp L312（60 秒骨架）、L522（常用命令） | — |
 | skillshub | CoExp L493 | CoExp L537 |
 | studysolo | CoExp L395 | CoExp L426 |

@@ -13,7 +13,6 @@
 | [hust1037](cases/hust1037/CARD.md) | `opus-1037-hust-story` | 22.8 KB | 0 个 · 0.0 KB | 0 个 · 0.0 KB | —（代码在 CoExp 里） |
 | [f12](cases/f12/CARD.md) | `opus-F12-teaching` | 25.9 KB | 34 个 · 1.1 MB | 0 个 · 0.0 KB | `F12-Field-Guide.html`<br>`F12-Field-Guide-source.zip` |
 | [ageint](cases/ageint/CARD.md) | `opus-age-of-intelligence` | 46.3 KB | 46 个 · 1.7 MB | 3 个 · 13.0 MB | `智能时代-The_Age_of_Intelligence-source.zip` |
-| [shatter](cases/shatter/CARD.md) | `opus-broken-reround` | 36.8 KB | 0 个 · 0.0 KB | 0 个 · 0.0 KB | —（代码在 CoExp 里） |
 | [claude15](cases/claude15/CARD.md) | `opus-claude-intro-with-15-way` | — | 7 个 · 101.4 KB | 0 个 · 0.0 KB | `claude_intro_源码.zip` |
 | [dingge](cases/dingge/CARD.md) | `opus-factory-safety-videos` | 30.8 KB | 33 个 · 313.1 KB | 0 个 · 0.0 KB | `dingge-source.tgz` |
 | [readclub](cases/readclub/CARD.md) | `opus-hust-read-join-video-v1` | 39.6 KB | 8 个 · 2.2 MB | 0 个 · 0.0 KB | `华中大读书会_慢下来_代码版.html`<br>`华中大读书会_慢下来_源码.zip` |
@@ -21,7 +20,6 @@
 | [senpai](cases/senpai/CARD.md) | `opus-mid-autumn-for-my-dg01` | 15.4 KB | 0 个 · 0.0 KB | 0 个 · 0.0 KB | —（代码在 CoExp 里） |
 | [moonlamp](cases/moonlamp/CARD.md) | `opus-mid-autumn-for-my-dg02` | 56.6 KB | 60 个 · 970.0 KB | 2 个 · 1.0 MB | `月光替你亮着灯-source.zip` |
 | [samemoon](cases/samemoon/CARD.md) | `opus-mid-autumn-genergal-videos` | 35.9 KB | 0 个 · 0.0 KB | 0 个 · 0.0 KB | —（代码在 CoExp 里） |
-| [gongcishi](cases/gongcishi/CARD.md) | `opus-mid-autumn-highschool-videos` | 56.3 KB | 0 个 · 0.0 KB | 0 个 · 0.0 KB | —（代码在 CoExp 里） |
 | [oneink](cases/oneink/CARD.md) | `opus-oneink` | 34.7 KB | 9 个 · 193.3 KB | 2 个 · 17.5 MB | `一畫_源代码.zip` |
 | [phasegate](cases/phasegate/CARD.md) | `opus-production-video-ai-phase-skill` | 58.6 KB | 0 个 · 0.0 KB | 0 个 · 0.0 KB | —（代码在 CoExp 里） |
 | [protocom](cases/protocom/CARD.md) | `opus-production-video-protocom-intro` | 64.2 KB | 19 个 · 338.6 KB | 15 个 · 14.0 MB | `promo-src.zip` |

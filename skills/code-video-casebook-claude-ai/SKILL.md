@@ -78,8 +78,6 @@ python3 scripts/casebook.py verify                                # 校验源码
 | [samemoon](references/cases/samemoon/CARD.md) | 📄 | 面向大众的节日片；单文件 Canvas + Web Audio；BGM 骤停；两个半月拼满月 |
 | [gpt-autumn](references/cases/gpt-autumn/CARD.md) | ✅ | 节日片 60s；每个时代换一种材质；圆形母题 match cut；MIDI + FluidSynth |
 | [oneink](references/cases/oneink/CARD.md) | ✅ | 书法 / 水墨 / 古诗；按笔顺写字；WebGL2 墨着色器；手卷一镜到底；古琴合成 |
-| [gongcishi](references/cases/gongcishi/CARD.md) | 📄 | 217 份真实照片视频做 3 分钟回忆片；素材普查 + 机器看片；原声接管 |
-| [shatter](references/cases/shatter/CARD.md) | 📄 | 照片素材做 AE 级特效；自写 3D 合成器、抠像拆层、23 万粒子 |
 | [moonlamp](references/cases/moonlamp/CARD.md) | ✅ | 送给某人的祝福；Three.js 真 3D 一镜到底；12 步水彩 GLSL；13 项 QC |
 | [senpai](references/cases/senpai/CARD.md) | 📄 | 竖屏温情祝福 29s；让对方成为画面里的光；V1 被否的教训 |
 | [moon-letter](references/cases/moon-letter/CARD.md) | ✅ | 竖屏可交互 HTML 信笺；自带播放器；同源导出 MP4 |
